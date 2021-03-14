@@ -15,7 +15,7 @@ class DefaultEmojiPickerView extends EmojiPickerBuilder {
 
 class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     with SingleTickerProviderStateMixin {
-  final PageController _pageController = new PageController();
+  PageController _pageController;
   TabController _tabController;
 
   @override
@@ -26,6 +26,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
         initialIndex: selectedCategory,
         length: widget.state.categoryEmoji.length,
         vsync: this);
+    _pageController = PageController(initialPage: selectedCategory);
     super.initState();
   }
 
@@ -44,6 +45,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
                 indicatorColor: widget.config.indicatorColor,
                 unselectedLabelColor: widget.config.iconColor,
                 controller: _tabController,
+                labelPadding: EdgeInsets.zero,
                 onTap: (index) {
                   _pageController.jumpToPage(index);
                 },
@@ -81,6 +83,12 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
   }
 
   Widget _buildPage(double emojiSize, CategoryEmoji categoryEmoji) {
+    // Display notice if recent has no entries yet
+    if (categoryEmoji.category == Category.RECENT &&
+        categoryEmoji.emoji.isEmpty) {
+      return _buildNoRecent();
+    }
+    // Build page normally
     return GridView.count(
       scrollDirection: Axis.vertical,
       physics: ScrollPhysics(),
@@ -105,5 +113,11 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
               ))
           .toList(),
     );
+  }
+
+  Widget _buildNoRecent() {
+    return Center(
+        child: Text(widget.config.noRecentsText,
+            style: widget.config.noRecentsStyle));
   }
 }

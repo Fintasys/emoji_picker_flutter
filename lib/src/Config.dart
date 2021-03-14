@@ -40,6 +40,12 @@ class Config {
   /// The color of the loading indicator when icons get initalized
   final Color progressIndicatorColor;
 
+  /// Show extra tab with recently used emoji
+  final bool showRecentsTab;
+
+  /// Limit of recently used emoji that will be saved
+  final int recentsLimit;
+
   /// The string to be displayed if no recent emojis to display
   final String noRecentsText;
 
@@ -64,6 +70,8 @@ class Config {
       this.iconColor = Colors.grey,
       this.iconColorSelected = Colors.blue,
       this.progressIndicatorColor = Colors.blue,
+      this.showRecentsTab = true,
+      this.recentsLimit = 36,
       this.noRecentsText = "No Recents",
       this.noRecentsStyle =
           const TextStyle(fontSize: 20, color: Colors.black26),
@@ -77,6 +85,8 @@ class Config {
 
   IconData getIconForCategory(Category category) {
     switch (category) {
+      case Category.RECENT:
+        return this.categoryIcons.recentIcon;
       case Category.SMILEYS:
         return this.categoryIcons.smileyIcon;
       case Category.ANIMALS:

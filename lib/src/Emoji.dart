@@ -14,4 +14,15 @@ class Emoji {
   String toString() {
     return "Name: " + name + ", Emoji: " + emoji;
   }
+
+  static Emoji fromJson(json) {
+    return new Emoji(json['name'], json['emoji']);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "name": this.name,
+      "emoji": this.emoji,
+    };
+  }
 }
