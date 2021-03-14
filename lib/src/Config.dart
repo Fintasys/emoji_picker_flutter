@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:emoji_picker_flutter/src/CategoryIcon.dart';
 import 'package:emoji_picker_flutter/src/CategoryIcons.dart';
 import 'package:flutter/material.dart';
 
@@ -19,8 +18,10 @@ class Config {
   /// Can be smaller due to screen size and amount of columns
   final double emojiSizeMax;
 
+  /// Verical spacing between icons
   final double verticalSpacing;
 
+  /// Horizontal spacing between icon
   final double horizontalSpacing;
 
   /// The initial [Category] that will be selected
@@ -36,6 +37,10 @@ class Config {
   /// The color the category icon
   final Color iconColor;
 
+  /// The color of the category icon when selelected
+  final Color iconColorSelected;
+
+  /// The color of the loading indicator when icons get initalized
   final Color progressIndicatorColor;
 
   /// A list of keywords that are used to provide the user with recommended emojis in [Category.RECOMMENDED]
@@ -72,6 +77,7 @@ class Config {
       this.bgColor = _defaultBgColor,
       this.indicatorColor = Colors.blue,
       this.iconColor = Colors.blue,
+      this.iconColorSelected = Colors.white,
       this.progressIndicatorColor = Colors.blue,
       this.recommendKeywords,
       this.numRecommended = 10,
@@ -89,7 +95,7 @@ class Config {
     return min(maxSize, this.emojiSizeMax);
   }
 
-  CategoryIcon getIconForCategory(Category category) {
+  IconData getIconForCategory(Category category) {
     switch (category) {
       case Category.SMILEYS:
         return this.categoryIcons.smileyIcon;

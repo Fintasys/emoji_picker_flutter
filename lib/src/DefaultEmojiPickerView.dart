@@ -74,7 +74,12 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView> {
                   _pageController.jumpToPage(index);
                 });
               },
-              child: Icon(widget.config.getIconForCategory(category).icon)),
+              child: Icon(
+                widget.config.getIconForCategory(category),
+                color: selectedCategory == index
+                    ? widget.config.iconColorSelected
+                    : widget.config.iconColor,
+              )),
         ),
       ),
     );
@@ -100,7 +105,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView> {
                     },
                     child: Center(
                       child: Text(item.emoji,
-                          style: TextStyle(fontSize: emojiSize - 8)),
+                          style: TextStyle(fontSize: emojiSize)),
                     )),
               ))
           .toList(),

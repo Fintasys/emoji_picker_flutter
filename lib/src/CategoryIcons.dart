@@ -7,44 +7,45 @@ import 'package:flutter/material.dart';
 /// If a [CategoryIcon] is set as null or not defined during initialization, the default icons will be used instead
 class CategoryIcons {
   /// Icon for [Category.RECOMMENDED]
-  final CategoryIcon recommendationIcon;
+  final IconData recommendationIcon;
 
   /// Icon for [Category.RECENT]
-  final CategoryIcon recentIcon;
+  final IconData recentIcon;
 
   /// Icon for [Category.SMILEYS]
-  final CategoryIcon smileyIcon;
+  final IconData smileyIcon;
 
   /// Icon for [Category.ANIMALS]
-  final CategoryIcon animalIcon;
+  final IconData animalIcon;
 
   /// Icon for [Category.FOODS]
-  final CategoryIcon foodIcon;
+  final IconData foodIcon;
 
   /// Icon for [Category.TRAVEL]
-  final CategoryIcon travelIcon;
+  final IconData travelIcon;
 
   /// Icon for [Category.ACTIVITIES]
-  final CategoryIcon activityIcon;
+  final IconData activityIcon;
 
   /// Icon for [Category.OBJECTS]
-  final CategoryIcon objectIcon;
+  final IconData objectIcon;
 
   /// Icon for [Category.SYMBOLS]
-  final CategoryIcon symbolIcon;
+  final IconData symbolIcon;
 
   /// Icon for [Category.FLAGS]
-  final CategoryIcon flagIcon;
+  final IconData flagIcon;
 
-  const CategoryIcons(
-      {this.recommendationIcon = const CategoryIcon(icon: Icons.search),
-      this.recentIcon = const CategoryIcon(icon: Icons.access_time),
-      this.smileyIcon = const CategoryIcon(icon: Icons.tag_faces),
-      this.animalIcon = const CategoryIcon(icon: Icons.pets),
-      this.foodIcon = const CategoryIcon(icon: Icons.fastfood),
-      this.travelIcon = const CategoryIcon(icon: Icons.location_city),
-      this.activityIcon = const CategoryIcon(icon: Icons.directions_run),
-      this.objectIcon = const CategoryIcon(icon: Icons.lightbulb_outline),
-      this.symbolIcon = const CategoryIcon(icon: Icons.euro_symbol),
-      this.flagIcon = const CategoryIcon(icon: Icons.flag)});
+  const CategoryIcons({
+    this.recommendationIcon = Icons.search,
+    this.recentIcon = Icons.access_time,
+    this.smileyIcon = Icons.tag_faces,
+    this.animalIcon = Icons.pets,
+    this.foodIcon = Icons.fastfood,
+    this.travelIcon = Icons.location_city,
+    this.activityIcon = Icons.directions_run,
+    this.objectIcon = Icons.lightbulb_outline,
+    this.symbolIcon = Icons.euro_symbol,
+    this.flagIcon = Icons.flag,
+  });
 }
