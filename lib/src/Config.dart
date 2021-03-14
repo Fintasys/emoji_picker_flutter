@@ -4,9 +4,6 @@ import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:emoji_picker_flutter/src/CategoryIcons.dart';
 import 'package:flutter/material.dart';
 
-/// Default values
-const Color _defaultBgColor = Color.fromRGBO(242, 242, 242, 1);
-
 class Config {
   /// Number of columns in keyboard grid
   final int columns;
@@ -73,11 +70,11 @@ class Config {
       this.emojiSizeMax = 32.0,
       this.verticalSpacing = 0,
       this.horizontalSpacing = 0,
-      this.initCategory,
-      this.bgColor = _defaultBgColor,
+      this.initCategory = Category.SMILEYS,
+      this.bgColor = const Color.fromRGBO(242, 242, 242, 1),
       this.indicatorColor = Colors.blue,
-      this.iconColor = Colors.blue,
-      this.iconColorSelected = Colors.white,
+      this.iconColor = Colors.grey,
+      this.iconColorSelected = Colors.blue,
       this.progressIndicatorColor = Colors.blue,
       this.recommendKeywords,
       this.numRecommended = 10,

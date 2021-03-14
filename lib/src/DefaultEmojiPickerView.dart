@@ -1,6 +1,6 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import 'package:emoji_picker_flutter/src/CategoryEmoji.dart';
 import 'package:emoji_picker_flutter/src/Config.dart';
-import 'package:emoji_picker_flutter/src/Emoji.dart';
 import 'package:emoji_picker_flutter/src/EmojiPickerBuilder.dart';
 import 'package:emoji_picker_flutter/src/EmojiViewState.dart';
 import 'package:flutter/material.dart';
@@ -13,15 +13,19 @@ class DefaultEmojiPickerView extends EmojiPickerBuilder {
   _DefaultEmojiPickerViewState createState() => _DefaultEmojiPickerViewState();
 }
 
-class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView> {
-  final PageController _pageController = PageController();
-
-  int selectedCategory;
+class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
+    with SingleTickerProviderStateMixin {
+  final PageController _pageController = new PageController();
+  TabController _tabController;
 
   @override
   void initState() {
-    selectedCategory = widget.state.categoryEmoji.indexWhere(
+    int selectedCategory = widget.state.categoryEmoji.indexWhere(
         (element) => element.category == widget.config.initCategory);
+    _tabController = new TabController(
+        initialIndex: selectedCategory,
+        length: widget.state.categoryEmoji.length,
+        vsync: this);
     super.initState();
   }
 
@@ -31,61 +35,52 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView> {
       builder: (context, constraints) {
         final emojiSize = widget.config.getEmojiSize(constraints.maxWidth);
 
-        return Column(
-          children: [
-            Container(
-              height: 50,
-              color: Colors.grey[200],
-              child: Row(
-                  children: widget.state.categoryEmoji
-                      .asMap()
-                      .entries
-                      .map<Widget>((item) =>
-                          _buildCategory(item.key, item.value.category))
-                      .toList()),
-            ),
-            Flexible(
-              child: PageView.builder(
-                itemCount: widget.state.categoryEmoji.length,
-                controller: _pageController,
-                onPageChanged: (index) {},
-                itemBuilder: (context, index) => _buildPage(
-                    emojiSize, widget.state.categoryEmoji[index].emoji),
+        return Container(
+          color: widget.config.bgColor,
+          child: Column(
+            children: [
+              TabBar(
+                labelColor: widget.config.iconColorSelected,
+                indicatorColor: widget.config.indicatorColor,
+                unselectedLabelColor: widget.config.iconColor,
+                controller: _tabController,
+                onTap: (index) {
+                  _pageController.jumpToPage(index);
+                },
+                tabs: widget.state.categoryEmoji
+                    .asMap()
+                    .entries
+                    .map<Widget>(
+                        (item) => _buildCategory(item.key, item.value.category))
+                    .toList(),
               ),
-            ),
-          ],
+              Flexible(
+                child: PageView.builder(
+                  itemCount: widget.state.categoryEmoji.length,
+                  controller: _pageController,
+                  onPageChanged: (index) {
+                    _tabController.animateTo(index);
+                  },
+                  itemBuilder: (context, index) =>
+                      _buildPage(emojiSize, widget.state.categoryEmoji[index]),
+                ),
+              ),
+            ],
+          ),
         );
       },
     );
   }
 
   Widget _buildCategory(int index, Category category) {
-    return Expanded(
-      flex: 1,
-      child: Container(
-        color: selectedCategory == index
-            ? widget.config.indicatorColor
-            : Colors.transparent,
-        child: Center(
-          child: TextButton(
-              onPressed: () {
-                setState(() {
-                  selectedCategory = index;
-                  _pageController.jumpToPage(index);
-                });
-              },
-              child: Icon(
-                widget.config.getIconForCategory(category),
-                color: selectedCategory == index
-                    ? widget.config.iconColorSelected
-                    : widget.config.iconColor,
-              )),
-        ),
+    return Tab(
+      icon: Icon(
+        widget.config.getIconForCategory(category),
       ),
     );
   }
 
-  Widget _buildPage(double emojiSize, List<Emoji> emoji) {
+  Widget _buildPage(double emojiSize, CategoryEmoji categoryEmoji) {
     return GridView.count(
       scrollDirection: Axis.vertical,
       physics: ScrollPhysics(),
@@ -94,14 +89,14 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView> {
       crossAxisCount: widget.config.columns,
       mainAxisSpacing: widget.config.verticalSpacing,
       crossAxisSpacing: widget.config.horizontalSpacing,
-      children: emoji
+      children: categoryEmoji.emoji
           .map<Widget>((item) => SizedBox(
                 width: emojiSize,
                 height: emojiSize,
                 child: TextButton(
                     onPressed: () {
-                      widget.state.onEmojiSelected(
-                          widget.state.categoryEmoji[0].category, item);
+                      widget.state
+                          .onEmojiSelected(categoryEmoji.category, item);
                     },
                     child: Center(
                       child: Text(item.emoji,

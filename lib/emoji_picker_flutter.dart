@@ -80,10 +80,9 @@ class _EmojiPickerFlutterState extends State<EmojiPickerFlutter> {
 
   @override
   void initState() {
-    selectedCategory =
-        widget.config.initCategory ?? widget.config.recommendKeywords != null
-            ? Category.RECOMMENDED
-            : Category.SMILEYS;
+    selectedCategory = widget.config.recommendKeywords != null
+        ? Category.RECOMMENDED
+        : widget.config.initCategory;
     super.initState();
   }
 
