@@ -23,19 +23,16 @@ class EmojiPickerFlutterPlugin: FlutterPlugin, MethodCallHandler {
   }
 
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
+    val delimiter = "|"
     when (call.method) {
-        "isAvailable" -> {
-          val paint = Paint()
-          result.success(PaintCompat.hasGlyph(paint, call.argument<String>("emoji").toString()))
-        }
         "checkAvailability" -> {
           val paint = Paint()
-          val keys: List<String> = call.argument<String>("emojiKeys").toString().split("//")
-          val entries: List<String> = call.argument<String>("emojiEntries").toString().split("//")
+          val keys: List<String> = call.argument<String>("emojiKeys").toString().split(delimiter)
+          val entries: List<String> = call.argument<String>("emojiEntries").toString().split(delimiter)
           val builder = StringBuilder()
           for (i in keys.indices) {
             if (PaintCompat.hasGlyph(paint, entries[i])) {
-              builder.append(keys[i] + "//")
+              builder.append(keys[i] + delimiter)
             }
           }
           val allKeys = builder.toString()

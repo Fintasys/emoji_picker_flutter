@@ -64,7 +64,7 @@ class Config {
       this.emojiSizeMax = 32.0,
       this.verticalSpacing = 0,
       this.horizontalSpacing = 0,
-      this.initCategory = Category.SMILEYS,
+      this.initCategory = Category.RECENT,
       this.bgColor = const Color.fromRGBO(242, 242, 242, 1),
       this.indicatorColor = Colors.blue,
       this.iconColor = Colors.grey,

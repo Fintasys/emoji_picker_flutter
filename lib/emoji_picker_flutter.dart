@@ -108,7 +108,14 @@ class _EmojiPickerFlutterState extends State<EmojiPickerFlutter> {
   OnEmojiSelected _getOnEmojiListener() {
     return (category, emoji) {
       if (widget.config.showRecentsTab) {
-        _addEmojiToRecentlyUsed(emoji).then((value) => setState(() {}));
+        _addEmojiToRecentlyUsed(emoji).then((value) {
+          if (category != Category.RECENT) {
+            setState(() {
+              // rebuild to update recent emoji tab
+              // when it is not current tab
+            });
+          }
+        });
       }
       widget.onEmojiSelected(category, emoji);
     };
@@ -166,12 +173,13 @@ class _EmojiPickerFlutterState extends State<EmojiPickerFlutter> {
       Map<String, String> emoji) async {
     if (Platform.isAndroid) {
       Map<String, String> filtered;
+      String delimiter = "|";
       try {
-        String entries = emoji.values.join("//");
-        String keys = emoji.keys.join("//");
+        String entries = emoji.values.join(delimiter);
+        String keys = emoji.keys.join(delimiter);
         String result = (await platform.invokeMethod("checkAvailability",
             {'emojiKeys': keys, 'emojiEntries': entries})) as String;
-        List<String> resultKeys = result.split("//");
+        List<String> resultKeys = result.split(delimiter);
         for (int i = 0; i < emoji.length; i++) {
           if (!emoji.containsKey(resultKeys[i])) {
             emoji.remove(resultKeys[i]);

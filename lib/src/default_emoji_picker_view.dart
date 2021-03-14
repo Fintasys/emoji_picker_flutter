@@ -3,6 +3,7 @@ import 'package:emoji_picker_flutter/src/category_emoji.dart';
 import 'package:emoji_picker_flutter/src/config.dart';
 import 'package:emoji_picker_flutter/emoji_picker_builder.dart';
 import 'package:emoji_picker_flutter/src/emoji_view_state.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DefaultEmojiPickerView extends EmojiPickerBuilder {
@@ -20,13 +21,16 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
 
   @override
   void initState() {
-    int selectedCategory = widget.state.categoryEmoji.indexWhere(
+    int initCategory = widget.state.categoryEmoji.indexWhere(
         (element) => element.category == widget.config.initCategory);
+    if (initCategory == -1) {
+      initCategory = 0;
+    }
     _tabController = new TabController(
-        initialIndex: selectedCategory,
+        initialIndex: initCategory,
         length: widget.state.categoryEmoji.length,
         vsync: this);
-    _pageController = PageController(initialPage: selectedCategory);
+    _pageController = PageController(initialPage: initCategory);
     super.initState();
   }
 
@@ -82,6 +86,14 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     );
   }
 
+  Widget _buildButtonWidget({VoidCallback onPressed, Widget child}) {
+    if (widget.config.buttonMode == ButtonMode.MATERIAL) {
+      return TextButton(onPressed: onPressed, child: child);
+    }
+    return CupertinoButton(
+        padding: EdgeInsets.zero, onPressed: onPressed, child: child);
+  }
+
   Widget _buildPage(double emojiSize, CategoryEmoji categoryEmoji) {
     // Display notice if recent has no entries yet
     if (categoryEmoji.category == Category.RECENT &&
@@ -101,7 +113,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
           .map<Widget>((item) => SizedBox(
                 width: emojiSize,
                 height: emojiSize,
-                child: TextButton(
+                child: _buildButtonWidget(
                     onPressed: () {
                       widget.state
                           .onEmojiSelected(categoryEmoji.category, item);
