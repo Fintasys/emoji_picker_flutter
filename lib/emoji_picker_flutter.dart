@@ -13,10 +13,8 @@ import 'emoji_lists.dart' as emojiList;
 
 /// All the possible categories that [Emoji] can be put into
 ///
-/// All [Category] are shown in the keyboard bottombar with the exception of [Category.RECOMMENDED]
-/// which only displays when keywords are given
+/// All [Category] are shown in the category bar
 enum Category {
-  RECOMMENDED,
   RECENT,
   SMILEYS,
   ANIMALS,
@@ -72,19 +70,10 @@ class EmojiPickerFlutter extends StatefulWidget {
 class _EmojiPickerFlutterState extends State<EmojiPickerFlutter> {
   static const platform = const MethodChannel("emoji_picker_flutter");
 
-  Category selectedCategory = Category.SMILEYS;
   List<String> recentEmojis = new List.empty();
   List<CategoryEmoji> categoryEmoji = [];
 
   bool loaded = false;
-
-  @override
-  void initState() {
-    selectedCategory = widget.config.recommendKeywords != null
-        ? Category.RECOMMENDED
-        : widget.config.initCategory;
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +90,6 @@ class _EmojiPickerFlutterState extends State<EmojiPickerFlutter> {
 
     EmojiViewState state = EmojiViewState(
       categoryEmoji,
-      selectedCategory,
       widget.onEmojiSelected,
     );
 

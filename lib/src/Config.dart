@@ -40,18 +40,6 @@ class Config {
   /// The color of the loading indicator when icons get initalized
   final Color progressIndicatorColor;
 
-  /// A list of keywords that are used to provide the user with recommended emojis in [Category.RECOMMENDED]
-  final List<String> recommendKeywords;
-
-  /// The maximum number of emojis to be recommended
-  final int numRecommended;
-
-  /// The string to be displayed if no recommendations found
-  final String noRecommendationsText;
-
-  /// The text style for the [noRecommendationsText]
-  final TextStyle noRecommendationsStyle;
-
   /// The string to be displayed if no recent emojis to display
   final String noRecentsText;
 
@@ -76,11 +64,6 @@ class Config {
       this.iconColor = Colors.grey,
       this.iconColorSelected = Colors.blue,
       this.progressIndicatorColor = Colors.blue,
-      this.recommendKeywords,
-      this.numRecommended = 10,
-      this.noRecommendationsText = "No Recommendations",
-      this.noRecommendationsStyle =
-          const TextStyle(fontSize: 20, color: Colors.black26),
       this.noRecentsText = "No Recents",
       this.noRecentsStyle =
           const TextStyle(fontSize: 20, color: Colors.black26),
