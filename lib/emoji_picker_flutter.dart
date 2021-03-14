@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:emoji_picker_flutter/src/CategoryEmoji.dart';
-import 'package:emoji_picker_flutter/src/Config.dart';
-import 'package:emoji_picker_flutter/src/DefaultEmojiPickerView.dart';
-import 'package:emoji_picker_flutter/src/Emoji.dart';
-import 'package:emoji_picker_flutter/src/EmojiViewState.dart';
+import 'package:emoji_picker_flutter/src/category_emoji.dart';
+import 'package:emoji_picker_flutter/src/config.dart';
+import 'package:emoji_picker_flutter/src/default_emoji_picker_view.dart';
+import 'package:emoji_picker_flutter/src/emoji.dart';
+import 'package:emoji_picker_flutter/src/emoji_view_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';

@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:emoji_picker_flutter/src/CategoryIcons.dart';
+import 'package:emoji_picker_flutter/src/category_icons.dart';
 import 'package:flutter/material.dart';
 
 class Config {
