@@ -13,7 +13,7 @@ Yet another Emoji Picker for Flutter 🤩
 - Emojis that cannot be displayed are filtered out (Android Only)
 - Optional recently used emoji tab
 
-![Example](/assets/images/tux.png)
+<img src="screenshot/screenshot.png" width="300">
 
 ## Getting Started
 
