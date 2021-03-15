@@ -6,7 +6,9 @@ import 'package:emoji_picker_flutter/src/emoji_view_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+/// Default EmojiPicker Implementation
 class DefaultEmojiPickerView extends EmojiPickerBuilder {
+  /// Constructor
   DefaultEmojiPickerView(Config config, EmojiViewState state)
       : super(config, state);
 
@@ -21,12 +23,12 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
 
   @override
   void initState() {
-    int initCategory = widget.state.categoryEmoji.indexWhere(
+    var initCategory = widget.state.categoryEmoji.indexWhere(
         (element) => element.category == widget.config.initCategory);
     if (initCategory == -1) {
       initCategory = 0;
     }
-    _tabController = new TabController(
+    _tabController = TabController(
         initialIndex: initCategory,
         length: widget.state.categoryEmoji.length,
         vsync: this);
@@ -104,7 +106,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     // Build page normally
     return GridView.count(
       scrollDirection: Axis.vertical,
-      physics: ScrollPhysics(),
+      physics: const ScrollPhysics(),
       shrinkWrap: true,
       primary: true,
       crossAxisCount: widget.config.columns,

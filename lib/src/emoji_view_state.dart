@@ -1,12 +1,17 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:emoji_picker_flutter/src/category_emoji.dart';
 
+/// State that holds current emoji data
 class EmojiViewState {
-  final List<CategoryEmoji> categoryEmoji;
-  final OnEmojiSelected onEmojiSelected;
-
+  /// Constructor
   EmojiViewState(
     this.categoryEmoji,
     this.onEmojiSelected,
   );
+
+  /// List of all category including their emoji
+  final List<CategoryEmoji> categoryEmoji;
+
+  /// Callback when pressed on emoji
+  final OnEmojiSelected onEmojiSelected;
 }

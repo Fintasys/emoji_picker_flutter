@@ -4,7 +4,28 @@ import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:emoji_picker_flutter/category_icons.dart';
 import 'package:flutter/material.dart';
 
+/// Config for customizations
 class Config {
+  /// Constructor
+  const Config(
+      {this.columns = 7,
+      this.emojiSizeMax = 32.0,
+      this.verticalSpacing = 0,
+      this.horizontalSpacing = 0,
+      this.initCategory = Category.RECENT,
+      this.bgColor = const Color(0xFFEBEFF2),
+      this.indicatorColor = Colors.blue,
+      this.iconColor = Colors.grey,
+      this.iconColorSelected = Colors.blue,
+      this.progressIndicatorColor = Colors.blue,
+      this.showRecentsTab = true,
+      this.recentsLimit = 28,
+      this.noRecentsText = 'No Recents',
+      this.noRecentsStyle =
+          const TextStyle(fontSize: 20, color: Colors.black26),
+      this.categoryIcons = const CategoryIcons(),
+      this.buttonMode = ButtonMode.MATERIAL});
+
   /// Number of emojis per row
   final int columns;
 
@@ -55,52 +76,35 @@ class Config {
   /// Change between Material and Cupertino button style
   final ButtonMode buttonMode;
 
-  const Config(
-      {this.columns = 7,
-      this.emojiSizeMax = 32.0,
-      this.verticalSpacing = 0,
-      this.horizontalSpacing = 0,
-      this.initCategory = Category.RECENT,
-      this.bgColor = const Color(0xFFEBEFF2),
-      this.indicatorColor = Colors.blue,
-      this.iconColor = Colors.grey,
-      this.iconColorSelected = Colors.blue,
-      this.progressIndicatorColor = Colors.blue,
-      this.showRecentsTab = true,
-      this.recentsLimit = 28,
-      this.noRecentsText = "No Recents",
-      this.noRecentsStyle =
-          const TextStyle(fontSize: 20, color: Colors.black26),
-      this.categoryIcons = const CategoryIcons(),
-      this.buttonMode = ButtonMode.MATERIAL});
-
+  /// Get Emoji size based on properties and screen width
   double getEmojiSize(double width) {
-    final maxSize = width / this.columns;
-    return min(maxSize, this.emojiSizeMax);
+    final maxSize = width / columns;
+    return min(maxSize, emojiSizeMax);
   }
 
+  /// Returns the icon for the category
   IconData getIconForCategory(Category category) {
     switch (category) {
       case Category.RECENT:
-        return this.categoryIcons.recentIcon;
+        return categoryIcons.recentIcon;
       case Category.SMILEYS:
-        return this.categoryIcons.smileyIcon;
+        return categoryIcons.smileyIcon;
       case Category.ANIMALS:
-        return this.categoryIcons.animalIcon;
+        return categoryIcons.animalIcon;
       case Category.FOODS:
-        return this.categoryIcons.foodIcon;
+        return categoryIcons.foodIcon;
       case Category.TRAVEL:
-        return this.categoryIcons.travelIcon;
+        return categoryIcons.travelIcon;
       case Category.ACTIVITIES:
-        return this.categoryIcons.activityIcon;
+        return categoryIcons.activityIcon;
       case Category.OBJECTS:
-        return this.categoryIcons.objectIcon;
+        return categoryIcons.objectIcon;
       case Category.SYMBOLS:
-        return this.categoryIcons.symbolIcon;
+        return categoryIcons.symbolIcon;
       case Category.FLAGS:
-        return this.categoryIcons.flagIcon;
+        return categoryIcons.flagIcon;
       default:
-        throw Exception("Unsupported Category");
+        throw Exception('Unsupported Category');
     }
   }
 }

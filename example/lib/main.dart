@@ -7,6 +7,7 @@ void main() {
   runApp(MyApp());
 }
 
+/// Example for EmojiPickerFlutter
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
@@ -40,7 +41,7 @@ class _MyAppState extends State<MyApp> {
                             emojiShowing = !emojiShowing;
                           });
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.emoji_emotions,
                           color: Colors.white,
                         ),
@@ -51,7 +52,7 @@ class _MyAppState extends State<MyApp> {
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: TextFormField(
                             controller: _controller,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 20.0, color: Colors.black87),
                             decoration: InputDecoration(
                               hintText: 'Type a message',
@@ -74,7 +75,7 @@ class _MyAppState extends State<MyApp> {
                           onPressed: () {
                             // send message
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.send,
                             color: Colors.white,
                           )),
@@ -87,11 +88,12 @@ class _MyAppState extends State<MyApp> {
                 height: 250,
                 child: EmojiPicker(
                     onEmojiSelected: (category, emoji) {
-                      _controller.text += emoji.emoji;
-                      _controller.selection = TextSelection.fromPosition(
-                          TextPosition(offset: _controller.text.length));
+                      _controller
+                        ..text += emoji.emoji
+                        ..selection = TextSelection.fromPosition(
+                            TextPosition(offset: _controller.text.length));
                     },
-                    config: Config(
+                    config: const Config(
                         columns: 7,
                         emojiSizeMax: 32.0,
                         verticalSpacing: 0,
@@ -104,10 +106,10 @@ class _MyAppState extends State<MyApp> {
                         progressIndicatorColor: Colors.blue,
                         showRecentsTab: true,
                         recentsLimit: 28,
-                        noRecentsText: "No Recents",
-                        noRecentsStyle: const TextStyle(
-                            fontSize: 20, color: Colors.black26),
-                        categoryIcons: const CategoryIcons(),
+                        noRecentsText: 'No Recents',
+                        noRecentsStyle:
+                            TextStyle(fontSize: 20, color: Colors.black26),
+                        categoryIcons: CategoryIcons(),
                         buttonMode: ButtonMode.MATERIAL)),
               ),
             ),
