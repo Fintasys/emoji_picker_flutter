@@ -1,21 +1,30 @@
 import 'package:emoji_picker_flutter/src/emoji.dart';
 
+/// Class that holds an recent emoji
+/// Recent Emoji has an instance of the emoji
+/// And a counter, which counts how often this emoji
+/// has been used before
 class RecentEmoji {
+  /// Constructor
   RecentEmoji(this.emoji, this.counter);
+
+  /// Emoji instance
   final Emoji emoji;
+
+  /// Counter how often emoji has been used before
   int counter = 0;
 
-  static RecentEmoji fromJson(json) {
-    return new RecentEmoji(
+  /// Parse RecentEmoji from json
+  static RecentEmoji fromJson(dynamic json) {
+    return RecentEmoji(
       Emoji.fromJson(json['emoji']),
-      json['counter'],
+      json['counter'] as int,
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      "emoji": this.emoji,
-      "counter": this.counter,
-    };
-  }
+  /// Encode RecentEmoji to json
+  Map<String, dynamic> toJson() => {
+        'emoji': emoji,
+        'counter': counter,
+      };
 }

@@ -1,5 +1,8 @@
 /// A class to store data for each individual emoji
 class Emoji {
+  /// Emoji constructor
+  const Emoji(this.name, this.emoji);
+
   /// The name or description for this emoji
   final String name;
 
@@ -8,21 +11,21 @@ class Emoji {
   /// This is the string that should be displayed to view the emoji
   final String emoji;
 
-  const Emoji(this.name, this.emoji);
-
   @override
   String toString() {
-    return "Name: " + name + ", Emoji: " + emoji;
+    return 'Name: $name, Emoji: $emoji';
   }
 
-  static Emoji fromJson(json) {
-    return new Emoji(json['name'], json['emoji']);
+  /// Parse Emoji from json
+  static Emoji fromJson(Map<String, dynamic> json) {
+    return Emoji(json['name'] as String, json['emoji'] as String);
   }
 
+  ///  Encode Emoji to json
   Map<String, dynamic> toJson() {
     return {
-      "name": this.name,
-      "emoji": this.emoji,
+      'name': name,
+      'emoji': emoji,
     };
   }
 }

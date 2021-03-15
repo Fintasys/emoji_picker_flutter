@@ -21,14 +21,14 @@ jobs:
           java-version: '12.x'
       - uses: subosito/flutter-action@v1.4.0
         with:
-          flutter-version: '2.0.1'
+          # flutter-version: '2.0.1'
           channel: 'stable'
       - name: Install Dependencies
-        run: flutter packages get
+        run: flutter pub get
       - name: Format
         run: flutter format --set-exit-if-changed lib test example
       - name: Analyze
-        run: flutter analyze lib
+        run: flutter analyze lib test example
       - name: Run tests
         run: flutter test
       - name: Build Android APK  
