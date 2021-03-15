@@ -1,3 +1,5 @@
+import 'package:emoji_picker_flutter/category_icons.dart';
+import 'package:emoji_picker_flutter/config.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 
@@ -83,11 +85,30 @@ class _MyAppState extends State<MyApp> {
               offstage: !emojiShowing,
               child: SizedBox(
                 height: 250,
-                child: EmojiPickerFlutter(onEmojiSelected: (category, emoji) {
-                  _controller.text += emoji.emoji;
-                  _controller.selection = TextSelection.fromPosition(
-                      TextPosition(offset: _controller.text.length));
-                }),
+                child: EmojiPicker(
+                    onEmojiSelected: (category, emoji) {
+                      _controller.text += emoji.emoji;
+                      _controller.selection = TextSelection.fromPosition(
+                          TextPosition(offset: _controller.text.length));
+                    },
+                    config: Config(
+                        columns: 7,
+                        emojiSizeMax: 32.0,
+                        verticalSpacing: 0,
+                        horizontalSpacing: 0,
+                        initCategory: Category.RECENT,
+                        bgColor: Color(0xFFF2F2F2),
+                        indicatorColor: Colors.blue,
+                        iconColor: Colors.grey,
+                        iconColorSelected: Colors.blue,
+                        progressIndicatorColor: Colors.blue,
+                        showRecentsTab: true,
+                        recentsLimit: 28,
+                        noRecentsText: "No Recents",
+                        noRecentsStyle: const TextStyle(
+                            fontSize: 20, color: Colors.black26),
+                        categoryIcons: const CategoryIcons(),
+                        buttonMode: ButtonMode.MATERIAL)),
               ),
             ),
           ],

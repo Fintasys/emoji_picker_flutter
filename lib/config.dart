@@ -1,15 +1,12 @@
 import 'dart:math';
 
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:emoji_picker_flutter/src/category_icons.dart';
+import 'package:emoji_picker_flutter/category_icons.dart';
 import 'package:flutter/material.dart';
 
 class Config {
   /// Number of columns in keyboard grid
   final int columns;
-
-  /// Number of rows in keyboard grid
-  final int rows;
 
   /// Width and height the emoji will be maximal displayed
   /// Can be smaller due to screen size and amount of columns
@@ -60,18 +57,17 @@ class Config {
 
   const Config(
       {this.columns = 7,
-      this.rows = 3,
       this.emojiSizeMax = 32.0,
       this.verticalSpacing = 0,
       this.horizontalSpacing = 0,
       this.initCategory = Category.RECENT,
-      this.bgColor = const Color.fromRGBO(242, 242, 242, 1),
+      this.bgColor = const Color(0xFFEBEFF2),
       this.indicatorColor = Colors.blue,
       this.iconColor = Colors.grey,
       this.iconColorSelected = Colors.blue,
       this.progressIndicatorColor = Colors.blue,
       this.showRecentsTab = true,
-      this.recentsLimit = 36,
+      this.recentsLimit = 28,
       this.noRecentsText = "No Recents",
       this.noRecentsStyle =
           const TextStyle(fontSize: 20, color: Colors.black26),

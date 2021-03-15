@@ -3,7 +3,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:emoji_picker_flutter/src/category_emoji.dart';
-import 'package:emoji_picker_flutter/src/config.dart';
+import 'package:emoji_picker_flutter/config.dart';
 import 'package:emoji_picker_flutter/src/default_emoji_picker_view.dart';
 import 'package:emoji_picker_flutter/src/emoji.dart';
 import 'package:emoji_picker_flutter/src/emoji_view_state.dart';
@@ -49,7 +49,7 @@ typedef EmojiViewBuilder = Widget Function(Config config, EmojiViewState state);
 /// This widget displays a grid of [Emoji] sorted by [Category] which the user can horizontally scroll through.
 ///
 /// There is also a bottombar which displays all the possible [Category] and allow the user to quickly switch to that [Category]
-class EmojiPickerFlutter extends StatefulWidget {
+class EmojiPicker extends StatefulWidget {
   /// Custom widget
   final EmojiViewBuilder? customWidget;
 
@@ -58,7 +58,7 @@ class EmojiPickerFlutter extends StatefulWidget {
 
   final Config config;
 
-  EmojiPickerFlutter({
+  EmojiPicker({
     Key? key,
     required this.onEmojiSelected,
     this.config = const Config(),
@@ -66,10 +66,10 @@ class EmojiPickerFlutter extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _EmojiPickerFlutterState createState() => _EmojiPickerFlutterState();
+  _EmojiPickerState createState() => _EmojiPickerState();
 }
 
-class _EmojiPickerFlutterState extends State<EmojiPickerFlutter> {
+class _EmojiPickerState extends State<EmojiPicker> {
   static const platform = const MethodChannel("emoji_picker_flutter");
 
   List<CategoryEmoji> categoryEmoji = [];
