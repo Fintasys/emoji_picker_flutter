@@ -3,7 +3,7 @@ import 'package:emoji_picker_flutter/src/emoji.dart';
 class RecentEmoji {
   RecentEmoji(this.emoji, this.counter);
   final Emoji emoji;
-  int counter;
+  int counter = 0;
 
   static RecentEmoji fromJson(json) {
     return new RecentEmoji(

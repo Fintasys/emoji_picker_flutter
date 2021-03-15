@@ -16,8 +16,8 @@ class DefaultEmojiPickerView extends EmojiPickerBuilder {
 
 class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     with SingleTickerProviderStateMixin {
-  PageController _pageController;
-  TabController _tabController;
+  PageController? _pageController;
+  TabController? _tabController;
 
   @override
   void initState() {
@@ -51,7 +51,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
                 controller: _tabController,
                 labelPadding: EdgeInsets.zero,
                 onTap: (index) {
-                  _pageController.jumpToPage(index);
+                  _pageController!.jumpToPage(index);
                 },
                 tabs: widget.state.categoryEmoji
                     .asMap()
@@ -65,7 +65,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
                   itemCount: widget.state.categoryEmoji.length,
                   controller: _pageController,
                   onPageChanged: (index) {
-                    _tabController.animateTo(index);
+                    _tabController!.animateTo(index);
                   },
                   itemBuilder: (context, index) =>
                       _buildPage(emojiSize, widget.state.categoryEmoji[index]),
@@ -86,7 +86,8 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     );
   }
 
-  Widget _buildButtonWidget({VoidCallback onPressed, Widget child}) {
+  Widget _buildButtonWidget(
+      {required VoidCallback onPressed, required Widget child}) {
     if (widget.config.buttonMode == ButtonMode.MATERIAL) {
       return TextButton(onPressed: onPressed, child: child);
     }
