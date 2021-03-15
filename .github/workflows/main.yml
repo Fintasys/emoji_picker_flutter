@@ -20,9 +20,9 @@ jobs:
         with:
           java-version: '12.x'
       - uses: subosito/flutter-action@v1.4.0
-        with:
+        # with:
           # flutter-version: '2.0.1'
-          channel: 'stable'
+          # channel: 'stable'
       - name: Install Dependencies
         run: flutter pub get
       - name: Format
