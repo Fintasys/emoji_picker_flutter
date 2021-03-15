@@ -22,7 +22,7 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('Emoji Picker Example App'),
         ),
         body: Column(
           children: [
