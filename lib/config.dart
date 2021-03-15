@@ -5,36 +5,36 @@ import 'package:emoji_picker_flutter/category_icons.dart';
 import 'package:flutter/material.dart';
 
 class Config {
-  /// Number of columns in keyboard grid
+  /// Number of emojis per row
   final int columns;
 
   /// Width and height the emoji will be maximal displayed
   /// Can be smaller due to screen size and amount of columns
   final double emojiSizeMax;
 
-  /// Verical spacing between icons
+  /// Verical spacing between emojis
   final double verticalSpacing;
 
-  /// Horizontal spacing between icon
+  /// Horizontal spacing between emojis
   final double horizontalSpacing;
 
   /// The initial [Category] that will be selected
   /// This [Category] will have its button in the bottombar darkened
   final Category initCategory;
 
-  /// The background color of the keyboard
+  /// The background color of the Widget
   final Color bgColor;
 
   /// The color of the category indicator
   final Color indicatorColor;
 
-  /// The color the category icon
+  /// The color of the category icons
   final Color iconColor;
 
-  /// The color of the category icon when selelected
+  /// The color of the category icon when selected
   final Color iconColorSelected;
 
-  /// The color of the loading indicator when icons get initalized
+  /// The color of the loading indicator during initalization
   final Color progressIndicatorColor;
 
   /// Show extra tab with recently used emoji
@@ -43,16 +43,16 @@ class Config {
   /// Limit of recently used emoji that will be saved
   final int recentsLimit;
 
-  /// The string to be displayed if no recent emojis to display
+  /// The text to be displayed if no recent emojis to display
   final String noRecentsText;
 
-  /// The text style for the [noRecentsText]
+  /// The text style for [noRecentsText]
   final TextStyle noRecentsStyle;
 
   /// Determines the icon to display for each [Category]
   final CategoryIcons categoryIcons;
 
-  /// Determines the style given to the keyboard keys
+  /// Change between Material and Cupertino button style
   final ButtonMode buttonMode;
 
   const Config(
