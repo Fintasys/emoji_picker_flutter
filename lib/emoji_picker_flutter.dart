@@ -11,7 +11,7 @@ import 'package:emoji_picker_flutter/src/recent_emoji.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'emoji_lists.dart' as emojiList;
+import 'src/emoji_lists.dart' as emojiList;
 
 /// All the possible categories that [Emoji] can be put into
 ///
