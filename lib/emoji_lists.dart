@@ -1,3 +1,6 @@
+// Copyright information
+// File originally from https://github.com/JeffG05/emoji_picker
+
 /// Map of all possible emojis along with their names in [Category.SMILEYS]
 final Map<String, String> smileys = new Map.fromIterables([
   'Grinning Face',
