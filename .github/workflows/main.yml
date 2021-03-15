@@ -28,7 +28,7 @@ jobs:
       - name: Format
         run: flutter format --set-exit-if-changed lib test example
       - name: Analyze
-        run: flutter analyze lib test example
+        run: flutter analyze lib
       - name: Run tests
         run: flutter test
       - name: Build Android APK  
