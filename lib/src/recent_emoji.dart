@@ -17,7 +17,7 @@ class RecentEmoji {
   /// Parse RecentEmoji from json
   static RecentEmoji fromJson(dynamic json) {
     return RecentEmoji(
-      Emoji.fromJson(json['emoji']),
+      Emoji.fromJson(json['emoji'] as Map<String, dynamic>),
       json['counter'] as int,
     );
   }
