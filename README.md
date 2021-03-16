@@ -20,8 +20,7 @@ Yet another Emoji Picker for Flutter 🤩
 - Emojis that cannot be displayed are filtered out (Android Only)
 - Optional recently used emoji tab
 
-<img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/master/screenshot/screenshot.png" width="300">
-<img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/master/screenshot/screenshot2.png" width="300">
+<img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/master/screenshot/screenshot.png" width="300"><img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/master/screenshot/screenshot2.png" width="300">
 
 ## Getting Started
 
