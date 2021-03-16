@@ -74,7 +74,7 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 | buttonMode     | Choose between Material and Cupertino button style                                | ButtonMode.MATERIAL     |
 
 ## Custom view
-The appearance is completely customizable. If properties in settings are not enough you can inherit from `EmojiPickerBuilder` to make further adjustments.
+The appearance is completely customizable by setting `customWidget` property. If properties in Config are not enough you can inherit from `EmojiPickerBuilder` (recommended but not necessary) to make further adjustments. 
 ```
 class CustomView extends EmojiPickerBuilder {
     CustomView(Config config, EmojiViewState state) : super(config, state);
