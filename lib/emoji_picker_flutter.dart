@@ -200,7 +200,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
   Future<Map<String, String>?> _getPlatformAvailableEmoji(
       Map<String, String> emoji) async {
     if (Platform.isAndroid) {
-      Map<String, String>? filtered;
+      Map<String, String>? filtered = {};
       var delimiter = '|';
       try {
         var entries = emoji.values.join(delimiter);
@@ -208,12 +208,9 @@ class _EmojiPickerState extends State<EmojiPicker> {
         var result = (await platform.invokeMethod<String>('checkAvailability',
             {'emojiKeys': keys, 'emojiEntries': entries})) as String;
         var resultKeys = result.split(delimiter);
-        for (var i = 0; i < emoji.length; i++) {
-          if (!emoji.containsKey(resultKeys[i])) {
-            emoji.remove(resultKeys[i]);
-          }
+        for (var i = 0; i < resultKeys.length; i++) {
+          filtered[resultKeys[i]] = emoji[resultKeys[i]]!;
         }
-        filtered = emoji;
       } on PlatformException catch (_) {
         filtered = null;
       }
