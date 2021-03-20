@@ -1,6 +1,6 @@
 ## 1.0.2
 
-* Bug fixes
+* Bug fix
 
 ## 1.0.1
 
