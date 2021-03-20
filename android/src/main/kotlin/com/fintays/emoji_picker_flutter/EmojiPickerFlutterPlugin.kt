@@ -29,14 +29,13 @@ class EmojiPickerFlutterPlugin: FlutterPlugin, MethodCallHandler {
           val paint = Paint()
           val keys: List<String> = call.argument<String>("emojiKeys").toString().split(delimiter)
           val entries: List<String> = call.argument<String>("emojiEntries").toString().split(delimiter)
-          val builder = StringBuilder()
+          val supportedList = mutableListOf<String>()
           for (i in keys.indices) {
             if (PaintCompat.hasGlyph(paint, entries[i])) {
-              builder.append(keys[i] + delimiter)
+              supportedList.add(keys[i])
             }
           }
-          val allKeys = builder.toString()
-          result.success(allKeys)
+          result.success(supportedList.joinToString(separator = delimiter))
         }
         else -> {
           result.notImplemented()
