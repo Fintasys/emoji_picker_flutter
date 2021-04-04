@@ -1,5 +1,3 @@
-import 'package:emoji_picker_flutter/category_icons.dart';
-import 'package:emoji_picker_flutter/config.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 
