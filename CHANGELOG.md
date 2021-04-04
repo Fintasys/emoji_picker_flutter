@@ -1,3 +1,7 @@
+## 1.0.3
+
+* Organize imports
+
 ## 1.0.2
 
 * Bug fix
