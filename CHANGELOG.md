@@ -1,3 +1,7 @@
+## 1.0.4
+
+* Make Emoji class accessible 🙌
+
 ## 1.0.3
 
 * Organize imports
