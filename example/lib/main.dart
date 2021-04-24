@@ -85,7 +85,7 @@ class _MyAppState extends State<MyApp> {
               child: SizedBox(
                 height: 250,
                 child: EmojiPicker(
-                    onEmojiSelected: (category, emoji) {
+                    onEmojiSelected: (Category category, Emoji emoji) {
                       _controller
                         ..text += emoji.emoji
                         ..selection = TextSelection.fromPosition(
