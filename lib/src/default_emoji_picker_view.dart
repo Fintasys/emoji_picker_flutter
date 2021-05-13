@@ -123,6 +123,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
                     },
                     child: Center(
                       child: Text(item.emoji,
+                          textScaleFactor: 1,
                           style: TextStyle(fontSize: emojiSize)),
                     )),
               ))
