@@ -80,6 +80,7 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 
 ## Backspace-Button
 You can add an Backspace-Button to the end category list by adding the callback method `onBackspacePressed: () { }` to the EmojiPicker-Widget. This will make it easier for your user to remove an added Emoji without showing the keyboard. Check out the example for more details about usage.
+
 <img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/master/screenshot/backspace.png" width="300">
 
 ## Custom view
