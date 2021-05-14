@@ -70,6 +70,7 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 | iconColor    | The color of the category icons                                                       | Colors.grey      |
 | iconColorSelected      | The color of the category icon when selected                                                 | Colors.blue |
 | progressIndicatorColor     | The color of the loading indicator during initalization                                | Colors.blue     |
+| backspaceColor     | The color of the backspace icon button                               | Colors.blue     |
 | showRecentsTab     | Show extra tab with recently used emoji                                | true     |
 | recentsLimit     | Limit of recently used emoji that will be saved                                | 28     |
 | noRecentsText     | The text to be displayed if no recent emojis to display                                | "No Recents"     |
