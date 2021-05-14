@@ -7,6 +7,7 @@ class EmojiViewState {
   EmojiViewState(
     this.categoryEmoji,
     this.onEmojiSelected,
+    this.onBackspacePressed,
   );
 
   /// List of all category including their emoji
@@ -14,4 +15,7 @@ class EmojiViewState {
 
   /// Callback when pressed on emoji
   final OnEmojiSelected onEmojiSelected;
+
+  /// Callback when pressed on backspace
+  final OnBackspacePressed? onBackspacePressed;
 }

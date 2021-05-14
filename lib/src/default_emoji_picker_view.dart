@@ -36,6 +36,24 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     super.initState();
   }
 
+  Widget _buildBackspaceButton() {
+    if (widget.state.onBackspacePressed != null) {
+      return Material(
+        type: MaterialType.transparency,
+        child: IconButton(
+            padding: const EdgeInsets.only(bottom: 2),
+            icon: Icon(
+              Icons.backspace,
+              color: widget.config.backspaceColor,
+            ),
+            onPressed: () {
+              widget.state.onBackspacePressed!();
+            }),
+      );
+    }
+    return Container();
+  }
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -46,21 +64,28 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
           color: widget.config.bgColor,
           child: Column(
             children: [
-              TabBar(
-                labelColor: widget.config.iconColorSelected,
-                indicatorColor: widget.config.indicatorColor,
-                unselectedLabelColor: widget.config.iconColor,
-                controller: _tabController,
-                labelPadding: EdgeInsets.zero,
-                onTap: (index) {
-                  _pageController!.jumpToPage(index);
-                },
-                tabs: widget.state.categoryEmoji
-                    .asMap()
-                    .entries
-                    .map<Widget>(
-                        (item) => _buildCategory(item.key, item.value.category))
-                    .toList(),
+              Row(
+                children: [
+                  Expanded(
+                    child: TabBar(
+                      labelColor: widget.config.iconColorSelected,
+                      indicatorColor: widget.config.indicatorColor,
+                      unselectedLabelColor: widget.config.iconColor,
+                      controller: _tabController,
+                      labelPadding: EdgeInsets.zero,
+                      onTap: (index) {
+                        _pageController!.jumpToPage(index);
+                      },
+                      tabs: widget.state.categoryEmoji
+                          .asMap()
+                          .entries
+                          .map<Widget>((item) =>
+                              _buildCategory(item.key, item.value.category))
+                          .toList(),
+                    ),
+                  ),
+                  _buildBackspaceButton(),
+                ],
               ),
               Flexible(
                 child: PageView.builder(

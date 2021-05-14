@@ -42,7 +42,7 @@ enum Category {
   SYMBOLS,
 
   /// Flag emojis
-  FLAGS
+  FLAGS,
 }
 
 /// Enum to alter the keyboard button style
@@ -60,6 +60,9 @@ enum ButtonMode {
 /// as the [Category] from which it originated
 typedef void OnEmojiSelected(Category category, Emoji emoji);
 
+/// Callback function for backspace button
+typedef void OnBackspacePressed();
+
 /// Callback function for custom view
 typedef EmojiViewBuilder = Widget Function(Config config, EmojiViewState state);
 
@@ -75,6 +78,7 @@ class EmojiPicker extends StatefulWidget {
   EmojiPicker({
     Key? key,
     required this.onEmojiSelected,
+    this.onBackspacePressed,
     this.config = const Config(),
     this.customWidget,
   }) : super(key: key);
@@ -84,6 +88,9 @@ class EmojiPicker extends StatefulWidget {
 
   /// The function called when the emoji is selected
   final OnEmojiSelected onEmojiSelected;
+
+  /// The function called when backspace button is pressed
+  final OnBackspacePressed? onBackspacePressed;
 
   /// Config for customizations
   final Config config;
@@ -119,6 +126,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
     var state = EmojiViewState(
       categoryEmoji,
       _getOnEmojiListener(),
+      widget.onBackspacePressed,
     );
 
     // Build

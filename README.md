@@ -29,6 +29,10 @@ EmojiPicker(
     onEmojiSelected: (category, emoji) {
         // Do something when emoji is tapped
     },
+    onBackspacePressed: () {
+        // Backspace-Button tapped logic
+        // Remove this line to also remove the button in the UI
+    },
     config: Config(
         columns: 7,
         emojiSizeMax: 32.0,
@@ -72,6 +76,9 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 | noRecentsStyle     | The text style for [noRecentsText]                                | TextStyle(fontSize:  20, color:  Colors.black26)     |
 | categoryIcons     | Determines the icon to display for each Category. You can change icons by setting them in the constructor.                               | CategoryIcons()     |
 | buttonMode     | Choose between Material and Cupertino button style                                | ButtonMode.MATERIAL     |
+
+## Backspace-Button
+You can add an Backspace-Button to the end category list by adding the callback method `onBackspacePressed: () { }` to the EmojiPicker-Widget. This will make it easier for your user to remove an added Emoji without showing the keyboard. Check out the example for more details about usage.
 
 ## Custom view
 The appearance is completely customizable by setting `customWidget` property. If properties in Config are not enough you can inherit from `EmojiPickerBuilder` (recommended but not necessary) to make further adjustments. 

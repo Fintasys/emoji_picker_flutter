@@ -1,6 +1,7 @@
 ## 1.0.5
 
 * Fix appearance of emoji when device font size is not default 🖥
+* Add Backspace-Button & OnBackspacePressed-Callback for easier deletion of added Emoji's
 
 ## 1.0.4
 
