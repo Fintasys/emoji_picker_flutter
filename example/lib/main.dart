@@ -15,6 +15,20 @@ class _MyAppState extends State<MyApp> {
   final TextEditingController _controller = TextEditingController();
   bool emojiShowing = false;
 
+  _onEmojiSelected(Emoji emoji) {
+    _controller
+      ..text += emoji.emoji
+      ..selection = TextSelection.fromPosition(
+          TextPosition(offset: _controller.text.length));
+  }
+
+  _onBackspacePressed() {
+    _controller
+      ..text = _controller.text.characters.skipLast(1).toString()
+      ..selection = TextSelection.fromPosition(
+          TextPosition(offset: _controller.text.length));
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -86,11 +100,9 @@ class _MyAppState extends State<MyApp> {
                 height: 250,
                 child: EmojiPicker(
                     onEmojiSelected: (Category category, Emoji emoji) {
-                      _controller
-                        ..text += emoji.emoji
-                        ..selection = TextSelection.fromPosition(
-                            TextPosition(offset: _controller.text.length));
+                      _onEmojiSelected(emoji);
                     },
+                    onBackspacePressed: _onBackspacePressed,
                     config: const Config(
                         columns: 7,
                         emojiSizeMax: 32.0,
@@ -102,6 +114,7 @@ class _MyAppState extends State<MyApp> {
                         iconColor: Colors.grey,
                         iconColorSelected: Colors.blue,
                         progressIndicatorColor: Colors.blue,
+                        backspaceColor: Colors.blue,
                         showRecentsTab: true,
                         recentsLimit: 28,
                         noRecentsText: 'No Recents',

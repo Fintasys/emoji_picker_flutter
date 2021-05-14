@@ -18,6 +18,7 @@ class Config {
       this.iconColor = Colors.grey,
       this.iconColorSelected = Colors.blue,
       this.progressIndicatorColor = Colors.blue,
+      this.backspaceColor = Colors.blue,
       this.showRecentsTab = true,
       this.recentsLimit = 28,
       this.noRecentsText = 'No Recents',
@@ -57,6 +58,9 @@ class Config {
 
   /// The color of the loading indicator during initalization
   final Color progressIndicatorColor;
+
+  /// The color of the backspace icon button
+  final Color backspaceColor;
 
   /// Show extra tab with recently used emoji
   final bool showRecentsTab;
