@@ -134,6 +134,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
       physics: const ScrollPhysics(),
       shrinkWrap: true,
       primary: true,
+      padding: const EdgeInsets.all(0),
       crossAxisCount: widget.config.columns,
       mainAxisSpacing: widget.config.verticalSpacing,
       crossAxisSpacing: widget.config.horizontalSpacing,
