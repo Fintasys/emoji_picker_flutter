@@ -2,6 +2,7 @@
 
 * Fix appearance of emoji when device font size is not default 🖥
 * Add Backspace-Button & OnBackspacePressed-Callback for easier deletion of added Emoji's
+* Fix issue with GridView padding at the top when no AppBar exist in Scaffold
 
 ## 1.0.4
 
