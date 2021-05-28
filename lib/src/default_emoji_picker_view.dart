@@ -131,7 +131,6 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     // Build page normally
     return GridView.count(
       scrollDirection: Axis.vertical,
-
       physics: const ScrollPhysics(),
       shrinkWrap: true,
       primary: true,
@@ -149,19 +148,18 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     CategoryEmoji categoryEmoji,
     Emoji emoji,
   ) {
-    return SizedBox.expand(
-      child: SizedBox(
- 
-        child: _buildButtonWidget(
-            onPressed: () {
-              widget.state.onEmojiSelected(categoryEmoji.category, emoji);
-            },
-            child: Text(
-              emoji.emoji,
-              textScaleFactor: 1.0,
-            )),
-      ),
-    );
+    return _buildButtonWidget(
+        onPressed: () {
+          widget.state.onEmojiSelected(categoryEmoji.category, emoji);
+        },
+        child: FittedBox(
+          fit: BoxFit.fill,
+          child: Text(
+            emoji.emoji,
+            textScaleFactor: 1.0,
+            style: TextStyle(fontSize: emojiSize),
+          ),
+        ));
   }
 
   Widget _buildNoRecent() {
