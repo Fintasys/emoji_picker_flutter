@@ -139,22 +139,28 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
       mainAxisSpacing: widget.config.verticalSpacing,
       crossAxisSpacing: widget.config.horizontalSpacing,
       children: categoryEmoji.emoji
-          .map<Widget>((item) => SizedBox(
-                width: emojiSize,
-                height: emojiSize,
-                child: _buildButtonWidget(
-                    onPressed: () {
-                      widget.state
-                          .onEmojiSelected(categoryEmoji.category, item);
-                    },
-                    child: Center(
-                      child: Text(item.emoji,
-                          textScaleFactor: 1,
-                          style: TextStyle(fontSize: emojiSize)),
-                    )),
-              ))
+          .map<Widget>((item) => _buildEmoji(emojiSize, categoryEmoji, item))
           .toList(),
     );
+  }
+
+  Widget _buildEmoji(
+    double emojiSize,
+    CategoryEmoji categoryEmoji,
+    Emoji emoji,
+  ) {
+    return _buildButtonWidget(
+        onPressed: () {
+          widget.state.onEmojiSelected(categoryEmoji.category, emoji);
+        },
+        child: FittedBox(
+          fit: BoxFit.fill,
+          child: Text(
+            emoji.emoji,
+            textScaleFactor: 1.0,
+            style: TextStyle(fontSize: emojiSize),
+          ),
+        ));
   }
 
   Widget _buildNoRecent() {
