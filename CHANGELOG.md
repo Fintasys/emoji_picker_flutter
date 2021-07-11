@@ -1,3 +1,7 @@
+## 1.0.7
+
+* Align center NoRecent-Text
+
 ## 1.0.6
 
 * Fix appearance of emoji when device display size is not default 👀

@@ -165,7 +165,10 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
 
   Widget _buildNoRecent() {
     return Center(
-        child: Text(widget.config.noRecentsText,
-            style: widget.config.noRecentsStyle));
+        child: Text(
+      widget.config.noRecentsText,
+      style: widget.config.noRecentsStyle,
+      textAlign: TextAlign.center,
+    ));
   }
 }
