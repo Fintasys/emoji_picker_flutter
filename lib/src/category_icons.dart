@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 class CategoryIcons {
   /// Constructor
   const CategoryIcons({
-    this.recommendationIcon = Icons.search,
     this.recentIcon = Icons.access_time,
     this.smileyIcon = Icons.tag_faces,
     this.animalIcon = Icons.pets,
@@ -20,9 +19,6 @@ class CategoryIcons {
     this.symbolIcon = Icons.emoji_symbols,
     this.flagIcon = Icons.flag,
   });
-
-  /// Icon for [Category.RECOMMENDED]
-  final IconData recommendationIcon;
 
   /// Icon for [Category.RECENT]
   final IconData recentIcon;
