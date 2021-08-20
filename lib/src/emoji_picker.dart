@@ -105,7 +105,17 @@ class _EmojiPickerState extends State<EmojiPicker> {
   List<CategoryEmoji> categoryEmoji = List.empty(growable: true);
   List<RecentEmoji> recentEmoji = List.empty(growable: true);
 
+  // Prevent emojis to be reloaded with every build
   bool loaded = false;
+
+  @override
+  void didUpdateWidget(covariant EmojiPicker oldWidget) {
+    if (oldWidget.config != widget.config) {
+      // Config changed - rebuild EmojiPickerView completely
+      loaded = false;
+    }
+    super.didUpdateWidget(oldWidget);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -160,25 +170,22 @@ class _EmojiPickerState extends State<EmojiPicker> {
       final recentEmojiMap = recentEmoji.map((e) => e.emoji).toList();
       categoryEmoji.add(CategoryEmoji(Category.RECENT, recentEmojiMap));
     }
-    categoryEmoji
-      ..add(CategoryEmoji(Category.SMILEYS,
-          await _getAvailableEmojis(emoji_list.smileys, title: 'smileys')))
-      ..add(CategoryEmoji(Category.ANIMALS,
-          await _getAvailableEmojis(emoji_list.animals, title: 'animals')))
-      ..add(CategoryEmoji(Category.FOODS,
-          await _getAvailableEmojis(emoji_list.foods, title: 'foods')))
-      ..add(CategoryEmoji(
-          Category.ACTIVITIES,
-          await _getAvailableEmojis(emoji_list.activities,
-              title: 'activities')))
-      ..add(CategoryEmoji(Category.TRAVEL,
-          await _getAvailableEmojis(emoji_list.travel, title: 'travel')))
-      ..add(CategoryEmoji(Category.OBJECTS,
-          await _getAvailableEmojis(emoji_list.objects, title: 'objects')))
-      ..add(CategoryEmoji(Category.SYMBOLS,
-          await _getAvailableEmojis(emoji_list.symbols, title: 'symbols')))
-      ..add(CategoryEmoji(Category.FLAGS,
-          await _getAvailableEmojis(emoji_list.flags, title: 'flags')));
+    categoryEmoji.addAll([
+      CategoryEmoji(Category.SMILEYS,
+          await _getAvailableEmojis(emoji_list.smileys, title: 'smileys')),
+      CategoryEmoji(Category.ANIMALS,
+          await _getAvailableEmojis(emoji_list.animals, title: 'animals')),
+      CategoryEmoji(Category.FOODS,
+          await _getAvailableEmojis(emoji_list.foods, title: 'foods')),
+      CategoryEmoji(Category.TRAVEL,
+          await _getAvailableEmojis(emoji_list.travel, title: 'travel')),
+      CategoryEmoji(Category.OBJECTS,
+          await _getAvailableEmojis(emoji_list.objects, title: 'objects')),
+      CategoryEmoji(Category.SYMBOLS,
+          await _getAvailableEmojis(emoji_list.symbols, title: 'symbols')),
+      CategoryEmoji(Category.FLAGS,
+          await _getAvailableEmojis(emoji_list.flags, title: 'flags'))
+    ]);
   }
 
   // Get available emoji for given category title

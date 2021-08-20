@@ -1,6 +1,8 @@
 ## 1.0.7
 
 * Align center NoRecent-Text
+* Enable Hot Reload for config changes
+* Format & Cleanup
 
 ## 1.0.6
 
