@@ -35,7 +35,7 @@ EmojiPicker(
     },
     config: Config(
         columns: 7,
-        emojiSizeMax: 32.0,
+        emojiSizeMax: 32 * (Platform.isIOS ? 1.30 : 1.0), // Issue: https://github.com/flutter/flutter/issues/28894
         verticalSpacing: 0,
         horizontalSpacing: 0,
         initCategory: Category.RECENT,
@@ -63,7 +63,7 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 | --------------- | ------------------------------------------------------------------ |------------|
 | columns             | Number of emojis per row                                       |7    |
 | emojiSizeMax     | Width and height the emoji will be maximal displayed                 |32.0  |
-| verticalSpacing         | Verical spacing between emojis | ToastGravity.BOTTOM    |
+| verticalSpacing         | Verical spacing between emojis | 0    |
 | horizontalSpacing | Horizontal spacing between emojis                                                 | 0     |
 | initCategory         | The initial Category that will be selected                                                         |Category.RECENT   |
 | bgColor       | The background color of the Widget                                                       |Color(0xFFF2F2F2)    |
