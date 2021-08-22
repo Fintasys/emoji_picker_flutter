@@ -123,6 +123,7 @@ class _MyAppState extends State<MyApp> {
                         noRecentsText: 'No Recents',
                         noRecentsStyle: const TextStyle(
                             fontSize: 20, color: Colors.black26),
+                        tabIndicatorAnimDuration: kTabScrollDuration,
                         categoryIcons: const CategoryIcons(),
                         buttonMode: ButtonMode.MATERIAL)),
               ),

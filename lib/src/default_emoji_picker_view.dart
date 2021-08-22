@@ -92,7 +92,10 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
                   itemCount: widget.state.categoryEmoji.length,
                   controller: _pageController,
                   onPageChanged: (index) {
-                    _tabController!.animateTo(index);
+                    _tabController!.animateTo(
+                      index,
+                      duration: widget.config.tabIndicatorAnimDuration,
+                    );
                   },
                   itemBuilder: (context, index) =>
                       _buildPage(emojiSize, widget.state.categoryEmoji[index]),

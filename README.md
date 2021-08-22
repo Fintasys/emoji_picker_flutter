@@ -49,6 +49,7 @@ EmojiPicker(
         noRecentsText: "No Recents",
         noRecentsStyle:
             const TextStyle(fontSize: 20, color: Colors.black26),
+        tabIndicatorAnimDuration: kTabScrollDuration,    
         categoryIcons: const CategoryIcons(),
         buttonMode: ButtonMode.MATERIAL
     ),
@@ -75,6 +76,7 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 | recentsLimit     | Limit of recently used emoji that will be saved                                | 28     |
 | noRecentsText     | The text to be displayed if no recent emojis to display                                | "No Recents"     |
 | noRecentsStyle     | The text style for [noRecentsText]                                | TextStyle(fontSize:  20, color:  Colors.black26)     |
+| tabIndicatorAnimDuration     | Duration of tab indicator to animate to next category                                | Duration(milliseconds: 300)     |
 | categoryIcons     | Determines the icon to display for each Category. You can change icons by setting them in the constructor.                               | CategoryIcons()     |
 | buttonMode     | Choose between Material and Cupertino button style                                | ButtonMode.MATERIAL     |
 

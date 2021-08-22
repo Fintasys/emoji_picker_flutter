@@ -3,6 +3,7 @@
 * Align center NoRecent-Text
 * Enable Hot Reload for config changes
 * Add hint to example code how to fix emoji size issue for iOS
+* Add attribute tabIndicatorAnimDuration to config to control tab indicator animation duration
 * Fix issue with iOS hover effect
 * Format & Cleanup
 

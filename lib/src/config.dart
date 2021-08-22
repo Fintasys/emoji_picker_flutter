@@ -24,6 +24,7 @@ class Config {
       this.noRecentsText = 'No Recents',
       this.noRecentsStyle =
           const TextStyle(fontSize: 20, color: Colors.black26),
+      this.tabIndicatorAnimDuration = kTabScrollDuration,
       this.categoryIcons = const CategoryIcons(),
       this.buttonMode = ButtonMode.MATERIAL});
 
@@ -73,6 +74,9 @@ class Config {
 
   /// The text style for [noRecentsText]
   final TextStyle noRecentsStyle;
+
+  /// Duration of tab indicator to animate to next category
+  final Duration tabIndicatorAnimDuration;
 
   /// Determines the icon to display for each [Category]
   final CategoryIcons categoryIcons;
