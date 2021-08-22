@@ -2,6 +2,8 @@
 
 * Align center NoRecent-Text
 * Enable Hot Reload for config changes
+* Add hint to example code how to fix emoji size issue for iOS
+* Fix issue with iOS hover effect
 * Format & Cleanup
 
 ## 1.0.6
