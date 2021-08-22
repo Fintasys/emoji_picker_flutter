@@ -116,7 +116,11 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
   Widget _buildButtonWidget(
       {required VoidCallback onPressed, required Widget child}) {
     if (widget.config.buttonMode == ButtonMode.MATERIAL) {
-      return TextButton(onPressed: onPressed, child: child);
+      return TextButton(
+        onPressed: onPressed,
+        child: child,
+        style: ButtonStyle(padding: MaterialStateProperty.all(EdgeInsets.zero)),
+      );
     }
     return CupertinoButton(
         padding: EdgeInsets.zero, onPressed: onPressed, child: child);
@@ -158,7 +162,10 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
           child: Text(
             emoji.emoji,
             textScaleFactor: 1.0,
-            style: TextStyle(fontSize: emojiSize),
+            style: TextStyle(
+              fontSize: emojiSize,
+              backgroundColor: Colors.transparent,
+            ),
           ),
         ));
   }
