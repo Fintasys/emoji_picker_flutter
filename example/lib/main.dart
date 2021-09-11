@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 
 void main() {
@@ -105,14 +106,15 @@ class _MyAppState extends State<MyApp> {
                       _onEmojiSelected(emoji);
                     },
                     onBackspacePressed: _onBackspacePressed,
-                    config: Config(
+                    config: const Config(
                         columns: 7,
                         // Issue: https://github.com/flutter/flutter/issues/28894
-                        emojiSizeMax: 32 * (Platform.isIOS ? 1.30 : 1.0),
+                        emojiSizeMax:
+                            32 * (!kIsWeb && Platform.isIOS ? 1.30 : 1.0),
                         verticalSpacing: 0,
                         horizontalSpacing: 0,
                         initCategory: Category.RECENT,
-                        bgColor: const Color(0xFFF2F2F2),
+                        bgColor: Color(0xFFF2F2F2),
                         indicatorColor: Colors.blue,
                         iconColor: Colors.grey,
                         iconColorSelected: Colors.blue,
@@ -121,10 +123,10 @@ class _MyAppState extends State<MyApp> {
                         showRecentsTab: true,
                         recentsLimit: 28,
                         noRecentsText: 'No Recents',
-                        noRecentsStyle: const TextStyle(
-                            fontSize: 20, color: Colors.black26),
+                        noRecentsStyle:
+                            TextStyle(fontSize: 20, color: Colors.black26),
                         tabIndicatorAnimDuration: kTabScrollDuration,
-                        categoryIcons: const CategoryIcons(),
+                        categoryIcons: CategoryIcons(),
                         buttonMode: ButtonMode.MATERIAL)),
               ),
             ),
