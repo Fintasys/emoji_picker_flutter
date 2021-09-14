@@ -104,15 +104,23 @@ class _EmojiPickerState extends State<EmojiPicker> {
 
   List<CategoryEmoji> categoryEmoji = List.empty(growable: true);
   List<RecentEmoji> recentEmoji = List.empty(growable: true);
+  late Future<void> updateEmojiFuture;
 
   // Prevent emojis to be reloaded with every build
   bool loaded = false;
+
+  @override
+  void initState() {
+    super.initState();
+    updateEmojiFuture = _updateEmojis();
+  }
 
   @override
   void didUpdateWidget(covariant EmojiPicker oldWidget) {
     if (oldWidget.config != widget.config) {
       // Config changed - rebuild EmojiPickerView completely
       loaded = false;
+      updateEmojiFuture = _updateEmojis();
     }
     super.didUpdateWidget(oldWidget);
   }
@@ -121,7 +129,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
   Widget build(BuildContext context) {
     if (!loaded) {
       // Load emojis
-      _updateEmojis().then(
+      updateEmojiFuture.then(
         (value) => WidgetsBinding.instance!.addPostFrameCallback((_) {
           if (!mounted) return;
           setState(() {
