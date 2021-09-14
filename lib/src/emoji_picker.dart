@@ -123,11 +123,10 @@ class _EmojiPickerState extends State<EmojiPicker> {
       // Load emojis
       _updateEmojis().then(
         (value) => WidgetsBinding.instance!.addPostFrameCallback((_) {
-          if (mounted) {
-            setState(() {
-              loaded = true;
-            });
-          }
+          if (!mounted) return;
+          setState(() {
+            loaded = true;
+          });
         }),
       );
 
@@ -155,13 +154,11 @@ class _EmojiPickerState extends State<EmojiPicker> {
     return (category, emoji) {
       if (widget.config.showRecentsTab) {
         _addEmojiToRecentlyUsed(emoji).then((value) {
-          if (category != Category.RECENT) {
-            if (mounted) {
-              setState(() {
-                // rebuild to update recent emoji tab
-                // when it is not current tab
-              });
-            }
+          if (category != Category.RECENT && mounted) {
+            setState(() {
+              // rebuild to update recent emoji tab
+              // when it is not current tab
+            });
           }
         });
       }
