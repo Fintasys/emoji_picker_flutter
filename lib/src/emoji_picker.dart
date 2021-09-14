@@ -121,10 +121,14 @@ class _EmojiPickerState extends State<EmojiPicker> {
   Widget build(BuildContext context) {
     if (!loaded) {
       // Load emojis
-      _updateEmojis().then((value) =>
-          WidgetsBinding.instance!.addPostFrameCallback((_) => setState(() {
-                loaded = true;
-              })));
+      _updateEmojis().then(
+        (value) => WidgetsBinding.instance!.addPostFrameCallback((_) {
+          if (!mounted) return;
+          setState(() {
+            loaded = true;
+          });
+        }),
+      );
 
       // Show loading indicator
       return const Center(child: CircularProgressIndicator());
@@ -150,7 +154,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
     return (category, emoji) {
       if (widget.config.showRecentsTab) {
         _addEmojiToRecentlyUsed(emoji).then((value) {
-          if (category != Category.RECENT) {
+          if (category != Category.RECENT && mounted) {
             setState(() {
               // rebuild to update recent emoji tab
               // when it is not current tab
