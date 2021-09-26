@@ -182,7 +182,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
       CategoryEmoji(Category.FOODS,
           await _getAvailableEmojis(emoji_list.foods, title: 'foods')),
           CategoryEmoji(Category.ACTIVITIES,
-          await _getAvailableEmojis(emoji_list.travel, title: 'activities')),
+          await _getAvailableEmojis(emoji_list.activities, title: 'activities')),
       CategoryEmoji(Category.TRAVEL,
           await _getAvailableEmojis(emoji_list.travel, title: 'travel')),
       CategoryEmoji(Category.OBJECTS,
