@@ -115,4 +115,48 @@ class Config {
         throw Exception('Unsupported Category');
     }
   }
+
+  @override
+  bool operator ==(other) {
+    return (other is Config) &&
+        other.columns == columns &&
+        other.emojiSizeMax == emojiSizeMax &&
+        other.verticalSpacing == verticalSpacing &&
+        other.horizontalSpacing == horizontalSpacing &&
+        other.initCategory == initCategory &&
+        other.bgColor == bgColor &&
+        other.indicatorColor == indicatorColor &&
+        other.iconColor == iconColor &&
+        other.iconColorSelected == iconColorSelected &&
+        other.progressIndicatorColor == progressIndicatorColor &&
+        other.backspaceColor == backspaceColor &&
+        other.showRecentsTab == showRecentsTab &&
+        other.recentsLimit == recentsLimit &&
+        other.noRecentsText == noRecentsText &&
+        other.noRecentsStyle == noRecentsStyle &&
+        other.tabIndicatorAnimDuration == tabIndicatorAnimDuration &&
+        other.categoryIcons == categoryIcons &&
+        other.buttonMode == buttonMode;
+  }
+
+  @override
+  int get hashCode =>
+      columns.hashCode ^
+      emojiSizeMax.hashCode ^
+      verticalSpacing.hashCode ^
+      horizontalSpacing.hashCode ^
+      initCategory.hashCode ^
+      bgColor.hashCode ^
+      indicatorColor.hashCode ^
+      iconColor.hashCode ^
+      iconColorSelected.hashCode ^
+      progressIndicatorColor.hashCode ^
+      backspaceColor.hashCode ^
+      showRecentsTab.hashCode ^
+      recentsLimit.hashCode ^
+      noRecentsText.hashCode ^
+      noRecentsStyle.hashCode ^
+      tabIndicatorAnimDuration.hashCode ^
+      categoryIcons.hashCode ^
+      buttonMode.hashCode;
 }
