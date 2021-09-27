@@ -1,3 +1,7 @@
+## 1.1.0
+
+* Add Support for MacOS platform 🖥
+
 ## 1.0.7
 
 * Align center NoRecent-Text
