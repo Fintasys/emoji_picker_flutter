@@ -1,3 +1,8 @@
+## 1.0.8
+
+* Fix to avoid unnecessary rebuilds
+* Re-add Activities Category 
+
 ## 1.0.7
 
 * Align center NoRecent-Text
