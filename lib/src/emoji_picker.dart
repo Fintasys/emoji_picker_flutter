@@ -205,9 +205,9 @@ class _EmojiPickerState extends State<EmojiPicker> {
   }
 
   // Get available emoji for given category title
-  Future<List<Emoji>> _getAvailableEmojis(Map<String, String> map,
+  Future<List<Emoji>> _getAvailableEmojis(Map<String, dynamic> map,
       {required String title}) async {
-    Map<String, String>? newMap;
+    Map<String, dynamic>? newMap;
 
     // Get Emojis cached locally if available
     newMap = await _restoreFilteredEmojis(title);
@@ -222,19 +222,30 @@ class _EmojiPickerState extends State<EmojiPicker> {
     }
 
     // Map to Emoji Object
-    return newMap!.entries
-        .map<Emoji>((entry) => Emoji(entry.key, entry.value))
-        .toList();
+    return newMap!.entries.map<Emoji>((entry) {
+      if (entry is List) {
+        return Emoji(
+          entry.key,
+          entry.value[0].toString(),
+          skinToneVariants: entry.value as List<String>,
+        );
+      }
+      return Emoji(entry.key, entry.value.toString());
+    }).toList();
   }
 
   // Check if emoji is available on current platform
-  Future<Map<String, String>?> _getPlatformAvailableEmoji(
-      Map<String, String> emoji) async {
+  Future<Map<String, dynamic>?> _getPlatformAvailableEmoji(
+      Map<String, dynamic> emoji) async {
     if (Platform.isAndroid) {
-      Map<String, String>? filtered = {};
+      Map<String, dynamic>? filtered = {};
       var delimiter = '|';
       try {
-        var entries = emoji.values.join(delimiter);
+        var emojiWithoutTones = emoji.map((key, value) {
+          if (value is List) return MapEntry(key, value[0]);
+          return MapEntry(key, value);
+        });
+        var entries = emojiWithoutTones.values.join(delimiter);
         var keys = emoji.keys.join(delimiter);
         var result = (await platform.invokeMethod<String>('checkAvailability',
             {'emojiKeys': keys, 'emojiEntries': entries})) as String;
@@ -265,7 +276,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
 
   // Stores filtered emoji locally for faster access next time
   Future<void> _cacheFilteredEmojis(
-      String title, Map<String, String> emojis) async {
+      String title, Map<String, dynamic> emojis) async {
     final prefs = await SharedPreferences.getInstance();
     var emojiJson = jsonEncode(emojis);
     prefs.setString(title, emojiJson);

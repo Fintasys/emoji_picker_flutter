@@ -97,8 +97,8 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
                       duration: widget.config.tabIndicatorAnimDuration,
                     );
                   },
-                  itemBuilder: (context, index) =>
-                      _buildPage(emojiSize, widget.state.categoryEmoji[index]),
+                  itemBuilder: (context, index) => Page(widget.config,
+                      emojiSize, widget.state.categoryEmoji[index]),
                 ),
               ),
             ],
@@ -115,38 +115,55 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
       ),
     );
   }
+}
 
-  Widget _buildButtonWidget(
-      {required VoidCallback onPressed, required Widget child}) {
-    if (widget.config.buttonMode == ButtonMode.MATERIAL) {
-      return TextButton(
-        onPressed: onPressed,
-        child: child,
-        style: ButtonStyle(padding: MaterialStateProperty.all(EdgeInsets.zero)),
-      );
-    }
-    return CupertinoButton(
-        padding: EdgeInsets.zero, onPressed: onPressed, child: child);
+class Page extends StatefulWidget {
+  /// Page
+  const Page(this.config, this.emojiSize, this.categoryEmoji);
+  final Config config;
+  final double emojiSize;
+  final CategoryEmoji categoryEmoji;
+
+  @override
+  State<Page> createState() => _PageState();
+}
+
+class _PageState extends State<Page> {
+  OverlayEntry? overlay;
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    _scrollController.addListener(() {
+      overlay?.remove();
+      overlay = null;
+    });
+    super.initState();
   }
 
-  Widget _buildPage(double emojiSize, CategoryEmoji categoryEmoji) {
+  @override
+  Widget build(BuildContext context) {
     // Display notice if recent has no entries yet
-    if (categoryEmoji.category == Category.RECENT &&
-        categoryEmoji.emoji.isEmpty) {
+    if (widget.categoryEmoji.category == Category.RECENT &&
+        widget.categoryEmoji.emoji.isEmpty) {
       return _buildNoRecent();
     }
     // Build page normally
     return GridView.count(
       scrollDirection: Axis.vertical,
       physics: const ScrollPhysics(),
+      controller: _scrollController,
       shrinkWrap: true,
-      primary: true,
+      primary: false, // changed
       padding: const EdgeInsets.all(0),
       crossAxisCount: widget.config.columns,
       mainAxisSpacing: widget.config.verticalSpacing,
       crossAxisSpacing: widget.config.horizontalSpacing,
-      children: categoryEmoji.emoji
-          .map<Widget>((item) => _buildEmoji(emojiSize, categoryEmoji, item))
+      children: widget.categoryEmoji.emoji
+          .asMap()
+          .entries
+          .map((item) => _buildEmoji(
+              widget.emojiSize, widget.categoryEmoji, item.value, item.key))
           .toList(),
     );
   }
@@ -155,22 +172,50 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     double emojiSize,
     CategoryEmoji categoryEmoji,
     Emoji emoji,
+    int index,
   ) {
     return _buildButtonWidget(
-        onPressed: () {
-          widget.state.onEmojiSelected(categoryEmoji.category, emoji);
-        },
-        child: FittedBox(
-          fit: BoxFit.fill,
-          child: Text(
-            emoji.emoji,
-            textScaleFactor: 1.0,
-            style: TextStyle(
-              fontSize: emojiSize,
-              backgroundColor: Colors.transparent,
-            ),
+      onPressed: () {
+        // widget.state.onEmojiSelected(categoryEmoji.category, emoji);
+      },
+      child: FittedBox(
+        fit: BoxFit.fill,
+        child: Text(
+          emoji.emoji,
+          textScaleFactor: 1.0,
+          style: TextStyle(
+            fontSize: emojiSize,
+            backgroundColor: Colors.transparent,
           ),
-        ));
+        ),
+      ),
+      index: index,
+    );
+  }
+
+  Widget _buildButtonWidget({
+    required VoidCallback onPressed,
+    required Widget child,
+    required int index,
+  }) {
+    if (widget.config.buttonMode == ButtonMode.MATERIAL) {
+      return TextButton(
+        onPressed: onPressed,
+        onLongPress: () {
+          var row = index ~/ widget.config.columns;
+          var column = index % widget.config.columns;
+          overlay?.remove();
+          overlay = _createSkinToneOverlay(row, column);
+          Overlay.of(context)!.insert(overlay!);
+          print(row);
+          print(column);
+        },
+        child: child,
+        style: ButtonStyle(padding: MaterialStateProperty.all(EdgeInsets.zero)),
+      );
+    }
+    return CupertinoButton(
+        padding: EdgeInsets.zero, onPressed: onPressed, child: child);
   }
 
   Widget _buildNoRecent() {
@@ -180,5 +225,29 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
       style: widget.config.noRecentsStyle,
       textAlign: TextAlign.center,
     ));
+  }
+
+  /// Overlay for SkinTone
+  OverlayEntry _createSkinToneOverlay(int row, int column) {
+    var renderBox = context.findRenderObject() as RenderBox;
+    var offset = renderBox.localToGlobal(Offset.zero);
+    var emojiWidth = renderBox.size.width / widget.config.columns;
+
+    print(offset.dx + column * emojiWidth);
+    print(offset.dy + row * emojiWidth);
+
+    return OverlayEntry(
+        builder: (context) => Positioned(
+              left: offset.dx + column * emojiWidth,
+              top: offset.dy + row * emojiWidth - _scrollController.offset,
+              child: Material(
+                elevation: 4.0,
+                child: Container(
+                  width: emojiWidth,
+                  height: emojiWidth,
+                  color: Colors.red,
+                ),
+              ),
+            ));
   }
 }
