@@ -19,6 +19,7 @@ class Config {
       this.iconColorSelected = Colors.blue,
       this.progressIndicatorColor = Colors.blue,
       this.backspaceColor = Colors.blue,
+      this.skinToneDialogBgColor = Colors.white,
       this.showRecentsTab = true,
       this.recentsLimit = 28,
       this.noRecentsText = 'No Recents',
@@ -62,6 +63,9 @@ class Config {
 
   /// The color of the backspace icon button
   final Color backspaceColor;
+
+  /// The backgorund color of the skin tone dialog
+  final Color skinToneDialogBgColor;
 
   /// Show extra tab with recently used emoji
   final bool showRecentsTab;
@@ -130,6 +134,7 @@ class Config {
         other.iconColorSelected == iconColorSelected &&
         other.progressIndicatorColor == progressIndicatorColor &&
         other.backspaceColor == backspaceColor &&
+        other.skinToneDialogBgColor == skinToneDialogBgColor &&
         other.showRecentsTab == showRecentsTab &&
         other.recentsLimit == recentsLimit &&
         other.noRecentsText == noRecentsText &&
@@ -152,6 +157,7 @@ class Config {
       iconColorSelected.hashCode ^
       progressIndicatorColor.hashCode ^
       backspaceColor.hashCode ^
+      skinToneDialogBgColor.hashCode ^
       showRecentsTab.hashCode ^
       recentsLimit.hashCode ^
       noRecentsText.hashCode ^

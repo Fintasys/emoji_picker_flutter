@@ -1,7 +1,14 @@
+import 'package:flutter/material.dart';
+
 /// A class to store data for each individual emoji
+@immutable
 class Emoji {
   /// Emoji constructor
-  const Emoji(this.name, this.emoji, {this.skinToneVariants = const []});
+  const Emoji(
+    this.name,
+    this.emoji,
+    this.hasSkinTone,
+  );
 
   /// The name or description for this emoji
   final String name;
@@ -11,25 +18,21 @@ class Emoji {
   /// This is the string that should be displayed to view the emoji
   final String emoji;
 
-  /// Skin Tone variants
-  final List<String> skinToneVariants;
-
   /// Flag if emoji supports multiple skin tones
-  bool hasSkinTone() {
-    return skinToneVariants.isNotEmpty;
-  }
-
-  //// TODO PROBABLY BETTER TO USE attribute hasSkinVariants in Emoji list and then generate the emoji's based on this attribute during Tooltip showing
-  /// TOoltip https://www.youtube.com/watch?v=OOEyJ0ct0Sg&ab_channel=JohannesMilke
+  final bool hasSkinTone;
 
   @override
   String toString() {
-    return 'Name: $name, Emoji: $emoji';
+    return 'Name: $name, Emoji: $emoji, HasSkinTone: $hasSkinTone';
   }
 
   /// Parse Emoji from json
   static Emoji fromJson(Map<String, dynamic> json) {
-    return Emoji(json['name'] as String, json['emoji'] as String);
+    return Emoji(
+      json['name'] as String,
+      json['emoji'] as String,
+      json['hasSkinTone'] as bool,
+    );
   }
 
   ///  Encode Emoji to json
@@ -37,6 +40,16 @@ class Emoji {
     return {
       'name': name,
       'emoji': emoji,
+      'hasSkinTone': hasSkinTone,
     };
+  }
+
+  /// Copy method
+  Emoji copyWith({String? name, String? emoji, bool? hasSkinTone}) {
+    return Emoji(
+      name ?? this.name,
+      emoji ?? this.emoji,
+      hasSkinTone ?? this.hasSkinTone,
+    );
   }
 }

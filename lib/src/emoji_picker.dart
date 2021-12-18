@@ -223,14 +223,12 @@ class _EmojiPickerState extends State<EmojiPicker> {
 
     // Map to Emoji Object
     return newMap!.entries.map<Emoji>((entry) {
-      if (entry is List) {
-        return Emoji(
-          entry.key,
-          entry.value[0].toString(),
-          skinToneVariants: entry.value as List<String>,
-        );
+      if (entry.value is List) {
+        var emoji = entry.value[0] as String;
+        var hasSkinTone = entry.value[1] as bool;
+        return Emoji(entry.key, emoji, hasSkinTone);
       }
-      return Emoji(entry.key, entry.value.toString());
+      return Emoji(entry.key, entry.value as String, false);
     }).toList();
   }
 
@@ -263,14 +261,14 @@ class _EmojiPickerState extends State<EmojiPicker> {
   }
 
   // Restore locally cached emoji
-  Future<Map<String, String>?> _restoreFilteredEmojis(String title) async {
+  Future<Map<String, dynamic>?> _restoreFilteredEmojis(String title) async {
     final prefs = await SharedPreferences.getInstance();
     var emojiJson = prefs.getString(title);
     if (emojiJson == null) {
       return null;
     }
-    var emojis =
-        Map<String, String>.from(jsonDecode(emojiJson) as Map<String, dynamic>);
+    var emojis = Map<String, dynamic>.from(
+        jsonDecode(emojiJson) as Map<String, dynamic>);
     return emojis;
   }
 
