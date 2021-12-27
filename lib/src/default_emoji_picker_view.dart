@@ -2,6 +2,7 @@ import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:emoji_picker_flutter/src/category_emoji.dart';
 import 'package:emoji_picker_flutter/src/config.dart';
 import 'package:emoji_picker_flutter/src/emoji_picker_builder.dart';
+import 'package:emoji_picker_flutter/src/emoji_skin_tones.dart';
 import 'package:emoji_picker_flutter/src/emoji_view_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,9 +21,10 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     with SingleTickerProviderStateMixin {
   PageController? _pageController;
   TabController? _tabController;
-  OverlayEntry? overlay;
+  OverlayEntry? _overlay;
+  UniqueKey _tabBarKey = UniqueKey();
   final ScrollController _scrollController = ScrollController();
-  final int skinToneCount = 6;
+  final int _skinToneCount = 6;
 
   @override
   void initState() {
@@ -42,8 +44,8 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
   }
 
   void closeSkinToneDialog() {
-    overlay?.remove();
-    overlay = null;
+    _overlay?.remove();
+    _overlay = null;
   }
 
   Widget _buildBackspaceButton() {
@@ -150,50 +152,51 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
         };
 
         final onLongPressed = () {
-          if (!emoji.hasSkinTone) return;
+          if (!emoji.hasSkinTone) {
+            closeSkinToneDialog();
+            return;
+          }
           var row = item.key ~/ widget.config.columns;
           var column = item.key % widget.config.columns;
           closeSkinToneDialog();
-          overlay = _buildSkinToneOverlay(
+          _overlay = _buildSkinToneOverlay(
               emoji, emojiSize, categoryEmoji, row, column);
-          Overlay.of(context)?.insert(overlay!);
+          Overlay.of(context)?.insert(_overlay!);
         };
 
-        return _buildEmoji(
-          onPressed,
-          onLongPressed,
-          emojiSize,
-          categoryEmoji,
-          emoji,
+        return _buildButtonWidget(
+          onPressed: onPressed,
+          onLongPressed: onLongPressed,
+          child: _buildEmoji(
+            emojiSize,
+            categoryEmoji,
+            emoji,
+          ),
         );
       }).toList(),
     );
   }
 
+  /// Build and display Emoji centered of its parent
   Widget _buildEmoji(
-    VoidCallback onPressed,
-    VoidCallback onLongPressed,
     double emojiSize,
     CategoryEmoji categoryEmoji,
     Emoji emoji,
   ) {
-    return _buildButtonWidget(
-      onPressed: onPressed,
-      onLongPressed: onLongPressed,
-      child: FittedBox(
-        fit: BoxFit.fill,
-        child: Text(
-          emoji.emoji,
-          textScaleFactor: 1.0,
-          style: TextStyle(
-            fontSize: emojiSize,
-            backgroundColor: Colors.transparent,
-          ),
+    return FittedBox(
+      fit: BoxFit.fill,
+      child: Text(
+        emoji.emoji,
+        textScaleFactor: 1.0,
+        style: TextStyle(
+          fontSize: emojiSize,
+          backgroundColor: Colors.transparent,
         ),
       ),
     );
   }
 
+  /// Build different Button based on ButtonMode
   Widget _buildButtonWidget({
     required VoidCallback onPressed,
     required VoidCallback onLongPressed,
@@ -214,6 +217,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     );
   }
 
+  /// Build Widgt for when no recent emoji are available
   Widget _buildNoRecent() {
     return Center(
         child: Text(
@@ -237,15 +241,20 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     var aboveOffset = emojiWidth;
     var leftOffset = getLeftOffset(emojiWidth, column);
     var left = offset.dx + column * emojiWidth + leftOffset;
-    var top =
-        offset.dy + row * emojiWidth - _scrollController.offset - aboveOffset;
+    var top = 46 +
+        offset.dy +
+        row * emojiWidth -
+        _scrollController.offset -
+        aboveOffset;
     var height = emojiWidth;
 
-    var skinTone1 = emoji.copyWith(emoji: '${emoji.emoji}🏻');
-    var skinTone2 = emoji.copyWith(emoji: '${emoji.emoji}🏼');
-    var skinTone3 = emoji.copyWith(emoji: '${emoji.emoji}🏽');
-    var skinTone4 = emoji.copyWith(emoji: '${emoji.emoji}🏾');
-    var skinTone5 = emoji.copyWith(emoji: '${emoji.emoji}🏿');
+    var skinTone1 = emoji.copyWith(emoji: '${emoji.emoji}${SkinTone.light}');
+    var skinTone2 =
+        emoji.copyWith(emoji: '${emoji.emoji}${SkinTone.mediumLight}');
+    var skinTone3 = emoji.copyWith(emoji: '${emoji.emoji}${SkinTone.medium}');
+    var skinTone4 =
+        emoji.copyWith(emoji: '${emoji.emoji}${SkinTone.mediumDark}');
+    var skinTone5 = emoji.copyWith(emoji: '${emoji.emoji}${SkinTone.dark}');
 
     return OverlayEntry(
       builder: (context) => Positioned(
@@ -286,23 +295,27 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
   ) {
     return SizedBox(
       width: width,
-      child: _buildEmoji(() {
-        widget.state.onEmojiSelected(categoryEmoji.category, emoji);
-        closeSkinToneDialog();
-      }, () {}, emojiSize, categoryEmoji, emoji),
+      child: _buildButtonWidget(
+        onPressed: () {
+          widget.state.onEmojiSelected(categoryEmoji.category, emoji);
+          closeSkinToneDialog();
+        },
+        onLongPressed: () {},
+        child: _buildEmoji(emojiSize, categoryEmoji, emoji),
+      ),
     );
   }
 
   double getLeftOffset(double emojiWidth, int column) {
     var remainingColumns =
-        widget.config.columns - (column + 1 + (skinToneCount ~/ 2));
+        widget.config.columns - (column + 1 + (_skinToneCount ~/ 2));
     if (column >= 0 && column < 3) {
       return -1 * column * emojiWidth;
     } else if (remainingColumns < 0) {
       return -1 *
-          ((skinToneCount ~/ 2 - 1) + -1 * remainingColumns) *
+          ((_skinToneCount ~/ 2 - 1) + -1 * remainingColumns) *
           emojiWidth;
     }
-    return -1 * ((skinToneCount ~/ 2) * emojiWidth) + emojiWidth / 2;
+    return -1 * ((_skinToneCount ~/ 2) * emojiWidth) + emojiWidth / 2;
   }
 }

@@ -6,6 +6,7 @@ import 'package:emoji_picker_flutter/src/category_emoji.dart';
 import 'package:emoji_picker_flutter/src/config.dart';
 import 'package:emoji_picker_flutter/src/default_emoji_picker_view.dart';
 import 'package:emoji_picker_flutter/src/emoji.dart';
+import 'package:emoji_picker_flutter/src/emoji_skin_tones.dart';
 import 'package:emoji_picker_flutter/src/emoji_view_state.dart';
 import 'package:emoji_picker_flutter/src/recent_emoji.dart';
 import 'package:flutter/material.dart';
@@ -293,15 +294,22 @@ class _EmojiPickerState extends State<EmojiPicker> {
 
   // Add an emoji to recently used list or increase its counter
   Future<void> _addEmojiToRecentlyUsed(Emoji emoji) async {
+    var _emoji = emoji;
+    // Remove SkinTone in Recent-Category
+    if (emoji.hasSkinTone) {
+      _emoji = emoji.copyWith(emoji: emoji.emoji.replaceFirst(RegExp(
+          // ignore: lines_longer_than_80_chars
+          '${SkinTone.light}|${SkinTone.mediumLight}|${SkinTone.medium}|${SkinTone.mediumDark}|${SkinTone.dark}'), ''));
+    }
     final prefs = await SharedPreferences.getInstance();
-    var recentEmojiIndex =
-        recentEmoji.indexWhere((element) => element.emoji.emoji == emoji.emoji);
+    var recentEmojiIndex = recentEmoji
+        .indexWhere((element) => element.emoji.emoji == _emoji.emoji);
     if (recentEmojiIndex != -1) {
       // Already exist in recent list
       // Just update counter
       recentEmoji[recentEmojiIndex].counter++;
     } else {
-      recentEmoji.add(RecentEmoji(emoji, 1));
+      recentEmoji.add(RecentEmoji(_emoji, 1));
     }
     // Sort by counter desc
     recentEmoji.sort((a, b) => b.counter - a.counter);
