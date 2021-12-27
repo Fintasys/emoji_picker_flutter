@@ -22,7 +22,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
   TabController? _tabController;
   OverlayEntry? overlay;
   final ScrollController _scrollController = ScrollController();
-  final skinToneCount = 6;
+  final int skinToneCount = 6;
 
   @override
   void initState() {
@@ -153,8 +153,8 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
           if (!emoji.hasSkinTone) return;
           var row = item.key ~/ widget.config.columns;
           var column = item.key % widget.config.columns;
-          overlay?.remove();
-          overlay = _createSkinToneOverlay(
+          closeSkinToneDialog();
+          overlay = _buildSkinToneOverlay(
               emoji, emojiSize, categoryEmoji, row, column);
           Overlay.of(context)?.insert(overlay!);
         };
@@ -224,7 +224,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
   }
 
   /// Overlay for SkinTone
-  OverlayEntry _createSkinToneOverlay(
+  OverlayEntry _buildSkinToneOverlay(
     Emoji emoji,
     double emojiSize,
     CategoryEmoji categoryEmoji,
@@ -239,7 +239,6 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     var left = offset.dx + column * emojiWidth + leftOffset;
     var top =
         offset.dy + row * emojiWidth - _scrollController.offset - aboveOffset;
-    var width = skinToneCount * emojiWidth;
     var height = emojiWidth;
 
     var skinTone1 = emoji.copyWith(emoji: '${emoji.emoji}🏻');
@@ -255,45 +254,42 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
         child: Material(
           elevation: 4.0,
           child: Container(
-            width: width,
             height: height,
             color: widget.config.skinToneDialogBgColor,
             child: Row(
               children: [
-                _buildEmoji(() {
-                  widget.state.onEmojiSelected(categoryEmoji.category, emoji);
-                  closeSkinToneDialog();
-                }, () {}, emojiSize, categoryEmoji, emoji),
-                _buildEmoji(() {
-                  widget.state
-                      .onEmojiSelected(categoryEmoji.category, skinTone1);
-                  closeSkinToneDialog();
-                }, () {}, emojiSize, categoryEmoji, skinTone1),
-                _buildEmoji(() {
-                  widget.state
-                      .onEmojiSelected(categoryEmoji.category, skinTone2);
-                  closeSkinToneDialog();
-                }, () {}, emojiSize, categoryEmoji, skinTone2),
-                _buildEmoji(() {
-                  widget.state
-                      .onEmojiSelected(categoryEmoji.category, skinTone3);
-                  closeSkinToneDialog();
-                }, () {}, emojiSize, categoryEmoji, skinTone3),
-                _buildEmoji(() {
-                  widget.state
-                      .onEmojiSelected(categoryEmoji.category, skinTone4);
-                  closeSkinToneDialog();
-                }, () {}, emojiSize, categoryEmoji, skinTone4),
-                _buildEmoji(() {
-                  widget.state
-                      .onEmojiSelected(categoryEmoji.category, skinTone5);
-                  closeSkinToneDialog();
-                }, () {}, emojiSize, categoryEmoji, skinTone5),
+                _buildSkinToneEmoji(
+                    categoryEmoji, emoji, emojiWidth, emojiSize),
+                _buildSkinToneEmoji(
+                    categoryEmoji, skinTone1, emojiWidth, emojiSize),
+                _buildSkinToneEmoji(
+                    categoryEmoji, skinTone2, emojiWidth, emojiSize),
+                _buildSkinToneEmoji(
+                    categoryEmoji, skinTone3, emojiWidth, emojiSize),
+                _buildSkinToneEmoji(
+                    categoryEmoji, skinTone4, emojiWidth, emojiSize),
+                _buildSkinToneEmoji(
+                    categoryEmoji, skinTone5, emojiWidth, emojiSize),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildSkinToneEmoji(
+    CategoryEmoji categoryEmoji,
+    Emoji emoji,
+    double width,
+    double emojiSize,
+  ) {
+    return SizedBox(
+      width: width,
+      child: _buildEmoji(() {
+        widget.state.onEmojiSelected(categoryEmoji.category, emoji);
+        closeSkinToneDialog();
+      }, () {}, emojiSize, categoryEmoji, emoji),
     );
   }
 
