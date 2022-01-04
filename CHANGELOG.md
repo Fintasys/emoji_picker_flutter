@@ -1,3 +1,6 @@
+## 1.1.0
+* Feature add EmojiPickerUtils, Provide getRecentEmojis and getCategoryEmoji
+
 ## 1.0.8
 
 * Fix to avoid unnecessary rebuilds

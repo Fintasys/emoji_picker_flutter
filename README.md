@@ -110,6 +110,17 @@ EmojiPicker(
     customWidget: (config, state) => CustomView(config, state),
 )
 ```
+
+## Get recent emojis or all category emojis
+
+```
+// get all the category emojis
+final categoryEmoji = EmojiPickerUtils.getCategoryEmoji;
+
+// get recently used emoji
+final recentEmojis = await EmojiPickerUtils.getRecentEmojis();
+```
+
 ## Feel free to contribute to this package!! 🙇‍♂️
 Always happy if anyone wants to help to improve this package !
 
