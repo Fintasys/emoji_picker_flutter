@@ -183,7 +183,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
       categoryEmoji.add(CategoryEmoji(Category.RECENT, recentEmojiMap));
     }
 
-    EmojiPickerUtils.getCategoryEmoji().forEach((category, emojis) async {
+    EmojiPickerUtils.getCategoryEmoji.forEach((category, emojis) async {
       categoryEmoji.add(
         CategoryEmoji(
             category, await _getAvailableEmojis(emojis, title: category.name)),

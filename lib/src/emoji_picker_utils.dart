@@ -11,8 +11,6 @@ import 'emoji_lists.dart' as $emoji_list;
 
 class EmojiPickerUtils {
   /// Returns list of recently used emoji from cache
-  /// extension examples:
-  /// 1. want to show my usual facial expressions outside
   static Future<List<RecentEmoji>> getRecentEmojis() async {
     final prefs = await SharedPreferences.getInstance();
     var emojiJson = prefs.getString('recent');
@@ -24,22 +22,17 @@ class EmojiPickerUtils {
   }
 
   /// Returns list of all the category emojis
-  /// extension examples:
-  /// 1. when our package adds a category,
-  /// we don’t need to modify it in multiple places
-  /// 2. want to expand the function of searching emoticons,
-  /// at this time, we need to get all the expressions,
-  /// this method does not require the user to reassemble all the expression data.
-  static Map<Category, Map<String, String>> getCategoryEmoji() {
-    return Map.from({
-      Category.ACTIVITIES: $emoji_list.activities,
-      Category.ANIMALS: $emoji_list.animals,
-      Category.FLAGS: $emoji_list.flags,
-      Category.FOODS: $emoji_list.foods,
-      Category.OBJECTS: $emoji_list.objects,
-      Category.SMILEYS: $emoji_list.smileys,
-      Category.SYMBOLS: $emoji_list.symbols,
-      Category.TRAVEL: $emoji_list.travel,
-    });
-  }
+  static Map<Category, Map<String, String>> get getCategoryEmoji =>
+      _categoryEmoji;
+
+  static final Map<Category, Map<String, String>> _categoryEmoji = Map.from({
+    Category.ACTIVITIES: $emoji_list.activities,
+    Category.ANIMALS: $emoji_list.animals,
+    Category.FLAGS: $emoji_list.flags,
+    Category.FOODS: $emoji_list.foods,
+    Category.OBJECTS: $emoji_list.objects,
+    Category.SMILEYS: $emoji_list.smileys,
+    Category.SYMBOLS: $emoji_list.symbols,
+    Category.TRAVEL: $emoji_list.travel
+  });
 }
