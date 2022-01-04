@@ -6,12 +6,12 @@ import 'package:emoji_picker_flutter/src/category_emoji.dart';
 import 'package:emoji_picker_flutter/src/config.dart';
 import 'package:emoji_picker_flutter/src/default_emoji_picker_view.dart';
 import 'package:emoji_picker_flutter/src/emoji.dart';
+import 'package:emoji_picker_flutter/src/emoji_picker_utils.dart';
 import 'package:emoji_picker_flutter/src/emoji_view_state.dart';
 import 'package:emoji_picker_flutter/src/recent_emoji.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'emoji_lists.dart' as emoji_list;
 
 /// All the possible categories that [Emoji] can be put into
 ///
@@ -178,30 +178,17 @@ class _EmojiPickerState extends State<EmojiPicker> {
   Future<void> _updateEmojis() async {
     categoryEmoji.clear();
     if (widget.config.showRecentsTab) {
-      recentEmoji = await _getRecentEmojis();
+      recentEmoji = await EmojiPickerUtils.getRecentEmojis();
       final recentEmojiMap = recentEmoji.map((e) => e.emoji).toList();
       categoryEmoji.add(CategoryEmoji(Category.RECENT, recentEmojiMap));
     }
-    categoryEmoji.addAll([
-      CategoryEmoji(Category.SMILEYS,
-          await _getAvailableEmojis(emoji_list.smileys, title: 'smileys')),
-      CategoryEmoji(Category.ANIMALS,
-          await _getAvailableEmojis(emoji_list.animals, title: 'animals')),
-      CategoryEmoji(Category.FOODS,
-          await _getAvailableEmojis(emoji_list.foods, title: 'foods')),
-      CategoryEmoji(
-          Category.ACTIVITIES,
-          await _getAvailableEmojis(emoji_list.activities,
-              title: 'activities')),
-      CategoryEmoji(Category.TRAVEL,
-          await _getAvailableEmojis(emoji_list.travel, title: 'travel')),
-      CategoryEmoji(Category.OBJECTS,
-          await _getAvailableEmojis(emoji_list.objects, title: 'objects')),
-      CategoryEmoji(Category.SYMBOLS,
-          await _getAvailableEmojis(emoji_list.symbols, title: 'symbols')),
-      CategoryEmoji(Category.FLAGS,
-          await _getAvailableEmojis(emoji_list.flags, title: 'flags'))
-    ]);
+
+    EmojiPickerUtils.getCategoryEmoji().forEach((category, emojis) async {
+      categoryEmoji.add(
+        CategoryEmoji(
+            category, await _getAvailableEmojis(emojis, title: category.name)),
+      );
+    });
   }
 
   // Get available emoji for given category title
@@ -269,17 +256,6 @@ class _EmojiPickerState extends State<EmojiPicker> {
     final prefs = await SharedPreferences.getInstance();
     var emojiJson = jsonEncode(emojis);
     prefs.setString(title, emojiJson);
-  }
-
-  // Returns list of recently used emoji from cache
-  Future<List<RecentEmoji>> _getRecentEmojis() async {
-    final prefs = await SharedPreferences.getInstance();
-    var emojiJson = prefs.getString('recent');
-    if (emojiJson == null) {
-      return [];
-    }
-    var json = jsonDecode(emojiJson) as List<dynamic>;
-    return json.map<RecentEmoji>(RecentEmoji.fromJson).toList();
   }
 
   // Add an emoji to recently used list or increase its counter
