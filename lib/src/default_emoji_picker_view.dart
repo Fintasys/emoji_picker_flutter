@@ -22,7 +22,6 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
   PageController? _pageController;
   TabController? _tabController;
   OverlayEntry? _overlay;
-  UniqueKey _tabBarKey = UniqueKey();
   final ScrollController _scrollController = ScrollController();
   final int _skinToneCount = 6;
 
