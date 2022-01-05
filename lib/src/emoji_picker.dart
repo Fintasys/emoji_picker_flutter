@@ -161,14 +161,16 @@ class _EmojiPickerState extends State<EmojiPicker> {
   OnEmojiSelected _getOnEmojiListener() {
     return (category, emoji) {
       if (widget.config.showRecentsTab) {
-        _addEmojiToRecentlyUsed(emoji).then((value) {
-          if (category != Category.RECENT && mounted) {
-            setState(() {
-              // rebuild to update recent emoji tab
-              // when it is not current tab
-            });
-          }
-        });
+        EmojiPickerUtils.addEmojiToRecentlyUsed(
+                emoji: emoji, recentsLimit: widget.config.recentsLimit)
+            .then((newRecentEmoji) => {
+                  recentEmoji = newRecentEmoji,
+                  if (category != Category.RECENT && mounted)
+                    setState(() {
+                      // rebuild to update recent emoji tab
+                      // when it is not current tab
+                    })
+                });
       }
       widget.onEmojiSelected(category, emoji);
     };
@@ -256,26 +258,5 @@ class _EmojiPickerState extends State<EmojiPicker> {
     final prefs = await SharedPreferences.getInstance();
     var emojiJson = jsonEncode(emojis);
     prefs.setString(title, emojiJson);
-  }
-
-  // Add an emoji to recently used list or increase its counter
-  Future<void> _addEmojiToRecentlyUsed(Emoji emoji) async {
-    final prefs = await SharedPreferences.getInstance();
-    var recentEmojiIndex =
-        recentEmoji.indexWhere((element) => element.emoji.emoji == emoji.emoji);
-    if (recentEmojiIndex != -1) {
-      // Already exist in recent list
-      // Just update counter
-      recentEmoji[recentEmojiIndex].counter++;
-    } else {
-      recentEmoji.add(RecentEmoji(emoji, 1));
-    }
-    // Sort by counter desc
-    recentEmoji.sort((a, b) => b.counter - a.counter);
-    // Limit entries to recentsLimit
-    recentEmoji = recentEmoji.sublist(
-        0, min(widget.config.recentsLimit, recentEmoji.length));
-    // save locally
-    prefs.setString('recent', jsonEncode(recentEmoji));
   }
 }

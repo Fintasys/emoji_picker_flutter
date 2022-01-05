@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:emoji_picker_flutter/src/recent_emoji.dart';
@@ -35,4 +36,29 @@ class EmojiPickerUtils {
     Category.SYMBOLS: $emoji_list.symbols,
     Category.TRAVEL: $emoji_list.travel
   });
+
+  /// Add an emoji to recently used list or increase its counter
+  static Future<List<RecentEmoji>> addEmojiToRecentlyUsed(
+      {required Emoji emoji, int? recentsLimit}) async {
+    final prefs = await SharedPreferences.getInstance();
+    var recentEmoji = await getRecentEmojis();
+    var recentEmojiIndex =
+        recentEmoji.indexWhere((element) => element.emoji.emoji == emoji.emoji);
+    if (recentEmojiIndex != -1) {
+      // Already exist in recent list
+      // Just update counter
+      recentEmoji[recentEmojiIndex].counter++;
+    } else {
+      recentEmoji.add(RecentEmoji(emoji, 1));
+    }
+    // Sort by counter desc
+    recentEmoji.sort((a, b) => b.counter - a.counter);
+    // Limit entries to recentsLimit
+    recentEmoji =
+        recentEmoji.sublist(0, min(recentsLimit!, recentEmoji.length));
+    // save locally
+    prefs.setString('recent', jsonEncode(recentEmoji));
+
+    return recentEmoji;
+  }
 }

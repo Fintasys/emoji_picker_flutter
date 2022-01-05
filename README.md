@@ -111,7 +111,7 @@ EmojiPicker(
 )
 ```
 
-## Get recent emojis or all category emojis
+## Extended use of EmojiPickerUtils
 
 ```
 // get all the category emojis
@@ -119,6 +119,9 @@ final categoryEmoji = EmojiPickerUtils.getCategoryEmoji;
 
 // get recently used emoji
 final recentEmojis = await EmojiPickerUtils.getRecentEmojis();
+
+// add emoji to recently used
+final recentEmojis = await EmojiPickerUtils.addEmojiToRecentlyUsed(emoji);
 ```
 
 ## Feel free to contribute to this package!! 🙇‍♂️

@@ -1,5 +1,5 @@
 ## 1.1.0
-* Feature add EmojiPickerUtils, Provide getRecentEmojis and getCategoryEmoji
+* Feature add EmojiPickerUtils, Provide getRecentEmojis and getCategoryEmoji and addEmojiToRecentlyUsed methods
 
 ## 1.0.8
 
