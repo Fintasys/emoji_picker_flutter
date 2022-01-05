@@ -39,7 +39,7 @@ class EmojiPickerUtils {
 
   /// Add an emoji to recently used list or increase its counter
   static Future<List<RecentEmoji>> addEmojiToRecentlyUsed(
-      {required Emoji emoji, int? recentsLimit}) async {
+      {required Emoji emoji, int recentsLimit = 1000}) async {
     final prefs = await SharedPreferences.getInstance();
     var recentEmoji = await getRecentEmojis();
     var recentEmojiIndex =
@@ -55,7 +55,7 @@ class EmojiPickerUtils {
     recentEmoji.sort((a, b) => b.counter - a.counter);
     // Limit entries to recentsLimit
     recentEmoji =
-        recentEmoji.sublist(0, min(recentsLimit!, recentEmoji.length));
+        recentEmoji.sublist(0, min(recentsLimit, recentEmoji.length));
     // save locally
     prefs.setString('recent', jsonEncode(recentEmoji));
 
