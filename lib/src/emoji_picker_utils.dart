@@ -101,7 +101,8 @@ class EmojiPickerUtils {
     // Sort by counter desc
     recentEmoji.sort((a, b) => b.counter - a.counter);
     // Limit entries to recentsLimit
-    recentEmoji = recentEmoji.sublist(0, min(recentsLimit, recentEmoji.length));
+    recentEmoji =
+        recentEmoji.sublist(0, min(recentsLimit, recentEmoji.length));
     // save locally
     prefs.setString('recent', jsonEncode(recentEmoji));
 
