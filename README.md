@@ -56,7 +56,7 @@ EmojiPicker(
 )
 ```
 See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/example/lib/main.dart) for more detailed sample project.
-  
+
 ## Config
 
 | property        | description                                                        | default    |
@@ -111,17 +111,20 @@ EmojiPicker(
 )
 ```
 
-## Extended use of EmojiPickerUtils
+## Extended usage with EmojiPickerUtils
 
 ```
-// get all the category emojis
-final categoryEmoji = EmojiPickerUtils.getCategoryEmoji;
+// Get all the category emojis
+final categoryEmoji = await EmojiPickerUtils.getAvailableCategoryEmoji();
 
-// get recently used emoji
-final recentEmojis = await EmojiPickerUtils.getRecentEmojis();
+// Get all the emoji entities
+final emojiEntities = await EmojiPickerUtils.getAllAvailableEmojiEntities();
 
-// add emoji to recently used
-final recentEmojis = await EmojiPickerUtils.addEmojiToRecentlyUsed(emoji);
+// Search for related emoticons based on keywords
+final filterEmojiEntities = await EmojiPickerUtils.searchEmoji("face");
+
+// Add an emoji to recently used list or increase its counter
+final newRecentEmojis = await EmojiPickerUtils.addEmojiToRecentlyUsed(emoji: emoji);
 ```
 
 ## Feel free to contribute to this package!! 🙇‍♂️

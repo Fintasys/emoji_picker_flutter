@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:emoji_picker_flutter/src/category_emoji.dart';
 import 'package:emoji_picker_flutter/src/config.dart';
@@ -12,6 +11,7 @@ import 'package:emoji_picker_flutter/src/recent_emoji.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'emoji_lists.dart' as $emoji_list;
 
 /// All the possible categories that [Emoji] can be put into
 ///
@@ -185,7 +185,25 @@ class _EmojiPickerState extends State<EmojiPicker> {
       categoryEmoji.add(CategoryEmoji(Category.RECENT, recentEmojiMap));
     }
 
-    EmojiPickerUtils.getCategoryEmoji.forEach((category, emojis) async {
+    Map.fromIterables([
+      Category.ACTIVITIES,
+      Category.ANIMALS,
+      Category.FLAGS,
+      Category.FOODS,
+      Category.OBJECTS,
+      Category.SMILEYS,
+      Category.SYMBOLS,
+      Category.TRAVEL
+    ], [
+      $emoji_list.activities,
+      $emoji_list.animals,
+      $emoji_list.flags,
+      $emoji_list.foods,
+      $emoji_list.objects,
+      $emoji_list.smileys,
+      $emoji_list.symbols,
+      $emoji_list.travel
+    ]).forEach((category, emojis) async {
       categoryEmoji.add(
         CategoryEmoji(
             category, await _getAvailableEmojis(emojis, title: category.name)),
@@ -199,7 +217,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
     Map<String, String>? newMap;
 
     // Get Emojis cached locally if available
-    newMap = await _restoreFilteredEmojis(title);
+    newMap = await EmojiPickerUtils.restoreFilteredEmojis(title);
 
     if (newMap == null) {
       // Check if emoji is available on this platform
@@ -238,18 +256,6 @@ class _EmojiPickerState extends State<EmojiPicker> {
     } else {
       return emoji;
     }
-  }
-
-  // Restore locally cached emoji
-  Future<Map<String, String>?> _restoreFilteredEmojis(String title) async {
-    final prefs = await SharedPreferences.getInstance();
-    var emojiJson = prefs.getString(title);
-    if (emojiJson == null) {
-      return null;
-    }
-    var emojis =
-        Map<String, String>.from(jsonDecode(emojiJson) as Map<String, dynamic>);
-    return emojis;
   }
 
   // Stores filtered emoji locally for faster access next time
