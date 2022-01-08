@@ -21,9 +21,9 @@ jobs:
         with:
           java-version: '12.x'
           sdk: '2.15.0'
-      - uses: subosito/flutter-action@v1.4.0
+      - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '2.x'
+          flutter-version: '2.8.0'
           channel: 'stable'
       - name: Install Dependencies
         run: flutter pub get
