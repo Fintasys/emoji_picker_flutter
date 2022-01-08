@@ -14,15 +14,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      matrix:
-        sdk: [2.15.0, stable]
     steps:
       - uses: actions/checkout@v2
-      - uses: dart-lang/setup-dart@v1
+      - uses: dart-lang/setup-dart@v1.3
       - uses: actions/setup-java@v1
         with:
           java-version: '12.x'
-          sdk: ${{ matrix.sdk }}
+          sdk: '2.15.0'
       - uses: subosito/flutter-action@v1.4.0
         with:
           flutter-version: '2.0.2'
