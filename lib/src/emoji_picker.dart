@@ -1,17 +1,12 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:emoji_picker_flutter/src/category_emoji.dart';
 import 'package:emoji_picker_flutter/src/config.dart';
 import 'package:emoji_picker_flutter/src/default_emoji_picker_view.dart';
 import 'package:emoji_picker_flutter/src/emoji.dart';
-import 'package:emoji_picker_flutter/src/emoji_picker_utils.dart';
+import 'package:emoji_picker_flutter/src/emoji_picker_extended_utils.dart';
+import 'package:emoji_picker_flutter/src/emoji_picker_internal_utils.dart';
 import 'package:emoji_picker_flutter/src/emoji_view_state.dart';
 import 'package:emoji_picker_flutter/src/recent_emoji.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'emoji_lists.dart' as $emoji_list;
 
 /// All the possible categories that [Emoji] can be put into
 ///
@@ -43,6 +38,33 @@ enum Category {
 
   /// Flag emojis
   FLAGS,
+}
+
+/// Extension on Category enum to get its name
+extension CategoryExtension on Category {
+  /// Returns name of Category
+  String get name {
+    switch (this) {
+      case Category.RECENT:
+        return 'recent';
+      case Category.SMILEYS:
+        return 'smileys';
+      case Category.ANIMALS:
+        return 'animals';
+      case Category.FOODS:
+        return 'foods';
+      case Category.ACTIVITIES:
+        return 'activities';
+      case Category.TRAVEL:
+        return 'travel';
+      case Category.OBJECTS:
+        return 'objects';
+      case Category.SYMBOLS:
+        return 'symbols';
+      case Category.FLAGS:
+        return 'flags';
+    }
+  }
 }
 
 /// Enum to alter the keyboard button style
@@ -100,14 +122,14 @@ class EmojiPicker extends StatefulWidget {
 }
 
 class _EmojiPickerState extends State<EmojiPicker> {
-  static const platform = MethodChannel('emoji_picker_flutter');
-
   List<CategoryEmoji> categoryEmoji = List.empty(growable: true);
   List<RecentEmoji> recentEmoji = List.empty(growable: true);
   late Future<void> updateEmojiFuture;
 
   // Prevent emojis to be reloaded with every build
   bool loaded = false;
+
+  final emojiPickerInternalUtils = EmojiPickerInternalUtils();
 
   @override
   void initState() {
@@ -161,7 +183,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
   OnEmojiSelected _getOnEmojiListener() {
     return (category, emoji) {
       if (widget.config.showRecentsTab) {
-        EmojiPickerUtils.addEmojiToRecentlyUsed(
+        EmojiPickerExtendedUtils.addEmojiToRecentlyUsed(
                 emoji: emoji, recentsLimit: widget.config.recentsLimit)
             .then((newRecentEmoji) => {
                   recentEmoji = newRecentEmoji,
@@ -180,89 +202,22 @@ class _EmojiPickerState extends State<EmojiPicker> {
   Future<void> _updateEmojis() async {
     categoryEmoji.clear();
     if (widget.config.showRecentsTab) {
-      recentEmoji = await EmojiPickerUtils.getRecentEmojis();
+      recentEmoji = await EmojiPickerExtendedUtils.getRecentEmojis();
       final recentEmojiMap = recentEmoji.map((e) => e.emoji).toList();
       categoryEmoji.add(CategoryEmoji(Category.RECENT, recentEmojiMap));
     }
 
-    Map.fromIterables([
-      Category.ACTIVITIES,
-      Category.ANIMALS,
-      Category.FLAGS,
-      Category.FOODS,
-      Category.OBJECTS,
-      Category.SMILEYS,
-      Category.SYMBOLS,
-      Category.TRAVEL
-    ], [
-      $emoji_list.activities,
-      $emoji_list.animals,
-      $emoji_list.flags,
-      $emoji_list.foods,
-      $emoji_list.objects,
-      $emoji_list.smileys,
-      $emoji_list.symbols,
-      $emoji_list.travel
-    ]).forEach((category, emojis) async {
+    final availableCategoryEmoji =
+        await emojiPickerInternalUtils.getAvailableCategoryEmoji();
+
+    availableCategoryEmoji.forEach((category, emojis) async {
       categoryEmoji.add(
         CategoryEmoji(
-            category, await _getAvailableEmojis(emojis, title: category.name)),
+            category,
+            emojis.entries
+                .map((emoji) => Emoji(emoji.key, emoji.value))
+                .toList()),
       );
     });
-  }
-
-  // Get available emoji for given category title
-  Future<List<Emoji>> _getAvailableEmojis(Map<String, String> map,
-      {required String title}) async {
-    Map<String, String>? newMap;
-
-    // Get Emojis cached locally if available
-    newMap = await EmojiPickerUtils.restoreFilteredEmojis(title);
-
-    if (newMap == null) {
-      // Check if emoji is available on this platform
-      newMap = await _getPlatformAvailableEmoji(map);
-      // Save available Emojis to local storage for faster loading next time
-      if (newMap != null) {
-        await _cacheFilteredEmojis(title, newMap);
-      }
-    }
-
-    // Map to Emoji Object
-    return newMap!.entries
-        .map<Emoji>((entry) => Emoji(entry.key, entry.value))
-        .toList();
-  }
-
-  // Check if emoji is available on current platform
-  Future<Map<String, String>?> _getPlatformAvailableEmoji(
-      Map<String, String> emoji) async {
-    if (Platform.isAndroid) {
-      Map<String, String>? filtered = {};
-      var delimiter = '|';
-      try {
-        var entries = emoji.values.join(delimiter);
-        var keys = emoji.keys.join(delimiter);
-        var result = (await platform.invokeMethod<String>('checkAvailability',
-            {'emojiKeys': keys, 'emojiEntries': entries})) as String;
-        var resultKeys = result.split(delimiter);
-        for (var i = 0; i < resultKeys.length; i++) {
-          filtered[resultKeys[i]] = emoji[resultKeys[i]]!;
-        }
-      } on PlatformException catch (_) {
-        filtered = null;
-      }
-      return filtered;
-    } else {
-      return emoji;
-    }
-  }
-
-  // Stores filtered emoji locally for faster access next time
-  Future<void> _cacheFilteredEmojis(
-      String title, Map<String, String> emojis) async {
-    final prefs = await SharedPreferences.getInstance();
-    var emojiJson = jsonEncode(emojis);
-    prefs.setString(title, emojiJson);
   }
 }

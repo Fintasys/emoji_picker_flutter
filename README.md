@@ -111,20 +111,17 @@ EmojiPicker(
 )
 ```
 
-## Extended usage with EmojiPickerUtils
+## Extended usage with EmojiPickerExtendedUtils
 
 ```
-// Get all the category emojis
-final categoryEmoji = await EmojiPickerUtils.getAvailableCategoryEmoji();
-
-// Get all the emoji entities
-final emojiEntities = await EmojiPickerUtils.getAllAvailableEmojiEntities();
+// Get recently used emoji
+final recentEmojis = await EmojiPickerExtendedUtils.getRecentEmojis();
 
 // Search for related emoticons based on keywords
-final filterEmojiEntities = await EmojiPickerUtils.searchEmoji("face");
+final filterEmojiEntities = await EmojiPickerExtendedUtils.searchEmoji("face");
 
 // Add an emoji to recently used list or increase its counter
-final newRecentEmojis = await EmojiPickerUtils.addEmojiToRecentlyUsed(emoji: emoji);
+final newRecentEmojis = await EmojiPickerExtendedUtils.addEmojiToRecentlyUsed(emoji: emoji);
 ```
 
 ## Feel free to contribute to this package!! 🙇‍♂️
