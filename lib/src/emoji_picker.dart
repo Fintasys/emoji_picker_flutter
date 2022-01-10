@@ -2,8 +2,8 @@ import 'package:emoji_picker_flutter/src/category_emoji.dart';
 import 'package:emoji_picker_flutter/src/config.dart';
 import 'package:emoji_picker_flutter/src/default_emoji_picker_view.dart';
 import 'package:emoji_picker_flutter/src/emoji.dart';
-import 'package:emoji_picker_flutter/src/emoji_picker_extended_utils.dart';
 import 'package:emoji_picker_flutter/src/emoji_picker_internal_utils.dart';
+import 'package:emoji_picker_flutter/src/emoji_picker_utils.dart';
 import 'package:emoji_picker_flutter/src/emoji_view_state.dart';
 import 'package:emoji_picker_flutter/src/recent_emoji.dart';
 import 'package:flutter/material.dart';
@@ -183,8 +183,8 @@ class _EmojiPickerState extends State<EmojiPicker> {
   OnEmojiSelected _getOnEmojiListener() {
     return (category, emoji) {
       if (widget.config.showRecentsTab) {
-        EmojiPickerExtendedUtils.addEmojiToRecentlyUsed(
-                emoji: emoji, recentsLimit: widget.config.recentsLimit)
+        EmojiPickerUtils.addEmojiToRecentlyUsed(
+                emoji: emoji, config: widget.config)
             .then((newRecentEmoji) => {
                   recentEmoji = newRecentEmoji,
                   if (category != Category.RECENT && mounted)
@@ -202,7 +202,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
   Future<void> _updateEmojis() async {
     categoryEmoji.clear();
     if (widget.config.showRecentsTab) {
-      recentEmoji = await EmojiPickerExtendedUtils.getRecentEmojis();
+      recentEmoji = await EmojiPickerUtils.getRecentEmojis();
       final recentEmojiMap = recentEmoji.map((e) => e.emoji).toList();
       categoryEmoji.add(CategoryEmoji(Category.RECENT, recentEmojiMap));
     }

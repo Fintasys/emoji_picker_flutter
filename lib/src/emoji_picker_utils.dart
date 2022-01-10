@@ -4,12 +4,10 @@ import 'dart:math';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:emoji_picker_flutter/src/recent_emoji.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'emoji_picker_internal_utils.dart';
 
 /// Helper class that provides extended usage
-
-class EmojiPickerExtendedUtils {
+class EmojiPickerUtils {
   static final List<Emoji> _allAvailableEmojiEntities = [];
 
   /// Returns list of recently used emoji from cache
@@ -48,7 +46,7 @@ class EmojiPickerExtendedUtils {
 
   /// Add an emoji to recently used list or increase its counter
   static Future<List<RecentEmoji>> addEmojiToRecentlyUsed(
-      {required Emoji emoji, int recentsLimit = 1000}) async {
+      {required Emoji emoji, Config config = const Config()}) async {
     final prefs = await SharedPreferences.getInstance();
     var recentEmoji = await getRecentEmojis();
     var recentEmojiIndex =
@@ -63,7 +61,8 @@ class EmojiPickerExtendedUtils {
     // Sort by counter desc
     recentEmoji.sort((a, b) => b.counter - a.counter);
     // Limit entries to recentsLimit
-    recentEmoji = recentEmoji.sublist(0, min(recentsLimit, recentEmoji.length));
+    recentEmoji =
+        recentEmoji.sublist(0, min(config.recentsLimit, recentEmoji.length));
     // save locally
     prefs.setString('recent', jsonEncode(recentEmoji));
 

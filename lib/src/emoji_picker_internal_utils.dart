@@ -7,7 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'emoji_lists.dart' as $emoji_list;
 
 /// Helper class that provides internal usage
-
 class EmojiPickerInternalUtils {
   /// Establish communication with native
   static const platform = MethodChannel('emoji_picker_flutter');
@@ -41,7 +40,7 @@ class EmojiPickerInternalUtils {
       }
     }
 
-    return newMap!;
+    return newMap ?? {};
   }
 
   /// Returns map of all the available category emojis
