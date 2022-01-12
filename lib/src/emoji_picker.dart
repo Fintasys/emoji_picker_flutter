@@ -3,7 +3,6 @@ import 'package:emoji_picker_flutter/src/config.dart';
 import 'package:emoji_picker_flutter/src/default_emoji_picker_view.dart';
 import 'package:emoji_picker_flutter/src/emoji.dart';
 import 'package:emoji_picker_flutter/src/emoji_picker_internal_utils.dart';
-import 'package:emoji_picker_flutter/src/emoji_picker_utils.dart';
 import 'package:emoji_picker_flutter/src/emoji_view_state.dart';
 import 'package:emoji_picker_flutter/src/recent_emoji.dart';
 import 'package:flutter/material.dart';
@@ -118,44 +117,54 @@ class EmojiPicker extends StatefulWidget {
   final Config config;
 
   @override
-  _EmojiPickerState createState() => _EmojiPickerState();
+  EmojiPickerState createState() => EmojiPickerState();
 }
 
-class _EmojiPickerState extends State<EmojiPicker> {
-  List<CategoryEmoji> categoryEmoji = List.empty(growable: true);
-  List<RecentEmoji> recentEmoji = List.empty(growable: true);
-  late Future<void> updateEmojiFuture;
+/// EmojiPickerState
+class EmojiPickerState extends State<EmojiPicker> {
+  final List<CategoryEmoji> _categoryEmoji = List.empty(growable: true);
+  List<RecentEmoji> _recentEmoji = List.empty(growable: true);
+  late Future<void> _updateEmojiFuture;
 
   // Prevent emojis to be reloaded with every build
-  bool loaded = false;
+  bool _loaded = false;
 
-  final emojiPickerInternalUtils = EmojiPickerInternalUtils();
+  // Internal helper
+  final _emojiPickerInternalUtils = EmojiPickerInternalUtils();
+
+  /// Update recentEmoji list from outside using EmojiPickerUtils
+  void updateRecentEmoji(List<RecentEmoji> recentEmoji) {
+    _recentEmoji = recentEmoji;
+    if (mounted) {
+      setState(() {});
+    }
+  }
 
   @override
   void initState() {
     super.initState();
-    updateEmojiFuture = _updateEmojis();
+    _updateEmojiFuture = _updateEmojis();
   }
 
   @override
   void didUpdateWidget(covariant EmojiPicker oldWidget) {
     if (oldWidget.config != widget.config) {
       // Config changed - rebuild EmojiPickerView completely
-      loaded = false;
-      updateEmojiFuture = _updateEmojis();
+      _loaded = false;
+      _updateEmojiFuture = _updateEmojis();
     }
     super.didUpdateWidget(oldWidget);
   }
 
   @override
   Widget build(BuildContext context) {
-    if (!loaded) {
+    if (!_loaded) {
       // Load emojis
-      updateEmojiFuture.then(
+      _updateEmojiFuture.then(
         (value) => WidgetsBinding.instance!.addPostFrameCallback((_) {
           if (!mounted) return;
           setState(() {
-            loaded = true;
+            _loaded = true;
           });
         }),
       );
@@ -164,11 +173,11 @@ class _EmojiPickerState extends State<EmojiPicker> {
       return const Center(child: CircularProgressIndicator());
     }
     if (widget.config.showRecentsTab) {
-      categoryEmoji[0].emoji = recentEmoji.map((e) => e.emoji).toList();
+      _categoryEmoji[0].emoji = _recentEmoji.map((e) => e.emoji).toList();
     }
 
     var state = EmojiViewState(
-      categoryEmoji,
+      _categoryEmoji,
       _getOnEmojiListener(),
       widget.onBackspacePressed,
     );
@@ -183,10 +192,10 @@ class _EmojiPickerState extends State<EmojiPicker> {
   OnEmojiSelected _getOnEmojiListener() {
     return (category, emoji) {
       if (widget.config.showRecentsTab) {
-        EmojiPickerUtils.addEmojiToRecentlyUsed(
-                emoji: emoji, config: widget.config)
+        _emojiPickerInternalUtils
+            .addEmojiToRecentlyUsed(emoji: emoji, config: widget.config)
             .then((newRecentEmoji) => {
-                  recentEmoji = newRecentEmoji,
+                  _recentEmoji = newRecentEmoji,
                   if (category != Category.RECENT && mounted)
                     setState(() {
                       // rebuild to update recent emoji tab
@@ -200,18 +209,18 @@ class _EmojiPickerState extends State<EmojiPicker> {
 
   // Initalize emoji data
   Future<void> _updateEmojis() async {
-    categoryEmoji.clear();
+    _categoryEmoji.clear();
     if (widget.config.showRecentsTab) {
-      recentEmoji = await EmojiPickerUtils.getRecentEmojis();
-      final recentEmojiMap = recentEmoji.map((e) => e.emoji).toList();
-      categoryEmoji.add(CategoryEmoji(Category.RECENT, recentEmojiMap));
+      _recentEmoji = await _emojiPickerInternalUtils.getRecentEmojis();
+      final recentEmojiMap = _recentEmoji.map((e) => e.emoji).toList();
+      _categoryEmoji.add(CategoryEmoji(Category.RECENT, recentEmojiMap));
     }
 
     final availableCategoryEmoji =
-        await emojiPickerInternalUtils.getAvailableCategoryEmoji();
+        await _emojiPickerInternalUtils.getAvailableCategoryEmoji();
 
     availableCategoryEmoji.forEach((category, emojis) async {
-      categoryEmoji.add(
+      _categoryEmoji.add(
         CategoryEmoji(
             category,
             emojis.entries
