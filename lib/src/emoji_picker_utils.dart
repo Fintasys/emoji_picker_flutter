@@ -39,7 +39,9 @@ class EmojiPickerUtils {
     }
 
     return _allAvailableEmojiEntities
-        .where((emoji) => emoji.name.contains(keyword))
+        .where(
+          (emoji) => emoji.name.toLowerCase().contains(keyword.toLowerCase()),
+        )
         .toList();
   }
 
