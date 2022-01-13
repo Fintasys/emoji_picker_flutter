@@ -115,13 +115,14 @@ EmojiPicker(
 
 ```
 // Get recently used emoji
-final recentEmojis = await EmojiPickerUtils.getRecentEmojis();
+final recentEmojis = await EmojiPickerUtils().getRecentEmojis();
 
 // Search for related emoticons based on keywords
-final filterEmojiEntities = await EmojiPickerUtils.searchEmoji("face");
+final filterEmojiEntities = await EmojiPickerUtils().searchEmoji("face");
 
 // Add an emoji to recently used list or increase its counter
-final newRecentEmojis = await EmojiPickerUtils.addEmojiToRecentlyUsed(emoji: emoji);
+final newRecentEmojis = await EmojiPickerUtils().addEmojiToRecentlyUsed(key: key, emoji: emoji);
+// Important: Needs same key instance of type GlobalKey<EmojiPickerState> here and for the EmojiPicker-Widget in order to work properly
 ```
 
 ## Feel free to contribute to this package!! 🙇‍♂️
