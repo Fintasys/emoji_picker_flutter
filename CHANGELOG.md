@@ -1,3 +1,6 @@
+## 1.1.0
+* New feature: EmojiPickerUtils provide access to recent emojis, search emoji and adding emoji to recently-used list
+
 ## 1.0.8
 
 * Fix to avoid unnecessary rebuilds

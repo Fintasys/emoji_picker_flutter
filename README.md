@@ -56,7 +56,7 @@ EmojiPicker(
 )
 ```
 See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/example/lib/main.dart) for more detailed sample project.
-  
+
 ## Config
 
 | property        | description                                                        | default    |
@@ -110,6 +110,21 @@ EmojiPicker(
     customWidget: (config, state) => CustomView(config, state),
 )
 ```
+
+## Extended usage with EmojiPickerUtils
+
+```
+// Get recently used emoji
+final recentEmojis = await EmojiPickerUtils().getRecentEmojis();
+
+// Search for related emoticons based on keywords
+final filterEmojiEntities = await EmojiPickerUtils().searchEmoji("face");
+
+// Add an emoji to recently used list or increase its counter
+final newRecentEmojis = await EmojiPickerUtils().addEmojiToRecentlyUsed(key: key, emoji: emoji);
+// Important: Needs same key instance of type GlobalKey<EmojiPickerState> here and for the EmojiPicker-Widget in order to work properly
+```
+
 ## Feel free to contribute to this package!! 🙇‍♂️
 Always happy if anyone wants to help to improve this package !
 
