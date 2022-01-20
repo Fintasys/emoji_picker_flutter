@@ -4,11 +4,7 @@ import 'package:flutter/material.dart';
 @immutable
 class Emoji {
   /// Emoji constructor
-  const Emoji(
-    this.name,
-    this.emoji,
-    this.hasSkinTone,
-  );
+  const Emoji(this.name, this.emoji, {this.hasSkinTone = false});
 
   /// The name or description for this emoji
   final String name;
@@ -31,7 +27,7 @@ class Emoji {
     return Emoji(
       json['name'] as String,
       json['emoji'] as String,
-      json['hasSkinTone'] as bool,
+      hasSkinTone: json['hasSkinTone'] as bool,
     );
   }
 
@@ -49,7 +45,7 @@ class Emoji {
     return Emoji(
       name ?? this.name,
       emoji ?? this.emoji,
-      hasSkinTone ?? this.hasSkinTone,
+      hasSkinTone: hasSkinTone ?? this.hasSkinTone,
     );
   }
 }
