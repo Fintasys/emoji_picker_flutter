@@ -3211,8 +3211,8 @@ final Map<String, String> flags = Map.fromIterables([
   '🇿🇼'
 ]);
 
-/// List of emoji that support different skin tones
-final supportSkinToneList = [
+/// Set of emoji that support different skin tones
+final supportSkinToneList = <String>{
   '👋',
   '🤚',
   '🖐',
@@ -3338,5 +3338,5 @@ final supportSkinToneList = [
   '👩‍❤️‍💋‍👩',
   '💑',
   '👨‍❤️‍👨',
-  '👩‍❤️‍👩'
-];
+  '👩‍❤️‍👩',
+};

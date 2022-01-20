@@ -3,9 +3,10 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import 'package:emoji_picker_flutter/src/emoji_skin_tones.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'emoji_lists.dart' as $emoji_list;
+import 'emoji_lists.dart' as emoji_list;
 import 'recent_emoji.dart';
 
 /// Helper class that provides internal usage
@@ -57,14 +58,14 @@ class EmojiPickerInternalUtils {
       Category.SYMBOLS,
       Category.FLAGS
     ], [
-      $emoji_list.smileys,
-      $emoji_list.animals,
-      $emoji_list.foods,
-      $emoji_list.activities,
-      $emoji_list.travel,
-      $emoji_list.objects,
-      $emoji_list.symbols,
-      $emoji_list.flags,
+      emoji_list.smileys,
+      emoji_list.animals,
+      emoji_list.foods,
+      emoji_list.activities,
+      emoji_list.travel,
+      emoji_list.objects,
+      emoji_list.symbols,
+      emoji_list.flags,
     ]);
 
     final futures = allCategoryEmoji.entries
@@ -121,7 +122,12 @@ class EmojiPickerInternalUtils {
   /// Add an emoji to recently used list or increase its counter
   Future<List<RecentEmoji>> addEmojiToRecentlyUsed(
       {required Emoji emoji, Config config = const Config()}) async {
-    final prefs = await SharedPreferences.getInstance();
+    // Remove SkinTone in Recent-Category
+    if (emoji.hasSkinTone) {
+      emoji = emoji.copyWith(emoji: emoji.emoji.replaceFirst(RegExp(
+          // ignore: lines_longer_than_80_chars
+          '${SkinTone.light}|${SkinTone.mediumLight}|${SkinTone.medium}|${SkinTone.mediumDark}|${SkinTone.dark}'), ''));
+    }
     var recentEmoji = await getRecentEmojis();
     var recentEmojiIndex =
         recentEmoji.indexWhere((element) => element.emoji.emoji == emoji.emoji);
@@ -138,8 +144,14 @@ class EmojiPickerInternalUtils {
     recentEmoji =
         recentEmoji.sublist(0, min(config.recentsLimit, recentEmoji.length));
     // save locally
+    final prefs = await SharedPreferences.getInstance();
     prefs.setString('recent', jsonEncode(recentEmoji));
 
     return recentEmoji;
+  }
+
+  /// Returns true when the emoji support multiple skin colors
+  bool hasSkinTone(Emoji emoji) {
+    return emoji_list.supportSkinToneList.contains(emoji.emoji);
   }
 }
