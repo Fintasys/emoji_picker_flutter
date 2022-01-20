@@ -225,8 +225,9 @@ class EmojiPickerState extends State<EmojiPicker> {
             category,
             emojis.entries.map((emoji) {
               var _emoji = Emoji(emoji.key, emoji.value);
-              // Emoji with skin tone are only in SMILEY category
-              if (category == Category.SMILEYS) {
+              // Emoji with skin tone are only in SMILEY & ACTIVITIES category
+              if (category == Category.SMILEYS ||
+                  category == Category.ACTIVITIES) {
                 return _updateSkinToneSupport(_emoji);
               } else
                 return _emoji;
@@ -235,6 +236,7 @@ class EmojiPickerState extends State<EmojiPicker> {
     });
   }
 
+  // TODO: Order is important (Emoji, Skin Color, Gender)
   Emoji _updateSkinToneSupport(Emoji emoji) {
     if (_emojiPickerInternalUtils.hasSkinTone(emoji)) {
       return emoji.copyWith(hasSkinTone: true);
