@@ -66,10 +66,10 @@ class Config {
   /// The color of the backspace icon button
   final Color backspaceColor;
 
-  /// The backgorund color of the skin tone dialog
+  /// The background color of the skin tone dialog
   final Color skinToneDialogBgColor;
 
-  /// Color of the small triangle
+  /// Color of the small triangle next to multiple skin tone emoji
   final Color skinToneIndicatorColor;
 
   /// Enable feature to select a skin tone of certain emoji's

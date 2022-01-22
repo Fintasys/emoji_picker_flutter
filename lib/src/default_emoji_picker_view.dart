@@ -256,7 +256,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     );
   }
 
-  /// Build Widgt for when no recent emoji are available
+  /// Build Widget for when no recent emoji are available
   Widget _buildNoRecent() {
     return Center(
         child: Text(
@@ -281,7 +281,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     final offset = renderBox.localToGlobal(Offset.zero);
     final emojiSpace = renderBox.size.width / widget.config.columns;
     final topOffset = emojiSpace;
-    final leftOffset = getLeftOffset(emojiSpace, column);
+    final leftOffset = _getLeftOffset(emojiSpace, column);
     final left = offset.dx + column * emojiSpace + leftOffset;
     final top = tabBarHeight +
         offset.dy +
@@ -326,6 +326,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     );
   }
 
+  // Build Emoji inside skin tone dialog
   Widget _buildSkinToneEmoji(
     CategoryEmoji categoryEmoji,
     Emoji emoji,
@@ -346,7 +347,15 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     );
   }
 
-  double getLeftOffset(double emojiWidth, int column) {
+  // Calucates the offset from the middle of selected emoji to the left side
+  // of the skin tone dialog
+  // Case 1: Selected Emoji is close to left border and offset needs to be
+  // reduced
+  // Case 2: Selected Emoji is close to right border and offset needs to be
+  // reduced
+  // Case 3: Enough space to left and right border and offset can be half
+  // of whole width
+  double _getLeftOffset(double emojiWidth, int column) {
     var remainingColumns =
         widget.config.columns - (column + 1 + (_skinToneCount ~/ 2));
     if (column >= 0 && column < 3) {
