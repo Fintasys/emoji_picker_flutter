@@ -122,7 +122,7 @@ class EmojiPickerInternalUtils {
   /// Add an emoji to recently used list or increase its counter
   Future<List<RecentEmoji>> addEmojiToRecentlyUsed(
       {required Emoji emoji, Config config = const Config()}) async {
-    // Remove SkinTone in Recent-Category
+    // Remove emoji's skin tone in Recent-Category
     if (emoji.hasSkinTone) {
       emoji = emoji.copyWith(emoji: emoji.emoji.replaceFirst(RegExp(
           // ignore: lines_longer_than_80_chars

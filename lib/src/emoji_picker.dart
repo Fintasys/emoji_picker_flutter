@@ -236,7 +236,7 @@ class EmojiPickerState extends State<EmojiPicker> {
     });
   }
 
-  // TODO: Order is important (Emoji, Skin Color, Gender)
+  // Set [hasSkinTone] to true for emoji that support skin tones
   Emoji _updateSkinToneSupport(Emoji emoji) {
     if (_emojiPickerInternalUtils.hasSkinTone(emoji)) {
       return emoji.copyWith(hasSkinTone: true);
