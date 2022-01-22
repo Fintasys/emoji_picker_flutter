@@ -157,7 +157,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
         };
 
         final onLongPressed = () {
-          if (!emoji.hasSkinTone) {
+          if (!emoji.hasSkinTone || !widget.config.enableSkinTones) {
             _closeSkinToneDialog();
             return;
           }
@@ -176,7 +176,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
             emojiSize,
             categoryEmoji,
             emoji,
-            true,
+            widget.config.enableSkinTones,
           ),
         );
       }).toList(),
@@ -200,7 +200,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
                 right: 0,
                 child: CustomPaint(
                   size: const Size(8, 8),
-                  painter: TriangleShape(widget.config.indicatorColor),
+                  painter: TriangleShape(widget.config.skinToneIndicatorColor),
                 ),
               )
             : Container(),

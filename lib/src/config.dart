@@ -20,6 +20,8 @@ class Config {
       this.progressIndicatorColor = Colors.blue,
       this.backspaceColor = Colors.blue,
       this.skinToneDialogBgColor = Colors.white,
+      this.skinToneIndicatorColor = Colors.grey,
+      this.enableSkinTones = true,
       this.showRecentsTab = true,
       this.recentsLimit = 28,
       this.noRecentsText = 'No Recents',
@@ -66,6 +68,12 @@ class Config {
 
   /// The backgorund color of the skin tone dialog
   final Color skinToneDialogBgColor;
+
+  /// Color of the small triangle
+  final Color skinToneIndicatorColor;
+
+  /// Enable feature to select a skin tone of certain emoji's
+  final bool enableSkinTones;
 
   /// Show extra tab with recently used emoji
   final bool showRecentsTab;
@@ -135,6 +143,8 @@ class Config {
         other.progressIndicatorColor == progressIndicatorColor &&
         other.backspaceColor == backspaceColor &&
         other.skinToneDialogBgColor == skinToneDialogBgColor &&
+        other.skinToneIndicatorColor == skinToneIndicatorColor &&
+        other.enableSkinTones == enableSkinTones &&
         other.showRecentsTab == showRecentsTab &&
         other.recentsLimit == recentsLimit &&
         other.noRecentsText == noRecentsText &&
@@ -158,6 +168,8 @@ class Config {
       progressIndicatorColor.hashCode ^
       backspaceColor.hashCode ^
       skinToneDialogBgColor.hashCode ^
+      skinToneIndicatorColor.hashCode ^
+      enableSkinTones.hashCode ^
       showRecentsTab.hashCode ^
       recentsLimit.hashCode ^
       noRecentsText.hashCode ^
