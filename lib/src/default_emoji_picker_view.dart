@@ -352,7 +352,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
   // Case 1: Selected Emoji is close to left border and offset needs to be
   // reduced
   // Case 2: Selected Emoji is close to right border and offset needs to be
-  // reduced
+  // larger than half of the whole width
   // Case 3: Enough space to left and right border and offset can be half
   // of whole width
   double _getLeftOffset(double emojiWidth, int column) {
