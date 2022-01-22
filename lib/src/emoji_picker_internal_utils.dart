@@ -12,7 +12,7 @@ import 'recent_emoji.dart';
 /// Helper class that provides internal usage
 class EmojiPickerInternalUtils {
   /// Establish communication with native
-  static const platform = MethodChannel('emoji_picker_flutter');
+  static const _platform = MethodChannel('emoji_picker_flutter');
 
   /// Restore locally cached emoji
   Future<Map<String, String>?> _restoreFilteredEmojis(String title) async {
@@ -93,7 +93,7 @@ class EmojiPickerInternalUtils {
       try {
         var entries = emoji.values.join(delimiter);
         var keys = emoji.keys.join(delimiter);
-        var result = (await platform.invokeMethod<String>('checkAvailability',
+        var result = (await _platform.invokeMethod<String>('checkAvailability',
             {'emojiKeys': keys, 'emojiEntries': entries})) as String;
         var resultKeys = result.split(delimiter);
         for (var i = 0; i < resultKeys.length; i++) {
@@ -153,5 +153,17 @@ class EmojiPickerInternalUtils {
   /// Returns true when the emoji support multiple skin colors
   bool hasSkinTone(Emoji emoji) {
     return emoji_list.supportSkinToneList.contains(emoji.emoji);
+  }
+
+  /// Applies skin tone to given emoji
+  String applySkinTone(String emoji, String color) {
+    final codeUnits = emoji.codeUnits;
+    var result = List<int>.empty(growable: true)
+      ..addAll(codeUnits.sublist(0, min(codeUnits.length, 2)))
+      ..addAll(color.codeUnits);
+    if (codeUnits.length >= 2) {
+      result.addAll(codeUnits.sublist(2));
+    }
+    return String.fromCharCodes(result);
   }
 }

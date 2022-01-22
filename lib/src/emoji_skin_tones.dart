@@ -3,17 +3,20 @@ class SkinTone {
   SkinTone._();
 
   /// Light Skin Tone
-  static String light = '🏻';
+  static const String light = '🏻';
 
   /// Medium-Light Skin Tone
-  static String mediumLight = '🏼';
+  static const String mediumLight = '🏼';
 
   /// Medium Skin Tone
-  static String medium = '🏽';
+  static const String medium = '🏽';
 
   /// Medium-Dark Skin Tone
-  static String mediumDark = '🏾';
+  static const String mediumDark = '🏾';
 
   /// Dark Skin Tone
-  static String dark = '🏿';
+  static const String dark = '🏿';
+
+  /// Return all values as Array
+  static const values = [light, mediumLight, medium, mediumDark, dark];
 }
