@@ -48,6 +48,21 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     _overlay = null;
   }
 
+  void _openSkinToneDialog(
+    Emoji emoji,
+    double emojiSize,
+    CategoryEmoji categoryEmoji,
+    int index,
+  ) {
+    _overlay = _buildSkinToneOverlay(
+      emoji,
+      emojiSize,
+      categoryEmoji,
+      index,
+    );
+    Overlay.of(context)?.insert(_overlay!);
+  }
+
   Widget _buildBackspaceButton() {
     if (widget.state.onBackspacePressed != null) {
       return Material(
@@ -150,8 +165,10 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
       mainAxisSpacing: widget.config.verticalSpacing,
       crossAxisSpacing: widget.config.horizontalSpacing,
       children: categoryEmoji.emoji.asMap().entries.map((item) {
+        final index = item.key;
         final emoji = item.value;
         final onPressed = () {
+          _closeSkinToneDialog();
           widget.state.onEmojiSelected(categoryEmoji.category, emoji);
         };
 
@@ -160,12 +177,8 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
             _closeSkinToneDialog();
             return;
           }
-          var row = item.key ~/ widget.config.columns;
-          var column = item.key % widget.config.columns;
           _closeSkinToneDialog();
-          _overlay = _buildSkinToneOverlay(
-              emoji, emojiSize, categoryEmoji, row, column);
-          Overlay.of(context)?.insert(_overlay!);
+          _openSkinToneDialog(emoji, emojiSize, categoryEmoji, index);
         };
 
         return _buildButtonWidget(
@@ -233,10 +246,13 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
         ),
       );
     }
-    return CupertinoButton(
-      padding: EdgeInsets.zero,
-      onPressed: onPressed,
-      child: child,
+    return GestureDetector(
+      onLongPress: onLongPressed,
+      child: CupertinoButton(
+        padding: EdgeInsets.zero,
+        onPressed: onPressed,
+        child: child,
+      ),
     );
   }
 
@@ -255,9 +271,12 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     Emoji emoji,
     double emojiSize,
     CategoryEmoji categoryEmoji,
-    int row,
-    int column,
+    int index,
   ) {
+    // Calculate position of emoji in the grid
+    final row = index ~/ widget.config.columns;
+    final column = index % widget.config.columns;
+    // Calculate position for skin tone dialog
     final renderBox = context.findRenderObject() as RenderBox;
     final offset = renderBox.localToGlobal(Offset.zero);
     final emojiSpace = renderBox.size.width / widget.config.columns;
