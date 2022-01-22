@@ -430,7 +430,7 @@ final Map<String, String> smileys = Map.fromIterables([
   '😟',
   '🙁',
   '☹',
-  '🚣',
+  '😮',
   '😯',
   '😲',
   '😳',
@@ -1310,7 +1310,6 @@ final Map<String, String> foods = Map.fromIterables([
 
 /// Map of all possible emojis along with their names in [Category.TRAVEL]
 final Map<String, String> travel = Map.fromIterables([
-  'Person Rowing Boat',
   'Map of Japan',
   'Snow-Capped Mountain',
   'Mountain',
@@ -1436,7 +1435,6 @@ final Map<String, String> travel = Map.fromIterables([
   'Baggage Claim',
   'Left Luggage'
 ], [
-  '🚣',
   '🗾',
   '🏔',
   '⛰',
