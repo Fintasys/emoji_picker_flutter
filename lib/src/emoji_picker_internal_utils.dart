@@ -124,9 +124,7 @@ class EmojiPickerInternalUtils {
       {required Emoji emoji, Config config = const Config()}) async {
     // Remove emoji's skin tone in Recent-Category
     if (emoji.hasSkinTone) {
-      emoji = emoji.copyWith(emoji: emoji.emoji.replaceFirst(RegExp(
-          // ignore: lines_longer_than_80_chars
-          '${SkinTone.light}|${SkinTone.mediumLight}|${SkinTone.medium}|${SkinTone.mediumDark}|${SkinTone.dark}'), ''));
+      emoji = removeSkinTone(emoji);
     }
     var recentEmoji = await getRecentEmojis();
     var recentEmojiIndex =
@@ -156,14 +154,24 @@ class EmojiPickerInternalUtils {
   }
 
   /// Applies skin tone to given emoji
-  String applySkinTone(String emoji, String color) {
-    final codeUnits = emoji.codeUnits;
+  Emoji applySkinTone(Emoji emoji, String color) {
+    final codeUnits = emoji.emoji.codeUnits;
     var result = List<int>.empty(growable: true)
       ..addAll(codeUnits.sublist(0, min(codeUnits.length, 2)))
       ..addAll(color.codeUnits);
     if (codeUnits.length >= 2) {
       result.addAll(codeUnits.sublist(2));
     }
-    return String.fromCharCodes(result);
+    return emoji.copyWith(emoji: String.fromCharCodes(result));
+  }
+
+  /// Remove skin tone from given emoji
+  Emoji removeSkinTone(Emoji emoji) {
+    return emoji.copyWith(
+      emoji: emoji.emoji.replaceFirst(
+        RegExp('${SkinTone.values.join('|')}'),
+        '',
+      ),
+    );
   }
 }

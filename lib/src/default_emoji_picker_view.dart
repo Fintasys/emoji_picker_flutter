@@ -291,8 +291,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
 
     // Generate other skintone options
     final skinTonesEmoji = SkinTone.values
-        .map((skinTone) =>
-            emoji.copyWith(emoji: _utils.applySkinTone(emoji.emoji, skinTone)))
+        .map((skinTone) => _utils.applySkinTone(emoji, skinTone))
         .toList();
 
     return OverlayEntry(
