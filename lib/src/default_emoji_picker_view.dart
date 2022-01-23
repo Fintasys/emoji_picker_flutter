@@ -38,7 +38,8 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
         initialIndex: initCategory,
         length: widget.state.categoryEmoji.length,
         vsync: this);
-    _pageController = PageController(initialPage: initCategory);
+    _pageController = PageController(initialPage: initCategory)
+      ..addListener(_closeSkinToneDialog);
     _scrollController.addListener(_closeSkinToneDialog);
     super.initState();
   }
