@@ -223,10 +223,24 @@ class EmojiPickerState extends State<EmojiPicker> {
       _categoryEmoji.add(
         CategoryEmoji(
             category,
-            emojis.entries
-                .map((emoji) => Emoji(emoji.key, emoji.value))
-                .toList()),
+            emojis.entries.map((emoji) {
+              var _emoji = Emoji(emoji.key, emoji.value);
+              // Emoji with skin tone are only in SMILEY & ACTIVITIES category
+              if (category == Category.SMILEYS ||
+                  category == Category.ACTIVITIES) {
+                return _updateSkinToneSupport(_emoji);
+              } else
+                return _emoji;
+            }).toList()),
       );
     });
+  }
+
+  // Set [hasSkinTone] to true for emoji that support skin tones
+  Emoji _updateSkinToneSupport(Emoji emoji) {
+    if (_emojiPickerInternalUtils.hasSkinTone(emoji)) {
+      return emoji.copyWith(hasSkinTone: true);
+    }
+    return emoji;
   }
 }
