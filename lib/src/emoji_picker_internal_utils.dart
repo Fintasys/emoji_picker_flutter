@@ -19,7 +19,8 @@ class EmojiPickerInternalUtils {
   Future<bool> isEmojiUpdateAvailable() async {
     final prefs = await SharedPreferences.getInstance();
     var emojiVersion = prefs.getInt(_emojiVersion) ?? 0;
-    return emoji_list.version > emojiVersion;
+    // != to support downgrading of emoji_picker versions
+    return emoji_list.version != emojiVersion;
   }
 
   /// Updates local emoji version with current version
