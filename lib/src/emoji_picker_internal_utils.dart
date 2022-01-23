@@ -11,8 +11,22 @@ import 'recent_emoji.dart';
 
 /// Helper class that provides internal usage
 class EmojiPickerInternalUtils {
-  /// Establish communication with native
+  // Establish communication with native
   static const _platform = MethodChannel('emoji_picker_flutter');
+  static const _emojiVersion = 'emoji_version';
+
+  /// Returns true when local emoji list is outdated
+  Future<bool> isEmojiUpdateAvailable() async {
+    final prefs = await SharedPreferences.getInstance();
+    var emojiVersion = prefs.getInt(_emojiVersion) ?? 0;
+    return emoji_list.version > emojiVersion;
+  }
+
+  /// Updates local emoji version with current version
+  Future updateEmojiVersion() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setInt(_emojiVersion, emoji_list.version);
+  }
 
   /// Restore locally cached emoji
   Future<Map<String, String>?> _restoreFilteredEmojis(String title) async {
@@ -32,7 +46,9 @@ class EmojiPickerInternalUtils {
     Map<String, String>? newMap;
 
     // Get Emojis cached locally if available
-    newMap = await _restoreFilteredEmojis(title);
+    if (await isEmojiUpdateAvailable() == false) {
+      newMap = await _restoreFilteredEmojis(title);
+    }
 
     if (newMap == null) {
       // Check if emoji is available on this platform
@@ -79,8 +95,8 @@ class EmojiPickerInternalUtils {
   /// Stores filtered emoji locally for faster access next time
   Future<void> _cacheFilteredEmojis(
       String title, Map<String, String> emojis) async {
-    final prefs = await SharedPreferences.getInstance();
     var emojiJson = jsonEncode(emojis);
+    final prefs = await SharedPreferences.getInstance();
     prefs.setString(title, emojiJson);
   }
 

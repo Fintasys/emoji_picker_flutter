@@ -234,6 +234,9 @@ class EmojiPickerState extends State<EmojiPicker> {
             }).toList()),
       );
     });
+
+    // Update emoji list version once all categories were cached
+    _emojiPickerInternalUtils.updateEmojiVersion();
   }
 
   // Set [hasSkinTone] to true for emoji that support skin tones
