@@ -1,6 +1,7 @@
 ## 1.1.0
 * New feature: EmojiPickerUtils provide access to recent emojis, search emoji and adding emoji to recently-used list
 * New feature: Skin-Tone Support
+* New feature: Emoji-List Versioning (force update users cached emoji's if necessary between versions)
 
 ## 1.0.8
 
