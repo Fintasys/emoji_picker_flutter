@@ -19,6 +19,7 @@ Yet another Emoji Picker for Flutter 🤩
 - Material Design and Cupertino mode
 - Emojis that cannot be displayed are filtered out (Android Only)
 - Optional recently used emoji tab
+- Skin Tone Support
 
 <img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/master/screenshot/screenshot.png" width="300"> <img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/master/screenshot/screenshot2.png" width="277">
 
@@ -44,6 +45,10 @@ EmojiPicker(
         iconColor: Colors.grey,
         iconColorSelected: Colors.blue,
         progressIndicatorColor: Colors.blue,
+        backspaceColor: Colors.blue,
+        skinToneDialogBgColor: Colors.white,
+        skinToneIndicatorColor: Colors.grey,
+        enableSkinTones: true,
         showRecentsTab: true,
         recentsLimit: 28,
         noRecentsText: "No Recents",
@@ -56,7 +61,7 @@ EmojiPicker(
 )
 ```
 See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/example/lib/main.dart) for more detailed sample project.
-  
+
 ## Config
 
 | property        | description                                                        | default    |
@@ -72,6 +77,9 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 | iconColorSelected      | The color of the category icon when selected                                                 | Colors.blue |
 | progressIndicatorColor     | The color of the loading indicator during initalization                                | Colors.blue     |
 | backspaceColor     | The color of the backspace icon button                               | Colors.blue     |
+| skinToneDialogBgColor     | The background color of the skin tone dialog                               | Colors.white     |
+| skinToneIndicatorColor     | Color of the small triangle next to multiple skin tone emoji                               | Colors.grey     |
+| enableSkinTones     | Enable feature to select a skin tone of certain emoji's                               | true     |
 | showRecentsTab     | Show extra tab with recently used emoji                                | true     |
 | recentsLimit     | Limit of recently used emoji that will be saved                                | 28     |
 | noRecentsText     | The text to be displayed if no recent emojis to display                                | "No Recents"     |
@@ -110,6 +118,21 @@ EmojiPicker(
     customWidget: (config, state) => CustomView(config, state),
 )
 ```
+
+## Extended usage with EmojiPickerUtils
+
+```
+// Get recently used emoji
+final recentEmojis = await EmojiPickerUtils().getRecentEmojis();
+
+// Search for related emoticons based on keywords
+final filterEmojiEntities = await EmojiPickerUtils().searchEmoji("face");
+
+// Add an emoji to recently used list or increase its counter
+final newRecentEmojis = await EmojiPickerUtils().addEmojiToRecentlyUsed(key: key, emoji: emoji);
+// Important: Needs same key instance of type GlobalKey<EmojiPickerState> here and for the EmojiPicker-Widget in order to work properly
+```
+
 ## Feel free to contribute to this package!! 🙇‍♂️
 Always happy if anyone wants to help to improve this package !
 
