@@ -11,6 +11,8 @@ Yet another Emoji Picker for Flutter 🤩
 
   > **Note:** This package is based on [emoji_picker](https://pub.dev/packages/emoji_picker) which has been deprecated and not maintained anymore. Therefore I decided to create a modernized version of it and fixing existing issues.
 
+<img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/master/screenshot/intro.png">
+
 ## Key features
 - Lightweight Package
 - Faster Loading
@@ -20,8 +22,6 @@ Yet another Emoji Picker for Flutter 🤩
 - Emojis that cannot be displayed are filtered out (Android Only)
 - Optional recently used emoji tab
 - Skin Tone Support
-
-<img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/master/screenshot/screenshot.png" width="300"> <img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/master/screenshot/screenshot2.png" width="277">
 
 ## Getting Started
 
