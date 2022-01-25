@@ -23,3 +23,5 @@ flutter:
         pluginClass: EmojiPickerFlutterPlugin
       ios:
         pluginClass: EmojiPickerFlutterPlugin
+      macos:
+        pluginClass: EmojiPickerFlutterPlugin
