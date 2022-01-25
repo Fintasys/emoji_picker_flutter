@@ -11,7 +11,7 @@ Yet another Emoji Picker for Flutter 🤩
 
   > **Note:** This package is based on [emoji_picker](https://pub.dev/packages/emoji_picker) which has been deprecated and not maintained anymore. Therefore I decided to create a modernized version of it and fixing existing issues.
 
-<img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/readme-update/screenshot/intro.png">
+<img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/master/screenshot/intro.png">
 
 ## Key features
 - Lightweight Package
