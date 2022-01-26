@@ -71,7 +71,7 @@ void emojiVersioningTests() {
 
 void emojiModelTests() {
   test('encode Emoji', () {
-    final encode = Emoji('name', '🤣');
+    final encode = const Emoji('name', '🤣');
     expect(encode.toJson(),
         <String, dynamic>{'name': 'name', 'emoji': '🤣', 'hasSkinTone': false});
   });
