@@ -8,6 +8,7 @@ import 'package:test/test.dart';
 void main() {
   skinToneTests();
   emojiVersioningTests();
+  emojiModelTests();
 }
 
 void skinToneTests() {
@@ -65,5 +66,33 @@ void emojiVersioningTests() {
     });
     final utils = EmojiPickerInternalUtils();
     expect((await utils.isEmojiUpdateAvailable()), false);
+  });
+}
+
+void emojiModelTests() {
+  test('encode Emoji', () {
+    final encode = const Emoji('name', '🤣');
+    expect(encode.toJson(),
+        <String, dynamic>{'name': 'name', 'emoji': '🤣', 'hasSkinTone': false});
+  });
+
+  test('decode Emoji without hasSkinTone property', () {
+    final decode = <String, dynamic>{'name': 'name', 'emoji': '🤣'};
+    final result = Emoji.fromJson(decode);
+    expect(result.name, 'name');
+    expect(result.emoji, '🤣');
+    expect(result.hasSkinTone, false);
+  });
+
+  test('decode Emoji with hasSkinTone property', () {
+    final decode = <String, dynamic>{
+      'name': 'name',
+      'emoji': '🤣',
+      'hasSkinTone': true
+    };
+    final result = Emoji.fromJson(decode);
+    expect(result.name, 'name');
+    expect(result.emoji, '🤣');
+    expect(result.hasSkinTone, true);
   });
 }
