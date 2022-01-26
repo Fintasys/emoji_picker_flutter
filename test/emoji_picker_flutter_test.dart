@@ -70,24 +70,29 @@ void emojiVersioningTests() {
 }
 
 void emojiModelTests() {
-   test('encode Emoji', () {
-     final encode = Emoji('name', '🤣');
-     expect(encode.toJson(), <String, dynamic> { 'name':'name', 'emoji': '🤣', 'hasSkinTone': false });
-   });
+  test('encode Emoji', () {
+    final encode = Emoji('name', '🤣');
+    expect(encode.toJson(),
+        <String, dynamic>{'name': 'name', 'emoji': '🤣', 'hasSkinTone': false});
+  });
 
-   test('decode Emoji without hasSkinTone property', () {
-     final decode = <String, dynamic> { 'name':'name', 'emoji': '🤣' };
-     final result = Emoji.fromJson(decode);
-     expect(result.name, 'name');
-     expect(result.emoji, '🤣');
-     expect(result.hasSkinTone, false);
-   });
+  test('decode Emoji without hasSkinTone property', () {
+    final decode = <String, dynamic>{'name': 'name', 'emoji': '🤣'};
+    final result = Emoji.fromJson(decode);
+    expect(result.name, 'name');
+    expect(result.emoji, '🤣');
+    expect(result.hasSkinTone, false);
+  });
 
-   test('decode Emoji with hasSkinTone property', () {
-     final decode = <String, dynamic> { 'name':'name', 'emoji': '🤣', 'hasSkinTone': true };
-     final result = Emoji.fromJson(decode);
-     expect(result.name, 'name');
-     expect(result.emoji, '🤣');
-     expect(result.hasSkinTone, true);
-   });
+  test('decode Emoji with hasSkinTone property', () {
+    final decode = <String, dynamic>{
+      'name': 'name',
+      'emoji': '🤣',
+      'hasSkinTone': true
+    };
+    final result = Emoji.fromJson(decode);
+    expect(result.name, 'name');
+    expect(result.emoji, '🤣');
+    expect(result.hasSkinTone, true);
+  });
 }
