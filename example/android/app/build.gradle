@@ -34,7 +34,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.fintays.emoji_picker_flutter_example"
+        applicationId "com.fintasys.emoji_picker_flutter_example"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()

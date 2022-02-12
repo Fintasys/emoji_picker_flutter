@@ -19,7 +19,7 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.fintays.emoji_picker_flutter
+        package: com.fintasys.emoji_picker_flutter
         pluginClass: EmojiPickerFlutterPlugin
       ios:
         pluginClass: EmojiPickerFlutterPlugin
