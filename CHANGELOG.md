@@ -1,3 +1,7 @@
+## 1.1.2
+- Fix a issue with macos platform 👨‍🔧
+- Close Skin-Tone dialog on several other timings
+
 ## 1.1.1
 * Fix parsing of legacy Emoji Recent-List 😵
 
