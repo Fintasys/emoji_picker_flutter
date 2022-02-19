@@ -142,7 +142,7 @@ final newRecentEmojis = await EmojiPickerUtils().addEmojiToRecentlyUsed(key: key
 
 ## Web Support
 
-#### Custom Emoji font
+### Custom Emoji font
 
 Depending on the platform probably not all Emoji's can be displayed correctly by default.
 In order to ensure correct rendering of the Emoji's unrelated to the platform you can add a custom emoji font to your project.
@@ -172,7 +172,7 @@ EmojiPicker(
 )
 ```
 
-#### Flexible amount of Emoji's per row
+### Flexible amount of Emoji's per row
 
 Since there is a lot more space on a website we might want to adjust the amount of Emoji in a row according to the websites width. We can easily achieve this by calucating the columns depending on the width:
 
