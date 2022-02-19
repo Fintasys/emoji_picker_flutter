@@ -1,5 +1,4 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:emoji_picker_flutter/src/emoji.dart';
 
 /// Container for Category and their emoji
 class CategoryEmoji {

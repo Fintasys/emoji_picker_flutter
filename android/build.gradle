@@ -1,4 +1,4 @@
-group 'com.fintays.emoji_picker_flutter'
+group 'com.fintasys.emoji_picker_flutter'
 version '1.0-SNAPSHOT'
 
 buildscript {
