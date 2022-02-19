@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import 'package:flutter/foundation.dart' as foundation;
 import 'package:flutter/material.dart';
 
 void main() {
@@ -67,16 +68,20 @@ class _MyAppState extends State<MyApp> {
                         child: TextFormField(
                             controller: _controller,
                             style: const TextStyle(
-                                fontSize: 20.0, color: Colors.black87),
+                              fontSize: 20.0,
+                              color: Colors.black87,
+                              fontFamily: 'NotoColorEmoji',
+                            ),
                             decoration: InputDecoration(
                               hintText: 'Type a message',
                               filled: true,
                               fillColor: Colors.white,
                               contentPadding: const EdgeInsets.only(
-                                  left: 16.0,
-                                  bottom: 8.0,
-                                  top: 8.0,
-                                  right: 16.0),
+                                left: 16.0,
+                                bottom: 8.0,
+                                top: 8.0,
+                                right: 16.0,
+                              ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(50.0),
                               ),
@@ -100,35 +105,50 @@ class _MyAppState extends State<MyApp> {
               offstage: !emojiShowing,
               child: SizedBox(
                 height: 250,
-                child: EmojiPicker(
-                    onEmojiSelected: (Category category, Emoji emoji) {
-                      _onEmojiSelected(emoji);
-                    },
-                    onBackspacePressed: _onBackspacePressed,
-                    config: Config(
-                        columns: 7,
-                        // Issue: https://github.com/flutter/flutter/issues/28894
-                        emojiSizeMax: 32 * (Platform.isIOS ? 1.30 : 1.0),
-                        verticalSpacing: 0,
-                        horizontalSpacing: 0,
-                        initCategory: Category.RECENT,
-                        bgColor: const Color(0xFFF2F2F2),
-                        indicatorColor: Colors.blue,
-                        iconColor: Colors.grey,
-                        iconColorSelected: Colors.blue,
-                        progressIndicatorColor: Colors.blue,
-                        backspaceColor: Colors.blue,
-                        skinToneDialogBgColor: Colors.white,
-                        skinToneIndicatorColor: Colors.grey,
-                        enableSkinTones: true,
-                        showRecentsTab: true,
-                        recentsLimit: 28,
-                        noRecentsText: 'No Recents',
-                        noRecentsStyle: const TextStyle(
-                            fontSize: 20, color: Colors.black26),
-                        tabIndicatorAnimDuration: kTabScrollDuration,
-                        categoryIcons: const CategoryIcons(),
-                        buttonMode: ButtonMode.MATERIAL)),
+                child: Builder(builder: (context) {
+                  // Calculate EmojiSize based on the Platform
+                  // Issue: https://github.com/flutter/flutter/issues/28894
+                  final emojiSize =
+                      48 * (!foundation.kIsWeb && Platform.isIOS ? 1.00 : 1.0);
+
+                  // Calculate columns based on the width (recommended for web)
+                  // Static number like `7` recommended for mobile
+                  final columns =
+                      MediaQuery.of(context).size.width ~/ emojiSize;
+
+                  // Build EmojiPicker
+                  return EmojiPicker(
+                      onEmojiSelected: (Category category, Emoji emoji) {
+                        _onEmojiSelected(emoji);
+                      },
+                      onBackspacePressed: _onBackspacePressed,
+                      config: Config(
+                          columns: columns,
+                          emojiSizeMax: emojiSize,
+                          verticalSpacing: 8,
+                          horizontalSpacing: 8,
+                          initCategory: Category.RECENT,
+                          bgColor: const Color(0xFFF2F2F2),
+                          indicatorColor: Colors.blue,
+                          iconColor: Colors.grey,
+                          iconColorSelected: Colors.blue,
+                          progressIndicatorColor: Colors.blue,
+                          backspaceColor: Colors.blue,
+                          // customEmojiFont: 'NotoColorEmoji',
+                          skinToneDialogBgColor: Colors.white,
+                          skinToneIndicatorColor: Colors.grey,
+                          enableSkinTones: true,
+                          showRecentsTab: true,
+                          recentsLimit: 28,
+                          noRecentsText: 'No Recents',
+                          noRecentsStyle: const TextStyle(
+                            fontSize: 20,
+                            color: Colors.black26,
+                          ),
+                          tabIndicatorAnimDuration: kTabScrollDuration,
+                          categoryIcons: const CategoryIcons(),
+                          buttonMode: ButtonMode.MATERIAL));
+                }),
               ),
             ),
           ],

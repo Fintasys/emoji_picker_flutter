@@ -232,6 +232,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
           style: TextStyle(
             fontSize: emojiSize,
             backgroundColor: Colors.transparent,
+            fontFamily: widget.config.customEmojiFont,
           ),
         ),
       ]),

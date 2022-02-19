@@ -19,3 +19,7 @@ dependency_overrides:
 
 flutter:
   uses-material-design: true
+#  fonts:
+#    - family: NotoColorEmoji
+#      fonts:
+#        - asset: assets/fonts/NotoColorEmoji.ttf

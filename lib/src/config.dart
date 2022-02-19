@@ -19,6 +19,7 @@ class Config {
       this.iconColorSelected = Colors.blue,
       this.progressIndicatorColor = Colors.blue,
       this.backspaceColor = Colors.blue,
+      this.customEmojiFont,
       this.skinToneDialogBgColor = Colors.white,
       this.skinToneIndicatorColor = Colors.grey,
       this.enableSkinTones = true,
@@ -65,6 +66,9 @@ class Config {
 
   /// The color of the backspace icon button
   final Color backspaceColor;
+
+  /// Custom font for emoji rendering
+  final String? customEmojiFont;
 
   /// The background color of the skin tone dialog
   final Color skinToneDialogBgColor;
