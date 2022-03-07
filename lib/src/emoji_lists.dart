@@ -1189,7 +1189,7 @@ final Map<String, String> foods = Map.fromIterables([
   'Glass of Milk',
   'Hot Beverage',
   'Teacup Without Handle',
-  'Mate Tee',
+  'Mate Drink',
   'Sake',
   'Bottle With Popping Cork',
   'Wine Glass',
