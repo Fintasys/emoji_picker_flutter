@@ -29,7 +29,8 @@ class Config {
           const TextStyle(fontSize: 20, color: Colors.black26),
       this.tabIndicatorAnimDuration = kTabScrollDuration,
       this.categoryIcons = const CategoryIcons(),
-      this.buttonMode = ButtonMode.MATERIAL});
+      this.buttonMode = ButtonMode.MATERIAL,
+      this.padding = EdgeInsets.zero});
 
   /// Number of emojis per row
   final int columns;
@@ -95,6 +96,9 @@ class Config {
 
   /// Change between Material and Cupertino button style
   final ButtonMode buttonMode;
+
+  /// The padding of GridView, default is [EdgeInsets.zero]
+  final EdgeInsets padding;
 
   /// Get Emoji size based on properties and screen width
   double getEmojiSize(double width) {
