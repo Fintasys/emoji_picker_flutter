@@ -123,9 +123,11 @@ class _MyAppState extends State<MyApp> {
                         enableSkinTones: true,
                         showRecentsTab: true,
                         recentsLimit: 28,
-                        noRecentsText: 'No Recents',
-                        noRecentsStyle: const TextStyle(
-                            fontSize: 20, color: Colors.black26),
+                        noRecentsText: const Text(
+                          'No Recents',
+                          style: TextStyle(fontSize: 20, color: Colors.black26),
+                          textAlign: TextAlign.center,
+                        ),
                         tabIndicatorAnimDuration: kTabScrollDuration,
                         categoryIcons: const CategoryIcons(),
                         buttonMode: ButtonMode.MATERIAL)),

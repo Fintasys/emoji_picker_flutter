@@ -269,11 +269,8 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
   /// Build Widget for when no recent emoji are available
   Widget _buildNoRecent() {
     return Center(
-        child: Text(
-      widget.config.noRecentsText,
-      style: widget.config.noRecentsStyle,
-      textAlign: TextAlign.center,
-    ));
+      child: widget.config.noRecentsText,
+    );
   }
 
   /// Overlay for SkinTone
