@@ -51,14 +51,14 @@ EmojiPicker(
         enableSkinTones: true,
         showRecentsTab: true,
         recentsLimit: 28,
-        noRecentsText: const Text(
+        noRecents: const Text(
           'No Recents',
           style: TextStyle(fontSize: 20, color: Colors.black26),
           textAlign: TextAlign.center,
         ),
         tabIndicatorAnimDuration: kTabScrollDuration,    
         categoryIcons: const CategoryIcons(),
-        buttonMode: ButtonMode.MATERIAL
+        buttonMode: ButtonMode.MATERIAL,
     ),
 )
 ```
@@ -84,8 +84,7 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 | enableSkinTones     | Enable feature to select a skin tone of certain emoji's                               | true     |
 | showRecentsTab     | Show extra tab with recently used emoji                                | true     |
 | recentsLimit     | Limit of recently used emoji that will be saved                                | 28     |
-| noRecentsText     | The text to be displayed if no recent emojis to display                                | "No Recents"     |
-| noRecentsStyle     | The text style for [noRecentsText]                                | TextStyle(fontSize:  20, color:  Colors.black26)     |
+| noRecents     |  A widget (usually [Text]) to be displayed if no recent emojis to display                                | Text('No Recents', style: TextStyle(fontSize: 20, color: Colors.black26), textAlign: TextAlign.center)     |
 | tabIndicatorAnimDuration     | Duration of tab indicator to animate to next category                                | Duration(milliseconds: 300)     |
 | categoryIcons     | Determines the icon to display for each Category. You can change icons by setting them in the constructor.                               | CategoryIcons()     |
 | buttonMode     | Choose between Material and Cupertino button style                                | ButtonMode.MATERIAL     |

@@ -123,7 +123,7 @@ class _MyAppState extends State<MyApp> {
                         enableSkinTones: true,
                         showRecentsTab: true,
                         recentsLimit: 28,
-                        noRecentsText: const Text(
+                        noRecents: const Text(
                           'No Recents',
                           style: TextStyle(fontSize: 20, color: Colors.black26),
                           textAlign: TextAlign.center,

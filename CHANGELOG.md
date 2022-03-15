@@ -1,6 +1,5 @@
 ## 1.2.0
-* New feature & breaking change: `noRecentsText` is now of type `Widget` (was `String` before). 
-  Inconsequence, `noRecentsStyle` was removed. This change leads to more customization options.
+- Breaking Change: `noRecentsText` of type `String` was changed to `noRecents` of type `Widget` and `noRecentsStyle` was removed from `Config`
 
 ## 1.1.2
 - Fix a issue with macos platform 👨‍🔧

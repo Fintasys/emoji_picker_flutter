@@ -269,7 +269,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
   /// Build Widget for when no recent emoji are available
   Widget _buildNoRecent() {
     return Center(
-      child: widget.config.noRecentsText,
+      child: widget.config.noRecents,
     );
   }
 
