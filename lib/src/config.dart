@@ -4,6 +4,13 @@ import 'package:emoji_picker_flutter/src/category_icons.dart';
 import 'package:emoji_picker_flutter/src/emoji_picker.dart';
 import 'package:flutter/material.dart';
 
+/// Default Widget if no recent is available
+const DefaultNoRecentsWidget = Text(
+  'No Recents',
+  style: TextStyle(fontSize: 20, color: Colors.black26),
+  textAlign: TextAlign.center,
+);
+
 /// Config for customizations
 class Config {
   /// Constructor
@@ -24,9 +31,7 @@ class Config {
       this.enableSkinTones = true,
       this.showRecentsTab = true,
       this.recentsLimit = 28,
-      this.noRecentsText = 'No Recents',
-      this.noRecentsStyle =
-          const TextStyle(fontSize: 20, color: Colors.black26),
+      this.noRecents = DefaultNoRecentsWidget,
       this.tabIndicatorAnimDuration = kTabScrollDuration,
       this.categoryIcons = const CategoryIcons(),
       this.buttonMode = ButtonMode.MATERIAL});
@@ -81,11 +86,8 @@ class Config {
   /// Limit of recently used emoji that will be saved
   final int recentsLimit;
 
-  /// The text to be displayed if no recent emojis to display
-  final String noRecentsText;
-
-  /// The text style for [noRecentsText]
-  final TextStyle noRecentsStyle;
+  /// A widget (usually [Text]) to be displayed if no recent emojis to display
+  final Widget noRecents;
 
   /// Duration of tab indicator to animate to next category
   final Duration tabIndicatorAnimDuration;
@@ -147,8 +149,7 @@ class Config {
         other.enableSkinTones == enableSkinTones &&
         other.showRecentsTab == showRecentsTab &&
         other.recentsLimit == recentsLimit &&
-        other.noRecentsText == noRecentsText &&
-        other.noRecentsStyle == noRecentsStyle &&
+        other.noRecents == noRecents &&
         other.tabIndicatorAnimDuration == tabIndicatorAnimDuration &&
         other.categoryIcons == categoryIcons &&
         other.buttonMode == buttonMode;
@@ -172,8 +173,7 @@ class Config {
       enableSkinTones.hashCode ^
       showRecentsTab.hashCode ^
       recentsLimit.hashCode ^
-      noRecentsText.hashCode ^
-      noRecentsStyle.hashCode ^
+      noRecents.hashCode ^
       tabIndicatorAnimDuration.hashCode ^
       categoryIcons.hashCode ^
       buttonMode.hashCode;
