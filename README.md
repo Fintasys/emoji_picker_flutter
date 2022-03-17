@@ -39,6 +39,7 @@ EmojiPicker(
         emojiSizeMax: 32 * (Platform.isIOS ? 1.30 : 1.0), // Issue: https://github.com/flutter/flutter/issues/28894
         verticalSpacing: 0,
         horizontalSpacing: 0,
+        gridPadding: EdgeInsets.zero,
         initCategory: Category.RECENT,
         bgColor: Color(0xFFF2F2F2),
         indicatorColor: Colors.blue,
@@ -66,28 +67,29 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 
 ## Config
 
-| property        | description                                                        | default    |
-| --------------- | ------------------------------------------------------------------ |------------|
-| columns             | Number of emojis per row                                       |7    |
-| emojiSizeMax     | Width and height the emoji will be maximal displayed                 |32.0  |
-| verticalSpacing         | Verical spacing between emojis | 0    |
-| horizontalSpacing | Horizontal spacing between emojis                                                 | 0     |
-| initCategory         | The initial Category that will be selected                                                         |Category.RECENT   |
-| bgColor       | The background color of the Widget                                                       |Color(0xFFF2F2F2)    |
-| indicatorColor        | The color of the category indicator                                                       | Colors.blue      |
-| iconColor    | The color of the category icons                                                       | Colors.grey      |
-| iconColorSelected      | The color of the category icon when selected                                                 | Colors.blue |
-| progressIndicatorColor     | The color of the loading indicator during initalization                                | Colors.blue     |
-| backspaceColor     | The color of the backspace icon button                               | Colors.blue     |
-| skinToneDialogBgColor     | The background color of the skin tone dialog                               | Colors.white     |
-| skinToneIndicatorColor     | Color of the small triangle next to multiple skin tone emoji                               | Colors.grey     |
-| enableSkinTones     | Enable feature to select a skin tone of certain emoji's                               | true     |
-| showRecentsTab     | Show extra tab with recently used emoji                                | true     |
-| recentsLimit     | Limit of recently used emoji that will be saved                                | 28     |
-| noRecents     |  A widget (usually [Text]) to be displayed if no recent emojis to display                                | Text('No Recents', style: TextStyle(fontSize: 20, color: Colors.black26), textAlign: TextAlign.center)     |
-| tabIndicatorAnimDuration     | Duration of tab indicator to animate to next category                                | Duration(milliseconds: 300)     |
-| categoryIcons     | Determines the icon to display for each Category. You can change icons by setting them in the constructor.                               | CategoryIcons()     |
-| buttonMode     | Choose between Material and Cupertino button style                                | ButtonMode.MATERIAL     |
+| property      | description                                                                                          | default                                                                                                |
+| ------------- |------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
+| columns           | Number of emojis per row                                                                             | 7                                                                                                      |
+| emojiSizeMax   | Width and height the emoji will be maximal displayed                                                 | 32.0                                                                                                   |
+| verticalSpacing       | Verical spacing between emojis                                                                       | 0                                                                                                      |
+| horizontalSpacing | Horizontal spacing between emojis                                                                    | 0                                                                                                      |
+| gridPadding | The padding of GridView                                                                              | EdgeInsets.zero                                                                                        |
+| initCategory       | The initial Category that will be selected                                                           | Category.RECENT                                                                                        |
+| bgColor     | The background color of the Widget                                                                   | Color(0xFFF2F2F2)                                                                                      |
+| indicatorColor      | The color of the category indicator                                                                  | Colors.blue                                                                                            |
+| iconColor   | The color of the category icons                                                                      | Colors.grey                                                                                            |
+| iconColorSelected    | The color of the category icon when selected                                                         | Colors.blue                                                                                            |
+| progressIndicatorColor   | The color of the loading indicator during initalization                                              | Colors.blue                                                                                            |
+| backspaceColor   | The color of the backspace icon button                                                               | Colors.blue                                                                                            |
+| skinToneDialogBgColor   | The background color of the skin tone dialog                                                         | Colors.white                                                                                           |
+| skinToneIndicatorColor   | Color of the small triangle next to multiple skin tone emoji                                         | Colors.grey                                                                                            |
+| enableSkinTones   | Enable feature to select a skin tone of certain emoji's                                              | true                                                                                                   |
+| showRecentsTab   | Show extra tab with recently used emoji                                                              | true                                                                                                   |
+| recentsLimit   | Limit of recently used emoji that will be saved                                                      | 28                                                                                                     |
+| noRecents   | A widget (usually [Text]) to be displayed if no recent emojis to display                             | Text('No Recents', style: TextStyle(fontSize: 20, color: Colors.black26), textAlign: TextAlign.center) |
+| tabIndicatorAnimDuration   | Duration of tab indicator to animate to next category                                                | Duration(milliseconds: 300)                                                                            |
+| categoryIcons   | Determines the icon to display for each Category. You can change icons by setting them in the constructor. | CategoryIcons()                                                                                        |
+| buttonMode   | Choose between Material and Cupertino button style                                                   | ButtonMode.MATERIAL                                                                                    |
 
 ## Backspace-Button
 You can add an Backspace-Button to the end category list by adding the callback method `onBackspacePressed: () { }` to the EmojiPicker-Widget. This will make it easier for your user to remove an added Emoji without showing the keyboard. Check out the example for more details about usage.
