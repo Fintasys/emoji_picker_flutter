@@ -12,6 +12,7 @@ class Config {
       this.emojiSizeMax = 32.0,
       this.verticalSpacing = 0,
       this.horizontalSpacing = 0,
+      this.gridPadding = EdgeInsets.zero,
       this.initCategory = Category.RECENT,
       this.bgColor = const Color(0xFFEBEFF2),
       this.indicatorColor = Colors.blue,
@@ -29,8 +30,7 @@ class Config {
           const TextStyle(fontSize: 20, color: Colors.black26),
       this.tabIndicatorAnimDuration = kTabScrollDuration,
       this.categoryIcons = const CategoryIcons(),
-      this.buttonMode = ButtonMode.MATERIAL,
-      this.padding = EdgeInsets.zero});
+      this.buttonMode = ButtonMode.MATERIAL});
 
   /// Number of emojis per row
   final int columns;
@@ -98,7 +98,7 @@ class Config {
   final ButtonMode buttonMode;
 
   /// The padding of GridView, default is [EdgeInsets.zero]
-  final EdgeInsets padding;
+  final EdgeInsets gridPadding;
 
   /// Get Emoji size based on properties and screen width
   double getEmojiSize(double width) {

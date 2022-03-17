@@ -169,7 +169,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
         controller: _scrollController,
         shrinkWrap: true,
         primary: false,
-        padding: widget.config.padding,
+        padding: widget.config.gridPadding,
         crossAxisCount: widget.config.columns,
         mainAxisSpacing: widget.config.verticalSpacing,
         crossAxisSpacing: widget.config.horizontalSpacing,
