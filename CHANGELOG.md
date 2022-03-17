@@ -1,3 +1,6 @@
+## 1.2.0
+- Breaking Change: `noRecentsText` of type `String` was changed to `noRecents` of type `Widget` and `noRecentsStyle` was removed from `Config`
+
 ## 1.1.2
 - Fix a issue with macos platform 👨‍🔧
 - Close Skin-Tone dialog on several other timings
