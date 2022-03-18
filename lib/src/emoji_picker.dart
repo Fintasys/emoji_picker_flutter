@@ -96,7 +96,7 @@ typedef EmojiViewBuilder = Widget Function(Config config, EmojiViewState state);
 /// and allow the user to quickly switch to that [Category]
 class EmojiPicker extends StatefulWidget {
   /// EmojiPicker for flutter
-  EmojiPicker({
+  const EmojiPicker({
     Key? key,
     required this.onEmojiSelected,
     this.onBackspacePressed,
