@@ -152,7 +152,7 @@ class EmojiPickerInternalUtils {
       recentEmoji[recentEmojiIndex].counter++;
     } else if (recentEmoji.length == config.recentsLimit &&
         config.replaceEmojiOnLimitExceed) {
-      // Replace latest emoji with fresh one
+      // Replace latest emoji with the fresh one
       recentEmoji[recentEmoji.length - 1] = RecentEmoji(emoji, 1);
     } else {
       recentEmoji.add(RecentEmoji(emoji, 1));
