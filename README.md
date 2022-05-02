@@ -83,7 +83,8 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 | skinToneIndicatorColor     | Color of the small triangle next to multiple skin tone emoji                               | Colors.grey     |
 | enableSkinTones     | Enable feature to select a skin tone of certain emoji's                               | true     |
 | showRecentsTab     | Show extra tab with recently used emoji                                | true     |
-| recentsLimit     | Limit of recently used emoji that will be saved                                | 28     |
+| recentsLimit     | Limit of recently used emoji that will be saved                                | 28
+| replaceEmojiOnLimitExceed | Replace latest emoji on recents list on limit exceed | false
 | noRecents     |  A widget (usually [Text]) to be displayed if no recent emojis to display                                | Text('No Recents', style: TextStyle(fontSize: 20, color: Colors.black26), textAlign: TextAlign.center)     |
 | tabIndicatorAnimDuration     | Duration of tab indicator to animate to next category                                | Duration(milliseconds: 300)     |
 | categoryIcons     | Determines the icon to display for each Category. You can change icons by setting them in the constructor.                               | CategoryIcons()     |

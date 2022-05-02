@@ -150,6 +150,10 @@ class EmojiPickerInternalUtils {
       // Already exist in recent list
       // Just update counter
       recentEmoji[recentEmojiIndex].counter++;
+    } else if (recentEmoji.length == config.recentsLimit &&
+        config.replaceEmojiOnLimitExceed) {
+      // Replace latest emoji with fresh one
+      recentEmoji[recentEmoji.length - 1] = RecentEmoji(emoji, 1);
     } else {
       recentEmoji.add(RecentEmoji(emoji, 1));
     }
