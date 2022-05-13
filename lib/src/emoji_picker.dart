@@ -161,7 +161,7 @@ class EmojiPickerState extends State<EmojiPicker> {
     if (!_loaded) {
       // Load emojis
       _updateEmojiFuture.then(
-        (value) => WidgetsBinding.instance!.addPostFrameCallback((_) {
+        (value) => WidgetsBinding.instance.addPostFrameCallback((_) {
           if (!mounted) return;
           setState(() {
             _loaded = true;
@@ -183,25 +183,21 @@ class EmojiPickerState extends State<EmojiPicker> {
     );
 
     // Build
-    return widget.customWidget == null
-        ? DefaultEmojiPickerView(widget.config, state)
-        : widget.customWidget!(widget.config, state);
+    return widget.customWidget == null ? DefaultEmojiPickerView(widget.config, state) : widget.customWidget!(widget.config, state);
   }
 
   // Add recent emoji handling to tap listener
   OnEmojiSelected _getOnEmojiListener() {
     return (category, emoji) {
       if (widget.config.showRecentsTab) {
-        _emojiPickerInternalUtils
-            .addEmojiToRecentlyUsed(emoji: emoji, config: widget.config)
-            .then((newRecentEmoji) => {
-                  _recentEmoji = newRecentEmoji,
-                  if (category != Category.RECENT && mounted)
-                    setState(() {
-                      // rebuild to update recent emoji tab
-                      // when it is not current tab
-                    })
-                });
+        _emojiPickerInternalUtils.addEmojiToRecentlyUsed(emoji: emoji, config: widget.config).then((newRecentEmoji) => {
+              _recentEmoji = newRecentEmoji,
+              if (category != Category.RECENT && mounted)
+                setState(() {
+                  // rebuild to update recent emoji tab
+                  // when it is not current tab
+                })
+            });
       }
       widget.onEmojiSelected(category, emoji);
     };
@@ -216,8 +212,7 @@ class EmojiPickerState extends State<EmojiPicker> {
       _categoryEmoji.add(CategoryEmoji(Category.RECENT, recentEmojiMap));
     }
 
-    final availableCategoryEmoji =
-        await _emojiPickerInternalUtils.getAvailableCategoryEmoji();
+    final availableCategoryEmoji = await _emojiPickerInternalUtils.getAvailableCategoryEmoji();
 
     availableCategoryEmoji.forEach((category, emojis) async {
       _categoryEmoji.add(
@@ -226,8 +221,7 @@ class EmojiPickerState extends State<EmojiPicker> {
             emojis.entries.map((emoji) {
               var _emoji = Emoji(emoji.key, emoji.value);
               // Emoji with skin tone are only in SMILEY & ACTIVITIES category
-              if (category == Category.SMILEYS ||
-                  category == Category.ACTIVITIES) {
+              if (category == Category.SMILEYS || category == Category.ACTIVITIES) {
                 return _updateSkinToneSupport(_emoji);
               } else
                 return _emoji;
