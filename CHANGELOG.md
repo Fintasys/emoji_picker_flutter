@@ -1,3 +1,6 @@
+## 1.3.0
+- Update Android and Kotlin version
+
 ## 1.2.0
 - Breaking Change: `noRecentsText` of type `String` was changed to `noRecents` of type `Widget` and `noRecentsStyle` was removed from `Config`
 
