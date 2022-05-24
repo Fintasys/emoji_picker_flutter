@@ -1,5 +1,5 @@
 ## 1.2.1
-- Update Android and Kotlin version
+- Compatibility for Flutter 2.10 and update Android and Kotlin versions
 - Add Mate Emoji 🧉
 
 ## 1.2.0
