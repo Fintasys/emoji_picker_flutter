@@ -2,7 +2,7 @@
 // File originally from https://github.com/JeffG05/emoji_picker
 
 /// Emoji Version
-const int version = 1;
+const int version = 2;
 
 /// Map of all possible emojis along with their names in [Category.SMILEYS]
 final Map<String, String> smileys = Map.fromIterables([
@@ -1189,6 +1189,7 @@ final Map<String, String> foods = Map.fromIterables([
   'Glass of Milk',
   'Hot Beverage',
   'Teacup Without Handle',
+  'Mate Drink',
   'Sake',
   'Bottle With Popping Cork',
   'Wine Glass',
@@ -1295,6 +1296,7 @@ final Map<String, String> foods = Map.fromIterables([
   '🥛',
   '☕',
   '🍵',
+  '🧉',
   '🍶',
   '🍾',
   '🍷',
