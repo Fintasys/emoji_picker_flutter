@@ -1,3 +1,7 @@
+## 1.2.1
+- Compatibility for Flutter 2.10 and update Android and Kotlin versions
+- Add Mate Emoji 🧉
+
 ## 1.2.0
 - Breaking Change: `noRecentsText` of type `String` was changed to `noRecents` of type `Widget` and `noRecentsStyle` was removed from `Config`
 
