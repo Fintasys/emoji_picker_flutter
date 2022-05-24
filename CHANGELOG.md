@@ -1,4 +1,4 @@
-## 1.3.0
+## 1.2.1
 - Update Android and Kotlin version
 
 ## 1.2.0
