@@ -1,5 +1,6 @@
 ## 1.2.1
 - Update Android and Kotlin version
+- Add Mate Emoji 🧉
 
 ## 1.2.0
 - Breaking Change: `noRecentsText` of type `String` was changed to `noRecents` of type `Widget` and `noRecentsStyle` was removed from `Config`
