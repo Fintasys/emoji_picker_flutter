@@ -96,7 +96,7 @@ typedef EmojiViewBuilder = Widget Function(Config config, EmojiViewState state);
 /// and allow the user to quickly switch to that [Category]
 class EmojiPicker extends StatefulWidget {
   /// EmojiPicker for flutter
-  EmojiPicker({
+  const EmojiPicker({
     Key? key,
     required this.onEmojiSelected,
     this.onBackspacePressed,
@@ -170,7 +170,11 @@ class EmojiPickerState extends State<EmojiPicker> {
       );
 
       // Show loading indicator
-      return const Center(child: CircularProgressIndicator());
+      return Container(
+        alignment: Alignment.center,
+        color: widget.config.bgColor,
+        child: const CircularProgressIndicator(),
+      );
     }
     if (widget.config.showRecentsTab) {
       _categoryEmoji[0].emoji = _recentEmoji.map((e) => e.emoji).toList();
@@ -207,7 +211,7 @@ class EmojiPickerState extends State<EmojiPicker> {
     };
   }
 
-  // Initalize emoji data
+  // Initialize emoji data
   Future<void> _updateEmojis() async {
     _categoryEmoji.clear();
     if (widget.config.showRecentsTab) {

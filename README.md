@@ -25,7 +25,7 @@ Yet another Emoji Picker for Flutter 🤩
 
 ## Getting Started
 
-```
+```dart
 EmojiPicker(
     onEmojiSelected: (category, emoji) {
         // Do something when emoji is tapped
@@ -70,14 +70,14 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 | --------------- | ------------------------------------------------------------------ |------------|
 | columns             | Number of emojis per row                                       |7    |
 | emojiSizeMax     | Width and height the emoji will be maximal displayed                 |32.0  |
-| verticalSpacing         | Verical spacing between emojis | 0    |
+| verticalSpacing         | Vertical spacing between emojis | 0    |
 | horizontalSpacing | Horizontal spacing between emojis                                                 | 0     |
 | initCategory         | The initial Category that will be selected                                                         |Category.RECENT   |
 | bgColor       | The background color of the Widget                                                       |Color(0xFFF2F2F2)    |
 | indicatorColor        | The color of the category indicator                                                       | Colors.blue      |
 | iconColor    | The color of the category icons                                                       | Colors.grey      |
 | iconColorSelected      | The color of the category icon when selected                                                 | Colors.blue |
-| progressIndicatorColor     | The color of the loading indicator during initalization                                | Colors.blue     |
+| progressIndicatorColor     | The color of the loading indicator during initialization                                | Colors.blue     |
 | backspaceColor     | The color of the backspace icon button                               | Colors.blue     |
 | skinToneDialogBgColor     | The background color of the skin tone dialog                               | Colors.white     |
 | skinToneIndicatorColor     | Color of the small triangle next to multiple skin tone emoji                               | Colors.grey     |
@@ -97,7 +97,7 @@ You can add an Backspace-Button to the end category list by adding the callback 
 
 ## Custom view
 The appearance is completely customizable by setting `customWidget` property. If properties in Config are not enough you can inherit from `EmojiPickerBuilder` (recommended but not necessary) to make further adjustments. 
-```
+```dart
 class CustomView extends EmojiPickerBuilder {
     CustomView(Config config, EmojiViewState state) : super(config, state);
 
@@ -123,7 +123,7 @@ EmojiPicker(
 
 ## Extended usage with EmojiPickerUtils
 
-```
+```dart
 // Get recently used emoji
 final recentEmojis = await EmojiPickerUtils().getRecentEmojis();
 
