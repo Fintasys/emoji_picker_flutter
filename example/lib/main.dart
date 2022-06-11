@@ -111,6 +111,7 @@ class _MyAppState extends State<MyApp> {
                         emojiSizeMax: 32 * (Platform.isIOS ? 1.30 : 1.0),
                         verticalSpacing: 0,
                         horizontalSpacing: 0,
+                        gridPadding: EdgeInsets.zero,
                         initCategory: Category.RECENT,
                         bgColor: const Color(0xFFF2F2F2),
                         indicatorColor: Colors.blue,
@@ -123,6 +124,7 @@ class _MyAppState extends State<MyApp> {
                         enableSkinTones: true,
                         showRecentsTab: true,
                         recentsLimit: 28,
+                        replaceEmojiOnLimitExceed: false,
                         noRecents: const Text(
                           'No Recents',
                           style: TextStyle(fontSize: 20, color: Colors.black26),
