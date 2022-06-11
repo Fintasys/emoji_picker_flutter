@@ -1,7 +1,7 @@
 ## 1.3.0
 - Compatibility for Flutter 3 and update dependencies 💙
 - Introduce property `replaceEmojiOnLimitExceed` to replace least used emoji in Recents when the list is full
-- Add property gridPadding to make GridView padding configurable 
+- Add property `gridPadding` to make GridView padding configurable 
 - Add same background color of emoji view to background of loading indicator
 - Improvements for usage of custom view
 
