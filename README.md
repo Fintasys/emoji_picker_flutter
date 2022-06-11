@@ -71,7 +71,7 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 | --------------- | ------------------------------------------------------------------ |------------|
 | columns             | Number of emojis per row                                       |7    |
 | emojiSizeMax     | Width and height the emoji will be maximal displayed                 |32.0  |
-| verticalSpacing         | Verical spacing between emojis | 0    |
+| verticalSpacing         | Vertical spacing between emojis | 0    |
 | horizontalSpacing | Horizontal spacing between emojis                                                 | 0     |
 | gridPadding | The padding of GridView                                                                              | EdgeInsets.zero                                                                                        |
 | initCategory         | The initial Category that will be selected                                                         |Category.RECENT   |
@@ -79,7 +79,7 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 | indicatorColor        | The color of the category indicator                                                       | Colors.blue      |
 | iconColor    | The color of the category icons                                                       | Colors.grey      |
 | iconColorSelected      | The color of the category icon when selected                                                 | Colors.blue |
-| progressIndicatorColor     | The color of the loading indicator during initalization                                | Colors.blue     |
+| progressIndicatorColor     | The color of the loading indicator during initialization                                | Colors.blue     |
 | backspaceColor     | The color of the backspace icon button                               | Colors.blue     |
 | skinToneDialogBgColor     | The background color of the skin tone dialog                               | Colors.white     |
 | skinToneIndicatorColor     | Color of the small triangle next to multiple skin tone emoji                               | Colors.grey     |
