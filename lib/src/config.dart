@@ -32,6 +32,7 @@ class Config {
       this.enableSkinTones = true,
       this.showRecentsTab = true,
       this.recentsLimit = 28,
+      this.replaceEmojiOnLimitExceed = false,
       this.noRecents = DefaultNoRecentsWidget,
       this.tabIndicatorAnimDuration = kTabScrollDuration,
       this.categoryIcons = const CategoryIcons(),
@@ -102,6 +103,9 @@ class Config {
   /// The padding of GridView, default is [EdgeInsets.zero]
   final EdgeInsets gridPadding;
 
+  /// Replace latest emoji on recents list on limit exceed
+  final bool replaceEmojiOnLimitExceed;
+
   /// Get Emoji size based on properties and screen width
   double getEmojiSize(double width) {
     final maxSize = width / columns;
@@ -156,7 +160,9 @@ class Config {
         other.noRecents == noRecents &&
         other.tabIndicatorAnimDuration == tabIndicatorAnimDuration &&
         other.categoryIcons == categoryIcons &&
-        other.buttonMode == buttonMode;
+        other.buttonMode == buttonMode &&
+        other.gridPadding == gridPadding &&
+        other.replaceEmojiOnLimitExceed == replaceEmojiOnLimitExceed;
   }
 
   @override
@@ -180,5 +186,7 @@ class Config {
       noRecents.hashCode ^
       tabIndicatorAnimDuration.hashCode ^
       categoryIcons.hashCode ^
-      buttonMode.hashCode;
+      buttonMode.hashCode ^
+      gridPadding.hashCode ^
+      replaceEmojiOnLimitExceed.hashCode;
 }

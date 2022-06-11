@@ -1,3 +1,13 @@
+## 1.3.0
+- Compatibility for Flutter 3 and update dependencies 💙
+- Introduce `replaceEmojiOnLimitExceed` to replace least used emoji in Recents when the list is full
+- Add same background color of emoji view to background of loading indicator
+- Improvements for usage of custom view
+
+## 1.2.1
+- Compatibility for Flutter 2.10 and update Android and Kotlin versions
+- Add Mate Emoji 🧉
+
 ## 1.2.0
 - Breaking Change: `noRecentsText` of type `String` was changed to `noRecents` of type `Widget` and `noRecentsStyle` was removed from `Config`
 
