@@ -39,6 +39,7 @@ EmojiPicker(
         emojiSizeMax: 32 * (Platform.isIOS ? 1.30 : 1.0), // Issue: https://github.com/flutter/flutter/issues/28894
         verticalSpacing: 0,
         horizontalSpacing: 0,
+        gridPadding: EdgeInsets.zero,
         initCategory: Category.RECENT,
         bgColor: Color(0xFFF2F2F2),
         indicatorColor: Colors.blue,
@@ -72,6 +73,7 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 | emojiSizeMax     | Width and height the emoji will be maximal displayed                 |32.0  |
 | verticalSpacing         | Vertical spacing between emojis | 0    |
 | horizontalSpacing | Horizontal spacing between emojis                                                 | 0     |
+| gridPadding | The padding of GridView                                                                              | EdgeInsets.zero                                                                                        |
 | initCategory         | The initial Category that will be selected                                                         |Category.RECENT   |
 | bgColor       | The background color of the Widget                                                       |Color(0xFFF2F2F2)    |
 | indicatorColor        | The color of the category indicator                                                       | Colors.blue      |
@@ -83,7 +85,7 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 | skinToneIndicatorColor     | Color of the small triangle next to multiple skin tone emoji                               | Colors.grey     |
 | enableSkinTones     | Enable feature to select a skin tone of certain emoji's                               | true     |
 | showRecentsTab     | Show extra tab with recently used emoji                                | true     |
-| recentsLimit     | Limit of recently used emoji that will be saved                                | 28
+| recentsLimit     | Limit of recently used emoji that will be saved                                | 28     |
 | replaceEmojiOnLimitExceed | Replace latest emoji on recents list on limit exceed | false
 | noRecents     |  A widget (usually [Text]) to be displayed if no recent emojis to display                                | Text('No Recents', style: TextStyle(fontSize: 20, color: Colors.black26), textAlign: TextAlign.center)     |
 | tabIndicatorAnimDuration     | Duration of tab indicator to animate to next category                                | Duration(milliseconds: 300)     |

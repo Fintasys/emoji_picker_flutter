@@ -19,6 +19,7 @@ class Config {
       this.emojiSizeMax = 32.0,
       this.verticalSpacing = 0,
       this.horizontalSpacing = 0,
+      this.gridPadding = EdgeInsets.zero,
       this.initCategory = Category.RECENT,
       this.bgColor = const Color(0xFFEBEFF2),
       this.indicatorColor = Colors.blue,
@@ -99,6 +100,9 @@ class Config {
   /// Change between Material and Cupertino button style
   final ButtonMode buttonMode;
 
+  /// The padding of GridView, default is [EdgeInsets.zero]
+  final EdgeInsets gridPadding;
+
   /// Replace latest emoji on recents list on limit exceed
   final bool replaceEmojiOnLimitExceed;
 
@@ -157,6 +161,7 @@ class Config {
         other.tabIndicatorAnimDuration == tabIndicatorAnimDuration &&
         other.categoryIcons == categoryIcons &&
         other.buttonMode == buttonMode &&
+        other.gridPadding == gridPadding &&
         other.replaceEmojiOnLimitExceed == replaceEmojiOnLimitExceed;
   }
 
@@ -182,5 +187,6 @@ class Config {
       tabIndicatorAnimDuration.hashCode ^
       categoryIcons.hashCode ^
       buttonMode.hashCode ^
+      gridPadding.hashCode ^
       replaceEmojiOnLimitExceed.hashCode;
 }
