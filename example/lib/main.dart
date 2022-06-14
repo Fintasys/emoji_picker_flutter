@@ -106,6 +106,18 @@ class _MyAppState extends State<MyApp> {
                     },
                     onBackspacePressed: _onBackspacePressed,
                     config: Config(
+                        isScrollable: true,
+                        tabCategoryBuilder: (index, icon) {
+                          return Tab(
+                            icon: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16),
+                              child: Icon(
+                                icon,
+                              ),
+                            ),
+                          );
+                        },
                         columns: 7,
                         // Issue: https://github.com/flutter/flutter/issues/28894
                         emojiSizeMax: 32 * (Platform.isIOS ? 1.30 : 1.0),

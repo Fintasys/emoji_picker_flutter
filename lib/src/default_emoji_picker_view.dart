@@ -103,6 +103,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
                     child: SizedBox(
                       height: tabBarHeight,
                       child: TabBar(
+                        isScrollable: widget.config.isScrollable,
                         labelColor: widget.config.iconColorSelected,
                         indicatorColor: widget.config.indicatorColor,
                         unselectedLabelColor: widget.config.iconColor,
@@ -146,6 +147,9 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
   }
 
   Widget _buildCategory(int index, Category category) {
+    if (widget.config.tabCategoryBuilder != null)
+      return widget.config.tabCategoryBuilder!(
+          index, widget.config.getIconForCategory(category));
     return Tab(
       icon: Icon(
         widget.config.getIconForCategory(category),

@@ -4,6 +4,8 @@ import 'package:emoji_picker_flutter/src/category_icons.dart';
 import 'package:emoji_picker_flutter/src/emoji_picker.dart';
 import 'package:flutter/material.dart';
 
+typedef Tab TabCategoryBuilder(int index, IconData icon);
+
 /// Default Widget if no recent is available
 const DefaultNoRecentsWidget = Text(
   'No Recents',
@@ -14,29 +16,37 @@ const DefaultNoRecentsWidget = Text(
 /// Config for customizations
 class Config {
   /// Constructor
-  const Config(
-      {this.columns = 7,
-      this.emojiSizeMax = 32.0,
-      this.verticalSpacing = 0,
-      this.horizontalSpacing = 0,
-      this.gridPadding = EdgeInsets.zero,
-      this.initCategory = Category.RECENT,
-      this.bgColor = const Color(0xFFEBEFF2),
-      this.indicatorColor = Colors.blue,
-      this.iconColor = Colors.grey,
-      this.iconColorSelected = Colors.blue,
-      this.progressIndicatorColor = Colors.blue,
-      this.backspaceColor = Colors.blue,
-      this.skinToneDialogBgColor = Colors.white,
-      this.skinToneIndicatorColor = Colors.grey,
-      this.enableSkinTones = true,
-      this.showRecentsTab = true,
-      this.recentsLimit = 28,
-      this.replaceEmojiOnLimitExceed = false,
-      this.noRecents = DefaultNoRecentsWidget,
-      this.tabIndicatorAnimDuration = kTabScrollDuration,
-      this.categoryIcons = const CategoryIcons(),
-      this.buttonMode = ButtonMode.MATERIAL});
+  const Config({
+    this.isScrollable = false,this.tabCategoryBuilder,
+    this.columns = 7,
+    this.emojiSizeMax = 32.0,
+    this.verticalSpacing = 0,
+    this.horizontalSpacing = 0,
+    this.gridPadding = EdgeInsets.zero,
+    this.initCategory = Category.RECENT,
+    this.bgColor = const Color(0xFFEBEFF2),
+    this.indicatorColor = Colors.blue,
+    this.iconColor = Colors.grey,
+    this.iconColorSelected = Colors.blue,
+    this.progressIndicatorColor = Colors.blue,
+    this.backspaceColor = Colors.blue,
+    this.skinToneDialogBgColor = Colors.white,
+    this.skinToneIndicatorColor = Colors.grey,
+    this.enableSkinTones = true,
+    this.showRecentsTab = true,
+    this.recentsLimit = 28,
+    this.replaceEmojiOnLimitExceed = false,
+    this.noRecents = DefaultNoRecentsWidget,
+    this.tabIndicatorAnimDuration = kTabScrollDuration,
+    this.categoryIcons = const CategoryIcons(),
+    this.buttonMode = ButtonMode.MATERIAL,
+  });
+
+  /// Setting scrollable tab cates
+  final bool isScrollable;
+
+  //Allow custom padding, or margin,... tab cates
+  final TabCategoryBuilder? tabCategoryBuilder;
 
   /// Number of emojis per row
   final int columns;
