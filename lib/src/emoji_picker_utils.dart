@@ -56,4 +56,19 @@ class EmojiPickerUtils {
         .then((recentEmojiList) =>
             key.currentState?.updateRecentEmoji(recentEmojiList));
   }
+
+  /// Returns true when the emoji support multiple skin colors
+  bool hasSkinTone(Emoji emoji) {
+    return EmojiPickerInternalUtils().hasSkinTone(emoji);
+  }
+
+  /// Applies skin tone to given emoji
+  Emoji applySkinTone(Emoji emoji, String color) {
+    return EmojiPickerInternalUtils().applySkinTone(emoji, color);
+  }
+
+  /// Remove skin tone from given emoji
+  Emoji removeSkinTone(Emoji emoji) {
+    return EmojiPickerInternalUtils().removeSkinTone(emoji);
+  }
 }
