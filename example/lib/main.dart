@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
-  void dispose(){
+  void dispose() {
     _controller.dispose();
     super.dispose();
   }

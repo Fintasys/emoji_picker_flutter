@@ -190,7 +190,8 @@ class EmojiPickerState extends State<EmojiPicker> {
       _categoryEmoji,
       _getOnEmojiListener(),
       widget.onBackspacePressed == null && widget.textEditingController == null
-        ? null : _onBackspacePressed,
+          ? null
+          : _onBackspacePressed,
     );
 
     // Build
@@ -200,23 +201,20 @@ class EmojiPickerState extends State<EmojiPicker> {
   }
 
   void _onBackspacePressed() {
-    if(widget.textEditingController != null) {
+    if (widget.textEditingController != null) {
       final controller = widget.textEditingController!;
 
       final selection = controller.value.selection;
       final text = controller.value.text;
       final cursorPosition = controller.selection.base.offset;
 
-      if(cursorPosition < 0) {
+      if (cursorPosition < 0) {
         widget.onBackspacePressed?.call();
         return;
       }
 
-      final newTextBeforeCursor = selection
-          .textBefore(text)
-          .characters
-          .skipLast(1)
-          .toString();
+      final newTextBeforeCursor =
+          selection.textBefore(text).characters.skipLast(1).toString();
       controller
         ..text = newTextBeforeCursor + selection.textAfter(text)
         ..selection = TextSelection.fromPosition(
@@ -242,21 +240,21 @@ class EmojiPickerState extends State<EmojiPicker> {
                 });
       }
 
-      if(widget.textEditingController != null){
+      if (widget.textEditingController != null) {
         // based on https://stackoverflow.com/a/60058972/10975692
         final controller = widget.textEditingController!;
         final text = controller.text;
         final selection = controller.selection;
         final cursorPosition = controller.selection.base.offset;
 
-        if(cursorPosition < 0){
+        if (cursorPosition < 0) {
           controller.text += emoji.emoji;
           widget.onEmojiSelected?.call(category, emoji);
           return;
         }
 
-        final newText = text.replaceRange(
-            selection.start, selection.end, emoji.emoji);
+        final newText =
+            text.replaceRange(selection.start, selection.end, emoji.emoji);
         final emojiLength = emoji.emoji.length;
         controller
           ..text = newText
