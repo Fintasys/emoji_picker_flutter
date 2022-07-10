@@ -41,7 +41,6 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: [
-            const TextField(), // only used to unfocus the other text field
             Expanded(child: Container()),
             Container(
                 height: 66.0,
