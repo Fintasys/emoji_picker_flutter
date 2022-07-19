@@ -28,12 +28,12 @@ Yet another Emoji Picker for Flutter 🤩
 ```dart
 EmojiPicker(
     onEmojiSelected: (category, emoji) {
-        // Do something when emoji is tapped
+        // Do something when emoji is tapped (optional)
     },
     onBackspacePressed: () {
-        // Backspace-Button tapped logic
-        // Remove this line to also remove the button in the UI
+        // Do something when the user taps the backspace button (optional)
     },
+    textEditingController: textEditionController, // pass here the same [TextEditingController] that is connected to your input field, usually a [TextFormField]
     config: Config(
         columns: 7,
         emojiSizeMax: 32 * (Platform.isIOS ? 1.30 : 1.0), // Issue: https://github.com/flutter/flutter/issues/28894
@@ -138,7 +138,7 @@ final newRecentEmojis = await EmojiPickerUtils().addEmojiToRecentlyUsed(key: key
 ```
 
 ## Feel free to contribute to this package!! 🙇‍♂️
-Always happy if anyone wants to help to improve this package !
+Always happy if anyone wants to help to improve this package!
 
 ## If you need any features 
 Please open an issue so that we can discuss your feature request 🙏

@@ -18,17 +18,17 @@ class _MyAppState extends State<MyApp> {
   bool emojiShowing = false;
 
   _onEmojiSelected(Emoji emoji) {
-    _controller
-      ..text += emoji.emoji
-      ..selection = TextSelection.fromPosition(
-          TextPosition(offset: _controller.text.length));
+    print('_onEmojiSelected: ${emoji.emoji}');
   }
 
   _onBackspacePressed() {
-    _controller
-      ..text = _controller.text.characters.skipLast(1).toString()
-      ..selection = TextSelection.fromPosition(
-          TextPosition(offset: _controller.text.length));
+    print('_onBackspacePressed');
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -101,6 +101,7 @@ class _MyAppState extends State<MyApp> {
               child: SizedBox(
                 height: 250,
                 child: EmojiPicker(
+                    textEditingController: _controller,
                     onEmojiSelected: (Category category, Emoji emoji) {
                       _onEmojiSelected(emoji);
                     },

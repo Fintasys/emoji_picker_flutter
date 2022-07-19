@@ -98,7 +98,8 @@ class EmojiPicker extends StatefulWidget {
   /// EmojiPicker for flutter
   const EmojiPicker({
     Key? key,
-    required this.onEmojiSelected,
+    this.textEditingController,
+    this.onEmojiSelected,
     this.onBackspacePressed,
     this.config = const Config(),
     this.customWidget,
@@ -107,8 +108,13 @@ class EmojiPicker extends StatefulWidget {
   /// Custom widget
   final EmojiViewBuilder? customWidget;
 
+  /// If you provide the [TextEditingController] that is linked to a
+  /// [TextField] this widget handles inserting and deleting for you
+  /// automatically.
+  final TextEditingController? textEditingController;
+
   /// The function called when the emoji is selected
-  final OnEmojiSelected onEmojiSelected;
+  final OnEmojiSelected? onEmojiSelected;
 
   /// The function called when backspace button is pressed
   final OnBackspacePressed? onBackspacePressed;
@@ -183,13 +189,39 @@ class EmojiPickerState extends State<EmojiPicker> {
     var state = EmojiViewState(
       _categoryEmoji,
       _getOnEmojiListener(),
-      widget.onBackspacePressed,
+      widget.onBackspacePressed == null && widget.textEditingController == null
+          ? null
+          : _onBackspacePressed,
     );
 
     // Build
     return widget.customWidget == null
         ? DefaultEmojiPickerView(widget.config, state)
         : widget.customWidget!(widget.config, state);
+  }
+
+  void _onBackspacePressed() {
+    if (widget.textEditingController != null) {
+      final controller = widget.textEditingController!;
+
+      final selection = controller.value.selection;
+      final text = controller.value.text;
+      final cursorPosition = controller.selection.base.offset;
+
+      if (cursorPosition < 0) {
+        widget.onBackspacePressed?.call();
+        return;
+      }
+
+      final newTextBeforeCursor =
+          selection.textBefore(text).characters.skipLast(1).toString();
+      controller
+        ..text = newTextBeforeCursor + selection.textAfter(text)
+        ..selection = TextSelection.fromPosition(
+            TextPosition(offset: newTextBeforeCursor.length));
+    }
+
+    widget.onBackspacePressed?.call();
   }
 
   // Add recent emoji handling to tap listener
@@ -207,7 +239,32 @@ class EmojiPickerState extends State<EmojiPicker> {
                     })
                 });
       }
-      widget.onEmojiSelected(category, emoji);
+
+      if (widget.textEditingController != null) {
+        // based on https://stackoverflow.com/a/60058972/10975692
+        final controller = widget.textEditingController!;
+        final text = controller.text;
+        final selection = controller.selection;
+        final cursorPosition = controller.selection.base.offset;
+
+        if (cursorPosition < 0) {
+          controller.text += emoji.emoji;
+          widget.onEmojiSelected?.call(category, emoji);
+          return;
+        }
+
+        final newText =
+            text.replaceRange(selection.start, selection.end, emoji.emoji);
+        final emojiLength = emoji.emoji.length;
+        controller
+          ..text = newText
+          ..selection = selection.copyWith(
+            baseOffset: selection.start + emojiLength,
+            extentOffset: selection.start + emojiLength,
+          );
+      }
+
+      widget.onEmojiSelected?.call(category, emoji);
     };
   }
 
