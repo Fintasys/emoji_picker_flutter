@@ -739,7 +739,7 @@ final Map<String, String> animals = Map.fromIterables([
   'Fox Face',
   'Bear Face',
   'Panda Face',
-  'Koala',
+  'Koala Face',
   'Tiger Face',
   'Lion Face',
   'Cow Face',
