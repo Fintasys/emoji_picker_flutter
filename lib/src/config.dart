@@ -178,7 +178,8 @@ class Config {
         other.gridPadding == gridPadding &&
         other.replaceEmojiOnLimitExceed == replaceEmojiOnLimitExceed &&
         other.checkPlatformCompatibility == checkPlatformCompatibility &&
-        other.emojiSet == emojiSet;
+        other.emojiSet == emojiSet &&
+        other.emojiTextStyle == emojiTextStyle;
   }
 
   @override
@@ -205,5 +206,6 @@ class Config {
       gridPadding.hashCode ^
       replaceEmojiOnLimitExceed.hashCode ^
       checkPlatformCompatibility.hashCode ^
-      emojiSet.hashCode;
+      (emojiSet?.hashCode ?? 0) ^
+      (emojiTextStyle?.hashCode ?? 0);
 }
