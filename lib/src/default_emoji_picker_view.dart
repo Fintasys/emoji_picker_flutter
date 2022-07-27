@@ -153,6 +153,34 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     );
   }
 
+  Widget _buildEmojiCell(
+      double size, CategoryEmoji categoryEmoji, Emoji emoji, int index) {
+    final onPressed = () {
+      _closeSkinToneDialog();
+      widget.state.onEmojiSelected(categoryEmoji.category, emoji);
+    };
+
+    final onLongPressed = () {
+      if (!emoji.hasSkinTone || !widget.config.enableSkinTones) {
+        _closeSkinToneDialog();
+        return;
+      }
+      _closeSkinToneDialog();
+      _openSkinToneDialog(emoji, size, categoryEmoji, index);
+    };
+
+    return _buildButtonWidget(
+      onPressed: onPressed,
+      onLongPressed: onLongPressed,
+      child: _buildEmoji(
+        size,
+        categoryEmoji,
+        emoji,
+        widget.config.enableSkinTones,
+      ),
+    );
+  }
+
   Widget _buildPage(double emojiSize, CategoryEmoji categoryEmoji) {
     // Display notice if recent has no entries yet
     if (categoryEmoji.category == Category.RECENT &&
@@ -163,44 +191,18 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     return GestureDetector(
       onTap: _closeSkinToneDialog,
       child: GridView.count(
-        scrollDirection: Axis.vertical,
-        physics: const ScrollPhysics(),
-        controller: _scrollController,
-        shrinkWrap: true,
-        primary: false,
-        padding: widget.config.gridPadding,
-        crossAxisCount: widget.config.columns,
-        mainAxisSpacing: widget.config.verticalSpacing,
-        crossAxisSpacing: widget.config.horizontalSpacing,
-        children: categoryEmoji.emoji.asMap().entries.map((item) {
-          final index = item.key;
-          final emoji = item.value;
-          final onPressed = () {
-            _closeSkinToneDialog();
-            widget.state.onEmojiSelected(categoryEmoji.category, emoji);
-          };
-
-          final onLongPressed = () {
-            if (!emoji.hasSkinTone || !widget.config.enableSkinTones) {
-              _closeSkinToneDialog();
-              return;
-            }
-            _closeSkinToneDialog();
-            _openSkinToneDialog(emoji, emojiSize, categoryEmoji, index);
-          };
-
-          return _buildButtonWidget(
-            onPressed: onPressed,
-            onLongPressed: onLongPressed,
-            child: _buildEmoji(
-              emojiSize,
-              categoryEmoji,
-              emoji,
-              widget.config.enableSkinTones,
-            ),
-          );
-        }).toList(),
-      ),
+          scrollDirection: Axis.vertical,
+          controller: _scrollController,
+          primary: false,
+          padding: widget.config.gridPadding,
+          crossAxisCount: widget.config.columns,
+          mainAxisSpacing: widget.config.verticalSpacing,
+          crossAxisSpacing: widget.config.horizontalSpacing,
+          children: [
+            for (int i = 0; i < categoryEmoji.emoji.length; i++)
+              _buildEmojiCell(
+                  emojiSize, categoryEmoji, categoryEmoji.emoji[i], i)
+          ]),
     );
   }
 
