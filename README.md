@@ -132,7 +132,7 @@ EmojiPicker(
 final recentEmojis = await EmojiPickerUtils().getRecentEmojis();
 
 // Search for related emoticons based on keywords
-final filterEmojiEntities = await EmojiPickerUtils().searchEmoji("face");
+final filterEmojiEntities = await EmojiPickerUtils().searchEmoji("face", defaultEmojiSet);
 
 // Add an emoji to recently used list or increase its counter
 final newRecentEmojis = await EmojiPickerUtils().addEmojiToRecentlyUsed(key: key, emoji: emoji);
