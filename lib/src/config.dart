@@ -39,7 +39,8 @@ class Config {
       this.categoryIcons = const CategoryIcons(),
       this.buttonMode = ButtonMode.MATERIAL,
       this.checkPlatformCompatibility = true,
-      this.emojiSet});
+      this.emojiSet,
+      this.emojiTextStyle});
 
   /// Number of emojis per row
   final int columns;
@@ -111,6 +112,14 @@ class Config {
 
   /// Custom emojis; if set, overrides default emojis provided by the library
   final List<CategoryEmoji>? emojiSet;
+
+  /// Custom emoji text style to apply to emoji characters in the grid
+  ///
+  /// If you define a custom fontFamily or use GoogleFonts to set this property
+  /// be sure to set [checkPlatformCompatibility] to false. It will improve
+  /// initalization performance and prevent technically supported glyphs from
+  /// being filtered out.
+  final TextStyle? emojiTextStyle;
 
   /// Get Emoji size based on properties and screen width
   double getEmojiSize(double width) {

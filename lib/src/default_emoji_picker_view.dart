@@ -236,13 +236,16 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     Emoji emoji,
     bool showSkinToneIndicator,
   ) {
+    final style = TextStyle(
+      fontSize: emojiSize,
+      backgroundColor: Colors.transparent,
+    );
     final emojiText = Text(
       emoji.emoji,
       textScaleFactor: 1.0,
-      style: TextStyle(
-        fontSize: emojiSize,
-        backgroundColor: Colors.transparent,
-      ),
+      style: widget.config.emojiTextStyle == null
+          ? style
+          : widget.config.emojiTextStyle!.merge(style),
     );
 
     return Center(

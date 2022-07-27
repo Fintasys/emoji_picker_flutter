@@ -15,6 +15,7 @@ class EmojiPickerUtils {
 
   static final EmojiPickerUtils _singleton = EmojiPickerUtils._internal();
   final List<Emoji> _allAvailableEmojiEntities = [];
+  final _emojiRegExp = RegExp(r'(\p{So})', unicode: true);
 
   /// Returns list of recently used emoji from cache
   Future<List<RecentEmoji>> getRecentEmojis() async {
@@ -22,8 +23,7 @@ class EmojiPickerUtils {
   }
 
   /// Search for related emoticons based on keywords
-  Future<List<Emoji>> searchEmoji(String keyword,
-      List<CategoryEmoji> data,
+  Future<List<Emoji>> searchEmoji(String keyword, List<CategoryEmoji> data,
       {bool checkPlatformCompatibility = true}) async {
     if (keyword.isEmpty) return [];
 
@@ -57,5 +57,31 @@ class EmojiPickerUtils {
         .addEmojiToRecentlyUsed(emoji: emoji, config: config)
         .then((recentEmojiList) =>
             key.currentState?.updateRecentEmoji(recentEmojiList));
+  }
+
+  /// Produce a list of spans to adjust style for emoji characters.
+  /// Spans enclosing emojis will have [parentStyle] combined with [emojiStyle].
+  /// Other spans will not have an explicit style (this method does not set
+  /// [parentStyle] to the whole text.
+  List<InlineSpan> setEmojiTextStyle(String text,
+      {required TextStyle emojiStyle, TextStyle? parentStyle}) {
+    final finalEmojiStyle =
+        parentStyle == null ? emojiStyle : parentStyle.merge(emojiStyle);
+    final matches = _emojiRegExp.allMatches(text).toList();
+    final spans = <InlineSpan>[];
+    var cursor = 0;
+    for (final match in matches) {
+      spans
+        ..add(TextSpan(text: text.substring(cursor, match.start)))
+        ..add(
+          TextSpan(
+            text: text.substring(match.start, match.end),
+            style: finalEmojiStyle,
+          ),
+        );
+      cursor = match.end;
+    }
+    spans.add(TextSpan(text: text.substring(cursor, text.length)));
+    return spans;
   }
 }
