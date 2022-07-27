@@ -97,7 +97,7 @@ class Config {
   /// Determines the icon to display for each [Category]
   final CategoryIcons categoryIcons;
 
-  /// Change between Material and Cupertino button style
+  /// Choose visual response for tapping on an emoji cell
   final ButtonMode buttonMode;
 
   /// The padding of GridView, default is [EdgeInsets.zero]

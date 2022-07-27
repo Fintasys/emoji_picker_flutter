@@ -88,8 +88,8 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
   }
 
   /// Builds a wrapper around the grid of emojis.
-  /// If the button style is Cupertino, this is wrapping the `child` with
-  /// a container of a color provided by config.
+  /// If the button style is Cupertino or None, this is just wrapping the
+  /// `child` with a container of a color provided by config.
   /// For Material style it is a `Material` widget that allows to render
   /// touch response for individual InkWell cells.
   Widget _buildBackgroundContainer(
@@ -267,20 +267,22 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
         onTap: onPressed,
         onLongPress: onLongPressed,
         child: child,
-        // style: ButtonStyle(
-        //   padding: MaterialStateProperty.all(EdgeInsets.zero),
-        //   minimumSize: MaterialStateProperty.all(Size.zero),
-        //   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        // ),
+      );
+    }
+    if (widget.config.buttonMode == ButtonMode.CUPERTINO) {
+      return GestureDetector(
+        onLongPress: onLongPressed,
+        child: CupertinoButton(
+          padding: EdgeInsets.zero,
+          onPressed: onPressed,
+          child: child,
+        ),
       );
     }
     return GestureDetector(
       onLongPress: onLongPressed,
-      child: CupertinoButton(
-        padding: EdgeInsets.zero,
-        onPressed: onPressed,
-        child: child,
-      ),
+      onTap: onPressed,
+      child: child,
     );
   }
 

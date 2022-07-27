@@ -1,8 +1,8 @@
 import 'package:emoji_picker_flutter/src/category_emoji.dart';
 import 'package:emoji_picker_flutter/src/config.dart';
 import 'package:emoji_picker_flutter/src/default_emoji_picker_view.dart';
+import 'package:emoji_picker_flutter/src/default_emoji_set.dart';
 import 'package:emoji_picker_flutter/src/emoji.dart';
-import 'package:emoji_picker_flutter/src/emoji_lists.dart';
 import 'package:emoji_picker_flutter/src/emoji_picker_internal_utils.dart';
 import 'package:emoji_picker_flutter/src/emoji_view_state.dart';
 import 'package:emoji_picker_flutter/src/recent_emoji.dart';
@@ -69,6 +69,10 @@ extension CategoryExtension on Category {
 
 /// Enum to alter the keyboard button style
 enum ButtonMode {
+  /// No cell touch effects, uses GestureDetector only. Provides best grid
+  /// scrolling performance
+  NONE,
+
   /// Android button style - gives the button a splash color with ripple effect
   MATERIAL,
 
