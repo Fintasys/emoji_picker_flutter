@@ -13,9 +13,5 @@ dependencies:
   emoji_picker_flutter:
     path: ../
 
-dependency_overrides:
-  emoji_picker_flutter:
-    path: ../
-
 flutter:
   uses-material-design: true

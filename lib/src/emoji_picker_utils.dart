@@ -1,4 +1,5 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import 'package:emoji_picker_flutter/src/emoji_lists.dart';
 import 'package:emoji_picker_flutter/src/recent_emoji.dart';
 import 'package:flutter/material.dart';
 import 'emoji_picker_internal_utils.dart';
@@ -21,21 +22,21 @@ class EmojiPickerUtils {
   }
 
   /// Search for related emoticons based on keywords
-  Future<List<Emoji>> searchEmoji(String keyword) async {
+  Future<List<Emoji>> searchEmoji(String keyword,
+      {bool checkPlatformCompatibility = true}) async {
     if (keyword.isEmpty) return [];
 
     if (_allAvailableEmojiEntities.isEmpty) {
       final emojiPickerInternalUtils = EmojiPickerInternalUtils();
 
-      final availableCategoryEmoji =
-          await emojiPickerInternalUtils.getAvailableCategoryEmoji();
+      final availableCategoryEmoji = checkPlatformCompatibility
+          ? await emojiPickerInternalUtils.getAvailableCategoryEmoji()
+          : emojiCategoryList;
 
       // Set all the emoji entities
-      availableCategoryEmoji.forEach((_, emojis) {
-        final emojiEntities =
-            emojis.entries.map((emoji) => Emoji(emoji.key, emoji.value));
-        _allAvailableEmojiEntities.addAll(emojiEntities);
-      });
+      for (var emojis in availableCategoryEmoji) {
+        _allAvailableEmojiEntities.addAll(emojis.emoji);
+      }
     }
 
     return _allAvailableEmojiEntities

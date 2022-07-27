@@ -25,7 +25,6 @@ class Config {
       this.indicatorColor = Colors.blue,
       this.iconColor = Colors.grey,
       this.iconColorSelected = Colors.blue,
-      this.progressIndicatorColor = Colors.blue,
       this.backspaceColor = Colors.blue,
       this.skinToneDialogBgColor = Colors.white,
       this.skinToneIndicatorColor = Colors.grey,
@@ -36,7 +35,8 @@ class Config {
       this.noRecents = DefaultNoRecentsWidget,
       this.tabIndicatorAnimDuration = kTabScrollDuration,
       this.categoryIcons = const CategoryIcons(),
-      this.buttonMode = ButtonMode.MATERIAL});
+      this.buttonMode = ButtonMode.MATERIAL,
+      this.checkPlatformCompatibility = true});
 
   /// Number of emojis per row
   final int columns;
@@ -66,9 +66,6 @@ class Config {
 
   /// The color of the category icon when selected
   final Color iconColorSelected;
-
-  /// The color of the loading indicator during initalization
-  final Color progressIndicatorColor;
 
   /// The color of the backspace icon button
   final Color backspaceColor;
@@ -105,6 +102,9 @@ class Config {
 
   /// Replace latest emoji on recents list on limit exceed
   final bool replaceEmojiOnLimitExceed;
+
+  /// Verify that emoji glyph is supported by the platform (Android only)
+  final bool checkPlatformCompatibility;
 
   /// Get Emoji size based on properties and screen width
   double getEmojiSize(double width) {
@@ -150,7 +150,6 @@ class Config {
         other.indicatorColor == indicatorColor &&
         other.iconColor == iconColor &&
         other.iconColorSelected == iconColorSelected &&
-        other.progressIndicatorColor == progressIndicatorColor &&
         other.backspaceColor == backspaceColor &&
         other.skinToneDialogBgColor == skinToneDialogBgColor &&
         other.skinToneIndicatorColor == skinToneIndicatorColor &&
@@ -162,7 +161,8 @@ class Config {
         other.categoryIcons == categoryIcons &&
         other.buttonMode == buttonMode &&
         other.gridPadding == gridPadding &&
-        other.replaceEmojiOnLimitExceed == replaceEmojiOnLimitExceed;
+        other.replaceEmojiOnLimitExceed == replaceEmojiOnLimitExceed &&
+        other.checkPlatformCompatibility == checkPlatformCompatibility;
   }
 
   @override
@@ -176,7 +176,6 @@ class Config {
       indicatorColor.hashCode ^
       iconColor.hashCode ^
       iconColorSelected.hashCode ^
-      progressIndicatorColor.hashCode ^
       backspaceColor.hashCode ^
       skinToneDialogBgColor.hashCode ^
       skinToneIndicatorColor.hashCode ^
@@ -188,5 +187,6 @@ class Config {
       categoryIcons.hashCode ^
       buttonMode.hashCode ^
       gridPadding.hashCode ^
-      replaceEmojiOnLimitExceed.hashCode;
+      replaceEmojiOnLimitExceed.hashCode ^
+      checkPlatformCompatibility.hashCode;
 }

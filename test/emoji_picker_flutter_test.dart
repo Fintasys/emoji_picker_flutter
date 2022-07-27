@@ -1,27 +1,15 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:emoji_picker_flutter/src/emoji_lists.dart' as emoji_list;
 import 'package:emoji_picker_flutter/src/emoji_picker_internal_utils.dart';
 import 'package:emoji_picker_flutter/src/emoji_skin_tones.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test/test.dart';
 
 void main() {
   skinToneTests();
-  emojiVersioningTests();
   emojiModelTests();
 }
 
 void skinToneTests() {
   final utils = EmojiPickerInternalUtils();
-  test('hasSkinTone()', () {
-    expect(utils.hasSkinTone(const Emoji('', '👍')), true);
-    expect(utils.hasSkinTone(const Emoji('', '👨‍🍳')), true);
-    expect(utils.hasSkinTone(const Emoji('', '👩‍🚀')), true);
-
-    expect(utils.hasSkinTone(const Emoji('', '🏀')), false);
-    expect(utils.hasSkinTone(const Emoji('', '😆')), false);
-    expect(utils.hasSkinTone(const Emoji('', '🧟‍♂️')), false);
-  });
 
   test('applySkinTone()', () {
     expect(
@@ -42,30 +30,6 @@ void skinToneTests() {
     expect(utils.removeSkinTone(const Emoji('', '👍🏻')).emoji, '👍');
     expect(utils.removeSkinTone(const Emoji('', '🏊🏾‍♂️')).emoji, '🏊‍♂️');
     expect(utils.removeSkinTone(const Emoji('', '👱🏿‍♀️')).emoji, '👱‍♀️');
-  });
-}
-
-void emojiVersioningTests() {
-  test('isEmojiUpdateAvailable() no pre data', () async {
-    SharedPreferences.setMockInitialValues({});
-    final utils = EmojiPickerInternalUtils();
-    expect((await utils.isEmojiUpdateAvailable()), true);
-  });
-
-  test('isEmojiUpdateAvailable() pre data and outdated', () async {
-    SharedPreferences.setMockInitialValues({
-      'emoji_version': 0,
-    });
-    final utils = EmojiPickerInternalUtils();
-    expect((await utils.isEmojiUpdateAvailable()), true);
-  });
-
-  test('isEmojiUpdateAvailable() pre data and up to date', () async {
-    SharedPreferences.setMockInitialValues({
-      'emoji_version': emoji_list.version,
-    });
-    final utils = EmojiPickerInternalUtils();
-    expect((await utils.isEmojiUpdateAvailable()), false);
   });
 }
 

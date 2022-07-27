@@ -1,128 +1,38 @@
 import 'dart:convert';
-import 'dart:io';
 import 'dart:math';
 
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import 'package:emoji_picker_flutter/src/category_emoji.dart';
 import 'package:emoji_picker_flutter/src/emoji_skin_tones.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'emoji_lists.dart' as emoji_list;
+import 'emoji_lists.dart';
 import 'recent_emoji.dart';
 
 /// Helper class that provides internal usage
 class EmojiPickerInternalUtils {
   // Establish communication with native
   static const _platform = MethodChannel('emoji_picker_flutter');
-  static const _emojiVersion = 'emoji_version';
-
-  /// Returns true when local emoji list is outdated
-  Future<bool> isEmojiUpdateAvailable() async {
-    final prefs = await SharedPreferences.getInstance();
-    var emojiVersion = prefs.getInt(_emojiVersion) ?? 0;
-    // != to support downgrading of emoji_picker versions
-    return emoji_list.version != emojiVersion;
-  }
-
-  /// Updates local emoji version with current version
-  Future updateEmojiVersion() async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setInt(_emojiVersion, emoji_list.version);
-  }
-
-  /// Restore locally cached emoji
-  Future<Map<String, String>?> _restoreFilteredEmojis(String title) async {
-    final prefs = await SharedPreferences.getInstance();
-    var emojiJson = prefs.getString(title);
-    if (emojiJson == null) {
-      return null;
-    }
-    var emojis =
-        Map<String, String>.from(jsonDecode(emojiJson) as Map<String, dynamic>);
-    return emojis;
-  }
 
   // Get available emoji for given category title
-  Future<Map<String, String>> _getAvailableEmojis(Map<String, String> map,
-      {required String title}) async {
-    Map<String, String>? newMap;
+  Future<CategoryEmoji> _getAvailableEmojis(CategoryEmoji category) async {
+    var available = (await _platform.invokeListMethod<bool>(
+        'getSupportedEmojis', {
+      'source': category.emoji.map((e) => e.emoji).toList(growable: false)
+    }))!;
 
-    // Get Emojis cached locally if available
-    if (await isEmojiUpdateAvailable() == false) {
-      newMap = await _restoreFilteredEmojis(title);
-    }
-
-    if (newMap == null) {
-      // Check if emoji is available on this platform
-      newMap = await _getPlatformAvailableEmoji(map);
-      // Save available Emojis to local storage for faster loading next time
-      if (newMap != null) {
-        await _cacheFilteredEmojis(title, newMap);
-      }
-    }
-
-    return newMap ?? {};
-  }
-
-  /// Returns map of all the available category emojis
-  Future<Map<Category, Map<String, String>>> getAvailableCategoryEmoji() async {
-    final allCategoryEmoji = Map.fromIterables([
-      Category.SMILEYS,
-      Category.ANIMALS,
-      Category.FOODS,
-      Category.ACTIVITIES,
-      Category.TRAVEL,
-      Category.OBJECTS,
-      Category.SYMBOLS,
-      Category.FLAGS
-    ], [
-      emoji_list.smileys,
-      emoji_list.animals,
-      emoji_list.foods,
-      emoji_list.activities,
-      emoji_list.travel,
-      emoji_list.objects,
-      emoji_list.symbols,
-      emoji_list.flags,
+    return category.copyWith(emoji: [
+      for (int i = 0; i < available.length; i++)
+        if (available[i]) category.emoji[i]
     ]);
-
-    final futures = allCategoryEmoji.entries
-        .map((e) => _getAvailableEmojis(e.value, title: e.key.name));
-
-    final allAvailableEmojis = await Future.wait(futures);
-
-    return Map.fromIterables(allCategoryEmoji.keys, allAvailableEmojis);
   }
 
-  /// Stores filtered emoji locally for faster access next time
-  Future<void> _cacheFilteredEmojis(
-      String title, Map<String, String> emojis) async {
-    var emojiJson = jsonEncode(emojis);
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString(title, emojiJson);
-  }
-
-  /// Check if emoji is available on current platform
-  Future<Map<String, String>?> _getPlatformAvailableEmoji(
-      Map<String, String> emoji) async {
-    if (Platform.isAndroid) {
-      Map<String, String>? filtered = {};
-      var delimiter = '|';
-      try {
-        var entries = emoji.values.join(delimiter);
-        var keys = emoji.keys.join(delimiter);
-        var result = (await _platform.invokeMethod<String>('checkAvailability',
-            {'emojiKeys': keys, 'emojiEntries': entries})) as String;
-        var resultKeys = result.split(delimiter);
-        for (var i = 0; i < resultKeys.length; i++) {
-          filtered[resultKeys[i]] = emoji[resultKeys[i]]!;
-        }
-      } on PlatformException catch (_) {
-        filtered = null;
-      }
-      return filtered;
-    } else {
-      return emoji;
-    }
+  /// Filters out emojis not supported on the platform
+  Future<List<CategoryEmoji>> getAvailableCategoryEmoji() async {
+    final futures = [
+      for (final cat in emojiCategoryList) _getAvailableEmojis(cat)
+    ];
+    return await Future.wait(futures);
   }
 
   /// Returns list of recently used emoji from cache
@@ -167,11 +77,6 @@ class EmojiPickerInternalUtils {
     prefs.setString('recent', jsonEncode(recentEmoji));
 
     return recentEmoji;
-  }
-
-  /// Returns true when the emoji support multiple skin colors
-  bool hasSkinTone(Emoji emoji) {
-    return emoji_list.supportSkinToneList.contains(emoji.emoji);
   }
 
   /// Applies skin tone to given emoji

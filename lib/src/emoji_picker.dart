@@ -2,6 +2,7 @@ import 'package:emoji_picker_flutter/src/category_emoji.dart';
 import 'package:emoji_picker_flutter/src/config.dart';
 import 'package:emoji_picker_flutter/src/default_emoji_picker_view.dart';
 import 'package:emoji_picker_flutter/src/emoji.dart';
+import 'package:emoji_picker_flutter/src/emoji_lists.dart';
 import 'package:emoji_picker_flutter/src/emoji_picker_internal_utils.dart';
 import 'package:emoji_picker_flutter/src/emoji_view_state.dart';
 import 'package:emoji_picker_flutter/src/recent_emoji.dart';
@@ -130,7 +131,7 @@ class EmojiPicker extends StatefulWidget {
 class EmojiPickerState extends State<EmojiPicker> {
   final List<CategoryEmoji> _categoryEmoji = List.empty(growable: true);
   List<RecentEmoji> _recentEmoji = List.empty(growable: true);
-  late Future<void> _updateEmojiFuture;
+  late EmojiViewState _state;
 
   // Prevent emojis to be reloaded with every build
   bool _loaded = false;
@@ -141,6 +142,8 @@ class EmojiPickerState extends State<EmojiPicker> {
   /// Update recentEmoji list from outside using EmojiPickerUtils
   void updateRecentEmoji(List<RecentEmoji> recentEmoji) {
     _recentEmoji = recentEmoji;
+    _categoryEmoji[0] = _categoryEmoji[0]
+        .copyWith(emoji: _recentEmoji.map((e) => e.emoji).toList());
     if (mounted) {
       setState(() {});
     }
@@ -149,7 +152,7 @@ class EmojiPickerState extends State<EmojiPicker> {
   @override
   void initState() {
     super.initState();
-    _updateEmojiFuture = _updateEmojis();
+    _updateEmojis();
   }
 
   @override
@@ -157,7 +160,7 @@ class EmojiPickerState extends State<EmojiPicker> {
     if (oldWidget.config != widget.config) {
       // Config changed - rebuild EmojiPickerView completely
       _loaded = false;
-      _updateEmojiFuture = _updateEmojis();
+      _updateEmojis();
     }
     super.didUpdateWidget(oldWidget);
   }
@@ -165,39 +168,14 @@ class EmojiPickerState extends State<EmojiPicker> {
   @override
   Widget build(BuildContext context) {
     if (!_loaded) {
-      // Load emojis
-      _updateEmojiFuture.then(
-        (value) => WidgetsBinding.instance.addPostFrameCallback((_) {
-          if (!mounted) return;
-          setState(() {
-            _loaded = true;
-          });
-        }),
-      );
-
-      // Show loading indicator
-      return Container(
-        alignment: Alignment.center,
-        color: widget.config.bgColor,
-        child: const CircularProgressIndicator(),
-      );
+      // initialization takes less than a second in the very worst case
+      // scenario, plus it is happening usually when the widget is off-screen
+      // no need to build progress indicator
+      return const SizedBox.shrink();
     }
-    if (widget.config.showRecentsTab) {
-      _categoryEmoji[0].emoji = _recentEmoji.map((e) => e.emoji).toList();
-    }
-
-    var state = EmojiViewState(
-      _categoryEmoji,
-      _getOnEmojiListener(),
-      widget.onBackspacePressed == null && widget.textEditingController == null
-          ? null
-          : _onBackspacePressed,
-    );
-
-    // Build
     return widget.customWidget == null
-        ? DefaultEmojiPickerView(widget.config, state)
-        : widget.customWidget!(widget.config, state);
+        ? DefaultEmojiPickerView(widget.config, _state)
+        : widget.customWidget!(widget.config, _state);
   }
 
   void _onBackspacePressed() {
@@ -231,12 +209,7 @@ class EmojiPickerState extends State<EmojiPicker> {
         _emojiPickerInternalUtils
             .addEmojiToRecentlyUsed(emoji: emoji, config: widget.config)
             .then((newRecentEmoji) => {
-                  _recentEmoji = newRecentEmoji,
-                  if (category != Category.RECENT && mounted)
-                    setState(() {
-                      // rebuild to update recent emoji tab
-                      // when it is not current tab
-                    })
+                  updateRecentEmoji(newRecentEmoji),
                 });
       }
 
@@ -276,35 +249,20 @@ class EmojiPickerState extends State<EmojiPicker> {
       final recentEmojiMap = _recentEmoji.map((e) => e.emoji).toList();
       _categoryEmoji.add(CategoryEmoji(Category.RECENT, recentEmojiMap));
     }
-
-    final availableCategoryEmoji =
-        await _emojiPickerInternalUtils.getAvailableCategoryEmoji();
-
-    availableCategoryEmoji.forEach((category, emojis) async {
-      _categoryEmoji.add(
-        CategoryEmoji(
-            category,
-            emojis.entries.map((emoji) {
-              var _emoji = Emoji(emoji.key, emoji.value);
-              // Emoji with skin tone are only in SMILEY & ACTIVITIES category
-              if (category == Category.SMILEYS ||
-                  category == Category.ACTIVITIES) {
-                return _updateSkinToneSupport(_emoji);
-              } else
-                return _emoji;
-            }).toList()),
-      );
-    });
-
-    // Update emoji list version once all categories were cached
-    _emojiPickerInternalUtils.updateEmojiVersion();
-  }
-
-  // Set [hasSkinTone] to true for emoji that support skin tones
-  Emoji _updateSkinToneSupport(Emoji emoji) {
-    if (_emojiPickerInternalUtils.hasSkinTone(emoji)) {
-      return emoji.copyWith(hasSkinTone: true);
+    _categoryEmoji.addAll(widget.config.checkPlatformCompatibility
+        ? await _emojiPickerInternalUtils.getAvailableCategoryEmoji()
+        : emojiCategoryList);
+    _state = EmojiViewState(
+      _categoryEmoji,
+      _getOnEmojiListener(),
+      widget.onBackspacePressed == null && widget.textEditingController == null
+          ? null
+          : _onBackspacePressed,
+    );
+    if (mounted) {
+      setState(() {
+        _loaded = true;
+      });
     }
-    return emoji;
   }
 }

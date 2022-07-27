@@ -118,7 +118,6 @@ class _MyAppState extends State<MyApp> {
                         indicatorColor: Colors.blue,
                         iconColor: Colors.grey,
                         iconColorSelected: Colors.blue,
-                        progressIndicatorColor: Colors.blue,
                         backspaceColor: Colors.blue,
                         skinToneDialogBgColor: Colors.white,
                         skinToneIndicatorColor: Colors.grey,
@@ -133,7 +132,9 @@ class _MyAppState extends State<MyApp> {
                         ),
                         tabIndicatorAnimDuration: kTabScrollDuration,
                         categoryIcons: const CategoryIcons(),
-                        buttonMode: ButtonMode.MATERIAL)),
+                        buttonMode: ButtonMode.MATERIAL,
+                        checkPlatformCompatibility: true
+                    )),
               ),
             ),
           ],
