@@ -1,7 +1,7 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:emoji_picker_flutter/src/emoji_lists.dart';
 import 'package:emoji_picker_flutter/src/recent_emoji.dart';
 import 'package:flutter/material.dart';
+import 'category_emoji.dart';
 import 'emoji_picker_internal_utils.dart';
 
 /// Helper class that provides extended usage
@@ -23,6 +23,7 @@ class EmojiPickerUtils {
 
   /// Search for related emoticons based on keywords
   Future<List<Emoji>> searchEmoji(String keyword,
+      List<CategoryEmoji> data,
       {bool checkPlatformCompatibility = true}) async {
     if (keyword.isEmpty) return [];
 
@@ -30,8 +31,8 @@ class EmojiPickerUtils {
       final emojiPickerInternalUtils = EmojiPickerInternalUtils();
 
       final availableCategoryEmoji = checkPlatformCompatibility
-          ? await emojiPickerInternalUtils.getAvailableCategoryEmoji()
-          : emojiCategoryList;
+          ? await emojiPickerInternalUtils.filterUnsupported(data)
+          : data;
 
       // Set all the emoji entities
       for (var emojis in availableCategoryEmoji) {

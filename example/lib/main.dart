@@ -99,43 +99,49 @@ class _MyAppState extends State<MyApp> {
             Offstage(
               offstage: !emojiShowing,
               child: SizedBox(
-                height: 250,
-                child: EmojiPicker(
+                  height: 250,
+                  child: EmojiPicker(
                     textEditingController: _controller,
                     onEmojiSelected: (Category category, Emoji emoji) {
                       _onEmojiSelected(emoji);
                     },
                     onBackspacePressed: _onBackspacePressed,
                     config: Config(
-                        columns: 7,
-                        // Issue: https://github.com/flutter/flutter/issues/28894
-                        emojiSizeMax: 32 * (Platform.isIOS ? 1.30 : 1.0),
-                        verticalSpacing: 0,
-                        horizontalSpacing: 0,
-                        gridPadding: EdgeInsets.zero,
-                        initCategory: Category.RECENT,
-                        bgColor: const Color(0xFFF2F2F2),
-                        indicatorColor: Colors.blue,
-                        iconColor: Colors.grey,
-                        iconColorSelected: Colors.blue,
-                        backspaceColor: Colors.blue,
-                        skinToneDialogBgColor: Colors.white,
-                        skinToneIndicatorColor: Colors.grey,
-                        enableSkinTones: true,
-                        showRecentsTab: true,
-                        recentsLimit: 28,
-                        replaceEmojiOnLimitExceed: false,
-                        noRecents: const Text(
-                          'No Recents',
-                          style: TextStyle(fontSize: 20, color: Colors.black26),
-                          textAlign: TextAlign.center,
-                        ),
-                        tabIndicatorAnimDuration: kTabScrollDuration,
-                        categoryIcons: const CategoryIcons(),
-                        buttonMode: ButtonMode.MATERIAL,
-                        checkPlatformCompatibility: true
-                    )),
-              ),
+                      columns: 7,
+                      // Issue: https://github.com/flutter/flutter/issues/28894
+                      emojiSizeMax: 32 * (Platform.isIOS ? 1.30 : 1.0),
+                      verticalSpacing: 0,
+                      horizontalSpacing: 0,
+                      gridPadding: EdgeInsets.zero,
+                      initCategory: Category.RECENT,
+                      bgColor: const Color(0xFFF2F2F2),
+                      indicatorColor: Colors.blue,
+                      iconColor: Colors.grey,
+                      iconColorSelected: Colors.blue,
+                      backspaceColor: Colors.blue,
+                      skinToneDialogBgColor: Colors.white,
+                      skinToneIndicatorColor: Colors.grey,
+                      enableSkinTones: true,
+                      showRecentsTab: true,
+                      recentsLimit: 28,
+                      replaceEmojiOnLimitExceed: false,
+                      noRecents: const Text(
+                        'No Recents',
+                        style: TextStyle(fontSize: 20, color: Colors.black26),
+                        textAlign: TextAlign.center,
+                      ),
+                      tabIndicatorAnimDuration: kTabScrollDuration,
+                      categoryIcons: const CategoryIcons(),
+                      buttonMode: ButtonMode.MATERIAL,
+                      checkPlatformCompatibility: true,
+                      /// example: using only first 10 emojis
+                      /// from each category:
+                      // emojiSet: defaultEmojiSet
+                      //     .map((e) =>
+                      //         e.copyWith(emoji: e.emoji.take(10).toList()))
+                      //     .toList()
+                    ),
+                  )),
             ),
           ],
         ),

@@ -249,9 +249,10 @@ class EmojiPickerState extends State<EmojiPicker> {
       final recentEmojiMap = _recentEmoji.map((e) => e.emoji).toList();
       _categoryEmoji.add(CategoryEmoji(Category.RECENT, recentEmojiMap));
     }
+    final data = widget.config.emojiSet ?? defaultEmojiSet;
     _categoryEmoji.addAll(widget.config.checkPlatformCompatibility
-        ? await _emojiPickerInternalUtils.getAvailableCategoryEmoji()
-        : emojiCategoryList);
+        ? await _emojiPickerInternalUtils.filterUnsupported(data)
+        : data);
     _state = EmojiViewState(
       _categoryEmoji,
       _getOnEmojiListener(),

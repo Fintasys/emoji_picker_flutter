@@ -6,7 +6,6 @@ import 'package:emoji_picker_flutter/src/category_emoji.dart';
 import 'package:emoji_picker_flutter/src/emoji_skin_tones.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'emoji_lists.dart';
 import 'recent_emoji.dart';
 
 /// Helper class that provides internal usage
@@ -28,10 +27,9 @@ class EmojiPickerInternalUtils {
   }
 
   /// Filters out emojis not supported on the platform
-  Future<List<CategoryEmoji>> getAvailableCategoryEmoji() async {
-    final futures = [
-      for (final cat in emojiCategoryList) _getAvailableEmojis(cat)
-    ];
+  Future<List<CategoryEmoji>> filterUnsupported(
+      List<CategoryEmoji> data) async {
+    final futures = [for (final cat in data) _getAvailableEmojis(cat)];
     return await Future.wait(futures);
   }
 

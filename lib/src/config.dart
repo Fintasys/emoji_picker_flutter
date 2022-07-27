@@ -4,6 +4,8 @@ import 'package:emoji_picker_flutter/src/category_icons.dart';
 import 'package:emoji_picker_flutter/src/emoji_picker.dart';
 import 'package:flutter/material.dart';
 
+import 'category_emoji.dart';
+
 /// Default Widget if no recent is available
 const DefaultNoRecentsWidget = Text(
   'No Recents',
@@ -36,7 +38,8 @@ class Config {
       this.tabIndicatorAnimDuration = kTabScrollDuration,
       this.categoryIcons = const CategoryIcons(),
       this.buttonMode = ButtonMode.MATERIAL,
-      this.checkPlatformCompatibility = true});
+      this.checkPlatformCompatibility = true,
+      this.emojiSet});
 
   /// Number of emojis per row
   final int columns;
@@ -106,6 +109,9 @@ class Config {
   /// Verify that emoji glyph is supported by the platform (Android only)
   final bool checkPlatformCompatibility;
 
+  /// Custom emojis; if set, overrides default emojis provided by the library
+  final List<CategoryEmoji>? emojiSet;
+
   /// Get Emoji size based on properties and screen width
   double getEmojiSize(double width) {
     final maxSize = width / columns;
@@ -162,7 +168,8 @@ class Config {
         other.buttonMode == buttonMode &&
         other.gridPadding == gridPadding &&
         other.replaceEmojiOnLimitExceed == replaceEmojiOnLimitExceed &&
-        other.checkPlatformCompatibility == checkPlatformCompatibility;
+        other.checkPlatformCompatibility == checkPlatformCompatibility &&
+        other.emojiSet == emojiSet;
   }
 
   @override
@@ -188,5 +195,6 @@ class Config {
       buttonMode.hashCode ^
       gridPadding.hashCode ^
       replaceEmojiOnLimitExceed.hashCode ^
-      checkPlatformCompatibility.hashCode;
+      checkPlatformCompatibility.hashCode ^
+      emojiSet.hashCode;
 }
