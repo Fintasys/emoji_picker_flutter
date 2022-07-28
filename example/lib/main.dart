@@ -16,6 +16,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final _editKey = GlobalKey();
+  final _focusNode = FocusNode();
   final TextEditingController _controller =
       EmojiTextEditingController(emojiStyle: GoogleFonts.notoEmoji());
   bool emojiShowing = false;
@@ -118,6 +119,18 @@ class _MyAppState extends State<MyApp> {
                         onPressed: () {
                           setState(() {
                             emojiShowing = !emojiShowing;
+                            if (emojiShowing) {
+                              // If TextField remains focused, the keyboard
+                              // will pop up on every emoji insert done with
+                              // EditableTextState manipulation.
+
+                              // In a production app you might want to detect
+                              // keyboard opens and hide emoji picker
+                              // for more consistent experience.
+                              _focusNode.unfocus();
+                            } else {
+                              _focusNode.requestFocus();
+                            }
                           });
                         },
                         icon: const Icon(
@@ -132,6 +145,7 @@ class _MyAppState extends State<MyApp> {
                         child: TextField(
                             key: _editKey,
                             controller: _controller,
+                            focusNode: _focusNode,
                             style: const TextStyle(
                                 fontSize: 20.0, color: Colors.black87),
                             decoration: InputDecoration(
@@ -198,7 +212,7 @@ class _MyAppState extends State<MyApp> {
                       tabIndicatorAnimDuration: kTabScrollDuration,
                       categoryIcons: const CategoryIcons(),
                       buttonMode: ButtonMode.MATERIAL,
-                      checkPlatformCompatibility: true,
+                      checkPlatformCompatibility: false,
                       emojiTextStyle:
                           GoogleFonts.notoEmoji(color: Colors.black),
                       // or TextStyle(fontFamily: 'NotoColorEmoji',
