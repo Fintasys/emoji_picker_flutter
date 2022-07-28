@@ -144,11 +144,12 @@ class EmojiPickerState extends State<EmojiPicker> {
   final _emojiPickerInternalUtils = EmojiPickerInternalUtils();
 
   /// Update recentEmoji list from outside using EmojiPickerUtils
-  void updateRecentEmoji(List<RecentEmoji> recentEmoji) {
+  void updateRecentEmoji(List<RecentEmoji> recentEmoji,
+      {bool refresh = false}) {
     _recentEmoji = recentEmoji;
     _categoryEmoji[0] = _categoryEmoji[0]
         .copyWith(emoji: _recentEmoji.map((e) => e.emoji).toList());
-    if (mounted) {
+    if (mounted && refresh) {
       setState(() {});
     }
   }
@@ -213,7 +214,11 @@ class EmojiPickerState extends State<EmojiPicker> {
         _emojiPickerInternalUtils
             .addEmojiToRecentlyUsed(emoji: emoji, config: widget.config)
             .then((newRecentEmoji) => {
-                  updateRecentEmoji(newRecentEmoji),
+              // we don't want to rebuild the widget if user is currently on
+              // the RECENT tab, it will make emojis jump since sorting
+              // is based on the use frequency
+                  updateRecentEmoji(newRecentEmoji,
+                      refresh: category != Category.RECENT),
                 });
       }
 
