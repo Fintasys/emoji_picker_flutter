@@ -1,10 +1,9 @@
 import 'dart:math';
 
+import 'package:emoji_picker_flutter/src/category_emoji.dart';
 import 'package:emoji_picker_flutter/src/category_icons.dart';
 import 'package:emoji_picker_flutter/src/emoji_picker.dart';
 import 'package:flutter/material.dart';
-
-import 'category_emoji.dart';
 
 /// Default Widget if no recent is available
 const DefaultNoRecentsWidget = Text(
@@ -16,31 +15,32 @@ const DefaultNoRecentsWidget = Text(
 /// Config for customizations
 class Config {
   /// Constructor
-  const Config(
-      {this.columns = 7,
-      this.emojiSizeMax = 32.0,
-      this.verticalSpacing = 0,
-      this.horizontalSpacing = 0,
-      this.gridPadding = EdgeInsets.zero,
-      this.initCategory = Category.RECENT,
-      this.bgColor = const Color(0xFFEBEFF2),
-      this.indicatorColor = Colors.blue,
-      this.iconColor = Colors.grey,
-      this.iconColorSelected = Colors.blue,
-      this.backspaceColor = Colors.blue,
-      this.skinToneDialogBgColor = Colors.white,
-      this.skinToneIndicatorColor = Colors.grey,
-      this.enableSkinTones = true,
-      this.showRecentsTab = true,
-      this.recentsLimit = 28,
-      this.replaceEmojiOnLimitExceed = false,
-      this.noRecents = DefaultNoRecentsWidget,
-      this.tabIndicatorAnimDuration = kTabScrollDuration,
-      this.categoryIcons = const CategoryIcons(),
-      this.buttonMode = ButtonMode.MATERIAL,
-      this.checkPlatformCompatibility = true,
-      this.emojiSet,
-      this.emojiTextStyle});
+  const Config({
+    this.columns = 7,
+    this.emojiSizeMax = 32.0,
+    this.verticalSpacing = 0,
+    this.horizontalSpacing = 0,
+    this.gridPadding = EdgeInsets.zero,
+    this.initCategory = Category.RECENT,
+    this.bgColor = const Color(0xFFEBEFF2),
+    this.indicatorColor = Colors.blue,
+    this.iconColor = Colors.grey,
+    this.iconColorSelected = Colors.blue,
+    this.backspaceColor = Colors.blue,
+    this.skinToneDialogBgColor = Colors.white,
+    this.skinToneIndicatorColor = Colors.grey,
+    this.enableSkinTones = true,
+    this.showRecentsTab = true,
+    this.recentsLimit = 28,
+    this.replaceEmojiOnLimitExceed = false,
+    this.noRecents = DefaultNoRecentsWidget,
+    this.tabIndicatorAnimDuration = kTabScrollDuration,
+    this.categoryIcons = const CategoryIcons(),
+    this.buttonMode = ButtonMode.MATERIAL,
+    this.checkPlatformCompatibility = true,
+    this.emojiSet,
+    this.emojiTextStyle,
+  });
 
   /// Number of emojis per row
   final int columns;
