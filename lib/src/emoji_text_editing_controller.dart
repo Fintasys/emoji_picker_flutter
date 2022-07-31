@@ -1,12 +1,10 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/widgets.dart';
 
-
 /// Text editing controller that produces text spans on the fly for setting
 /// a particular style to emoji characters. Offloads the main magic to
 /// [EmojiPickerUtils.setEmojiTextStyle] method.
 class EmojiTextEditingController extends TextEditingController {
-
   /// Constructor, requres emojiStyle, since otherwise this class has no effect
   EmojiTextEditingController({String? text, required this.emojiStyle})
       : super(text: text);

@@ -214,9 +214,9 @@ class EmojiPickerState extends State<EmojiPicker> {
         _emojiPickerInternalUtils
             .addEmojiToRecentlyUsed(emoji: emoji, config: widget.config)
             .then((newRecentEmoji) => {
-              // we don't want to rebuild the widget if user is currently on
-              // the RECENT tab, it will make emojis jump since sorting
-              // is based on the use frequency
+                  // we don't want to rebuild the widget if user is currently on
+                  // the RECENT tab, it will make emojis jump since sorting
+                  // is based on the use frequency
                   updateRecentEmoji(newRecentEmoji,
                       refresh: category != Category.RECENT),
                 });

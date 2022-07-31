@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 
-
 /// Decoration that can be used to render a triangle in the bottom-right
 /// corner of a container
 class TriangleDecoration extends Decoration {
-
   /// Constructor
-  TriangleDecoration({
-    required this.color,
-    required this.size
-  }) : super();
+  TriangleDecoration({required this.color, required this.size}) : super();
 
   /// Color of the triangle
   final Color color;
+
   /// Width and height of the triangle
   final double size;
 
@@ -21,7 +17,6 @@ class TriangleDecoration extends Decoration {
     return _TriangleShapePainter(color, size);
   }
 }
-
 
 class _TriangleShapePainter extends BoxPainter {
   /// Constructor

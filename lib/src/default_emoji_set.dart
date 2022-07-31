@@ -6,8 +6,8 @@ import 'category_emoji.dart';
 
 /// List of categories of emojis
 const List<CategoryEmoji> defaultEmojiSet = [
-// =========================================================== Category.SMILEYS
-   CategoryEmoji(Category.SMILEYS, [
+// ======================================================= Category.SMILEYS
+  CategoryEmoji(Category.SMILEYS, [
     Emoji('😀', 'Grinning Face'),
     Emoji('😃', 'Grinning Face With Big Eyes'),
     Emoji('😄', 'Grinning Face With Smiling Eyes'),
@@ -370,7 +370,7 @@ const List<CategoryEmoji> defaultEmojiSet = [
     Emoji('💼', 'Briefcase')
   ]),
 
-// =========================================================== Category.ANIMALS
+// ======================================================= Category.ANIMALS
   CategoryEmoji(Category.ANIMALS, [
     Emoji('🐶', 'Dog Face'),
     Emoji('🐱', 'Cat Face'),
@@ -555,7 +555,7 @@ const List<CategoryEmoji> defaultEmojiSet = [
     Emoji('🎍', 'Pine Decoration')
   ]),
 
-// =========================================================== Category.FOODS
+// ======================================================= Category.FOODS
   CategoryEmoji(Category.FOODS, [
     Emoji('🍇', 'Grapes'),
     Emoji('🍈', 'Melon'),
@@ -665,7 +665,7 @@ const List<CategoryEmoji> defaultEmojiSet = [
     Emoji('🥄', 'Spoon')
   ]),
 
-// =========================================================== Category.TRAVEL
+// ======================================================= Category.TRAVEL
   CategoryEmoji(Category.TRAVEL, [
     Emoji('🗾', 'Map of Japan'),
     Emoji('🏔', 'Snow-Capped Mountain'),
@@ -793,7 +793,7 @@ const List<CategoryEmoji> defaultEmojiSet = [
     Emoji('🛅', 'Left Luggage')
   ]),
 
-// =========================================================== Category.ACTIVITIES
+// ======================================================= Category.ACTIVITIES
   CategoryEmoji(Category.ACTIVITIES, [
     Emoji('🧗‍♂️', 'Man Climbing', hasSkinTone: true),
     Emoji('🧗‍♀️', 'Woman Climbing', hasSkinTone: true),
@@ -888,7 +888,7 @@ const List<CategoryEmoji> defaultEmojiSet = [
     Emoji('🏹', 'Bow and Arrow')
   ]),
 
-// =========================================================== Category.OBJECTS
+// ======================================================= Category.OBJECTS
   CategoryEmoji(Category.OBJECTS, [
     Emoji('💌', 'Love Letter'),
     Emoji('🕳', 'Hole'),
@@ -1090,7 +1090,7 @@ const List<CategoryEmoji> defaultEmojiSet = [
     Emoji('🚰', 'Potable Water')
   ]),
 
-// =========================================================== Category.SYMBOLS
+// ======================================================= Category.SYMBOLS
   CategoryEmoji(Category.SYMBOLS, [
     Emoji('💘', 'Heart With Arrow'),
     Emoji('💝', 'Heart With Ribbon'),
@@ -1353,7 +1353,7 @@ const List<CategoryEmoji> defaultEmojiSet = [
     Emoji('🔲', 'Black Square Button')
   ]),
 
-// =========================================================== Category.FLAGS
+// ======================================================= Category.FLAGS
   CategoryEmoji(Category.FLAGS, [
     Emoji('🏁', 'Chequered Flag'),
     Emoji('🚩', 'Triangular Flag'),
