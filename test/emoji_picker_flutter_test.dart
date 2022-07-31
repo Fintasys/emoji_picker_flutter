@@ -13,31 +13,31 @@ void skinToneTests() {
 
   test('applySkinTone()', () {
     expect(
-      utils.applySkinTone(const Emoji('', '👍'), SkinTone.light).emoji,
+      utils.applySkinTone(const Emoji('👍', ''), SkinTone.light).emoji,
       '👍🏻',
     );
     expect(
-      utils.applySkinTone(const Emoji('', '🏊‍♂️'), SkinTone.mediumDark).emoji,
+      utils.applySkinTone(const Emoji('🏊‍♂️', ''), SkinTone.mediumDark).emoji,
       '🏊🏾‍♂️',
     );
     expect(
-      utils.applySkinTone(const Emoji('', '👱‍♀️'), SkinTone.dark).emoji,
+      utils.applySkinTone(const Emoji('👱‍♀️', ''), SkinTone.dark).emoji,
       '👱🏿‍♀️',
     );
   });
 
   test('removeSkinTone()', () {
-    expect(utils.removeSkinTone(const Emoji('', '👍🏻')).emoji, '👍');
-    expect(utils.removeSkinTone(const Emoji('', '🏊🏾‍♂️')).emoji, '🏊‍♂️');
-    expect(utils.removeSkinTone(const Emoji('', '👱🏿‍♀️')).emoji, '👱‍♀️');
+    expect(utils.removeSkinTone(const Emoji('👍🏻', '')).emoji, '👍');
+    expect(utils.removeSkinTone(const Emoji('🏊🏾‍♂️', '')).emoji, '🏊‍♂️');
+    expect(utils.removeSkinTone(const Emoji('👱🏿‍♀️', '')).emoji, '👱‍♀️');
   });
 }
 
 void emojiModelTests() {
   test('encode Emoji', () {
-    final encode = const Emoji('name', '🤣');
+    final encode = const Emoji('🤣', 'name');
     expect(encode.toJson(),
-        <String, dynamic>{'name': 'name', 'emoji': '🤣', 'hasSkinTone': false});
+        <String, dynamic>{'emoji': '🤣', 'name': 'name', 'hasSkinTone': false});
   });
 
   test('decode Emoji without hasSkinTone property', () {
