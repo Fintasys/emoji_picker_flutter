@@ -11,7 +11,7 @@ Yet another Emoji Picker for Flutter 🤩
 
   > **Note:** This package is based on [emoji_picker](https://pub.dev/packages/emoji_picker) which has been deprecated and not maintained anymore. Therefore I decided to create a modernized version of it and fixing existing issues.
 
-<img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/master/screenshot/intro.png">
+<img src="https://user-images.githubusercontent.com/11667234/182385843-01f24231-2bbb-4bd6-b8ae-e2058be8be3f.png">
 
 ## Key features
 - Lightweight Package
@@ -95,7 +95,7 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 ## Backspace-Button
 You can add an Backspace-Button to the end category list by adding the callback method `onBackspacePressed: () { }` to the EmojiPicker-Widget. This will make it easier for your user to remove an added Emoji without showing the keyboard. Check out the example for more details about usage.
 
-<img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/master/screenshot/backspace.png" width="300">
+<img src="https://user-images.githubusercontent.com/11667234/182386154-b4b2435f-3a85-454d-a671-f857e5a1c7bd.png" width="300">
 
 ## Custom view
 The appearance is completely customizable by setting `customWidget` property. If properties in Config are not enough you can inherit from `EmojiPickerBuilder` (recommended but not necessary) to make further adjustments. 

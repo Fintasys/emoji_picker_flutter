@@ -1,3 +1,7 @@
+## 1.3.1
+- Add direct support for TextEditingController (thx @LostInDarkMath)
+- Fix Koala face position in emoji lists (thx @nathandud)
+
 ## 1.3.0
 - Compatibility for Flutter 3 and update dependencies 💙
 - Introduce property `replaceEmojiOnLimitExceed` to replace least used emoji in Recents when the list is full
