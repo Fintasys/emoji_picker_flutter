@@ -34,6 +34,7 @@ class Config {
     this.recentsLimit = 28,
     this.replaceEmojiOnLimitExceed = false,
     this.noRecents = DefaultNoRecentsWidget,
+    this.loadingIndicator = const SizedBox.shrink(),
     this.tabIndicatorAnimDuration = kTabScrollDuration,
     this.categoryIcons = const CategoryIcons(),
     this.buttonMode = ButtonMode.MATERIAL,
@@ -91,6 +92,9 @@ class Config {
 
   /// A widget (usually [Text]) to be displayed if no recent emojis to display
   final Widget noRecents;
+
+  /// A widget to display while emoji picker is initializing
+  final Widget loadingIndicator;
 
   /// Duration of tab indicator to animate to next category
   final Duration tabIndicatorAnimDuration;
@@ -172,6 +176,7 @@ class Config {
         other.showRecentsTab == showRecentsTab &&
         other.recentsLimit == recentsLimit &&
         other.noRecents == noRecents &&
+        other.loadingIndicator == loadingIndicator &&
         other.tabIndicatorAnimDuration == tabIndicatorAnimDuration &&
         other.categoryIcons == categoryIcons &&
         other.buttonMode == buttonMode &&
@@ -200,6 +205,7 @@ class Config {
       showRecentsTab.hashCode ^
       recentsLimit.hashCode ^
       noRecents.hashCode ^
+      loadingIndicator.hashCode ^
       tabIndicatorAnimDuration.hashCode ^
       categoryIcons.hashCode ^
       buttonMode.hashCode ^

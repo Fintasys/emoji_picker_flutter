@@ -173,10 +173,7 @@ class EmojiPickerState extends State<EmojiPicker> {
   @override
   Widget build(BuildContext context) {
     if (!_loaded) {
-      // initialization takes less than a second in the very worst case
-      // scenario, plus it is happening usually when the widget is off-screen
-      // no need to build progress indicator
-      return const SizedBox.shrink();
+      return widget.config.loadingIndicator;
     }
     return widget.customWidget == null
         ? DefaultEmojiPickerView(widget.config, _state)

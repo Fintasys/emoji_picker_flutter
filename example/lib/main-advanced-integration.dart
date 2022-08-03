@@ -212,6 +212,8 @@ class _MyAppState extends State<MyApp> {
                           style: TextStyle(fontSize: 20, color: Colors.black26),
                           textAlign: TextAlign.center,
                         ),
+                        loadingIndicator:
+                            const Center(child: CircularProgressIndicator()),
                         tabIndicatorAnimDuration: kTabScrollDuration,
                         categoryIcons: const CategoryIcons(),
                         buttonMode: ButtonMode.MATERIAL,
