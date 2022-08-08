@@ -1,5 +1,6 @@
 library emoji_picker_flutter;
 
+export 'package:emoji_picker_flutter/src/category_emoji.dart';
 export 'package:emoji_picker_flutter/src/category_icons.dart';
 export 'package:emoji_picker_flutter/src/config.dart';
 export 'package:emoji_picker_flutter/src/default_emoji_set.dart';
