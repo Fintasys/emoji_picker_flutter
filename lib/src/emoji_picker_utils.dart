@@ -1,8 +1,7 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import 'package:emoji_picker_flutter/src/emoji_picker_internal_utils.dart';
 import 'package:emoji_picker_flutter/src/recent_emoji.dart';
 import 'package:flutter/material.dart';
-import 'category_emoji.dart';
-import 'emoji_picker_internal_utils.dart';
 
 /// Helper class that provides extended usage
 class EmojiPickerUtils {

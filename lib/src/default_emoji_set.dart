@@ -2,8 +2,6 @@
 // File originally from https://github.com/JeffG05/emoji_picker
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 
-import 'category_emoji.dart';
-
 /// List of categories of emojis
 const List<CategoryEmoji> defaultEmojiSet = [
 // ======================================================= Category.SMILEYS
