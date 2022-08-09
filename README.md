@@ -27,7 +27,7 @@ Yet another Emoji Picker for Flutter 🤩
 
 ```dart
 EmojiPicker(
-    onEmojiSelected: (category, emoji) {
+    onEmojiSelected: (Category category, Emoji emoji) {
         // Do something when emoji is tapped (optional)
     },
     onBackspacePressed: () {
