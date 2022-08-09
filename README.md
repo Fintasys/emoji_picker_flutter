@@ -45,7 +45,6 @@ EmojiPicker(
         indicatorColor: Colors.blue,
         iconColor: Colors.grey,
         iconColorSelected: Colors.blue,
-        progressIndicatorColor: Colors.blue,
         backspaceColor: Colors.blue,
         skinToneDialogBgColor: Colors.white,
         skinToneIndicatorColor: Colors.grey,
@@ -88,9 +87,13 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 | recentsLimit     | Limit of recently used emoji that will be saved                                | 28     |
 | replaceEmojiOnLimitExceed | Replace latest emoji on recents list on limit exceed | false
 | noRecents     |  A widget (usually [Text]) to be displayed if no recent emojis to display                                | Text('No Recents', style: TextStyle(fontSize: 20, color: Colors.black26), textAlign: TextAlign.center)     |
+| loadingIndicator     |  A widget to display while emoji picker is initializing                                | SizedBox.shrink()     |
 | tabIndicatorAnimDuration     | Duration of tab indicator to animate to next category                                | Duration(milliseconds: 300)     |
 | categoryIcons     | Determines the icon to display for each Category. You can change icons by setting them in the constructor.                               | CategoryIcons()     |
 | buttonMode     | Choose between Material and Cupertino button style                                | ButtonMode.MATERIAL     |
+| checkPlatformCompatibility     | Whether to filter out glyphs that platform cannot render with the default font (Android).   | true     |
+| emojiSet     | Custom emoji set, can be built based on `defaultEmojiSet` provided by the library.   | null    |
+| emojiTextStyle     | Text style to apply to individual emoji icons. Can be used to define custom emoji font either with GoogleFonts library or bundled with the app.  | null    |
 
 ## Backspace-Button
 You can add an Backspace-Button to the end category list by adding the callback method `onBackspacePressed: () { }` to the EmojiPicker-Widget. This will make it easier for your user to remove an added Emoji without showing the keyboard. Check out the example for more details about usage.
@@ -130,11 +133,14 @@ EmojiPicker(
 final recentEmojis = await EmojiPickerUtils().getRecentEmojis();
 
 // Search for related emoticons based on keywords
-final filterEmojiEntities = await EmojiPickerUtils().searchEmoji("face");
+final filterEmojiEntities = await EmojiPickerUtils().searchEmoji("face", defaultEmojiSet);
 
 // Add an emoji to recently used list or increase its counter
 final newRecentEmojis = await EmojiPickerUtils().addEmojiToRecentlyUsed(key: key, emoji: emoji);
 // Important: Needs same key instance of type GlobalKey<EmojiPickerState> here and for the EmojiPicker-Widget in order to work properly
+
+// Highlight emojis with custom style spans
+final textSpans = EmojiPickerUtils().setEmojiTextStyle('text', emojiStyle: style);
 ```
 
 ## Feel free to contribute to this package!! 🙇‍♂️

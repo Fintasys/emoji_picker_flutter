@@ -4,29 +4,29 @@ import 'package:flutter/material.dart';
 @immutable
 class Emoji {
   /// Emoji constructor
-  const Emoji(this.name, this.emoji, {this.hasSkinTone = false});
-
-  /// The name or description for this emoji
-  final String name;
+  const Emoji(this.emoji, this.name, {this.hasSkinTone = false});
 
   /// The unicode string for this emoji
   ///
   /// This is the string that should be displayed to view the emoji
   final String emoji;
 
+  /// The name or description for this emoji
+  final String name;
+
   /// Flag if emoji supports multiple skin tones
   final bool hasSkinTone;
 
   @override
   String toString() {
-    return 'Name: $name, Emoji: $emoji, HasSkinTone: $hasSkinTone';
+    return 'Emoji: $emoji, Name: $name, HasSkinTone: $hasSkinTone';
   }
 
   /// Parse Emoji from json
   static Emoji fromJson(Map<String, dynamic> json) {
     return Emoji(
-      json['name'] as String,
       json['emoji'] as String,
+      json['name'] as String,
       hasSkinTone:
           json['hasSkinTone'] != null ? json['hasSkinTone'] as bool : false,
     );
@@ -35,8 +35,8 @@ class Emoji {
   ///  Encode Emoji to json
   Map<String, dynamic> toJson() {
     return {
-      'name': name,
       'emoji': emoji,
+      'name': name,
       'hasSkinTone': hasSkinTone,
     };
   }
@@ -44,8 +44,8 @@ class Emoji {
   /// Copy method
   Emoji copyWith({String? name, String? emoji, bool? hasSkinTone}) {
     return Emoji(
-      name ?? this.name,
       emoji ?? this.emoji,
+      name ?? this.name,
       hasSkinTone: hasSkinTone ?? this.hasSkinTone,
     );
   }

@@ -1,8 +1,7 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:emoji_picker_flutter/src/category_emoji.dart';
 import 'package:emoji_picker_flutter/src/emoji_picker_internal_utils.dart';
 import 'package:emoji_picker_flutter/src/emoji_skin_tones.dart';
-import 'package:emoji_picker_flutter/src/triangle_shape.dart';
+import 'package:emoji_picker_flutter/src/triangle_decoration.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -84,7 +83,33 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
             }),
       );
     }
-    return Container();
+    return const SizedBox.shrink();
+  }
+
+  /// Builds a wrapper around the grid of emojis.
+  /// If the button style is Cupertino or None, this is just wrapping the
+  /// `child` with a container of a color provided by config.
+  /// For Material style it is a `Material` widget that allows to render
+  /// touch response for individual InkWell cells.
+  Widget _buildBackgroundContainer(
+      {required Color color, required Widget child, EdgeInsets? padding}) {
+    if (widget.config.buttonMode == ButtonMode.MATERIAL) {
+      return Material(
+        color: color,
+        child: padding == null
+            ? child
+            : Padding(
+                padding: padding,
+                child: child,
+              ),
+      );
+    } else {
+      return Container(
+        color: color,
+        padding: padding,
+        child: child,
+      );
+    }
   }
 
   @override
@@ -92,8 +117,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     return LayoutBuilder(
       builder: (context, constraints) {
         final emojiSize = widget.config.getEmojiSize(constraints.maxWidth);
-
-        return Container(
+        return _buildBackgroundContainer(
           color: widget.config.bgColor,
           child: Column(
             children: [
@@ -153,6 +177,33 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     );
   }
 
+  Widget _buildEmojiCell(
+      double size, CategoryEmoji categoryEmoji, Emoji emoji, int index) {
+    final onPressed = () {
+      _closeSkinToneDialog();
+      widget.state.onEmojiSelected(categoryEmoji.category, emoji);
+    };
+
+    final onLongPressed = () {
+      if (!emoji.hasSkinTone || !widget.config.enableSkinTones) {
+        _closeSkinToneDialog();
+        return;
+      }
+      _closeSkinToneDialog();
+      _openSkinToneDialog(emoji, size, categoryEmoji, index);
+    };
+
+    return _buildButtonWidget(
+      onPressed: onPressed,
+      onLongPressed: onLongPressed,
+      child: _buildEmoji(
+        size,
+        emoji,
+        widget.config.enableSkinTones,
+      ),
+    );
+  }
+
   Widget _buildPage(double emojiSize, CategoryEmoji categoryEmoji) {
     // Display notice if recent has no entries yet
     if (categoryEmoji.category == Category.RECENT &&
@@ -163,105 +214,77 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     return GestureDetector(
       onTap: _closeSkinToneDialog,
       child: GridView.count(
-        scrollDirection: Axis.vertical,
-        physics: const ScrollPhysics(),
-        controller: _scrollController,
-        shrinkWrap: true,
-        primary: false,
-        padding: widget.config.gridPadding,
-        crossAxisCount: widget.config.columns,
-        mainAxisSpacing: widget.config.verticalSpacing,
-        crossAxisSpacing: widget.config.horizontalSpacing,
-        children: categoryEmoji.emoji.asMap().entries.map((item) {
-          final index = item.key;
-          final emoji = item.value;
-          final onPressed = () {
-            _closeSkinToneDialog();
-            widget.state.onEmojiSelected(categoryEmoji.category, emoji);
-          };
-
-          final onLongPressed = () {
-            if (!emoji.hasSkinTone || !widget.config.enableSkinTones) {
-              _closeSkinToneDialog();
-              return;
-            }
-            _closeSkinToneDialog();
-            _openSkinToneDialog(emoji, emojiSize, categoryEmoji, index);
-          };
-
-          return _buildButtonWidget(
-            onPressed: onPressed,
-            onLongPressed: onLongPressed,
-            child: _buildEmoji(
-              emojiSize,
-              categoryEmoji,
-              emoji,
-              widget.config.enableSkinTones,
-            ),
-          );
-        }).toList(),
-      ),
+          scrollDirection: Axis.vertical,
+          controller: _scrollController,
+          primary: false,
+          padding: widget.config.gridPadding,
+          crossAxisCount: widget.config.columns,
+          mainAxisSpacing: widget.config.verticalSpacing,
+          crossAxisSpacing: widget.config.horizontalSpacing,
+          children: [
+            for (int i = 0; i < categoryEmoji.emoji.length; i++)
+              _buildEmojiCell(
+                  emojiSize, categoryEmoji, categoryEmoji.emoji[i], i)
+          ]),
     );
   }
 
   /// Build and display Emoji centered of its parent
   Widget _buildEmoji(
     double emojiSize,
-    CategoryEmoji categoryEmoji,
     Emoji emoji,
     bool showSkinToneIndicator,
   ) {
-    // FittedBox needed for display, font scale settings
-    return FittedBox(
-      fit: BoxFit.fill,
-      child: Stack(children: [
-        emoji.hasSkinTone && showSkinToneIndicator
-            ? Positioned(
-                bottom: 0,
-                right: 0,
-                child: CustomPaint(
-                  size: const Size(8, 8),
-                  painter: TriangleShape(widget.config.skinToneIndicatorColor),
-                ),
-              )
-            : Container(),
-        Text(
-          emoji.emoji,
-          textScaleFactor: 1.0,
-          style: TextStyle(
-            fontSize: emojiSize,
-            backgroundColor: Colors.transparent,
-          ),
-        ),
-      ]),
+    final style = TextStyle(
+      fontSize: emojiSize,
+      backgroundColor: Colors.transparent,
+    );
+    final emojiText = Text(
+      emoji.emoji,
+      textScaleFactor: 1.0,
+      style: widget.config.emojiTextStyle == null
+          ? style
+          : widget.config.emojiTextStyle!.merge(style),
+    );
+
+    return Center(
+      child: emoji.hasSkinTone && showSkinToneIndicator
+          ? Container(
+              decoration: TriangleDecoration(
+                  color: widget.config.skinToneIndicatorColor, size: 8.0),
+              child: emojiText,
+            )
+          : emojiText,
     );
   }
 
   /// Build different Button based on ButtonMode
   Widget _buildButtonWidget({
     required VoidCallback onPressed,
-    required VoidCallback onLongPressed,
+    VoidCallback? onLongPressed,
     required Widget child,
   }) {
     if (widget.config.buttonMode == ButtonMode.MATERIAL) {
-      return TextButton(
-        onPressed: onPressed,
+      return InkWell(
+        onTap: onPressed,
         onLongPress: onLongPressed,
         child: child,
-        style: ButtonStyle(
-          padding: MaterialStateProperty.all(EdgeInsets.zero),
-          minimumSize: MaterialStateProperty.all(Size.zero),
-          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      );
+    }
+    if (widget.config.buttonMode == ButtonMode.CUPERTINO) {
+      return GestureDetector(
+        onLongPress: onLongPressed,
+        child: CupertinoButton(
+          padding: EdgeInsets.zero,
+          onPressed: onPressed,
+          child: child,
         ),
       );
     }
     return GestureDetector(
       onLongPress: onLongPressed,
-      child: CupertinoButton(
-        padding: EdgeInsets.zero,
-        onPressed: onPressed,
-        child: child,
-      ),
+      onTap: onPressed,
+      child: child,
     );
   }
 
@@ -306,7 +329,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
         top: top,
         child: Material(
           elevation: 4.0,
-          child: Container(
+          child: _buildBackgroundContainer(
             padding: const EdgeInsets.symmetric(vertical: 4.0),
             color: widget.config.skinToneDialogBgColor,
             child: Row(
@@ -346,8 +369,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
           widget.state.onEmojiSelected(categoryEmoji.category, emoji);
           _closeSkinToneDialog();
         },
-        onLongPressed: () {},
-        child: _buildEmoji(emojiSize, categoryEmoji, emoji, false),
+        child: _buildEmoji(emojiSize, emoji, false),
       ),
     );
   }
