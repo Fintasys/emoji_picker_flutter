@@ -208,7 +208,7 @@ class _MyAppState extends State<MyApp> {
 
   Widget _buildSearchResults(
       BuildContext context, double emojiSize, double cellSize) {
-    if (_searchResults.isNotEmpty != true) {
+    if (_searchResults.isEmpty) {
       return const Text('No matches');
     }
     return SizedBox(
