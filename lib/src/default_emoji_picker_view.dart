@@ -1,6 +1,4 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:emoji_picker_flutter/src/emoji_picker_internal_utils.dart';
-import 'package:emoji_picker_flutter/src/emoji_skin_tones.dart';
 import 'package:emoji_picker_flutter/src/triangle_decoration.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +19,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
   TabController? _tabController;
   OverlayEntry? _overlay;
   late final _scrollController = ScrollController();
-  late final _utils = EmojiPickerInternalUtils();
+  late final _utils = EmojiPickerUtils();
   final int _skinToneCount = 6;
   final double tabBarHeight = 46;
 

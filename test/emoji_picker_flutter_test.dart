@@ -1,6 +1,5 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:emoji_picker_flutter/src/emoji_picker_internal_utils.dart';
-import 'package:emoji_picker_flutter/src/emoji_skin_tones.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -9,7 +8,8 @@ void main() {
 }
 
 void skinToneTests() {
-  final utils = EmojiPickerInternalUtils();
+  final internalUtils = EmojiPickerInternalUtils();
+  final utils = EmojiPickerUtils();
 
   test('applySkinTone()', () {
     expect(
@@ -27,9 +27,11 @@ void skinToneTests() {
   });
 
   test('removeSkinTone()', () {
-    expect(utils.removeSkinTone(const Emoji('👍🏻', '')).emoji, '👍');
-    expect(utils.removeSkinTone(const Emoji('🏊🏾‍♂️', '')).emoji, '🏊‍♂️');
-    expect(utils.removeSkinTone(const Emoji('👱🏿‍♀️', '')).emoji, '👱‍♀️');
+    expect(internalUtils.removeSkinTone(const Emoji('👍🏻', '')).emoji, '👍');
+    expect(internalUtils.removeSkinTone(const Emoji('🏊🏾‍♂️', '')).emoji,
+        '🏊‍♂️');
+    expect(internalUtils.removeSkinTone(const Emoji('👱🏿‍♀️', '')).emoji,
+        '👱‍♀️');
   });
 }
 

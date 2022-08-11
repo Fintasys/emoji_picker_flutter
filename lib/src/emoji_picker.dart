@@ -80,11 +80,19 @@ enum ButtonMode {
   CUPERTINO
 }
 
+/// Number of skin tone icons
+const kSkinToneCount = 6;
+
 /// Callback function for when emoji is selected
 ///
 /// The function returns the selected [Emoji] as well
 /// as the [Category] from which it originated
-typedef void OnEmojiSelected(Category category, Emoji emoji);
+/// Category can be null in some cases, for example in search results
+typedef void OnEmojiSelected(Category? category, Emoji emoji);
+
+/// Callback from emoji cell to show a skin tone selection overlay
+typedef void OnSkinToneDialogRequested(
+    Emoji emoji, double emojiSize, CategoryEmoji? categoryEmoji, int index);
 
 /// Callback function for backspace button
 typedef void OnBackspacePressed();
