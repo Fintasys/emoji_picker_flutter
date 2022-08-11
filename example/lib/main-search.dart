@@ -28,6 +28,9 @@ class _MyAppState extends State<MyApp> {
   void dispose() {
     _closeSkinToneDialog();
     _controller.dispose();
+    _searchController.dispose();
+    _searchScrollController.dispose();
+    _searchFocusNode.dispose();
     super.dispose();
   }
 
