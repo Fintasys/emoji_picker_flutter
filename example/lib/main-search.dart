@@ -22,6 +22,7 @@ class _MyAppState extends State<MyApp> {
   final Config _config = const Config(
     buttonMode: ButtonMode.MATERIAL,
   );
+  bool _isSearchFocused = false;
   bool _emojiShowing = false;
 
   @override
@@ -170,34 +171,55 @@ class _MyAppState extends State<MyApp> {
     return ColoredBox(
       color: _config.bgColor,
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          IconButton(
-            onPressed: _searchFocusNode.requestFocus,
-            icon: const Icon(Icons.search),
-            visualDensity: VisualDensity.compact,
-          ),
-          Expanded(
-            child: TextField(
-              controller: _searchController,
-              focusNode: _searchFocusNode,
-              onChanged: (text) async {
-                _searchResults =
-                    await EmojiPickerUtils().searchEmoji(text, defaultEmojiSet);
-                setState(() {});
+          if (!_isSearchFocused)
+            IconButton(
+              onPressed: _searchFocusNode.requestFocus,
+              icon: const Icon(Icons.search),
+              visualDensity: VisualDensity.compact,
+            )
+          else
+            IconButton(
+              onPressed: () {
+                _searchController.text = '';
+                _searchFocusNode.unfocus();
               },
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                isDense: true,
-                suffixIconConstraints: const BoxConstraints(),
-                suffixIcon: isEmpty
-                    ? null
-                    : IconButton(
-                        onPressed: () {
-                          _searchController.text = '';
-                        },
-                        icon: const Icon(Icons.clear),
-                        visualDensity: VisualDensity.compact,
-                      ),
+              icon: const Icon(Icons.arrow_back),
+              visualDensity: VisualDensity.compact,
+            ),
+          Expanded(
+            child: Focus(
+              onFocusChange: (hasFocus) {
+                setState(() {
+                  _isSearchFocused = hasFocus;
+                });
+              },
+              child: TextField(
+                controller: _searchController,
+                focusNode: _searchFocusNode,
+                maxLines: 1,
+                onChanged: (text) async {
+                  _searchResults = await EmojiPickerUtils()
+                      .searchEmoji(text, defaultEmojiSet);
+                  setState(() {});
+                },
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 4.0, vertical: 10.0),
+                  isDense: true,
+                  suffixIconConstraints: const BoxConstraints(),
+                  suffixIcon: isEmpty
+                      ? null
+                      : IconButton(
+                          onPressed: () {
+                            _searchController.text = '';
+                          },
+                          icon: const Icon(Icons.clear),
+                          visualDensity: VisualDensity.compact,
+                        ),
+                ),
               ),
             ),
           )
@@ -209,7 +231,8 @@ class _MyAppState extends State<MyApp> {
   Widget _buildSearchResults(
       BuildContext context, double emojiSize, double cellSize) {
     if (_searchResults.isEmpty) {
-      return const Text('No matches');
+      return SizedBox(
+          height: cellSize, child: const Center(child: Text('No matches')));
     }
     return SizedBox(
       height: cellSize,
