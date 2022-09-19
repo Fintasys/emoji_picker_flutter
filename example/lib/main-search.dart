@@ -232,7 +232,11 @@ class _MyAppState extends State<MyApp> {
       BuildContext context, double emojiSize, double cellSize) {
     if (_searchResults.isEmpty) {
       return SizedBox(
-          height: cellSize, child: const Center(child: Text('No matches')));
+          height: cellSize,
+          child: Center(
+              child: Text(_searchController.text.isEmpty
+                  ? 'Type your search phrase'
+                  : 'No matches')));
     }
     return SizedBox(
       height: cellSize,
@@ -344,7 +348,7 @@ class _MyAppState extends State<MyApp> {
                     builder: (context, value, _) {
                       return Column(
                         children: [
-                          if (value.text.isEmpty)
+                          if (value.text.isEmpty && !_isSearchFocused)
                             SizedBox(
                                 height: 250,
                                 child: EmojiPicker(
