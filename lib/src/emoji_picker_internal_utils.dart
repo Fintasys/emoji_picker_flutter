@@ -3,7 +3,6 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:emoji_picker_flutter/src/emoji_skin_tones.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'recent_emoji.dart';
@@ -78,18 +77,6 @@ class EmojiPickerInternalUtils {
     prefs.setString('recent', jsonEncode(recentEmoji));
 
     return recentEmoji;
-  }
-
-  /// Applies skin tone to given emoji
-  Emoji applySkinTone(Emoji emoji, String color) {
-    final codeUnits = emoji.emoji.codeUnits;
-    var result = List<int>.empty(growable: true)
-      ..addAll(codeUnits.sublist(0, min(codeUnits.length, 2)))
-      ..addAll(color.codeUnits);
-    if (codeUnits.length >= 2) {
-      result.addAll(codeUnits.sublist(2));
-    }
-    return emoji.copyWith(emoji: String.fromCharCodes(result));
   }
 
   /// Remove skin tone from given emoji

@@ -83,6 +83,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void dispose() {
     _controller.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
@@ -184,7 +185,7 @@ class _MyAppState extends State<MyApp> {
               child: SizedBox(
                   height: 250,
                   child: EmojiPicker(
-                    onEmojiSelected: (Category category, Emoji emoji) {
+                    onEmojiSelected: (Category? category, Emoji emoji) {
                       _onEmojiSelected(emoji);
                     },
                     onBackspacePressed: _onBackspacePressed,
