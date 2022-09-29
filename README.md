@@ -27,7 +27,7 @@ Yet another Emoji Picker for Flutter 🤩
 
 ```dart
 EmojiPicker(
-    onEmojiSelected: (category, emoji) {
+    onEmojiSelected: (Category category, Emoji emoji) {
         // Do something when emoji is tapped (optional)
     },
     onBackspacePressed: () {
@@ -120,7 +120,7 @@ class _CustomViewState extends State<CustomView> {
 }
 
 EmojiPicker(
-    onEmojiSelected: (category, emoji) { /* ...*/ },
+    onEmojiSelected: (Category category, Emoji emoji) { /* ...*/ },
     config: Config( /* ...*/ ),
     customWidget: (config, state) => CustomView(config, state),
 )
