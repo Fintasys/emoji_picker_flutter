@@ -2,6 +2,7 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'emoji_picker_flutter_method_channel.dart';
 
+/// EmojiPickerFlutterPlatform
 abstract class EmojiPickerFlutterPlatform extends PlatformInterface {
   /// Constructs a EmojiPickerFlutterPlatform.
   EmojiPickerFlutterPlatform() : super(token: _token);
@@ -22,9 +23,5 @@ abstract class EmojiPickerFlutterPlatform extends PlatformInterface {
   static set instance(EmojiPickerFlutterPlatform instance) {
     PlatformInterface.verifyToken(instance, _token);
     _instance = instance;
-  }
-
-  Future<String?> getPlatformVersion() {
-    throw UnimplementedError('platformVersion() has not been implemented.');
   }
 }

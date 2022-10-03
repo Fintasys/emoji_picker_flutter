@@ -8,11 +8,4 @@ class MethodChannelEmojiPickerFlutter extends EmojiPickerFlutterPlatform {
   /// The method channel used to interact with the native platform.
   @visibleForTesting
   final methodChannel = const MethodChannel('emoji_picker_flutter');
-
-  @override
-  Future<String?> getPlatformVersion() async {
-    final version =
-        await methodChannel.invokeMethod<String>('getPlatformVersion');
-    return version;
-  }
 }
