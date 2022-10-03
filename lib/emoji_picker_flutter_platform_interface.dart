@@ -8,7 +8,8 @@ abstract class EmojiPickerFlutterPlatform extends PlatformInterface {
 
   static final Object _token = Object();
 
-  static EmojiPickerFlutterPlatform _instance = MethodChannelEmojiPickerFlutter();
+  static EmojiPickerFlutterPlatform _instance =
+      MethodChannelEmojiPickerFlutter();
 
   /// The default instance of [EmojiPickerFlutterPlatform] to use.
   ///
