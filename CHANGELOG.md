@@ -1,3 +1,6 @@
+## 1.4.1
+- Code cleanup and optimizations in DefaultEmojiPickerView (thx @PankovSerge)
+
 ## 1.4.0
 - Add support for custom fonts ✍️ (thx @yendacoder)
 - Refactor to make components reusable and add example for search (thx @yendacoder)
