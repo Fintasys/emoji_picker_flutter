@@ -29,13 +29,13 @@ mixin SkinToneOverlayStateMixin<T extends StatefulWidget> on State<T> {
         .map((skinTone) => utils.applySkinTone(emoji, skinTone))
         .toList();
 
-    final position = _calculateEmojiPosition(context, index, config.columns,
+    final positionRect = _calculateEmojiPosition(context, index, config.columns,
         skinToneCount, scrollControllerOffset, tabBarHeight);
 
     _overlay = OverlayEntry(
       builder: (context) => Positioned(
-        left: position.left,
-        top: position.top,
+        left: positionRect.left,
+        top: positionRect.top,
         child: Material(
           elevation: 4.0,
           child: Container(
@@ -43,32 +43,26 @@ mixin SkinToneOverlayStateMixin<T extends StatefulWidget> on State<T> {
             color: config.skinToneDialogBgColor,
             child: Row(
               children: [
-                SizedBox(
-                  width: emojiSize,
-                  height: emojiSize,
-                  child: EmojiCell.fromConfig(
-                    categoryEmoji: categoryEmoji,
-                    config: config,
-                    emoji: emoji,
-                    emojiSize: emojiSize,
-                    onEmojiSelected: onEmojiSelected,
-                  ),
-                ),
-                EmojiCell.fromConfig(
-                  emoji: emoji,
-                  emojiSize: emojiSize,
-                  categoryEmoji: categoryEmoji,
-                  onEmojiSelected: onEmojiSelected,
-                  config: config,
+                _buildSkinToneEmoji(
+                  emoji,
+                  categoryEmoji,
+                  positionRect.width,
+                  emojiSize,
+                  onEmojiSelected,
+                  config,
                 ),
                 ...List.generate(
                   SkinTone.values.length,
-                  (index) => EmojiCell.fromConfig(
-                    emoji: skinTonesEmoji[index],
-                    emojiSize: emojiSize,
-                    categoryEmoji: categoryEmoji,
-                    onEmojiSelected: onEmojiSelected,
-                    config: config,
+                  (index) => SizedBox(
+                    width: positionRect.width,
+                    height: positionRect.width,
+                    child: _buildSkinToneEmoji(
+                        skinTonesEmoji[index],
+                        categoryEmoji,
+                        positionRect.width,
+                        emojiSize,
+                        onEmojiSelected,
+                        config),
                   ),
                 ),
               ],
@@ -84,6 +78,26 @@ mixin SkinToneOverlayStateMixin<T extends StatefulWidget> on State<T> {
       throw Exception('Nullable skin tone overlay insert attempt');
     }
   }
+
+  Widget _buildSkinToneEmoji(
+    Emoji emoji,
+    CategoryEmoji? categoryEmoji,
+    double width,
+    double emojiSize,
+    OnEmojiSelected onEmojiSelected,
+    Config config,
+  ) =>
+      SizedBox(
+        width: width,
+        height: width,
+        child: EmojiCell.fromConfig(
+          emoji: emoji,
+          emojiSize: emojiSize,
+          categoryEmoji: categoryEmoji,
+          onEmojiSelected: onEmojiSelected,
+          config: config,
+        ),
+      );
 
   Rect _calculateEmojiPosition(BuildContext context, int index, int columns,
       int skinToneCount, double scrollControllerOffset, double tabBarHeight) {
