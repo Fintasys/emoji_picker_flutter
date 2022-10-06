@@ -53,17 +53,13 @@ mixin SkinToneOverlayStateMixin<T extends StatefulWidget> on State<T> {
                 ),
                 ...List.generate(
                   SkinTone.values.length,
-                  (index) => SizedBox(
-                    width: positionRect.width,
-                    height: positionRect.width,
-                    child: _buildSkinToneEmoji(
-                        skinTonesEmoji[index],
-                        categoryEmoji,
-                        positionRect.width,
-                        emojiSize,
-                        onEmojiSelected,
-                        config),
-                  ),
+                  (index) => _buildSkinToneEmoji(
+                      skinTonesEmoji[index],
+                      categoryEmoji,
+                      positionRect.width,
+                      emojiSize,
+                      onEmojiSelected,
+                      config),
                 ),
               ],
             ),
