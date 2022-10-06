@@ -34,14 +34,14 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
         length: widget.state.categoryEmoji.length,
         vsync: this);
     _pageController = PageController(initialPage: initCategory)
-      ..addListener(closeSkinToneDialog);
-    _scrollController.addListener(closeSkinToneDialog);
+      ..addListener(closeSkinToneOverlay);
+    _scrollController.addListener(closeSkinToneOverlay);
     super.initState();
   }
 
   @override
   void dispose() {
-    closeSkinToneDialog();
+    closeSkinToneOverlay();
     _pageController.dispose();
     _tabController.dispose();
     _scrollController.dispose();
@@ -96,7 +96,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
           controller: _tabController,
           labelPadding: EdgeInsets.zero,
           onTap: (index) {
-            closeSkinToneDialog();
+            closeSkinToneOverlay();
             _pageController.jumpToPage(index);
           },
           tabs: widget.state.categoryEmoji
@@ -142,7 +142,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     }
     // Build page normally
     return GestureDetector(
-      onTap: closeSkinToneDialog,
+      onTap: closeSkinToneOverlay,
       child: GridView.count(
           scrollDirection: Axis.vertical,
           controller: _scrollController,
@@ -159,7 +159,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
                 categoryEmoji: categoryEmoji,
                 index: i,
                 onEmojiSelected: (category, emoji) {
-                  closeSkinToneDialog();
+                  closeSkinToneOverlay();
                   widget.state.onEmojiSelected(category, emoji);
                 },
                 onSkinToneDialogRequested: _openSkinToneDialog,
@@ -182,12 +182,11 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     CategoryEmoji? categoryEmoji,
     int index,
   ) {
-    closeSkinToneDialog();
+    closeSkinToneOverlay();
     if (!emoji.hasSkinTone || !widget.config.enableSkinTones) {
       return;
     }
-    buildSkinToneOverlay(
-        context,
+    showSkinToneOverlay(
         emoji,
         emojiSize,
         categoryEmoji,
@@ -198,15 +197,10 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
         _tabBarHeight,
         _utils,
         _onSkinTonedEmojiSelected);
-    if (skinToneOverlay != null) {
-      Overlay.of(context)?.insert(skinToneOverlay!);
-    } else {
-      throw Exception('Nullable skin tone overlay insert attempt');
-    }
   }
 
   void _onSkinTonedEmojiSelected(Category? category, Emoji emoji) {
     widget.state.onEmojiSelected(category, emoji);
-    closeSkinToneDialog();
+    closeSkinToneOverlay();
   }
 }

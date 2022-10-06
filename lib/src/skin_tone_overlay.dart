@@ -5,18 +5,14 @@ import 'package:flutter/material.dart';
 mixin SkinToneOverlayStateMixin<T extends StatefulWidget> on State<T> {
   OverlayEntry? _overlay;
 
-  /// Overlay getter
-  OverlayEntry? get skinToneOverlay => _overlay;
-
   /// Overlay close & resources disposal
-  void closeSkinToneDialog() {
+  void closeSkinToneOverlay() {
     _overlay?.remove();
     _overlay = null;
   }
 
   /// Overlay for SkinTone
-  void buildSkinToneOverlay(
-    BuildContext context,
+  void showSkinToneOverlay(
     Emoji emoji,
     double emojiSize,
     CategoryEmoji? categoryEmoji,
@@ -81,6 +77,12 @@ mixin SkinToneOverlayStateMixin<T extends StatefulWidget> on State<T> {
         ),
       ),
     );
+
+    if (_overlay != null) {
+      Overlay.of(context)?.insert(_overlay!);
+    } else {
+      throw Exception('Nullable skin tone overlay insert attempt');
+    }
   }
 
   Rect _calculateEmojiPosition(BuildContext context, int index, int columns,
