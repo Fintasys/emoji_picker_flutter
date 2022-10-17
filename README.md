@@ -55,7 +55,8 @@ EmojiPicker(
           'No Recents',
           style: TextStyle(fontSize: 20, color: Colors.black26),
           textAlign: TextAlign.center,
-        ),
+        ), // Needs to be const Widget
+        loadingIndicator: const SizedBox.shrink(), // Needs to be const Widget
         tabIndicatorAnimDuration: kTabScrollDuration,    
         categoryIcons: const CategoryIcons(),
         buttonMode: ButtonMode.MATERIAL,
@@ -78,7 +79,6 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 | indicatorColor        | The color of the category indicator                                                       | Colors.blue      |
 | iconColor    | The color of the category icons                                                       | Colors.grey      |
 | iconColorSelected      | The color of the category icon when selected                                                 | Colors.blue |
-| progressIndicatorColor     | The color of the loading indicator during initialization                                | Colors.blue     |
 | backspaceColor     | The color of the backspace icon button                               | Colors.blue     |
 | skinToneDialogBgColor     | The background color of the skin tone dialog                               | Colors.white     |
 | skinToneIndicatorColor     | Color of the small triangle next to multiple skin tone emoji                               | Colors.grey     |
@@ -86,8 +86,8 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 | showRecentsTab     | Show extra tab with recently used emoji                                | true     |
 | recentsLimit     | Limit of recently used emoji that will be saved                                | 28     |
 | replaceEmojiOnLimitExceed | Replace latest emoji on recents list on limit exceed | false
-| noRecents     |  A widget (usually [Text]) to be displayed if no recent emojis to display                                | Text('No Recents', style: TextStyle(fontSize: 20, color: Colors.black26), textAlign: TextAlign.center)     |
-| loadingIndicator     |  A widget to display while emoji picker is initializing                                | SizedBox.shrink()     |
+| noRecents     |  A widget (usually [Text]) to be displayed if no recent emojis to display. Needs to be `const` Widget!                               | Text('No Recents', style: TextStyle(fontSize: 20, color: Colors.black26), textAlign: TextAlign.center)     |
+| loadingIndicator     |  A widget to display while emoji picker is initializing. Needs to be `const` Widget!                                | SizedBox.shrink()     |
 | tabIndicatorAnimDuration     | Duration of tab indicator to animate to next category                                | Duration(milliseconds: 300)     |
 | categoryIcons     | Determines the icon to display for each Category. You can change icons by setting them in the constructor.                               | CategoryIcons()     |
 | buttonMode     | Choose between Material and Cupertino button style                                | ButtonMode.MATERIAL     |

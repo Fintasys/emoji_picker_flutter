@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'recent_emoji.dart';
@@ -28,7 +29,7 @@ class EmojiPickerInternalUtils {
   /// Filters out emojis not supported on the platform
   Future<List<CategoryEmoji>> filterUnsupported(
       List<CategoryEmoji> data) async {
-    if (!Platform.isAndroid) {
+    if (kIsWeb || !Platform.isAndroid) {
       return data;
     }
     final futures = [for (final cat in data) _getAvailableEmojis(cat)];
