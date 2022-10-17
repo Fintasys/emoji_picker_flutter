@@ -10,6 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  plugin_platform_interface: ^2.0.2
   shared_preferences: ^2.0.15
 
 dev_dependencies:
@@ -25,3 +26,10 @@ flutter:
         pluginClass: EmojiPickerFlutterPlugin
       macos:
         pluginClass: EmojiPickerFlutterPlugin
+      windows:
+        pluginClass: EmojiPickerFlutterPluginCApi
+      linux:
+        pluginClass: EmojiPickerFlutterPlugin
+      web:
+        pluginClass: EmojiPickerFlutterPluginWeb
+        fileName: emoji_picker_flutter_web.dart 
