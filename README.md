@@ -86,8 +86,8 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 | showRecentsTab     | Show extra tab with recently used emoji                                | true     |
 | recentsLimit     | Limit of recently used emoji that will be saved                                | 28     |
 | replaceEmojiOnLimitExceed | Replace latest emoji on recents list on limit exceed | false
-| noRecents     |  A widget (usually [Text]) to be displayed if no recent emojis to display                                | Text('No Recents', style: TextStyle(fontSize: 20, color: Colors.black26), textAlign: TextAlign.center)     |
-| loadingIndicator     |  A widget to display while emoji picker is initializing                                | SizedBox.shrink()     |
+| noRecents     |  A widget (usually [Text]) to be displayed if no recent emojis to display. Needs to be `const` Widget!                               | Text('No Recents', style: TextStyle(fontSize: 20, color: Colors.black26), textAlign: TextAlign.center)     |
+| loadingIndicator     |  A widget to display while emoji picker is initializing. Needs to be `const` Widget!                                | SizedBox.shrink()     |
 | tabIndicatorAnimDuration     | Duration of tab indicator to animate to next category                                | Duration(milliseconds: 300)     |
 | categoryIcons     | Determines the icon to display for each Category. You can change icons by setting them in the constructor.                               | CategoryIcons()     |
 | buttonMode     | Choose between Material and Cupertino button style                                | ButtonMode.MATERIAL     |
