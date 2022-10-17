@@ -25,3 +25,6 @@ flutter:
         pluginClass: EmojiPickerFlutterPlugin
       macos:
         pluginClass: EmojiPickerFlutterPlugin
+      web:
+        pluginClass: EmojiPickerFlutterPluginWeb
+        fileName: emoji_picker_flutter_web.dart 
