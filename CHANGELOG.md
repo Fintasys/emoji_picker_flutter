@@ -1,3 +1,8 @@
+## 1.5.0
+- Add support for Web Platform
+- Add support for Windows Platform
+- Add support for Linux Platform
+
 ## 1.4.1
 - Code cleanup and optimizations in DefaultEmojiPickerView (thx @PankovSerge)
 
