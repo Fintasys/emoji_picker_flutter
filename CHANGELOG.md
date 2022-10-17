@@ -4,6 +4,7 @@
 ## 1.4.0
 - Add support for custom fonts ✍️ (thx @yendacoder)
 - Refactor to make components reusable and add example for search (thx @yendacoder)
+- Breaking: Remove `progressIndicatorColor` in favor of `loadingIndicator` in Config
 
 ## 1.3.1
 - Add direct support for TextEditingController (thx @LostInDarkMath)

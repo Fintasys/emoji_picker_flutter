@@ -78,7 +78,6 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 | indicatorColor        | The color of the category indicator                                                       | Colors.blue      |
 | iconColor    | The color of the category icons                                                       | Colors.grey      |
 | iconColorSelected      | The color of the category icon when selected                                                 | Colors.blue |
-| progressIndicatorColor     | The color of the loading indicator during initialization                                | Colors.blue     |
 | backspaceColor     | The color of the backspace icon button                               | Colors.blue     |
 | skinToneDialogBgColor     | The background color of the skin tone dialog                               | Colors.white     |
 | skinToneIndicatorColor     | Color of the small triangle next to multiple skin tone emoji                               | Colors.grey     |
