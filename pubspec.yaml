@@ -28,6 +28,8 @@ flutter:
         pluginClass: EmojiPickerFlutterPlugin
       windows:
         pluginClass: EmojiPickerFlutterPluginCApi
+      linux:
+        pluginClass: EmojiPickerFlutterPlugin
       web:
         pluginClass: EmojiPickerFlutterPluginWeb
         fileName: emoji_picker_flutter_web.dart 
