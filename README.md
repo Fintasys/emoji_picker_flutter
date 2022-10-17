@@ -55,7 +55,8 @@ EmojiPicker(
           'No Recents',
           style: TextStyle(fontSize: 20, color: Colors.black26),
           textAlign: TextAlign.center,
-        ),
+        ), // Needs to be const Widget
+        loadingIndicator: const SizedBox.shrink(), // Needs to be const Widget
         tabIndicatorAnimDuration: kTabScrollDuration,    
         categoryIcons: const CategoryIcons(),
         buttonMode: ButtonMode.MATERIAL,
