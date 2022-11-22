@@ -80,8 +80,8 @@ class EmojiPickerInternalUtils {
     return recentEmoji;
   }
 
-  /// Clears the list of recent emojis
-  Future<void> clearRecentEmojis() async {
+  /// Clears the list of recent emojis in local storage
+  Future<void> clearRecentEmojisInLocalStorage() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('recent', jsonEncode([]));
   }

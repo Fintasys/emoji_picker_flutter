@@ -102,7 +102,7 @@ class EmojiPickerUtils {
   Future<void> clearRecentEmojis(
       {required GlobalKey<EmojiPickerState> key}) async {
     await EmojiPickerInternalUtils()
-        .clearRecentEmojis()
+        .clearRecentEmojisInLocalStorage()
         .then((_) => key.currentState?.updateRecentEmoji([], refresh: true));
   }
 }
