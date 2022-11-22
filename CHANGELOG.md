@@ -1,5 +1,6 @@
 ## 1.5.1
 - Update ReadMe and example
+- Add method to clear list of recent Emojis in EmojiPickerUtils
 
 ## 1.5.0
 - Add support for Web Platform

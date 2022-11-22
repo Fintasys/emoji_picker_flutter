@@ -127,6 +127,7 @@ EmojiPicker(
 ```
 
 ## Extended usage with EmojiPickerUtils
+Find usage example [here](https://github.com/Fintasys/emoji_picker_flutter/blob/master/example/lib/main-key.dart)
 
 ```dart
 // Get recently used emoji
@@ -141,6 +142,9 @@ final newRecentEmojis = await EmojiPickerUtils().addEmojiToRecentlyUsed(key: key
 
 // Highlight emojis with custom style spans
 final textSpans = EmojiPickerUtils().setEmojiTextStyle('text', emojiStyle: style);
+
+// Clear list of recent Emojis
+EmojiPickerUtils().clearRecentEmojis(key: key);
 ```
 
 ## Feel free to contribute to this package!! 🙇‍♂️
