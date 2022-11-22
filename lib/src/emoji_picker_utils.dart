@@ -103,6 +103,6 @@ class EmojiPickerUtils {
       {required GlobalKey<EmojiPickerState> key}) async {
     await EmojiPickerInternalUtils()
         .clearRecentEmojis()
-        .then((recentEmojiList) => key.currentState?.updateRecentEmoji([]));
+        .then((_) => key.currentState?.updateRecentEmoji([], refresh: true));
   }
 }
