@@ -101,7 +101,7 @@ class EmojiPickerUtils {
   /// Clears the list of recent emojis
   Future<void> clearRecentEmojis(
       {required GlobalKey<EmojiPickerState> key}) async {
-    await EmojiPickerInternalUtils()
+    return await EmojiPickerInternalUtils()
         .clearRecentEmojisInLocalStorage()
         .then((_) => key.currentState?.updateRecentEmoji([], refresh: true));
   }
