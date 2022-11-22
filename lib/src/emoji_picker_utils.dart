@@ -97,4 +97,12 @@ class EmojiPickerUtils {
     }
     return emoji.copyWith(emoji: String.fromCharCodes(result));
   }
+
+  /// Clears the list of recent emojis
+  Future<void> clearRecentEmojis(
+      {required GlobalKey<EmojiPickerState> key}) async {
+    await EmojiPickerInternalUtils()
+        .clearRecentEmojis()
+        .then((recentEmojiList) => key.currentState?.updateRecentEmoji([]));
+  }
 }
