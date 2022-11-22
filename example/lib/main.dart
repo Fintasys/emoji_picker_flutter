@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/foundation.dart' as foundation;
 import 'package:flutter/material.dart';
@@ -99,7 +97,10 @@ class _MyAppState extends State<MyApp> {
                       columns: 7,
                       // Issue: https://github.com/flutter/flutter/issues/28894
                       emojiSizeMax: 32 *
-                          (!foundation.kIsWeb && Platform.isIOS ? 1.30 : 1.0),
+                          (foundation.defaultTargetPlatform ==
+                                  TargetPlatform.iOS
+                              ? 1.30
+                              : 1.0),
                       verticalSpacing: 0,
                       horizontalSpacing: 0,
                       gridPadding: EdgeInsets.zero,

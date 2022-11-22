@@ -1,3 +1,6 @@
+## 1.5.1
+- Update ReadMe and example
+
 ## 1.5.0
 - Add support for Web Platform
 - Add support for Windows Platform
