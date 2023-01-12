@@ -192,21 +192,28 @@ class EmojiPickerState extends State<EmojiPicker> {
     if (widget.textEditingController != null) {
       final controller = widget.textEditingController!;
 
-      final selection = controller.value.selection;
       final text = controller.value.text;
-      final cursorPosition = controller.selection.base.offset;
+      var cursorPosition = controller.selection.base.offset;
 
+      // If cursor is not set, then place it at the end of the textfield
       if (cursorPosition < 0) {
-        widget.onBackspacePressed?.call();
-        return;
+        controller.selection = TextSelection(
+          baseOffset: controller.text.length,
+          extentOffset: controller.text.length,
+        );
+        cursorPosition = controller.selection.base.offset;
       }
 
-      final newTextBeforeCursor =
-          selection.textBefore(text).characters.skipLast(1).toString();
-      controller
-        ..text = newTextBeforeCursor + selection.textAfter(text)
-        ..selection = TextSelection.fromPosition(
-            TextPosition(offset: newTextBeforeCursor.length));
+      if (cursorPosition >= 0) {
+        final selection = controller.value.selection;
+        final newTextBeforeCursor =
+            selection.textBefore(text).characters.skipLast(1).toString();
+        print(newTextBeforeCursor);
+        controller
+          ..text = newTextBeforeCursor + selection.textAfter(text)
+          ..selection = TextSelection.fromPosition(
+              TextPosition(offset: newTextBeforeCursor.length));
+      }
     }
 
     widget.onBackspacePressed?.call();
@@ -270,9 +277,7 @@ class EmojiPickerState extends State<EmojiPicker> {
     _state = EmojiViewState(
       _categoryEmoji,
       _getOnEmojiListener(),
-      widget.onBackspacePressed == null && widget.textEditingController == null
-          ? null
-          : _onBackspacePressed,
+      widget.onBackspacePressed == null ? null : _onBackspacePressed,
     );
     if (mounted) {
       setState(() {
