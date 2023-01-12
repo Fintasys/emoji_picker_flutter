@@ -32,6 +32,7 @@ EmojiPicker(
     },
     onBackspacePressed: () {
         // Do something when the user taps the backspace button (optional)
+        // Set it to null to hide the Backspace-Button
     },
     textEditingController: textEditionController, // pass here the same [TextEditingController] that is connected to your input field, usually a [TextFormField]
     config: Config(
@@ -96,7 +97,7 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 | emojiTextStyle     | Text style to apply to individual emoji icons. Can be used to define custom emoji font either with GoogleFonts library or bundled with the app.  | null    |
 
 ## Backspace-Button
-You can add an Backspace-Button to the end category list by adding the callback method `onBackspacePressed: () { }` to the EmojiPicker-Widget. This will make it easier for your user to remove an added Emoji without showing the keyboard. Check out the example for more details about usage.
+You can add a Backspace-Button to the end category list by adding the callback method `onBackspacePressed: () { }` to the EmojiPicker-Widget. This will make it easier for your user to remove an added Emoji without showing the keyboard. Check out the example for more details about usage. Set it to null to hide the Backspace-Button.
 
 <img src="https://user-images.githubusercontent.com/11667234/182386154-b4b2435f-3a85-454d-a671-f857e5a1c7bd.png" width="300">
 
