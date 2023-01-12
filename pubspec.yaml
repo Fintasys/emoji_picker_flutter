@@ -34,4 +34,4 @@ flutter:
         pluginClass: EmojiPickerFlutterPlugin
       web:
         pluginClass: EmojiPickerFlutterPluginWeb
-        fileName: emoji_picker_flutter_web.dart 
+        fileName: emoji_picker_flutter_web.dart
