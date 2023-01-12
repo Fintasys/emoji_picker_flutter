@@ -1,3 +1,7 @@
+## 1.5.2
+- Fix issue with hiding backspace button (set null to hide)
+- Migrate jcenter to mavenCentral (thx @duyjack)
+
 ## 1.5.1
 - Update ReadMe and example 📃
 - Add method `clearRecentEmojis` in EmojiPickerUtils to clear the recent Emojis
