@@ -1119,7 +1119,6 @@ const List<CategoryEmoji> defaultEmojiSet = [
     Emoji('🚬', 'Cigarette'),
     Emoji('⚰', 'Coffin'),
     Emoji('⚱', 'Funeral Urn'),
-    Emoji('🗿', 'Moai'),
     Emoji('🚰', 'Potable Water')
   ]),
 
