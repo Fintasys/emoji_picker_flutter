@@ -1,3 +1,6 @@
+## 1.5.4
+- Restore compatibility of older Flutter versions
+
 ## 1.5.3
 - Add Unicode 14 Emoji 🫡
 
