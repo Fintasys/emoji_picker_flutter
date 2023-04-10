@@ -1,3 +1,6 @@
+## 1.5.3
+- Add Unicode 14 Emoji 🫡
+
 ## 1.5.2
 - Fix issue with hiding backspace button (set null to hide)
 - Migrate jcenter to mavenCentral (thx @duyjack)
