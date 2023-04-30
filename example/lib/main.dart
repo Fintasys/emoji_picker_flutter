@@ -24,6 +24,15 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    final emojiPadding = 9 * 2;
+    final emojiSize =
+        32 * // Issue: https://github.com/flutter/flutter/issues/28894
+            (foundation.defaultTargetPlatform == TargetPlatform.iOS
+                ? 1.30
+                : 1.0);
+    final numEmojiColumns =
+        (screenSize.width / (emojiSize + emojiPadding)).floor();
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.white,
@@ -94,13 +103,8 @@ class _MyAppState extends State<MyApp> {
                   child: EmojiPicker(
                     textEditingController: _controller,
                     config: Config(
-                      columns: 7,
-                      // Issue: https://github.com/flutter/flutter/issues/28894
-                      emojiSizeMax: 32 *
-                          (foundation.defaultTargetPlatform ==
-                                  TargetPlatform.iOS
-                              ? 1.30
-                              : 1.0),
+                      columns: numEmojiColumns,
+                      emojiSizeMax: emojiSize,
                       verticalSpacing: 0,
                       horizontalSpacing: 0,
                       gridPadding: EdgeInsets.zero,
