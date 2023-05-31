@@ -34,7 +34,7 @@ EmojiPicker(
         // Do something when the user taps the backspace button (optional)
         // Set it to null to hide the Backspace-Button
     },
-    textEditingController: textEditionController, // pass here the same [TextEditingController] that is connected to your input field, usually a [TextFormField]
+    textEditingController: textEditingController, // pass here the same [TextEditingController] that is connected to your input field, usually a [TextFormField]
     config: Config(
         columns: 7,
         emojiSizeMax: 32 * (foundation.defaultTargetPlatform == TargetPlatform.iOS ? 1.30 : 1.0), // Issue: https://github.com/flutter/flutter/issues/28894
