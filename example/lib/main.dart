@@ -121,7 +121,7 @@ class _MyAppState extends State<MyApp> {
                       skinToneDialogBgColor: Colors.white,
                       skinToneIndicatorColor: Colors.grey,
                       enableSkinTones: true,
-                      recentTabBehavior: RecentTabBehavior.POPULAR,
+                      recentTabBehavior: RecentTabBehavior.RECENT,
                       recentsLimit: 28,
                       replaceEmojiOnLimitExceed: false,
                       noRecents: const Text(
