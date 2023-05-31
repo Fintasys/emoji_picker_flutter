@@ -6,13 +6,14 @@ import 'package:emoji_picker_flutter/src/emoji.dart';
 import 'package:emoji_picker_flutter/src/emoji_picker_internal_utils.dart';
 import 'package:emoji_picker_flutter/src/emoji_view_state.dart';
 import 'package:emoji_picker_flutter/src/recent_emoji.dart';
+import 'package:emoji_picker_flutter/src/recent_tab_behavior.dart';
 import 'package:flutter/material.dart';
 
 /// All the possible categories that [Emoji] can be put into
 ///
 /// All [Category] are shown in the category bar
 enum Category {
-  /// Recent emojis
+  /// Recent / Popular emojis
   RECENT,
 
   /// Smiley emojis
@@ -222,7 +223,17 @@ class EmojiPickerState extends State<EmojiPicker> {
   // Add recent emoji handling to tap listener
   OnEmojiSelected _getOnEmojiListener() {
     return (category, emoji) {
-      if (widget.config.showRecentsTab) {
+      if (widget.config.recentTabBehavior == RecentTabBehavior.POPULAR) {
+        _emojiPickerInternalUtils
+            .addEmojiToPopularUsed(emoji: emoji, config: widget.config)
+            .then((newRecentEmoji) => {
+                  // we don't want to rebuild the widget if user is currently on
+                  // the RECENT tab, it will make emojis jump since sorting
+                  // is based on the use frequency
+                  updateRecentEmoji(newRecentEmoji,
+                      refresh: category != Category.RECENT),
+                });
+      } else if (widget.config.recentTabBehavior == RecentTabBehavior.RECENT) {
         _emojiPickerInternalUtils
             .addEmojiToRecentlyUsed(emoji: emoji, config: widget.config)
             .then((newRecentEmoji) => {
@@ -265,7 +276,8 @@ class EmojiPickerState extends State<EmojiPicker> {
   // Initialize emoji data
   Future<void> _updateEmojis() async {
     _categoryEmoji.clear();
-    if (widget.config.showRecentsTab) {
+    if ([RecentTabBehavior.RECENT, RecentTabBehavior.POPULAR]
+        .contains(widget.config.recentTabBehavior)) {
       _recentEmoji = await _emojiPickerInternalUtils.getRecentEmojis();
       final recentEmojiMap = _recentEmoji.map((e) => e.emoji).toList();
       _categoryEmoji.add(CategoryEmoji(Category.RECENT, recentEmojiMap));

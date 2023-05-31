@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:emoji_picker_flutter/src/category_emoji.dart';
 import 'package:emoji_picker_flutter/src/category_icons.dart';
 import 'package:emoji_picker_flutter/src/emoji_picker.dart';
+import 'package:emoji_picker_flutter/src/recent_tab_behavior.dart';
 import 'package:flutter/material.dart';
 
 /// Default Widget if no recent is available
@@ -30,7 +31,7 @@ class Config {
     this.skinToneDialogBgColor = Colors.white,
     this.skinToneIndicatorColor = Colors.grey,
     this.enableSkinTones = true,
-    this.showRecentsTab = true,
+    this.recentTabBehavior = RecentTabBehavior.RECENT,
     this.recentsLimit = 28,
     this.replaceEmojiOnLimitExceed = false,
     this.noRecents = DefaultNoRecentsWidget,
@@ -84,8 +85,8 @@ class Config {
   /// Enable feature to select a skin tone of certain emoji's
   final bool enableSkinTones;
 
-  /// Show extra tab with recently used emoji
-  final bool showRecentsTab;
+  /// Behavior of Recent Tab (Recent, Popular)
+  final RecentTabBehavior recentTabBehavior;
 
   /// Limit of recently used emoji that will be saved
   final int recentsLimit;
@@ -173,7 +174,7 @@ class Config {
         other.skinToneDialogBgColor == skinToneDialogBgColor &&
         other.skinToneIndicatorColor == skinToneIndicatorColor &&
         other.enableSkinTones == enableSkinTones &&
-        other.showRecentsTab == showRecentsTab &&
+        other.recentTabBehavior == recentTabBehavior &&
         other.recentsLimit == recentsLimit &&
         other.noRecents == noRecents &&
         other.loadingIndicator == loadingIndicator &&
@@ -202,7 +203,7 @@ class Config {
       skinToneDialogBgColor.hashCode ^
       skinToneIndicatorColor.hashCode ^
       enableSkinTones.hashCode ^
-      showRecentsTab.hashCode ^
+      recentTabBehavior.hashCode ^
       recentsLimit.hashCode ^
       noRecents.hashCode ^
       loadingIndicator.hashCode ^

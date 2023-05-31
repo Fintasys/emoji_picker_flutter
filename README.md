@@ -50,7 +50,7 @@ EmojiPicker(
         skinToneDialogBgColor: Colors.white,
         skinToneIndicatorColor: Colors.grey,
         enableSkinTones: true,
-        showRecentsTab: true,
+        recentTabBehavior: RecentTabBehavior.RECENT,
         recentsLimit: 28,
         noRecents: const Text(
           'No Recents',
@@ -84,7 +84,7 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 | skinToneDialogBgColor     | The background color of the skin tone dialog                               | Colors.white     |
 | skinToneIndicatorColor     | Color of the small triangle next to multiple skin tone emoji                               | Colors.grey     |
 | enableSkinTones     | Enable feature to select a skin tone of certain emoji's                               | true     |
-| showRecentsTab     | Show extra tab with recently used emoji                                | true     |
+| recentTabBehavior     | Show extra tab with recently / popular used emoji                                | RecentTabBehavior.RECENT    |
 | recentsLimit     | Limit of recently used emoji that will be saved                                | 28     |
 | replaceEmojiOnLimitExceed | Replace latest emoji on recents list on limit exceed | false
 | noRecents     |  A widget (usually [Text]) to be displayed if no recent emojis to display. Needs to be `const` Widget!                               | Text('No Recents', style: TextStyle(fontSize: 20, color: Colors.black26), textAlign: TextAlign.center)     |

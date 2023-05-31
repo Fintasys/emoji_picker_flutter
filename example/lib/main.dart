@@ -22,6 +22,13 @@ class _MyAppState extends State<MyApp> {
     super.dispose();
   }
 
+  _onBackspacePressed() {
+    _controller
+      ..text = _controller.text.characters.toString()
+      ..selection = TextSelection.fromPosition(
+          TextPosition(offset: _controller.text.length));
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -93,6 +100,7 @@ class _MyAppState extends State<MyApp> {
                   height: 250,
                   child: EmojiPicker(
                     textEditingController: _controller,
+                    onBackspacePressed: _onBackspacePressed,
                     config: Config(
                       columns: 7,
                       // Issue: https://github.com/flutter/flutter/issues/28894
@@ -113,7 +121,7 @@ class _MyAppState extends State<MyApp> {
                       skinToneDialogBgColor: Colors.white,
                       skinToneIndicatorColor: Colors.grey,
                       enableSkinTones: true,
-                      showRecentsTab: true,
+                      recentTabBehavior: RecentTabBehavior.RECENT,
                       recentsLimit: 28,
                       replaceEmojiOnLimitExceed: false,
                       noRecents: const Text(
