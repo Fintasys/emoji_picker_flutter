@@ -47,8 +47,39 @@ class EmojiPickerInternalUtils {
     return json.map<RecentEmoji>(RecentEmoji.fromJson).toList();
   }
 
-  /// Add an emoji to recently used list or increase its counter
+  /// Add an emoji to recently used list
   Future<List<RecentEmoji>> addEmojiToRecentlyUsed(
+      {required Emoji emoji, Config config = const Config()}) async {
+    // Remove emoji's skin tone in Recent-Category
+    if (emoji.hasSkinTone) {
+      emoji = removeSkinTone(emoji);
+    }
+    var recentEmoji = await getRecentEmojis();
+    var recentEmojiIndex =
+        recentEmoji.indexWhere((element) => element.emoji.emoji == emoji.emoji);
+    if (recentEmojiIndex != -1) {
+      // Already exist in recent list
+      // Remove it
+      recentEmoji.removeAt(recentEmojiIndex);
+    }
+    // Add it first position
+    recentEmoji.insert(0, RecentEmoji(emoji, 0));
+
+    // Limit entries to recentsLimit
+    if (recentEmoji.length == config.recentsLimit &&
+        config.replaceEmojiOnLimitExceed) {
+      recentEmoji =
+          recentEmoji.sublist(0, min(config.recentsLimit, recentEmoji.length));
+    }
+    // save locally
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('recent', jsonEncode(recentEmoji));
+
+    return recentEmoji;
+  }
+
+  /// Add an emoji to popular used list or increase its counter
+  Future<List<RecentEmoji>> addEmojiToPopularUsed(
       {required Emoji emoji, Config config = const Config()}) async {
     // Remove emoji's skin tone in Recent-Category
     if (emoji.hasSkinTone) {

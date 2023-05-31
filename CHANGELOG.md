@@ -1,3 +1,7 @@
+## 1.6.0
+- Breaking Change: Fix behavior of recent tab, choose behavior (None, Recent, Popular) with `recentTabBehavior`. `showRecentsTab` was removed.
+- Fix typo in ReadMe (thx @nathanbacon)
+
 ## 1.5.4
 - Restore compatibility of older Flutter versions
 

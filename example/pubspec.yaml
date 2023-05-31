@@ -13,6 +13,7 @@ dependencies:
   google_fonts: ^3.0.1
   emoji_picker_flutter:
     path: ../
+  #file: ^6.1.4
 
 flutter:
   uses-material-design: true
