@@ -25,12 +25,16 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    final emojiPadding = 9*2;  // 9 pixels on both left and right sides of each emoji.
-    final emojiSize = 32 * (foundation.defaultTargetPlatform == 
-                                  TargetPlatform.iOS  // Issue: https://github.com/flutter/flutter/issues/28894
-                              ? 1.30
-                              : 1.0);
-    final numEmojiColumns = (screenSize.width/(emojiSize+emojiPadding)).floor();
+    final emojiPadding =
+        9 * 2; // 9 pixels on both left and right sides of each emoji.
+    final emojiSize = 32 *
+        (foundation.defaultTargetPlatform ==
+                TargetPlatform
+                    .iOS // Issue: https://github.com/flutter/flutter/issues/28894
+            ? 1.30
+            : 1.0);
+    final numEmojiColumns =
+        (screenSize.width / (emojiSize + emojiPadding)).floor();
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.white,
