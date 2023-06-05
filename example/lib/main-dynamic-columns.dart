@@ -25,7 +25,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    final emojiPadding = 9*2;
+    final emojiPadding = 9*2;  // 9 pixels on both left and righjt sides of each emoji.
     final emojiSize = 32 * (foundation.defaultTargetPlatform == 
                                   TargetPlatform.iOS  // Issue: https://github.com/flutter/flutter/issues/28894
                               ? 1.30
