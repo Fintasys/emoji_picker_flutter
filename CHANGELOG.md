@@ -1,3 +1,7 @@
+## 1.6.1
+- Fix issue with RecentsLimit not working
+- Add example for dynamic emoji columns based on screen width (thx to @timmaffett)
+
 ## 1.6.0
 - Breaking Change: Fix behavior of recent tab, choose behavior (None, Recent, Popular) with `recentTabBehavior`. `showRecentsTab` was removed.
 - Fix typo in ReadMe (thx @nathanbacon)
