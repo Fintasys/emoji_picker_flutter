@@ -46,7 +46,7 @@ class MyAppState extends State<MyApp> {
   /// [textEditingController] parameter in the [EmojiPicker] constructor
   /// (see basic example).
   _onEmojiSelected(Emoji emoji) {
-    print('_onEmojiSelected: ${emoji.emoji}');
+    debugPrint('_onEmojiSelected: ${emoji.emoji}');
 
     if (_controller.selection.base.offset < 0) {
       _updateTextEditingValue(TextEditingValue(
@@ -68,7 +68,7 @@ class MyAppState extends State<MyApp> {
   }
 
   _onBackspacePressed() {
-    print('_onBackspacePressed');
+    debugPrint('_onBackspacePressed');
     if (_controller.selection.base.offset < 0) {
       return;
     }
