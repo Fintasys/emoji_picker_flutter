@@ -128,7 +128,7 @@ EmojiPicker(
 ```
 
 ## Extended usage with EmojiPickerUtils
-Find usage example [here](https://github.com/Fintasys/emoji_picker_flutter/blob/master/example/lib/main-key.dart)
+Find usage example [here](https://github.com/Fintasys/emoji_picker_flutter/blob/master/example/lib/main_key.dart)
 
 ```dart
 // Get recently used emoji
