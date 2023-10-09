@@ -14,5 +14,10 @@ dependencies:
   emoji_picker_flutter:
     path: ../
 
+dev_dependencies:
+  flutter_lints: ^2.0.3
+  integration_test:
+    sdk: flutter
+
 flutter:
   uses-material-design: true

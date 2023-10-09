@@ -2,17 +2,19 @@ import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 /// Example for EmojiPickerFlutter that demonstrates possible search feature
 /// implementation.
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
-  _MyAppState createState() => _MyAppState();
+  MyAppState createState() => MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class MyAppState extends State<MyApp> {
   final TextEditingController _controller = TextEditingController();
   final TextEditingController _searchController = TextEditingController();
   final ScrollController _searchScrollController = ScrollController();
@@ -72,7 +74,7 @@ class _MyAppState extends State<MyApp> {
       emojiSize,
       index,
     );
-    Overlay.of(context)?.insert(_overlay!);
+    Overlay.of(context).insert(_overlay!);
   }
 
   void _closeSkinToneDialog() {
@@ -241,6 +243,8 @@ class _MyAppState extends State<MyApp> {
     return SizedBox(
       height: cellSize,
       child: ListView(
+        controller: _searchScrollController,
+        scrollDirection: Axis.horizontal,
         children: [
           for (int i = 0; i < _searchResults.length; i++)
             SizedBox(
@@ -266,8 +270,6 @@ class _MyAppState extends State<MyApp> {
               ),
             )
         ],
-        controller: _searchScrollController,
-        scrollDirection: Axis.horizontal,
       ),
     );
   }

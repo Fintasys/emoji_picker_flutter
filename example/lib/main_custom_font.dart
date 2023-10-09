@@ -6,18 +6,20 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 /// This example covers some advanced topics, like custom emoji font,
 /// inserting emojis in [TextField] with [EditableTextState],
 /// altering the default emoji set, etc.
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
-  _MyAppState createState() => _MyAppState();
+  MyAppState createState() => MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class MyAppState extends State<MyApp> {
   final _editKey = GlobalKey();
   final _focusNode = FocusNode();
   final TextEditingController _controller =
@@ -44,7 +46,7 @@ class _MyAppState extends State<MyApp> {
   /// [textEditingController] parameter in the [EmojiPicker] constructor
   /// (see basic example).
   _onEmojiSelected(Emoji emoji) {
-    print('_onEmojiSelected: ${emoji.emoji}');
+    debugPrint('_onEmojiSelected: ${emoji.emoji}');
 
     if (_controller.selection.base.offset < 0) {
       _updateTextEditingValue(TextEditingValue(
@@ -66,7 +68,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   _onBackspacePressed() {
-    print('_onBackspacePressed');
+    debugPrint('_onBackspacePressed');
     if (_controller.selection.base.offset < 0) {
       return;
     }

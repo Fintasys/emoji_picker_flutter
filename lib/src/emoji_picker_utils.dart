@@ -49,7 +49,7 @@ class EmojiPickerUtils {
   }
 
   /// Add an emoji to recently used list or increase its counter
-  Future addEmojiToRecentlyUsed({
+  Future<void> addEmojiToRecentlyUsed({
     required GlobalKey<EmojiPickerState> key,
     required Emoji emoji,
     Config config = const Config(),
