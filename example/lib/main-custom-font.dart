@@ -6,18 +6,20 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 /// This example covers some advanced topics, like custom emoji font,
 /// inserting emojis in [TextField] with [EditableTextState],
 /// altering the default emoji set, etc.
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
-  _MyAppState createState() => _MyAppState();
+  MyAppState createState() => MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class MyAppState extends State<MyApp> {
   final _editKey = GlobalKey();
   final _focusNode = FocusNode();
   final TextEditingController _controller =

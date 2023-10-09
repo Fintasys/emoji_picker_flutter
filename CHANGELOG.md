@@ -1,6 +1,7 @@
 ## 1.6.2
 
 - remove nullability from `OverlayState`
+- Compatible with Flutter 3.13.6
 
 ## 1.6.1
 
