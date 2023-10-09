@@ -69,7 +69,7 @@ mixin SkinToneOverlayStateMixin<T extends StatefulWidget> on State<T> {
     );
 
     if (_overlay != null) {
-      Overlay.of(context)?.insert(_overlay!);
+      Overlay.of(context).insert(_overlay!);
     } else {
       throw Exception('Nullable skin tone overlay insert attempt');
     }

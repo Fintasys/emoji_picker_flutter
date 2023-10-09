@@ -72,7 +72,7 @@ class _MyAppState extends State<MyApp> {
       emojiSize,
       index,
     );
-    Overlay.of(context)?.insert(_overlay!);
+    Overlay.of(context).insert(_overlay!);
   }
 
   void _closeSkinToneDialog() {
