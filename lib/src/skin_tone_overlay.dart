@@ -107,7 +107,7 @@ mixin SkinToneOverlayStateMixin<T extends StatefulWidget> on State<T> {
     final topOffset = emojiSpace;
     final leftOffset =
         _getLeftOffset(emojiSpace, column, skinToneCount, columns);
-    final left = offset.dx + column * emojiSpace + leftOffset;
+    final left = column * emojiSpace + leftOffset;
     final top = tabBarHeight +
         offset.dy +
         row * emojiSpace -
