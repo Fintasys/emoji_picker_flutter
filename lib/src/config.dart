@@ -42,6 +42,7 @@ class Config {
     this.checkPlatformCompatibility = true,
     this.emojiSet,
     this.emojiTextStyle,
+    this.hideCategorys = const <Category>[],
   });
 
   /// Number of emojis per row
@@ -125,6 +126,9 @@ class Config {
   /// initalization performance and prevent technically supported glyphs from
   /// being filtered out.
   final TextStyle? emojiTextStyle;
+
+  /// hide Categorys
+  final List<Category> hideCategorys;
 
   /// Get Emoji size based on properties and screen width
   double getEmojiSize(double width) {
