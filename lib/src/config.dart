@@ -127,7 +127,7 @@ class Config {
   /// being filtered out.
   final TextStyle? emojiTextStyle;
 
-  /// Customize skin color overlay horizontal position in case of ShellRoute or
+  /// Customize skin color overlay horizontal offset in case of ShellRoute or
   /// other cases, when EmojiPicker is not aligned to the left border of the
   /// screen.
   /// Reference: https://github.com/Fintasys/emoji_picker_flutter/issues/148
