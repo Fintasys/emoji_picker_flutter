@@ -42,6 +42,7 @@ class Config {
     this.checkPlatformCompatibility = true,
     this.emojiSet,
     this.emojiTextStyle,
+    this.customSkinColorOverlayHorizontalOffset,
   });
 
   /// Number of emojis per row
@@ -126,6 +127,12 @@ class Config {
   /// being filtered out.
   final TextStyle? emojiTextStyle;
 
+  /// Customize skin color overlay horizontal position in case of ShellRoute or
+  /// other cases, when EmojiPicker is not aligned to the left border of the
+  /// screen.
+  /// Reference: https://github.com/Fintasys/emoji_picker_flutter/issues/148
+  final double? customSkinColorOverlayHorizontalOffset;
+
   /// Get Emoji size based on properties and screen width
   double getEmojiSize(double width) {
     final maxSize = width / columns;
@@ -185,7 +192,9 @@ class Config {
         other.replaceEmojiOnLimitExceed == replaceEmojiOnLimitExceed &&
         other.checkPlatformCompatibility == checkPlatformCompatibility &&
         other.emojiSet == emojiSet &&
-        other.emojiTextStyle == emojiTextStyle;
+        other.emojiTextStyle == emojiTextStyle &&
+        other.customSkinColorOverlayHorizontalOffset ==
+            customSkinColorOverlayHorizontalOffset;
   }
 
   @override
@@ -214,5 +223,6 @@ class Config {
       replaceEmojiOnLimitExceed.hashCode ^
       checkPlatformCompatibility.hashCode ^
       (emojiSet?.hashCode ?? 0) ^
-      (emojiTextStyle?.hashCode ?? 0);
+      (emojiTextStyle?.hashCode ?? 0) ^
+      (customSkinColorOverlayHorizontalOffset?.hashCode ?? 0);
 }

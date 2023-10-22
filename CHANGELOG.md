@@ -1,3 +1,7 @@
+## 1.7.0
+
+- Added new Config parameter `customSkinColorOverlayHorizontalOffset` to fix issue with SkinColorOverlay in ShellRoute or other horizontal adjustments
+
 ## 1.6.2
 
 - remove nullability from `OverlayState`

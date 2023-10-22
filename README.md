@@ -95,6 +95,7 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 | checkPlatformCompatibility     | Whether to filter out glyphs that platform cannot render with the default font (Android).   | true     |
 | emojiSet     | Custom emoji set, can be built based on `defaultEmojiSet` provided by the library.   | null    |
 | emojiTextStyle     | Text style to apply to individual emoji icons. Can be used to define custom emoji font either with GoogleFonts library or bundled with the app.  | null    |
+| customSkinColorOverlayHorizontalOffset     | Custom horizontal offset for SkinColor Overlay. Try to assign `0.0` when overlay is not at the correct position  | null    |
 
 ## Backspace-Button
 You can add a Backspace-Button to the end category list by adding the callback method `onBackspacePressed: () { }` to the EmojiPicker-Widget. This will make it easier for your user to remove an added Emoji without showing the keyboard. Check out the example for more details about usage. Set it to null to hide the Backspace-Button.
