@@ -114,6 +114,7 @@ const List<CategoryEmoji> defaultEmojiSet = [
     Emoji('👽', 'Alien'),
     Emoji('👾', 'Alien Monster'),
     Emoji('🤖', 'Robot Face'),
+    Emoji('🎃', 'Jack-O-Lantern'),
     Emoji('😺', 'Grinning Cat Face'),
     Emoji('😸', 'Grinning Cat Face With Smiling Eyes'),
     Emoji('😹', 'Cat Face With Tears of Joy'),
