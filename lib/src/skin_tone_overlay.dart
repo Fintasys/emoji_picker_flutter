@@ -29,8 +29,15 @@ mixin SkinToneOverlayStateMixin<T extends StatefulWidget> on State<T> {
         .map((skinTone) => utils.applySkinTone(emoji, skinTone))
         .toList();
 
-    final positionRect = _calculateEmojiPosition(context, index, config.columns,
-        skinToneCount, scrollControllerOffset, tabBarHeight);
+    final positionRect = _calculateEmojiPosition(
+      context,
+      index,
+      config.columns,
+      skinToneCount,
+      scrollControllerOffset,
+      tabBarHeight,
+      config.customSkinColorOverlayHorizontalOffset,
+    );
 
     _overlay = OverlayEntry(
       builder: (context) => Positioned(
@@ -95,8 +102,15 @@ mixin SkinToneOverlayStateMixin<T extends StatefulWidget> on State<T> {
         ),
       );
 
-  Rect _calculateEmojiPosition(BuildContext context, int index, int columns,
-      int skinToneCount, double scrollControllerOffset, double tabBarHeight) {
+  Rect _calculateEmojiPosition(
+    BuildContext context,
+    int index,
+    int columns,
+    int skinToneCount,
+    double scrollControllerOffset,
+    double tabBarHeight,
+    double? customSkinColorOverlayHorizontalOffset,
+  ) {
     // Calculate position of emoji in the grid
     final row = index ~/ columns;
     final column = index % columns;
@@ -107,7 +121,8 @@ mixin SkinToneOverlayStateMixin<T extends StatefulWidget> on State<T> {
     final topOffset = emojiSpace;
     final leftOffset =
         _getLeftOffset(emojiSpace, column, skinToneCount, columns);
-    final left = offset.dx + column * emojiSpace + leftOffset;
+    final dx = customSkinColorOverlayHorizontalOffset ?? offset.dx;
+    final left = dx + column * emojiSpace + leftOffset;
     final top = tabBarHeight +
         offset.dy +
         row * emojiSpace -
