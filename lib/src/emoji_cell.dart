@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:emoji_picker_flutter/src/triangle_decoration.dart';
 import 'package:flutter/cupertino.dart';
@@ -99,16 +101,39 @@ class EmojiCell extends StatelessWidget {
     );
   }
 
+  static String? _getPlatformDefaultEmojiFont() {
+    if (Platform.isIOS || Platform.isMacOS) {
+      return 'Apple Color Emoji';
+    }
+    return null;
+  }
+
+  TextStyle _getEmojiTextStyle() {
+    final defaultStyle = TextStyle(
+      fontSize: emojiSize,
+      // If the user provided a style, don't override the font family.
+      fontFamily: textStyle == null ? _getPlatformDefaultEmojiFont() : null,
+      // Commonly available fallback fonts.
+      fontFamilyFallback: [
+        // iOS and MacOs.
+        'Apple Color Emoji',
+        // Android, ChromeOS, Ubuntu and some other Linux distros.
+        'NotoColorEmoji',
+        // Windows.
+        'Segoe UI Emoji',
+      ],
+      backgroundColor: Colors.transparent,
+      inherit: true,
+    );
+    return textStyle == null ? defaultStyle : textStyle!.merge(defaultStyle);
+  }
+
   /// Build and display Emoji centered of its parent
   Widget _buildEmoji() {
-    final style = TextStyle(
-      fontSize: emojiSize,
-      backgroundColor: Colors.transparent,
-    );
     final emojiText = Text(
       emoji.emoji,
       textScaleFactor: 1.0,
-      style: textStyle == null ? style : textStyle!.merge(style),
+      style: _getEmojiTextStyle(),
     );
 
     return Center(
