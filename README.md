@@ -54,7 +54,7 @@ EmojiPicker(
     },
     textEditingController: textEditingController, // pass here the same [TextEditingController] that is connected to your input field, usually a [TextFormField]
     config: Config(
-        height: 254,
+        height: 256,
         bgColor: const Color(0xFFF2F2F2),
         checkPlatformCompatibility: true,
         emojiViewConfig: EmojiViewConfig(
@@ -78,131 +78,79 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 
 ## Config
 
-| property | description | default |
-
-| --------------- | ------------------------------------------------------------------ |------------|
-
-| height | Height of Emoji Picker | 256 |
-
-| swapCategoryAndBottomBar | Swap the category view and bottom bar (category bottom and bottom bar top) | false |
-
-| checkPlatformCompatibility | Whether to filter out glyphs that platform cannot render with the default font (Android). | true |
-
-| emojiSet | Custom emoji set, can be built based on `defaultEmojiSet` provided by the library. | null |
-
-| emojiTextStyle | Text style to apply to individual emoji icons. Can be used to define custom emoji font either with GoogleFonts library or bundled with the app. | null |
-
-| customSkinColorOverlayHorizontalOffset | Custom horizontal offset for SkinColor Overlay. Try to assign `0.0` when overlay is not at the correct position | null |
-
-| emojiViewConfig | Emoji view config | const EmojiViewConfig() |
-
-| skinToneConfig | Skin tone config | const SkinToneConfig |
-
-| categoryViewConfig | Category view config | const CategoryViewConfig |
-
-| bottomActionBarConfig | Bottom action bar config | const BottomActionBarConfig() |
-
-| searchViewConfig | Search View config | const SearchViewConfig |
+| property                               | description                                                                                                                                     | default                       |
+| -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| height                                 | Height of Emoji Picker                                                                                                                          | 256                           |
+| swapCategoryAndBottomBar               | Swap the category view and bottom bar (category bottom and bottom bar top)                                                                      | false                         |
+| checkPlatformCompatibility             | Whether to filter out glyphs that platform cannot render with the default font (Android).                                                       | true                          |
+| emojiSet                               | Custom emoji set, can be built based on `defaultEmojiSet` provided by the library.                                                              | null                          |
+| emojiTextStyle                         | Text style to apply to individual emoji icons. Can be used to define custom emoji font either with GoogleFonts library or bundled with the app. | null                          |
+| customSkinColorOverlayHorizontalOffset | Custom horizontal offset for SkinColor Overlay. Try to assign `0.0` when overlay is not at the correct position                                 | null                          |
+| emojiViewConfig                        | Emoji view config                                                                                                                               | const EmojiViewConfig()       |
+| skinToneConfig                         | Skin tone config                                                                                                                                | const SkinToneConfig          |
+| categoryViewConfig                     | Category view config                                                                                                                            | const CategoryViewConfig      |
+| bottomActionBarConfig                  | Bottom action bar config                                                                                                                        | const BottomActionBarConfig() |
+| searchViewConfig                       | Search View config                                                                                                                              | const SearchViewConfig        |
 
 ### Emoji View Config
 
-| property | description | default |
-
-| --------------- | ------------------------------------------------------------------ |------------|
-
-| columns | Number of emojis per row | 7 |
-
-| emojiSizeMax | Width and height the emoji will be maximal displayed | 32.0 |
-
-| backgroundColor | The background color of the emoji view | const Color(0xFFEBEFF2) |
-
-| verticalSpacing | Vertical spacing between emojis | 0 |
-
-| horizontalSpacing | Horizontal spacing between emojis | 0 |
-
-| gridPadding | The padding of GridView | EdgeInsets.zero |
-
-| recentsLimit | Limit of recently used emoji that will be saved | 28 |
-
-| replaceEmojiOnLimitExceed | Replace latest emoji on recents list on limit exceed | false
-
-| noRecents | A widget (usually [Text]) to be displayed if no recent emojis to display. Needs to be `const` Widget! | Text('No Recents', style: TextStyle(fontSize: 20, color: Colors.black26), textAlign: TextAlign.center) |
-
-| loadingIndicator | A widget to display while emoji picker is initializing. Needs to be `const` Widget! | SizedBox.shrink() |
-
-| buttonMode | Choose between Material and Cupertino button style | ButtonMode.MATERIAL |
+| property                  | description                                                                                           | default                                                                                                |
+| ------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| columns                   | Number of emojis per row                                                                              | 7                                                                                                      |
+| emojiSizeMax              | Width and height the emoji will be maximal displayed                                                  | 32.0                                                                                                   |
+| backgroundColor           | The background color of the emoji view                                                                | const Color(0xFFEBEFF2)                                                                                |
+| verticalSpacing           | Vertical spacing between emojis                                                                       | 0                                                                                                      |
+| horizontalSpacing         | Horizontal spacing between emojis                                                                     | 0                                                                                                      |
+| gridPadding               | The padding of GridView                                                                               | EdgeInsets.zero                                                                                        |
+| recentsLimit              | Limit of recently used emoji that will be saved                                                       | 28                                                                                                     |
+| replaceEmojiOnLimitExceed | Replace latest emoji on recents list on limit exceed                                                  | false                                                                                                  |
+| noRecents                 | A widget (usually [Text]) to be displayed if no recent emojis to display. Needs to be `const` Widget! | Text('No Recents', style: TextStyle(fontSize: 20, color: Colors.black26), textAlign: TextAlign.center) |
+| loadingIndicator          | A widget to display while emoji picker is initializing. Needs to be `const` Widget!                   | SizedBox.shrink()                                                                                      |
+| buttonMode                | Choose between Material and Cupertino button style                                                    | ButtonMode.MATERIAL                                                                                    |
 
 ### SkinTone Config
 
-| property | description | default |
-
-| --------------- | ------------------------------------------------------------------ |------------|
-
-| enableSkinTones | Enable feature to select a skin tone of certain emoji's | true |
-
-| dialogBackgroundColor | The background color of the skin tone dialog | Colors.white |
-
-| indicatorColor | Color of the small triangle next to multiple skin tone emoji | Colors.grey |
+| property              | description                                                  | default      |
+| --------------------- | ------------------------------------------------------------ | ------------ |
+| enableSkinTones       | Enable feature to select a skin tone of certain emoji's      | true         |
+| dialogBackgroundColor | The background color of the skin tone dialog                 | Colors.white |
+| indicatorColor        | Color of the small triangle next to multiple skin tone emoji | Colors.grey  |
 
 ### Category View Config
 
-| property | description | default |
-
-| --------------- | ------------------------------------------------------------------ |------------|
-
-| tabBarHeight | Height of category tab bar | 46.0 |
-
-| tabIndicatorAnimDuration | Duration of tab indicator to animate to next category | Duration(milliseconds: 300) |
-
-| initCategory | The initial Category that will be selected |Category.RECENT |
-
-| recentTabBehavior | Show extra tab with recently / popular used emoji | RecentTabBehavior.RECENT |
-
-| showBackspaceButton | Show backspace button in category view | false
-
-| backgroundColor | Background color of category tab bar | const Color(0xFFEBEFF2)
-
-| indicatorColor | The color of the category indicator | Colors.blue |
-
-| iconColor | The color of the category icons | Colors.grey |
-
-| iconColorSelected | The color of the category icon when selected | Colors.blue |
-
-| backspaceColor | The color of the backspace icon button | Colors.blue |
-
-| categoryIcons | Determines the icon to display for each Category. You can change icons by setting them in the constructor. | CategoryIcons() |
-
-| customCategoryView | Customize the category widget | null |
+| property                 | description                                                                                                | default                     |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------- | --------------------------- |
+| tabBarHeight             | Height of category tab bar                                                                                 | 46.0                        |
+| tabIndicatorAnimDuration | Duration of tab indicator to animate to next category                                                      | Duration(milliseconds: 300) |
+| initCategory             | The initial Category that will be selected                                                                 | Category.RECENT             |
+| recentTabBehavior        | Show extra tab with recently / popular used emoji                                                          | RecentTabBehavior.RECENT    |
+| showBackspaceButton      | Show backspace button in category view                                                                     | false                       |
+| backgroundColor          | Background color of category tab bar                                                                       | const Color(0xFFEBEFF2)     |
+| indicatorColor           | The color of the category indicator                                                                        | Colors.blue                 |
+| iconColor                | The color of the category icons                                                                            | Colors.grey                 |
+| iconColorSelected        | The color of the category icon when selected                                                               | Colors.blue                 |
+| backspaceColor           | The color of the backspace icon button                                                                     | Colors.blue                 |
+| categoryIcons            | Determines the icon to display for each Category. You can change icons by setting them in the constructor. | CategoryIcons()             |
+| customCategoryView       | Customize the category widget                                                                              | null                        |
 
 ### Bottom Action Bar Config
 
-| property | description | default |
-
-| --------------- | ------------------------------------------------------------------ |------------|
-
-| showBackspaceButton | Show backspace button in bottom action bar | true |
-
-| backgroundColor | Background color of bottom action bar | Colors.blue |
-
-| buttonColor | Fill color of buttons in bottom action bar | Colors.blue |
-
-| buttonIconColor | Icon color of buttons | Colors.white |
-
-| customBottomActionBar | Customize the bottom action bar widget | null |
+| property              | description                                | default      |
+| --------------------- | ------------------------------------------ | ------------ |
+| showBackspaceButton   | Show backspace button in bottom action bar | true         |
+| backgroundColor       | Background color of bottom action bar      | Colors.blue  |
+| buttonColor           | Fill color of buttons in bottom action bar | Colors.blue  |
+| buttonIconColor       | Icon color of buttons                      | Colors.white |
+| customBottomActionBar | Customize the bottom action bar widget     | null         |
 
 ### Search View Config
 
-| property | description | default |
-
-| --------------- | ------------------------------------------------------------------ |------------|
-
-| backgroundColor | Background color of search view | const Color(0xFFEBEFF2) |
-
-| buttonColor | Fill color of hide search view button | Colors.transparent |
-
-| buttonIconColor | Icon color of hide search view button | Colors.black26 |
-
-| customSearchView | Customize search view widget | null |
+| property         | description                           | default                 |
+| ---------------- | ------------------------------------- | ----------------------- |
+| backgroundColor  | Background color of search view       | const Color(0xFFEBEFF2) |
+| buttonColor      | Fill color of hide search view button | Colors.transparent      |
+| buttonIconColor  | Icon color of hide search view button | Colors.black26          |
+| customSearchView | Customize search view widget          | null                    |
 
 ## Backspace-Button
 
