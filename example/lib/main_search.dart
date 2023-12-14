@@ -21,9 +21,7 @@ class MyAppState extends State<MyApp> {
   final FocusNode _searchFocusNode = FocusNode();
   List<Emoji> _searchResults = List.empty();
   OverlayEntry? _overlay;
-  final Config _config = const Config(
-    buttonMode: ButtonMode.MATERIAL,
-  );
+  final Config _config = const Config();
   bool _isSearchFocused = false;
   bool _emojiShowing = false;
 
@@ -65,7 +63,7 @@ class MyAppState extends State<MyApp> {
     int index,
   ) {
     _closeSkinToneDialog();
-    if (!emoji.hasSkinTone || !_config.enableSkinTones) {
+    if (!emoji.hasSkinTone || !_config.skinToneConfig.enableSkinTones) {
       return;
     }
     _overlay = _buildSkinToneOverlay(
@@ -92,7 +90,7 @@ class MyAppState extends State<MyApp> {
     // Calculate position for skin tone dialog
     final renderBox = context.findRenderObject() as RenderBox;
     final offset = renderBox.localToGlobal(Offset.zero);
-    final emojiSpace = renderBox.size.width / _config.columns;
+    final emojiSpace = renderBox.size.width / _config.emojiViewConfig.columns;
     final leftOffset = _getLeftOffset(emojiSpace, index);
     final left = offset.dx + index * emojiSpace + leftOffset;
     final top = offset.dy;
@@ -110,8 +108,8 @@ class MyAppState extends State<MyApp> {
           elevation: 4.0,
           child: EmojiContainer(
             padding: const EdgeInsets.symmetric(vertical: 4.0),
-            color: _config.skinToneDialogBgColor,
-            buttonMode: _config.buttonMode,
+            color: _config.skinToneConfig.skinToneDialogBgColor,
+            buttonMode: _config.emojiViewConfig.buttonMode,
             child: Row(
               children: [
                 _buildSkinToneEmoji(emoji, emojiSpace, emojiSize),
@@ -158,7 +156,7 @@ class MyAppState extends State<MyApp> {
   // of whole width
   double _getLeftOffset(double emojiWidth, int column) {
     var remainingColumns =
-        _config.columns - (column + 1 + (kSkinToneCount ~/ 2));
+        _config.emojiViewConfig.columns - (column + 1 + (kSkinToneCount ~/ 2));
     if (column >= 0 && column < 3) {
       return -1 * column * emojiWidth;
     } else if (remainingColumns < 0) {
@@ -283,7 +281,8 @@ class MyAppState extends State<MyApp> {
           title: const Text('Emoji Picker Search Example App'),
         ),
         body: LayoutBuilder(builder: (context, constraints) {
-          final emojiSize = _config.getEmojiSize(constraints.maxWidth);
+          final emojiSize =
+              _config.emojiViewConfig.getEmojiSize(constraints.maxWidth);
           // emojiSize is the size of the font, need some paddings around
           final cellSize = emojiSize + 20.0;
           return Column(

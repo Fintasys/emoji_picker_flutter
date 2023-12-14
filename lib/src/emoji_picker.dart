@@ -1,12 +1,7 @@
-import 'package:emoji_picker_flutter/src/category_emoji.dart';
-import 'package:emoji_picker_flutter/src/config.dart';
-import 'package:emoji_picker_flutter/src/default_emoji_picker_view.dart';
-import 'package:emoji_picker_flutter/src/default_emoji_set.dart';
-import 'package:emoji_picker_flutter/src/emoji.dart';
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import 'package:emoji_picker_flutter/src/category_view/category_emoji.dart';
 import 'package:emoji_picker_flutter/src/emoji_picker_internal_utils.dart';
-import 'package:emoji_picker_flutter/src/emoji_view_state.dart';
 import 'package:emoji_picker_flutter/src/recent_emoji.dart';
-import 'package:emoji_picker_flutter/src/recent_tab_behavior.dart';
 import 'package:flutter/material.dart';
 
 /// All the possible categories that [Emoji] can be put into
@@ -81,9 +76,6 @@ enum ButtonMode {
   CUPERTINO
 }
 
-/// Number of skin tone icons
-const kSkinToneCount = 6;
-
 /// Callback function for when emoji is selected
 ///
 /// The function returns the selected [Emoji] as well
@@ -97,9 +89,6 @@ typedef void OnSkinToneDialogRequested(
 
 /// Callback function for backspace button
 typedef void OnBackspacePressed();
-
-/// Callback function for custom view
-typedef EmojiViewBuilder = Widget Function(Config config, EmojiViewState state);
 
 /// The Emoji Keyboard widget
 ///
@@ -149,6 +138,9 @@ class EmojiPickerState extends State<EmojiPicker> {
   // Prevent emojis to be reloaded with every build
   bool _loaded = false;
 
+  // Display Search bar
+  bool _isSearchBarVisible = false;
+
   // Internal helper
   final _emojiPickerInternalUtils = EmojiPickerInternalUtils();
 
@@ -182,11 +174,12 @@ class EmojiPickerState extends State<EmojiPicker> {
   @override
   Widget build(BuildContext context) {
     if (!_loaded) {
-      return widget.config.loadingIndicator;
+      return widget.config.emojiViewConfig.loadingIndicator;
     }
-    return widget.customWidget == null
-        ? DefaultEmojiPickerView(widget.config, _state)
-        : widget.customWidget!(widget.config, _state);
+    if (_isSearchBarVisible) {
+      return _buildSearchBar();
+    }
+    return _buildEmojiView();
   }
 
   void _onBackspacePressed() {
@@ -223,7 +216,8 @@ class EmojiPickerState extends State<EmojiPicker> {
   // Add recent emoji handling to tap listener
   OnEmojiSelected _getOnEmojiListener() {
     return (category, emoji) {
-      if (widget.config.recentTabBehavior == RecentTabBehavior.POPULAR) {
+      if (widget.config.categoryViewConfig.recentTabBehavior ==
+          RecentTabBehavior.POPULAR) {
         _emojiPickerInternalUtils
             .addEmojiToPopularUsed(emoji: emoji, config: widget.config)
             .then((newRecentEmoji) => {
@@ -233,7 +227,8 @@ class EmojiPickerState extends State<EmojiPicker> {
                   updateRecentEmoji(newRecentEmoji,
                       refresh: category != Category.RECENT),
                 });
-      } else if (widget.config.recentTabBehavior == RecentTabBehavior.RECENT) {
+      } else if (widget.config.categoryViewConfig.recentTabBehavior ==
+          RecentTabBehavior.RECENT) {
         _emojiPickerInternalUtils
             .addEmojiToRecentlyUsed(emoji: emoji, config: widget.config)
             .then((newRecentEmoji) => {
@@ -277,7 +272,7 @@ class EmojiPickerState extends State<EmojiPicker> {
   Future<void> _updateEmojis() async {
     _categoryEmoji.clear();
     if ([RecentTabBehavior.RECENT, RecentTabBehavior.POPULAR]
-        .contains(widget.config.recentTabBehavior)) {
+        .contains(widget.config.categoryViewConfig.recentTabBehavior)) {
       _recentEmoji = await _emojiPickerInternalUtils.getRecentEmojis();
       final recentEmojiMap = _recentEmoji.map((e) => e.emoji).toList();
       _categoryEmoji.add(CategoryEmoji(Category.RECENT, recentEmojiMap));
@@ -296,5 +291,47 @@ class EmojiPickerState extends State<EmojiPicker> {
         _loaded = true;
       });
     }
+  }
+
+  Widget _buildSearchBar() {
+    return widget.config.searchViewConfig.customSearchView == null
+        ? DefaultSearchView(
+            widget.config,
+            _state,
+            _hideSearchView,
+          )
+        : widget.config.searchViewConfig.customSearchView!(
+            widget.config.searchViewConfig,
+            _hideSearchView,
+          );
+  }
+
+  Widget _buildEmojiView() {
+    return SizedBox(
+      height: widget.config.height,
+      child: widget.customWidget == null
+          ? DefaultEmojiPickerView(
+              widget.config,
+              _state,
+              _showSearchView,
+            )
+          : widget.customWidget!(
+              widget.config,
+              _state,
+              _showSearchView,
+            ),
+    );
+  }
+
+  void _showSearchView() {
+    setState(() {
+      _isSearchBarVisible = true;
+    });
+  }
+
+  void _hideSearchView() {
+    setState(() {
+      _isSearchBarVisible = false;
+    });
   }
 }

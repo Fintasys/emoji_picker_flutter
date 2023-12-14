@@ -1,0 +1,93 @@
+import 'dart:math';
+
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import 'package:flutter/material.dart';
+
+/// Callback function for custom view
+typedef EmojiViewBuilder = Widget Function(
+  Config config,
+  EmojiViewState state,
+  VoidCallback showSearchBar,
+);
+
+/// Emoji View Config
+class EmojiViewConfig {
+  /// Constructor
+  const EmojiViewConfig({
+    this.columns = 7,
+    this.emojiSizeMax = 32.0,
+    this.verticalSpacing = 0,
+    this.horizontalSpacing = 0,
+    this.gridPadding = EdgeInsets.zero,
+    this.recentsLimit = 28,
+    this.replaceEmojiOnLimitExceed = false,
+    this.noRecents = DefaultNoRecentsWidget,
+    this.loadingIndicator = const SizedBox.shrink(),
+    this.buttonMode = ButtonMode.MATERIAL,
+  });
+
+  /// Number of emojis per row
+  final int columns;
+
+  /// Width and height the emoji will be maximal displayed
+  /// Can be smaller due to screen size and amount of columns
+  final double emojiSizeMax;
+
+  /// Verical spacing between emojis
+  final double verticalSpacing;
+
+  /// Horizontal spacing between emojis
+  final double horizontalSpacing;
+
+  /// Limit of recently used emoji that will be saved
+  final int recentsLimit;
+
+  /// A widget (usually [Text]) to be displayed if no recent emojis to display
+  final Widget noRecents;
+
+  /// A widget to display while emoji picker is initializing
+  final Widget loadingIndicator;
+
+  /// Choose visual response for tapping on an emoji cell
+  final ButtonMode buttonMode;
+
+  /// The padding of GridView, default is [EdgeInsets.zero]
+  final EdgeInsets gridPadding;
+
+  /// Replace latest emoji on recents list on limit exceed
+  final bool replaceEmojiOnLimitExceed;
+
+  /// Get Emoji size based on properties and screen width
+  double getEmojiSize(double width) {
+    final maxSize = width / columns;
+    return min(maxSize, emojiSizeMax);
+  }
+
+  @override
+  bool operator ==(other) {
+    return (other is EmojiViewConfig) &&
+        other.columns == columns &&
+        other.emojiSizeMax == emojiSizeMax &&
+        other.verticalSpacing == verticalSpacing &&
+        other.horizontalSpacing == horizontalSpacing &&
+        other.recentsLimit == recentsLimit &&
+        other.noRecents == noRecents &&
+        other.loadingIndicator == loadingIndicator &&
+        other.buttonMode == buttonMode &&
+        other.gridPadding == gridPadding &&
+        other.replaceEmojiOnLimitExceed == replaceEmojiOnLimitExceed;
+  }
+
+  @override
+  int get hashCode =>
+      columns.hashCode ^
+      emojiSizeMax.hashCode ^
+      verticalSpacing.hashCode ^
+      horizontalSpacing.hashCode ^
+      recentsLimit.hashCode ^
+      noRecents.hashCode ^
+      loadingIndicator.hashCode ^
+      buttonMode.hashCode ^
+      gridPadding.hashCode ^
+      replaceEmojiOnLimitExceed.hashCode;
+}

@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 
 /// Template class for custom implementation
 /// Inhert this class to create your own EmojiPicker
-abstract class EmojiPickerBuilder extends StatefulWidget {
+abstract class EmojiPickerView extends StatefulWidget {
   /// Constructor
-  EmojiPickerBuilder(
+  EmojiPickerView(
     this.config,
-    this.state, {
+    this.state,
+    this.showSearchBar, {
     Key? key,
   }) : super(key: key);
 
@@ -17,4 +18,7 @@ abstract class EmojiPickerBuilder extends StatefulWidget {
 
   /// State that holds current emoji data
   final EmojiViewState state;
+
+  /// Show Search Bar
+  final VoidCallback showSearchBar;
 }

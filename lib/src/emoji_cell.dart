@@ -1,5 +1,5 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:emoji_picker_flutter/src/triangle_decoration.dart';
+import 'package:emoji_picker_flutter/src/skin_tones/triangle_decoration.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -31,10 +31,10 @@ class EmojiCell extends StatelessWidget {
       required this.onEmojiSelected,
       this.onSkinToneDialogRequested,
       required Config config})
-      : buttonMode = config.buttonMode,
-        enableSkinTones = config.enableSkinTones,
+      : buttonMode = config.emojiViewConfig.buttonMode,
+        enableSkinTones = config.skinToneConfig.enableSkinTones,
         textStyle = config.emojiTextStyle,
-        skinToneIndicatorColor = config.skinToneIndicatorColor;
+        skinToneIndicatorColor = config.skinToneConfig.skinToneIndicatorColor;
 
   /// Emoji to display as the cell content
   final Emoji emoji;

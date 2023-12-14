@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import 'package:emoji_picker_flutter/src/category_view/category_emoji.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -69,8 +70,8 @@ class EmojiPickerInternalUtils {
     recentEmoji.insert(0, RecentEmoji(emoji, initVal));
 
     // Limit entries to recentsLimit
-    recentEmoji =
-        recentEmoji.sublist(0, min(config.recentsLimit, recentEmoji.length));
+    recentEmoji = recentEmoji.sublist(
+        0, min(config.emojiViewConfig.recentsLimit, recentEmoji.length));
 
     // save locally
     final prefs = await SharedPreferences.getInstance();
@@ -93,8 +94,8 @@ class EmojiPickerInternalUtils {
       // Already exist in recent list
       // Just update counter
       recentEmoji[recentEmojiIndex].counter++;
-    } else if (recentEmoji.length == config.recentsLimit &&
-        config.replaceEmojiOnLimitExceed) {
+    } else if (recentEmoji.length == config.emojiViewConfig.recentsLimit &&
+        config.emojiViewConfig.replaceEmojiOnLimitExceed) {
       // Replace latest emoji with the fresh one
       recentEmoji[recentEmoji.length - 1] = RecentEmoji(emoji, initVal);
     } else {
@@ -105,8 +106,8 @@ class EmojiPickerInternalUtils {
     recentEmoji.sort((a, b) => b.counter - a.counter);
 
     // Limit entries to recentsLimit
-    recentEmoji =
-        recentEmoji.sublist(0, min(config.recentsLimit, recentEmoji.length));
+    recentEmoji = recentEmoji.sublist(
+        0, min(config.emojiViewConfig.recentsLimit, recentEmoji.length));
 
     // save locally
     final prefs = await SharedPreferences.getInstance();

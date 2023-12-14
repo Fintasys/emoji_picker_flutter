@@ -1,8 +1,10 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import 'package:emoji_picker_flutter/src/category_view/category_emoji.dart';
 import 'package:flutter/material.dart';
 
 /// Skin tone overlay mixin
 mixin SkinToneOverlayStateMixin<T extends StatefulWidget> on State<T> {
+  final EmojiPickerUtils _utils = EmojiPickerUtils();
   OverlayEntry? _overlay;
 
   /// Overlay close & resources disposal
@@ -17,23 +19,20 @@ mixin SkinToneOverlayStateMixin<T extends StatefulWidget> on State<T> {
     double emojiSize,
     CategoryEmoji? categoryEmoji,
     int index,
-    int skinToneCount,
     Config config,
     double scrollControllerOffset,
     double tabBarHeight,
-    EmojiPickerUtils utils,
     OnEmojiSelected onEmojiSelected,
   ) {
     // Generate other skintone options
     final skinTonesEmoji = SkinTone.values
-        .map((skinTone) => utils.applySkinTone(emoji, skinTone))
+        .map((skinTone) => _utils.applySkinTone(emoji, skinTone))
         .toList();
 
     final positionRect = _calculateEmojiPosition(
       context,
       index,
-      config.columns,
-      skinToneCount,
+      config.emojiViewConfig.columns,
       scrollControllerOffset,
       tabBarHeight,
       config.customSkinColorOverlayHorizontalOffset,
@@ -47,7 +46,7 @@ mixin SkinToneOverlayStateMixin<T extends StatefulWidget> on State<T> {
           elevation: 4.0,
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 4.0),
-            color: config.skinToneDialogBgColor,
+            color: config.skinToneConfig.skinToneDialogBgColor,
             child: Row(
               children: [
                 _buildSkinToneEmoji(
@@ -106,7 +105,6 @@ mixin SkinToneOverlayStateMixin<T extends StatefulWidget> on State<T> {
     BuildContext context,
     int index,
     int columns,
-    int skinToneCount,
     double scrollControllerOffset,
     double tabBarHeight,
     double? customSkinColorOverlayHorizontalOffset,
@@ -120,7 +118,7 @@ mixin SkinToneOverlayStateMixin<T extends StatefulWidget> on State<T> {
     final emojiSpace = renderBox.size.width / columns;
     final topOffset = emojiSpace;
     final leftOffset =
-        _getLeftOffset(emojiSpace, column, skinToneCount, columns);
+        _getLeftOffset(emojiSpace, column, kSkinToneCount, columns);
     final dx = customSkinColorOverlayHorizontalOffset ?? offset.dx;
     final left = dx + column * emojiSpace + leftOffset;
     final top = tabBarHeight +
