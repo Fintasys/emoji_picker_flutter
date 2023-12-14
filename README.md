@@ -1,13 +1,8 @@
 <p  align="center">
-
 <a  href="https://github.com/fintasys"><img  src="https://img.shields.io/badge/platform-flutter-blue.svg"  alt="platform flutter"></a>
-
 <a  href="https://github.com/fintasys/emoji_picker_flutter/actions"><img  src="https://github.com/fintasys/emoji_picker_flutter/workflows/emoji_picker_flutter/badge.svg"  alt="build"></a>
-
 <a  href="https://github.com/fintasys/emoji_picker_flutter"><img  src="https://img.shields.io/github/stars/fintasys/emoji_picker_flutter.svg?style=flat&logo=github&colorB=deeppink&label=stars"  alt="Star on Github"></a>
-
 <a  href="https://opensource.org/licenses/BSD-2-Clause"><img  src="https://img.shields.io/badge/License-BSD%202--Clause-orange.svg"  alt="License: BSD-2-Clause"></a>
-
 </p>
 
 # emoji_picker_flutter
