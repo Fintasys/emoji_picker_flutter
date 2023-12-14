@@ -10,12 +10,20 @@ typedef EmojiViewBuilder = Widget Function(
   VoidCallback showSearchBar,
 );
 
+/// Default Widget if no recent is available
+const DefaultNoRecentsWidget = Text(
+  'No Recents',
+  style: TextStyle(fontSize: 20, color: Colors.black26),
+  textAlign: TextAlign.center,
+);
+
 /// Emoji View Config
 class EmojiViewConfig {
   /// Constructor
   const EmojiViewConfig({
     this.columns = 7,
     this.emojiSizeMax = 32.0,
+    this.backgroundColor = const Color(0xFFEBEFF2),
     this.verticalSpacing = 0,
     this.horizontalSpacing = 0,
     this.gridPadding = EdgeInsets.zero,
@@ -32,6 +40,9 @@ class EmojiViewConfig {
   /// Width and height the emoji will be maximal displayed
   /// Can be smaller due to screen size and amount of columns
   final double emojiSizeMax;
+
+  /// The background color of the emoji view
+  final Color backgroundColor;
 
   /// Verical spacing between emojis
   final double verticalSpacing;
@@ -68,6 +79,7 @@ class EmojiViewConfig {
     return (other is EmojiViewConfig) &&
         other.columns == columns &&
         other.emojiSizeMax == emojiSizeMax &&
+        other.backgroundColor == backgroundColor &&
         other.verticalSpacing == verticalSpacing &&
         other.horizontalSpacing == horizontalSpacing &&
         other.recentsLimit == recentsLimit &&
@@ -82,6 +94,7 @@ class EmojiViewConfig {
   int get hashCode =>
       columns.hashCode ^
       emojiSizeMax.hashCode ^
+      backgroundColor.hashCode ^
       verticalSpacing.hashCode ^
       horizontalSpacing.hashCode ^
       recentsLimit.hashCode ^

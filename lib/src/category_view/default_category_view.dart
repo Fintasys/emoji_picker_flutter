@@ -1,5 +1,4 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:emoji_picker_flutter/src/skin_tones/skin_tone_overlay.dart';
 import 'package:flutter/material.dart';
 
 /// Default category view
@@ -57,18 +56,11 @@ class _DefaultCategoryViewState extends State<DefaultCategoryView>
       );
 
   Widget _buildBackspaceButton() {
-    if (widget.state.onBackspacePressed != null) {
-      return Material(
-        type: MaterialType.transparency,
-        child: IconButton(
-            padding: const EdgeInsets.only(bottom: 2),
-            icon: Icon(
-              Icons.backspace,
-              color: widget.config.categoryViewConfig.backspaceColor,
-            ),
-            onPressed: () {
-              widget.state.onBackspacePressed!();
-            }),
+    if (widget.config.categoryViewConfig.showBackspaceButton) {
+      return BackspaceButton(
+        widget.config,
+        widget.state.onBackspacePressed,
+        widget.config.categoryViewConfig.backspaceColor,
       );
     }
     return const SizedBox.shrink();

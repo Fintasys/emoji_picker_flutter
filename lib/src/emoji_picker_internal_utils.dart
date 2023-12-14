@@ -3,11 +3,9 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:emoji_picker_flutter/src/category_view/category_emoji.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'recent_emoji.dart';
 
 /// Initial value for RecentEmoji
 const initVal = 1;

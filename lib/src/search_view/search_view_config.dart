@@ -10,19 +10,19 @@ typedef SearchViewBuilder = Widget Function(
 class SearchViewConfig {
   /// Constructor
   const SearchViewConfig({
-    this.backgroundColor = Colors.blue,
-    this.buttonColor = Colors.blue,
-    this.buttonIconColor = Colors.white,
+    this.backgroundColor = const Color(0xFFEBEFF2),
+    this.buttonColor = Colors.transparent,
+    this.buttonIconColor = Colors.black26,
     this.customSearchView,
   });
 
   /// Background color of search bar
-  final Color? backgroundColor;
+  final Color backgroundColor;
 
-  /// Search Button color
+  /// Fill color of hide search view button
   final Color buttonColor;
 
-  /// Search Button Icon color
+  /// Icon color of hide search view button
   final Color buttonIconColor;
 
   /// Custom search bar
@@ -40,7 +40,6 @@ class SearchViewConfig {
   @override
   int get hashCode =>
       backgroundColor.hashCode ^
-      buttonColor.hashCode ^
       buttonIconColor.hashCode ^
       customSearchView.hashCode;
 }

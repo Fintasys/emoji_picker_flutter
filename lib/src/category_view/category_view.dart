@@ -1,5 +1,4 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:emoji_picker_flutter/src/category_view/category_icons.dart';
 import 'package:flutter/material.dart';
 
 /// Template class for custom implementation

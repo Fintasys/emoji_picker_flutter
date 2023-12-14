@@ -108,7 +108,7 @@ class MyAppState extends State<MyApp> {
           elevation: 4.0,
           child: EmojiContainer(
             padding: const EdgeInsets.symmetric(vertical: 4.0),
-            color: _config.skinToneConfig.skinToneDialogBgColor,
+            color: _config.skinToneConfig.dialogBackgroundColor,
             buttonMode: _config.emojiViewConfig.buttonMode,
             child: Row(
               children: [
@@ -169,7 +169,7 @@ class MyAppState extends State<MyApp> {
 
   Widget _buildSearchBar(BuildContext context, bool isEmpty) {
     return ColoredBox(
-      color: _config.bgColor,
+      color: _config.emojiViewConfig.backgroundColor,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

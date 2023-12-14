@@ -1,5 +1,4 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:emoji_picker_flutter/src/skin_tones/skin_tone_overlay.dart';
 import 'package:flutter/material.dart';
 
 /// Default Search implementation
@@ -17,9 +16,17 @@ class DefaultSearchView extends SearchView {
 
 class _DefaultSearchViewState extends State<DefaultSearchView>
     with SkinToneOverlayStateMixin {
-  // late final TextEditingController _controller;
+  final FocusNode _focusNode = FocusNode();
   final EmojiPickerUtils _utils = EmojiPickerUtils();
   List<Emoji> _results = [];
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      FocusScope.of(context).requestFocus(_focusNode);
+    });
+    super.initState();
+  }
 
   void _onTextInputChanged(String text) {
     _utils.searchEmoji(text, widget.state.categoryEmoji).then(
@@ -97,16 +104,16 @@ class _DefaultSearchViewState extends State<DefaultSearchView>
               children: [
                 IconButton(
                   onPressed: widget.showEmojiView,
-                  icon: const Icon(
+                  color: widget.config.searchViewConfig.buttonColor,
+                  icon: Icon(
                     Icons.arrow_back,
-                    color: Colors.black26,
+                    color: widget.config.searchViewConfig.buttonIconColor,
                   ),
                 ),
                 Expanded(
                   child: TextField(
-                    //controller: _controller,
                     onChanged: _onTextInputChanged,
-                    autofocus: true,
+                    focusNode: _focusNode,
                     decoration: const InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Search',

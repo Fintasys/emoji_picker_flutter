@@ -1,5 +1,4 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:emoji_picker_flutter/src/category_view/category_emoji.dart';
 import 'package:flutter/material.dart';
 
 /// Skin tone overlay mixin
@@ -46,7 +45,7 @@ mixin SkinToneOverlayStateMixin<T extends StatefulWidget> on State<T> {
           elevation: 4.0,
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 4.0),
-            color: config.skinToneConfig.skinToneDialogBgColor,
+            color: config.skinToneConfig.dialogBackgroundColor,
             child: Row(
               children: [
                 _buildSkinToneEmoji(

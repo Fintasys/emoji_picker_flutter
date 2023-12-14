@@ -1,5 +1,4 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:emoji_picker_flutter/src/category_view/category_icons.dart';
 import 'package:flutter/material.dart';
 
 /// Callback function for custom category view
@@ -15,6 +14,7 @@ class CategoryViewConfig {
     this.tabIndicatorAnimDuration = kTabScrollDuration,
     this.initCategory = Category.RECENT,
     this.recentTabBehavior = RecentTabBehavior.RECENT,
+    this.showBackspaceButton = false,
     this.backgroundColor = const Color(0xFFEBEFF2),
     this.indicatorColor = Colors.blue,
     this.iconColor = Colors.grey,
@@ -37,6 +37,9 @@ class CategoryViewConfig {
 
   /// Behavior of Recent Tab (Recent, Popular)
   final RecentTabBehavior recentTabBehavior;
+
+  /// Show Backspace button
+  final bool showBackspaceButton;
 
   /// Background color of TabBar
   final Color backgroundColor;
@@ -69,6 +72,7 @@ class CategoryViewConfig {
         other.tabIndicatorAnimDuration == tabIndicatorAnimDuration &&
         other.initCategory == initCategory &&
         other.recentTabBehavior == recentTabBehavior &&
+        other.showBackspaceButton == showBackspaceButton &&
         other.backgroundColor == backgroundColor &&
         other.indicatorColor == indicatorColor &&
         other.iconColor == iconColor &&
@@ -83,6 +87,7 @@ class CategoryViewConfig {
       tabIndicatorAnimDuration.hashCode ^
       initCategory.hashCode ^
       recentTabBehavior.hashCode ^
+      showBackspaceButton.hashCode ^
       backgroundColor.hashCode ^
       indicatorColor.hashCode ^
       iconColor.hashCode ^

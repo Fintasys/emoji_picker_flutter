@@ -1,7 +1,4 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:emoji_picker_flutter/src/category_view/category_emoji.dart';
-import 'package:emoji_picker_flutter/src/category_view/default_category_view.dart';
-import 'package:emoji_picker_flutter/src/skin_tones/skin_tone_overlay.dart';
 import 'package:flutter/material.dart';
 
 /// Default EmojiPicker Implementation
@@ -57,16 +54,22 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
         final emojiSize =
             widget.config.emojiViewConfig.getEmojiSize(constraints.maxWidth);
         return EmojiContainer(
-          color: widget.config.bgColor,
+          color: widget.config.emojiViewConfig.backgroundColor,
           buttonMode: widget.config.emojiViewConfig.buttonMode,
           child: Column(
             children: [
-              // Category view
-              _buildCategoryView(),
+              // Category view or bottom search bar
+              widget.config.swapCategoryAndBottomBar
+                  ? _buildBottomSearchBar()
+                  : _buildCategoryView(),
+
               // Emoji view
               _buildEmojiView(emojiSize),
-              // Bottom Search Bar
-              _buildBottomSearchBar(),
+
+              // Bottom Search Bar or Category view
+              widget.config.swapCategoryAndBottomBar
+                  ? _buildCategoryView()
+                  : _buildBottomSearchBar(),
             ],
           ),
         );
@@ -105,13 +108,15 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
   }
 
   Widget _buildBottomSearchBar() {
-    return widget.config.bottomSearchBarConfig.customBottomSearchBar != null
-        ? widget.config.bottomSearchBarConfig.customBottomSearchBar!(
+    return widget.config.bottomActionBarConfig.customBottomActionBar != null
+        ? widget.config.bottomActionBarConfig.customBottomActionBar!(
             widget.config,
+            widget.state,
             widget.showSearchBar,
           )
-        : DefaultBottomSearchBar(
+        : DefaultBottomActionBar(
             widget.config,
+            widget.state,
             widget.showSearchBar,
           );
   }

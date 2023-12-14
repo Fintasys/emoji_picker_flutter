@@ -1,21 +1,26 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 
-/// Callback function for custom bottom search bar
-typedef BottomSearchBarBuilder = Widget Function(
+/// Callback function for custom bottom action bar
+typedef BottomActionBarBuilder = Widget Function(
   Config config,
+  EmojiViewState state,
   VoidCallback showSearchView,
 );
 
-/// Search Bar Config
-class BottomSearchBarConfig {
+/// Bottom Action Bar Config
+class BottomActionBarConfig {
   /// Constructor
-  const BottomSearchBarConfig({
+  const BottomActionBarConfig({
+    this.showBackspaceButton = true,
     this.backgroundColor = Colors.blue,
     this.buttonColor = Colors.blue,
     this.buttonIconColor = Colors.white,
-    this.customBottomSearchBar,
+    this.customBottomActionBar,
   });
+
+  /// Show Backspace button
+  final bool showBackspaceButton;
 
   /// Background color of search bar
   final Color? backgroundColor;
@@ -27,21 +32,23 @@ class BottomSearchBarConfig {
   final Color buttonIconColor;
 
   /// Custom search bar
-  final BottomSearchBarBuilder? customBottomSearchBar;
+  final BottomActionBarBuilder? customBottomActionBar;
 
   @override
   bool operator ==(other) {
-    return (other is BottomSearchBarConfig) &&
+    return (other is BottomActionBarConfig) &&
+        other.showBackspaceButton == showBackspaceButton &&
         other.backgroundColor == backgroundColor &&
         other.buttonColor == buttonColor &&
         other.buttonIconColor == buttonIconColor &&
-        other.customBottomSearchBar == customBottomSearchBar;
+        other.customBottomActionBar == customBottomActionBar;
   }
 
   @override
   int get hashCode =>
+      showBackspaceButton.hashCode ^
       backgroundColor.hashCode ^
       buttonColor.hashCode ^
       buttonIconColor.hashCode ^
-      customBottomSearchBar.hashCode;
+      customBottomActionBar.hashCode;
 }

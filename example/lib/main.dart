@@ -2,6 +2,10 @@ import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/foundation.dart' as foundation;
 import 'package:flutter/material.dart';
 
+// TODO
+// 1. Update ReadMe
+// 4. Consider animations
+
 void main() {
   runApp(const MyApp());
 }
@@ -99,13 +103,11 @@ class MyAppState extends State<MyApp> {
                 )),
             Offstage(
               offstage: !emojiShowing,
-              child: SizedBox(
-                  // height: 250,
-                  child: EmojiPicker(
+              child: EmojiPicker(
                 textEditingController: _controller,
                 onBackspacePressed: _onBackspacePressed,
                 config: Config(
-                  bgColor: const Color(0xFFF2F2F2),
+                  height: 256,
                   checkPlatformCompatibility: true,
                   emojiViewConfig: EmojiViewConfig(
                     // Issue: https://github.com/flutter/flutter/issues/28894
@@ -114,12 +116,13 @@ class MyAppState extends State<MyApp> {
                             ? 1.30
                             : 1.0),
                   ),
+                  swapCategoryAndBottomBar: false,
                   skinToneConfig: const SkinToneConfig(),
                   categoryViewConfig: const CategoryViewConfig(),
-                  bottomSearchBarConfig: const BottomSearchBarConfig(),
+                  bottomActionBarConfig: const BottomActionBarConfig(),
                   searchViewConfig: const SearchViewConfig(),
                 ),
-              )),
+              ),
             ),
           ],
         ),

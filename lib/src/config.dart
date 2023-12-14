@@ -1,27 +1,15 @@
-import 'package:emoji_picker_flutter/src/bottom_search_bar/bottom_search_bar_config.dart';
-import 'package:emoji_picker_flutter/src/category_view/category_emoji.dart';
-import 'package:emoji_picker_flutter/src/category_view/category_view_config.dart';
-import 'package:emoji_picker_flutter/src/emoji_view/emoji_view_config.dart';
-import 'package:emoji_picker_flutter/src/emoji_view/skin_tone_config.dart';
-import 'package:emoji_picker_flutter/src/search_view/search_view_config.dart';
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 
 /// Number of skin tone icons
 const kSkinToneCount = 6;
 
-/// Default Widget if no recent is available
-const DefaultNoRecentsWidget = Text(
-  'No Recents',
-  style: TextStyle(fontSize: 20, color: Colors.black26),
-  textAlign: TextAlign.center,
-);
-
 /// Config for customizations
 class Config {
   /// Constructor
   const Config({
-    this.height = 252,
-    this.bgColor = const Color(0xFFEBEFF2),
+    this.height = 256,
+    this.swapCategoryAndBottomBar = false,
     this.checkPlatformCompatibility = true,
     this.emojiSet,
     this.emojiTextStyle,
@@ -29,15 +17,15 @@ class Config {
     this.emojiViewConfig = const EmojiViewConfig(),
     this.skinToneConfig = const SkinToneConfig(),
     this.categoryViewConfig = const CategoryViewConfig(),
-    this.bottomSearchBarConfig = const BottomSearchBarConfig(),
+    this.bottomActionBarConfig = const BottomActionBarConfig(),
     this.searchViewConfig = const SearchViewConfig(),
   });
 
   /// Max Height of the Emoji's view
   final double height;
 
-  /// The background color of the Widget
-  final Color bgColor;
+  /// Swap the category view and bottom bar (category bottom and bottom bar top)
+  final bool swapCategoryAndBottomBar;
 
   /// Verify that emoji glyph is supported by the platform (Android only)
   final bool checkPlatformCompatibility;
@@ -59,17 +47,17 @@ class Config {
   /// Reference: https://github.com/Fintasys/emoji_picker_flutter/issues/148
   final double? customSkinColorOverlayHorizontalOffset;
 
-  /// Category view config
-  final CategoryViewConfig categoryViewConfig;
-
   /// Emoji view config
   final EmojiViewConfig emojiViewConfig;
 
   /// Skin tone config
   final SkinToneConfig skinToneConfig;
 
+  /// Category view config
+  final CategoryViewConfig categoryViewConfig;
+
   /// Search bar config
-  final BottomSearchBarConfig bottomSearchBarConfig;
+  final BottomActionBarConfig bottomActionBarConfig;
 
   /// Search View config
   final SearchViewConfig searchViewConfig;
@@ -77,7 +65,7 @@ class Config {
   @override
   bool operator ==(other) {
     return (other is Config) &&
-        other.bgColor == bgColor &&
+        other.swapCategoryAndBottomBar == swapCategoryAndBottomBar &&
         other.checkPlatformCompatibility == checkPlatformCompatibility &&
         other.emojiSet == emojiSet &&
         other.emojiTextStyle == emojiTextStyle &&
@@ -85,13 +73,13 @@ class Config {
             customSkinColorOverlayHorizontalOffset &&
         other.emojiViewConfig == emojiViewConfig &&
         other.skinToneConfig == skinToneConfig &&
-        other.bottomSearchBarConfig == bottomSearchBarConfig &&
+        other.bottomActionBarConfig == bottomActionBarConfig &&
         other.searchViewConfig == searchViewConfig;
   }
 
   @override
   int get hashCode =>
-      bgColor.hashCode ^
+      swapCategoryAndBottomBar.hashCode ^
       checkPlatformCompatibility.hashCode ^
       (emojiSet?.hashCode ?? 0) ^
       (emojiTextStyle?.hashCode ?? 0) ^
@@ -99,6 +87,6 @@ class Config {
       categoryViewConfig.hashCode ^
       emojiViewConfig.hashCode ^
       skinToneConfig.hashCode ^
-      bottomSearchBarConfig.hashCode ^
+      bottomActionBarConfig.hashCode ^
       searchViewConfig.hashCode;
 }
