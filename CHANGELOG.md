@@ -1,3 +1,9 @@
+## 2.0.0-dev.1
+
+- Added search feature 🔎
+- Add more customization possibilities
+- Restructure & rename files
+
 ## 1.6.3
 
 - Added new Config parameter `customSkinColorOverlayHorizontalOffset` to fix issue with SkinColorOverlay in ShellRoute or other horizontal adjustments
