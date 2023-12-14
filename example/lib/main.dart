@@ -2,10 +2,6 @@ import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/foundation.dart' as foundation;
 import 'package:flutter/material.dart';
 
-// TODO
-// 1. Update ReadMe
-// 4. Consider animations
-
 void main() {
   runApp(const MyApp());
 }
