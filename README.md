@@ -210,7 +210,7 @@ Backspace button is enabled by default on the bottom action bar. If you prefer t
 You can listen to the Backspace tap event by registering a callback inside `onBackspacePressed: () { }`. This will make it easier for your user to remove an added Emoji without showing the keyboard. Check out the example for more details about usage.
 
 Bottom Backspace Button
-<img src="https://user-images.githubusercontent.com/backspace_bottom.png" width="300">
+<img src="https://github.com/Fintasys/emoji_picker_flutter/blob/version-2.0/screenshot/backspace_bottom.png?raw=true" width="300">
 
 Top Backspace Button
 <img src="https://user-images.githubusercontent.com/11667234/182386154-b4b2435f-3a85-454d-a671-f857e5a1c7bd.png" width="300">
