@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:emoji_picker_flutter/src/skin_tone_overlay.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +17,7 @@ class DefaultEmojiPickerView extends EmojiPickerBuilder {
 class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     with SingleTickerProviderStateMixin, SkinToneOverlayStateMixin {
   final double _tabBarHeight = 46;
+  Timer? _onBackspacePressedCallbackTimer;
 
   late PageController _pageController;
   late TabController _tabController;
@@ -45,6 +48,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     _pageController.dispose();
     _tabController.dispose();
     _scrollController.dispose();
+    _onBackspacePressedCallbackTimer?.cancel();
     super.dispose();
   }
 
@@ -112,15 +116,18 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     if (widget.state.onBackspacePressed != null) {
       return Material(
         type: MaterialType.transparency,
-        child: IconButton(
+        child: GestureDetector(
+          onLongPressStart: (_) => _startOnBackspacePressedCallback(),
+          onLongPressEnd: (_) => _stopOnBackspacePressedCallback(),
+          child: IconButton(
             padding: const EdgeInsets.only(bottom: 2),
             icon: Icon(
               Icons.backspace,
               color: widget.config.backspaceColor,
             ),
-            onPressed: () {
-              widget.state.onBackspacePressed!();
-            }),
+            onPressed: () => widget.state.onBackspacePressed!(),
+          ),
+        ),
       );
     }
     return const SizedBox.shrink();
@@ -202,5 +209,17 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
   void _onSkinTonedEmojiSelected(Category? category, Emoji emoji) {
     widget.state.onEmojiSelected(category, emoji);
     closeSkinToneOverlay();
+  }
+
+  void _startOnBackspacePressedCallback() {
+    const callbackInterval = Duration(milliseconds: 75);
+    _onBackspacePressedCallbackTimer =
+        Timer.periodic(callbackInterval, (timer) {
+      widget.state.onBackspacePressed!();
+    });
+  }
+
+  void _stopOnBackspacePressedCallback() {
+    _onBackspacePressedCallbackTimer?.cancel();
   }
 }
