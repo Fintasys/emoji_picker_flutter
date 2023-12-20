@@ -113,6 +113,7 @@ class EmojiPicker extends StatefulWidget {
   const EmojiPicker({
     Key? key,
     this.textEditingController,
+    this.scrollController,
     this.onEmojiSelected,
     this.onBackspacePressed,
     this.config = const Config(),
@@ -126,6 +127,10 @@ class EmojiPicker extends StatefulWidget {
   /// [TextField] this widget handles inserting and deleting for you
   /// automatically.
   final TextEditingController? textEditingController;
+
+  /// If you provide the [ScrollController] that is linked to a
+  /// [TextField] this widget handles auto scrolling for you.
+  final ScrollController? scrollController;
 
   /// The function called when the emoji is selected
   final OnEmojiSelected? onEmojiSelected;
@@ -217,6 +222,12 @@ class EmojiPickerState extends State<EmojiPicker> {
       }
     }
 
+    if (widget.scrollController != null) {
+      final autoScrollController = widget.scrollController!;
+      autoScrollController
+          .jumpTo(autoScrollController.position.maxScrollExtent);
+    }
+
     widget.onBackspacePressed?.call();
   }
 
@@ -267,6 +278,12 @@ class EmojiPickerState extends State<EmojiPicker> {
             baseOffset: selection.start + emojiLength,
             extentOffset: selection.start + emojiLength,
           );
+      }
+
+      if (widget.scrollController != null) {
+        final autoScrollController = widget.scrollController!;
+        autoScrollController
+            .jumpTo(autoScrollController.position.maxScrollExtent);
       }
 
       widget.onEmojiSelected?.call(category, emoji);
