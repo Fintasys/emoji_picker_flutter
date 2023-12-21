@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 class SkinToneConfig {
   /// Constructor
   const SkinToneConfig({
-    this.enableSkinTones = true,
+    this.enabled = true,
     this.dialogBackgroundColor = Colors.white,
     this.indicatorColor = Colors.grey,
   });
 
   /// Enable feature to select a skin tone of certain emoji's
-  final bool enableSkinTones;
+  final bool enabled;
 
   /// The background color of the skin tone dialog
   final Color dialogBackgroundColor;
@@ -21,14 +21,14 @@ class SkinToneConfig {
   @override
   bool operator ==(other) {
     return (other is SkinToneConfig) &&
-        other.enableSkinTones == enableSkinTones &&
+        other.enabled == enabled &&
         other.dialogBackgroundColor == dialogBackgroundColor &&
         other.indicatorColor == indicatorColor;
   }
 
   @override
   int get hashCode =>
-      enableSkinTones.hashCode ^
+      enabled.hashCode ^
       dialogBackgroundColor.hashCode ^
       indicatorColor.hashCode;
 }

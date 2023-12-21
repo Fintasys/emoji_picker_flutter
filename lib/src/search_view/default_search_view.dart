@@ -42,14 +42,11 @@ class _DefaultSearchViewState extends State<DefaultSearchView>
     return EmojiCell.fromConfig(
       emoji: emoji,
       emojiSize: emojiSize,
-      onEmojiSelected: (Category? category, Emoji e) {
-        widget.state.onEmojiSelected(category, emoji);
-      },
+      onEmojiSelected: widget.state.onEmojiSelected,
       config: widget.config,
       onSkinToneDialogRequested: (emoji, emojiSize, category, index) {
         closeSkinToneOverlay();
-        if (!emoji.hasSkinTone ||
-            !widget.config.skinToneConfig.enableSkinTones) {
+        if (!emoji.hasSkinTone || !widget.config.skinToneConfig.enabled) {
           return;
         }
         showSkinToneOverlay(

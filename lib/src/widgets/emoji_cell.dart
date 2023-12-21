@@ -31,7 +31,7 @@ class EmojiCell extends StatelessWidget {
       this.onSkinToneDialogRequested,
       required Config config})
       : buttonMode = config.emojiViewConfig.buttonMode,
-        enableSkinTones = config.skinToneConfig.enableSkinTones,
+        enableSkinTones = config.skinToneConfig.enabled,
         textStyle = config.emojiTextStyle,
         skinToneIndicatorColor = config.skinToneConfig.indicatorColor;
 
@@ -98,16 +98,23 @@ class EmojiCell extends StatelessWidget {
     );
   }
 
+  TextStyle _getEmojiTextStyle() {
+    final defaultStyle = emojiTextStyle.merge(
+      TextStyle(
+        fontSize: emojiSize,
+        backgroundColor: Colors.transparent,
+        inherit: true,
+      ),
+    );
+    return textStyle == null ? defaultStyle : textStyle!.merge(defaultStyle);
+  }
+
   /// Build and display Emoji centered of its parent
   Widget _buildEmoji() {
-    final style = TextStyle(
-      fontSize: emojiSize,
-      backgroundColor: Colors.transparent,
-    );
     final emojiText = Text(
       emoji.emoji,
       textScaleFactor: 1.0,
-      style: textStyle == null ? style : textStyle!.merge(style),
+      style: _getEmojiTextStyle(),
     );
 
     return Center(

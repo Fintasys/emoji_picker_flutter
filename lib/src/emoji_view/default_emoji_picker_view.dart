@@ -108,6 +108,9 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
   }
 
   Widget _buildBottomSearchBar() {
+    if (!widget.config.bottomActionBarConfig.enabled) {
+      return const SizedBox.shrink();
+    }
     return widget.config.bottomActionBarConfig.customBottomActionBar != null
         ? widget.config.bottomActionBarConfig.customBottomActionBar!(
             widget.config,
@@ -148,10 +151,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
                 emojiSize: emojiSize,
                 categoryEmoji: categoryEmoji,
                 index: i,
-                onEmojiSelected: (category, emoji) {
-                  closeSkinToneOverlay();
-                  widget.state.onEmojiSelected(category, emoji);
-                },
+                onEmojiSelected: _onSkinTonedEmojiSelected,
                 onSkinToneDialogRequested: _openSkinToneDialog,
                 config: widget.config,
               )
@@ -173,7 +173,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     int index,
   ) {
     closeSkinToneOverlay();
-    if (!emoji.hasSkinTone || !widget.config.skinToneConfig.enableSkinTones) {
+    if (!emoji.hasSkinTone || !widget.config.skinToneConfig.enabled) {
       return;
     }
     showSkinToneOverlay(

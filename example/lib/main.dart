@@ -6,7 +6,7 @@ void main() {
   runApp(const MyApp());
 }
 
-/// Example for EmojiPickerFlutter
+/// Example for EmojiPicker
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -15,14 +15,8 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-  final TextEditingController _controller = TextEditingController();
-  bool emojiShowing = false;
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+  final _controller = TextEditingController();
+  bool _emojiShowing = false;
 
   _onBackspacePressed() {
     _controller
@@ -39,90 +33,113 @@ class MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Emoji Picker Example App'),
         ),
-        body: Column(
-          children: [
-            const Spacer(),
-            Container(
-                height: 66.0,
-                color: Colors.blue,
-                child: Row(
-                  children: [
-                    Material(
-                      color: Colors.transparent,
-                      child: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            emojiShowing = !emojiShowing;
-                          });
-                        },
-                        icon: const Icon(
-                          Icons.emoji_emotions,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: TextField(
-                            controller: _controller,
-                            style: const TextStyle(
-                                fontSize: 20.0, color: Colors.black87),
-                            decoration: InputDecoration(
-                              hintText: 'Type a message',
-                              filled: true,
-                              fillColor: Colors.white,
-                              contentPadding: const EdgeInsets.only(
-                                left: 16.0,
-                                bottom: 8.0,
-                                top: 8.0,
-                                right: 16.0,
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(50.0),
-                              ),
-                            )),
-                      ),
-                    ),
-                    Material(
-                      color: Colors.transparent,
-                      child: IconButton(
-                          onPressed: () {
-                            // send message
-                          },
-                          icon: const Icon(
-                            Icons.send,
-                            color: Colors.white,
-                          )),
-                    )
-                  ],
-                )),
-            Offstage(
-              offstage: !emojiShowing,
-              child: EmojiPicker(
-                textEditingController: _controller,
-                onBackspacePressed: _onBackspacePressed,
-                config: Config(
-                  height: 256,
-                  checkPlatformCompatibility: true,
-                  emojiViewConfig: EmojiViewConfig(
-                    // Issue: https://github.com/flutter/flutter/issues/28894
-                    emojiSizeMax: 32 *
-                        (foundation.defaultTargetPlatform == TargetPlatform.iOS
-                            ? 1.30
-                            : 1.0),
+        body: SafeArea(
+          child: Column(
+            children: [
+              Expanded(
+                child: Center(
+                  child: ValueListenableBuilder(
+                    valueListenable: _controller,
+                    builder: (context, text, child) {
+                      return Text(
+                        _controller.text,
+                      );
+                    },
                   ),
-                  swapCategoryAndBottomBar: false,
-                  skinToneConfig: const SkinToneConfig(),
-                  categoryViewConfig: const CategoryViewConfig(),
-                  bottomActionBarConfig: const BottomActionBarConfig(),
-                  searchViewConfig: const SearchViewConfig(),
                 ),
               ),
-            ),
-          ],
+              Container(
+                  height: 66.0,
+                  color: Colors.blue,
+                  child: Row(
+                    children: [
+                      Material(
+                        color: Colors.transparent,
+                        child: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _emojiShowing = !_emojiShowing;
+                            });
+                          },
+                          icon: const Icon(
+                            Icons.emoji_emotions,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: TextField(
+                              controller: _controller,
+                              style: const TextStyle(
+                                fontSize: 20.0,
+                                color: Colors.black87,
+                              ),
+                              maxLines: 1,
+                              decoration: InputDecoration(
+                                hintText: 'Type a message',
+                                filled: true,
+                                fillColor: Colors.white,
+                                contentPadding: const EdgeInsets.only(
+                                  left: 16.0,
+                                  bottom: 8.0,
+                                  top: 8.0,
+                                  right: 16.0,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(50.0),
+                                ),
+                              )),
+                        ),
+                      ),
+                      Material(
+                        color: Colors.transparent,
+                        child: IconButton(
+                            onPressed: () {
+                              // send message
+                            },
+                            icon: const Icon(
+                              Icons.send,
+                              color: Colors.white,
+                            )),
+                      )
+                    ],
+                  )),
+              Offstage(
+                offstage: !_emojiShowing,
+                child: EmojiPicker(
+                  textEditingController: _controller,
+                  onBackspacePressed: _onBackspacePressed,
+                  config: Config(
+                    height: 256,
+                    checkPlatformCompatibility: true,
+                    emojiViewConfig: EmojiViewConfig(
+                      // Issue: https://github.com/flutter/flutter/issues/28894
+                      emojiSizeMax: 32 *
+                          (foundation.defaultTargetPlatform ==
+                                  TargetPlatform.iOS
+                              ? 1.30
+                              : 1.0),
+                    ),
+                    swapCategoryAndBottomBar: false,
+                    skinToneConfig: const SkinToneConfig(),
+                    categoryViewConfig: const CategoryViewConfig(),
+                    bottomActionBarConfig: const BottomActionBarConfig(),
+                    searchViewConfig: const SearchViewConfig(),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }

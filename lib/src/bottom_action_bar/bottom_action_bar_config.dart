@@ -12,12 +12,16 @@ typedef BottomActionBarBuilder = Widget Function(
 class BottomActionBarConfig {
   /// Constructor
   const BottomActionBarConfig({
+    this.enabled = true,
     this.showBackspaceButton = true,
     this.backgroundColor = Colors.blue,
     this.buttonColor = Colors.blue,
     this.buttonIconColor = Colors.white,
     this.customBottomActionBar,
   });
+
+  /// Enable Bottom Action Bar
+  final bool enabled;
 
   /// Show Backspace button
   final bool showBackspaceButton;
@@ -37,6 +41,7 @@ class BottomActionBarConfig {
   @override
   bool operator ==(other) {
     return (other is BottomActionBarConfig) &&
+        other.enabled == enabled &&
         other.showBackspaceButton == showBackspaceButton &&
         other.backgroundColor == backgroundColor &&
         other.buttonColor == buttonColor &&
@@ -46,6 +51,7 @@ class BottomActionBarConfig {
 
   @override
   int get hashCode =>
+      enabled.hashCode ^
       showBackspaceButton.hashCode ^
       backgroundColor.hashCode ^
       buttonColor.hashCode ^

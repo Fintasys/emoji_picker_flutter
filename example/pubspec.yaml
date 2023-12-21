@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  google_fonts: ^4.0.4
+  google_fonts: ^6.1.0
   emoji_picker_flutter:
     path: ../
 

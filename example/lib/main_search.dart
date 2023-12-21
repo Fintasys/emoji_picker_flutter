@@ -5,8 +5,8 @@ void main() {
   runApp(const MyApp());
 }
 
-/// Example for EmojiPickerFlutter that demonstrates possible search feature
-/// implementation.
+/// Example for EmojiPicker that demonstrates possible complete customization
+/// of search feature implementation, independ of the EmojiPicker.
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -21,19 +21,12 @@ class MyAppState extends State<MyApp> {
   final FocusNode _searchFocusNode = FocusNode();
   List<Emoji> _searchResults = List.empty();
   OverlayEntry? _overlay;
-  final Config _config = const Config();
+  final Config _config = const Config(
+      bottomActionBarConfig: BottomActionBarConfig(
+    enabled: false,
+  ));
   bool _isSearchFocused = false;
   bool _emojiShowing = false;
-
-  @override
-  void dispose() {
-    _closeSkinToneDialog();
-    _controller.dispose();
-    _searchController.dispose();
-    _searchScrollController.dispose();
-    _searchFocusNode.dispose();
-    super.dispose();
-  }
 
   void _onEmojiSelected(Category? category, Emoji emoji) {
     final text = _controller.text;
@@ -63,7 +56,7 @@ class MyAppState extends State<MyApp> {
     int index,
   ) {
     _closeSkinToneDialog();
-    if (!emoji.hasSkinTone || !_config.skinToneConfig.enableSkinTones) {
+    if (!emoji.hasSkinTone || !_config.skinToneConfig.enabled) {
       return;
     }
     _overlay = _buildSkinToneOverlay(
@@ -368,5 +361,15 @@ class MyAppState extends State<MyApp> {
         }),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _closeSkinToneDialog();
+    _controller.dispose();
+    _searchController.dispose();
+    _searchScrollController.dispose();
+    _searchFocusNode.dispose();
+    super.dispose();
   }
 }

@@ -7,45 +7,83 @@ import 'package:flutter/widgets.dart';
 class EmojiTextEditingController extends TextEditingController {
   /// Constructor, requres emojiStyle, since otherwise this class has no effect
   EmojiTextEditingController({String? text, required this.emojiStyle})
-      : super(text: text);
+      : super(text: text) {
+    var emojis = '';
+    for (final list in defaultEmojiSet) {
+      emojis += list.emoji.map((e) => e.emoji).join('|');
+    }
+    _regex = RegExp(emojis);
+  }
 
   /// The style used for the emoji characters
   final TextStyle emojiStyle;
-  final _utils = EmojiPickerUtils();
+  // final _utils = EmojiPickerUtils();
+  late final RegExp _regex;
 
   @override
-  TextSpan buildTextSpan(
-      {required BuildContext context,
-      TextStyle? style,
-      required bool withComposing}) {
-    if (!value.isComposingRangeValid || !withComposing) {
-      return TextSpan(
-          style: style,
-          children: _utils.setEmojiTextStyle(text,
-              emojiStyle: emojiStyle, parentStyle: style));
+  TextSpan buildTextSpan({
+    required BuildContext context,
+    TextStyle? style,
+    required bool withComposing,
+  }) {
+    assert(!value.composing.isValid ||
+        !withComposing ||
+        value.isComposingRangeValid);
+    // If the composing range is out of range for the current text, ignore it to
+    // preserve the tree integrity, otherwise in release mode a RangeError will
+    // be thrown and this EditableText will be built with a broken subtree.
+    final composingRegionOutOfRange =
+        !value.isComposingRangeValid || !withComposing;
+
+    if (composingRegionOutOfRange) {
+      final textSpanChildren = <InlineSpan>[];
+
+      text.splitMapJoin(_regex, onMatch: (Match match) {
+        final textPart = match.group(0);
+
+        if (textPart == null) return '';
+
+        _addTextSpan(
+          textSpanChildren,
+          textPart,
+          style?.merge(emojiStyle),
+        );
+
+        return '';
+      }, onNonMatch: (String text) {
+        _addTextSpan(textSpanChildren, text, style);
+        return '';
+      });
+
+      return TextSpan(style: style, children: textSpanChildren);
     }
+
     final composingStyle =
         style?.merge(const TextStyle(decoration: TextDecoration.underline)) ??
             const TextStyle(decoration: TextDecoration.underline);
     return TextSpan(
       style: style,
       children: <TextSpan>[
-        TextSpan(
-            children: _utils.setEmojiTextStyle(
-                value.composing.textBefore(value.text),
-                emojiStyle: emojiStyle)),
+        TextSpan(text: value.composing.textBefore(value.text)),
         TextSpan(
           style: composingStyle,
-          children: _utils.setEmojiTextStyle(
-              value.composing.textInside(value.text),
-              emojiStyle: emojiStyle,
-              parentStyle: composingStyle),
+          text: value.composing.textInside(value.text),
         ),
-        TextSpan(
-            children: _utils.setEmojiTextStyle(
-                value.composing.textAfter(value.text),
-                emojiStyle: emojiStyle)),
+        TextSpan(text: value.composing.textAfter(value.text)),
       ],
+    );
+  }
+
+  void _addTextSpan(
+    List<InlineSpan> textSpanChildren,
+    String? textToBeStyled,
+    TextStyle? style,
+  ) {
+    textSpanChildren.add(
+      TextSpan(
+        text: textToBeStyled,
+        style: style,
+      ),
     );
   }
 }

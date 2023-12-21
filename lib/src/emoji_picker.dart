@@ -200,7 +200,6 @@ class EmojiPickerState extends State<EmojiPicker> {
         final selection = controller.value.selection;
         final newTextBeforeCursor =
             selection.textBefore(text).characters.skipLast(1).toString();
-        print(newTextBeforeCursor);
         controller
           ..text = newTextBeforeCursor + selection.textAfter(text)
           ..selection = TextSelection.fromPosition(
