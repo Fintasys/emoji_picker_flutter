@@ -16,13 +16,7 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   final TextEditingController _controller = TextEditingController();
-  bool emojiShowing = false;
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+  bool _emojiShowing = false;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +50,7 @@ class MyAppState extends State<MyApp> {
                       child: IconButton(
                         onPressed: () {
                           setState(() {
-                            emojiShowing = !emojiShowing;
+                            _emojiShowing = !_emojiShowing;
                           });
                         },
                         icon: const Icon(
@@ -101,7 +95,7 @@ class MyAppState extends State<MyApp> {
                   ],
                 )),
             Offstage(
-              offstage: !emojiShowing,
+              offstage: !_emojiShowing,
               child: SizedBox(
                   height: 250,
                   child: EmojiPicker(
@@ -118,5 +112,11 @@ class MyAppState extends State<MyApp> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }

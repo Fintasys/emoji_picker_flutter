@@ -15,16 +15,10 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   final TextEditingController _controller = TextEditingController();
-  bool emojiShowing = false;
+  bool _emojiShowing = false;
 
   // 1. Create GlobalKey for EmojiPickerState
   final key = GlobalKey<EmojiPickerState>();
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +43,7 @@ class MyAppState extends State<MyApp> {
             ),
             _buildTextInputField(),
             Offstage(
-              offstage: !emojiShowing,
+              offstage: !_emojiShowing,
               child: SizedBox(
                 height: 250,
                 child: EmojiPicker(
@@ -76,7 +70,7 @@ class MyAppState extends State<MyApp> {
             child: IconButton(
               onPressed: () {
                 setState(() {
-                  emojiShowing = !emojiShowing;
+                  _emojiShowing = !_emojiShowing;
                 });
               },
               icon: const Icon(
@@ -118,5 +112,11 @@ class MyAppState extends State<MyApp> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }
