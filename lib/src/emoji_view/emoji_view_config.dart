@@ -21,8 +21,8 @@ const DefaultNoRecentsWidget = Text(
 class EmojiViewConfig {
   /// Constructor
   const EmojiViewConfig({
-    this.columns = 7,
-    this.emojiSizeMax = 32.0,
+    this.columns = 10,
+    this.emojiSizeMax = 28.0,
     this.backgroundColor = const Color(0xFFEBEFF2),
     this.verticalSpacing = 0,
     this.horizontalSpacing = 0,

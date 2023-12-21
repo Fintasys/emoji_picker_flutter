@@ -19,13 +19,13 @@ class MyAppState extends State<MyApp> {
   late EmojiTextEditingController _controller;
   late TextStyle _textStyle;
   bool _emojiShowing = false;
-  final _fontSize = 32.0;
+  final _fontSize = 28.0;
 
   @override
   void initState() {
     // 1. Define Custom Font & Text Style
     _textStyle = emojiTextStyle.copyWith(
-      fontFamily: GoogleFonts.notoEmoji().fontFamily,
+      fontFamily: GoogleFonts.notoColorEmoji().fontFamily,
       fontSize: _fontSize,
     );
 

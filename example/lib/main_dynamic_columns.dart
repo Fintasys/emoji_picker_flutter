@@ -23,7 +23,7 @@ class MyAppState extends State<MyApp> {
     final screenSize = MediaQuery.of(context).size;
     const emojiPadding =
         9 * 2; // 9 pixels on both left and right sides of each emoji.
-    final emojiSize = 32 *
+    final emojiSize = 28 *
         (foundation.defaultTargetPlatform ==
                 TargetPlatform
                     .iOS // Issue: https://github.com/flutter/flutter/issues/28894

@@ -116,7 +116,7 @@ class MyAppState extends State<MyApp> {
                     checkPlatformCompatibility: true,
                     emojiViewConfig: EmojiViewConfig(
                       // Issue: https://github.com/flutter/flutter/issues/28894
-                      emojiSizeMax: 32 *
+                      emojiSizeMax: 28 *
                           (foundation.defaultTargetPlatform ==
                                   TargetPlatform.iOS
                               ? 1.30
