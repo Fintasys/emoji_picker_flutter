@@ -1,3 +1,9 @@
+## 2.0.0-dev.2
+
+- Improve `EmojiTextEditingController` to ensure consistent appearance in Text and TextInput
+- Update examples code
+- Todo: Update ReadMe, Improve Search UI
+
 ## 2.0.0-dev.1
 
 - Added search feature 🔎
