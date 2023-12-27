@@ -60,8 +60,6 @@ EmojiPicker(
 
 ```
 
-See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/example/lib/main.dart) for more detailed sample project.
-
 ## Examples
 
 All examples can be found [here](https://github.com/Fintasys/emoji_picker_flutter/tree/master/example/lib)
