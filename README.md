@@ -161,7 +161,7 @@ All examples can be found [here](https://github.com/Fintasys/emoji_picker_flutte
 2. Custom Font (Display all emoji correctly in the style of the font, additional ~15mb e.g. with Google Fonts)
    <img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/version-2.0/screenshot/example_custom_font_android.png" width="300"> <img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/version-2.0/screenshot/example_custom_font_android_2.png" width="300">
 
-- All screenshots from Android. iOS displays by default most emoji correctly.
+\*All screenshots from Android. iOS displays by default most emoji correctly.
 
 ## Custom view
 
