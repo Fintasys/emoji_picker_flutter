@@ -14,23 +14,14 @@ Yet another Emoji Picker for Flutter 🤩
 ## Key features
 
 - Lightweight Package
-
 - Fast Loading
-
 - Null-safety
-
 - Completely customizable
-
 - Material Design and Cupertino mode
-
 - Emojis that cannot be displayed are filtered out (Android Only)
-
 - Optional recently used emoji tab
-
 - Skin Tone Support
-
 - Custom-Font Support
-
 - Search Option
 
 ## Getting Started
@@ -87,7 +78,7 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 | bottomActionBarConfig                  | Bottom action bar config                                                                                                                        | const BottomActionBarConfig() |
 | searchViewConfig                       | Search View config                                                                                                                              | const SearchViewConfig        |
 
-### Emoji View Config
+## Emoji View Config
 
 | property                  | description                                                                                           | default                                                                                                |
 | ------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
@@ -103,7 +94,7 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 | loadingIndicator          | A widget to display while emoji picker is initializing. Needs to be `const` Widget!                   | SizedBox.shrink()                                                                                      |
 | buttonMode                | Choose between Material and Cupertino button style                                                    | ButtonMode.MATERIAL                                                                                    |
 
-### SkinTone Config
+## SkinTone Config
 
 | property              | description                                                  | default      |
 | --------------------- | ------------------------------------------------------------ | ------------ |
@@ -111,7 +102,7 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 | dialogBackgroundColor | The background color of the skin tone dialog                 | Colors.white |
 | indicatorColor        | Color of the small triangle next to multiple skin tone emoji | Colors.grey  |
 
-### Category View Config
+## Category View Config
 
 | property                 | description                                                                                                | default                     |
 | ------------------------ | ---------------------------------------------------------------------------------------------------------- | --------------------------- |
@@ -128,7 +119,7 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 | categoryIcons            | Determines the icon to display for each Category. You can change icons by setting them in the constructor. | CategoryIcons()             |
 | customCategoryView       | Customize the category widget                                                                              | null                        |
 
-### Bottom Action Bar Config
+## Bottom Action Bar Config
 
 | property              | description                                | default      |
 | --------------------- | ------------------------------------------ | ------------ |
@@ -138,7 +129,7 @@ See the [demo](https://github.com/Fintasys/emoji_picker_flutter/blob/master/exam
 | buttonIconColor       | Icon color of buttons                      | Colors.white |
 | customBottomActionBar | Customize the bottom action bar widget     | null         |
 
-### Search View Config
+## Search View Config
 
 | property         | description                           | default                 |
 | ---------------- | ------------------------------------- | ----------------------- |
@@ -159,6 +150,14 @@ Bottom Backspace Button
 Top Backspace Button
 
 <img src="https://user-images.githubusercontent.com/11667234/182386154-b4b2435f-3a85-454d-a671-f857e5a1c7bd.png" width="300">
+
+## Examples
+
+1. Default (Some Emoji might not be displayed correct e.g. Frowning Face)
+   <img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/41c3e6d2cfe69375e263f42cfe06dbad7936bde1/screenshot/example_default_android.png" width="300">
+
+2. Custom Font (Display all emoji correctly in the style of the font, additional ~15mb e.g. with Google Fonts)
+   <img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/version-2.0/screenshot/example_custom_font_android.png" width="300"><img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/version-2.0/screenshot/example_custom_font_android_2.png" width="300">
 
 ## Custom view
 
