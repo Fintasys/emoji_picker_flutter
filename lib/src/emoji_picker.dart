@@ -100,6 +100,7 @@ class EmojiPicker extends StatefulWidget {
   const EmojiPicker({
     Key? key,
     this.textEditingController,
+    this.scrollController,
     this.onEmojiSelected,
     this.onBackspacePressed,
     this.config = const Config(),
@@ -113,6 +114,10 @@ class EmojiPicker extends StatefulWidget {
   /// [TextField] this widget handles inserting and deleting for you
   /// automatically.
   final TextEditingController? textEditingController;
+
+  /// If you provide the [ScrollController] that is linked to a
+  /// [TextField] this widget handles auto scrolling for you.
+  final ScrollController? scrollController;
 
   /// The function called when the emoji is selected
   final OnEmojiSelected? onEmojiSelected;
@@ -208,6 +213,8 @@ class EmojiPickerState extends State<EmojiPicker> {
     }
 
     widget.onBackspacePressed?.call();
+
+    _scrollToCursorAfterTextChange();
   }
 
   // Add recent emoji handling to tap listener
@@ -250,8 +257,11 @@ class EmojiPickerState extends State<EmojiPicker> {
           return;
         }
 
-        final newText =
-            text.replaceRange(selection.start, selection.end, emoji.emoji);
+        final newText = text.replaceRange(
+          selection.start,
+          selection.end,
+          emoji.emoji,
+        );
         final emojiLength = emoji.emoji.length;
         controller
           ..text = newText
@@ -262,6 +272,8 @@ class EmojiPickerState extends State<EmojiPicker> {
       }
 
       widget.onEmojiSelected?.call(category, emoji);
+
+      _scrollToCursorAfterTextChange();
     };
   }
 
@@ -330,5 +342,18 @@ class EmojiPickerState extends State<EmojiPicker> {
     setState(() {
       _isSearchBarVisible = false;
     });
+  }
+
+  void _scrollToCursorAfterTextChange() {
+    if (widget.scrollController != null) {
+      final scrollController = widget.scrollController!;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        scrollController.animateTo(
+          scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.ease,
+        );
+      });
+    }
   }
 }

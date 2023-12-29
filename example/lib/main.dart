@@ -16,6 +16,7 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   final _controller = TextEditingController();
+  final _scrollController = ScrollController();
   bool _emojiShowing = false;
 
   _onBackspacePressed() {
@@ -72,6 +73,7 @@ class MyAppState extends State<MyApp> {
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: TextField(
                               controller: _controller,
+                              scrollController: _scrollController,
                               style: const TextStyle(
                                 fontSize: 20.0,
                                 color: Colors.black87,
@@ -110,6 +112,7 @@ class MyAppState extends State<MyApp> {
                 offstage: !_emojiShowing,
                 child: EmojiPicker(
                   textEditingController: _controller,
+                  scrollController: _scrollController,
                   onBackspacePressed: _onBackspacePressed,
                   config: Config(
                     height: 256,
