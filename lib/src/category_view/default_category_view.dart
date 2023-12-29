@@ -60,6 +60,7 @@ class _DefaultCategoryViewState extends State<DefaultCategoryView>
       return BackspaceButton(
         widget.config,
         widget.state.onBackspacePressed,
+        widget.state.onBackspaceLongPressed,
         widget.config.categoryViewConfig.backspaceColor,
       );
     }

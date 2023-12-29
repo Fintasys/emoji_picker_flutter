@@ -39,6 +39,7 @@ class _DefaultBottomActionBarState extends State<DefaultBottomActionBar> {
       return BackspaceButton(
         widget.config,
         widget.state.onBackspacePressed,
+        widget.state.onBackspaceLongPressed,
         widget.config.bottomActionBarConfig.buttonIconColor,
       );
     }
