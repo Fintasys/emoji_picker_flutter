@@ -65,6 +65,7 @@ EmojiPicker(
 All examples can be found [here](https://github.com/Fintasys/emoji_picker_flutter/tree/master/example/lib)
 
 1. Default (Some Emoji might not be displayed correctly e.g. Frowning Face)
+
    <img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/41c3e6d2cfe69375e263f42cfe06dbad7936bde1/screenshot/example_default_android.png" width="300">
 
 2. Custom Font (Display all emoji correctly in the style of the font, additional ~15mb e.g. with Google Fonts)
