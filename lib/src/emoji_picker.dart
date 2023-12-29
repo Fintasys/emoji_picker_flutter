@@ -165,6 +165,7 @@ class EmojiPickerState extends State<EmojiPicker> {
   void initState() {
     super.initState();
     _updateEmojis();
+    widget.textEditingController?.addListener(_scrollToCursorAfterTextChange);
   }
 
   @override
@@ -217,7 +218,9 @@ class EmojiPickerState extends State<EmojiPicker> {
 
     widget.onBackspacePressed?.call();
 
-    _scrollToCursorAfterTextChange();
+    if (widget.textEditingController == null) {
+      _scrollToCursorAfterTextChange();
+    }
   }
 
   OnBackspaceLongPressed _onBackspaceLongPressed() {
@@ -314,17 +317,20 @@ class EmojiPickerState extends State<EmojiPicker> {
           emoji.emoji,
         );
         final emojiLength = emoji.emoji.length;
-        controller
-          ..text = newText
-          ..selection = selection.copyWith(
+        controller.value = controller.value.copyWith(
+          text: newText,
+          selection: selection.copyWith(
             baseOffset: selection.start + emojiLength,
             extentOffset: selection.start + emojiLength,
-          );
+          ),
+        );
       }
 
       widget.onEmojiSelected?.call(category, emoji);
 
-      _scrollToCursorAfterTextChange();
+      if (widget.textEditingController == null) {
+        _scrollToCursorAfterTextChange();
+      }
     };
   }
 
