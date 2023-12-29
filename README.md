@@ -68,6 +68,7 @@ All examples can be found [here](https://github.com/Fintasys/emoji_picker_flutte
    <img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/41c3e6d2cfe69375e263f42cfe06dbad7936bde1/screenshot/example_default_android.png" width="300">
 
 2. Custom Font (Display all emoji correctly in the style of the font, additional ~15mb e.g. with Google Fonts)
+
    <img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/version-2.0/screenshot/example_custom_font_android.png" width="300"> <img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/version-2.0/screenshot/example_custom_font_android_2.png" width="300">
 
 \*All screenshots from Android. iOS displays by default most emoji correctly.
@@ -242,7 +243,6 @@ Always happy if anyone wants to help to improve this package!
 ## If you need any features
 
 Please open an issue so that we can discuss your feature request 🙏
-
 
 ## Support me 🙏
 
