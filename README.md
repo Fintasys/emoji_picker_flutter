@@ -243,6 +243,11 @@ Always happy if anyone wants to help to improve this package!
 
 Please open an issue so that we can discuss your feature request 🙏
 
+
+## Support me 🙏
+
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/fintasys)
+
 ---
 
 <center>Made with 💙 in Tokyo</center>
