@@ -1,3 +1,8 @@
+## 2.0.0-dev.3
+
+- Add auto-scroll support by using `ScrollController`
+- Add long-press backspace support
+
 ## 2.0.0-dev.2
 
 - Improve `EmojiTextEditingController` to ensure consistent appearance in Text and TextInput
