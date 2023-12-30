@@ -152,7 +152,14 @@ EmojiPickerUtils().clearRecentEmojis(key: key);
 ## Feel free to contribute to this package!! 🙇‍♂️
 Always happy if anyone wants to help to improve this package!
 
-## If you need any features 
+## If you need any features
+
 Please open an issue so that we can discuss your feature request 🙏
-___
+
+## Support me 🙏
+
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/fintasys)
+
+---
+
 <center>Made with 💙 in Tokyo</center>
