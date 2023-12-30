@@ -222,13 +222,9 @@ class EmojiPickerState extends State<EmojiPicker> {
       }
     }
 
-    if (widget.scrollController != null) {
-      final autoScrollController = widget.scrollController!;
-      autoScrollController
-          .jumpTo(autoScrollController.position.maxScrollExtent);
-    }
-
     widget.onBackspacePressed?.call();
+
+    _scrollToCursorAfterTextChange();
   }
 
   // Add recent emoji handling to tap listener
@@ -280,13 +276,9 @@ class EmojiPickerState extends State<EmojiPicker> {
           );
       }
 
-      if (widget.scrollController != null) {
-        final autoScrollController = widget.scrollController!;
-        autoScrollController
-            .jumpTo(autoScrollController.position.maxScrollExtent);
-      }
-
       widget.onEmojiSelected?.call(category, emoji);
+
+      _scrollToCursorAfterTextChange();
     };
   }
 
@@ -311,6 +303,19 @@ class EmojiPickerState extends State<EmojiPicker> {
     if (mounted) {
       setState(() {
         _loaded = true;
+      });
+    }
+  }
+
+  void _scrollToCursorAfterTextChange() {
+    if (widget.scrollController != null) {
+      final scrollController = widget.scrollController!;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        scrollController.animateTo(
+          scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.ease,
+        );
       });
     }
   }
