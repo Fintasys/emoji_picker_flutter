@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 /// Inhert this class to create your own Category view
 abstract class CategoryView extends StatefulWidget {
   /// Constructor
-  CategoryView(
+  const CategoryView(
     this.config,
     this.state,
     this.tabController,

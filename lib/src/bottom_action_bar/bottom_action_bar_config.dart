@@ -45,8 +45,7 @@ class BottomActionBarConfig {
         other.showBackspaceButton == showBackspaceButton &&
         other.backgroundColor == backgroundColor &&
         other.buttonColor == buttonColor &&
-        other.buttonIconColor == buttonIconColor &&
-        other.customBottomActionBar == customBottomActionBar;
+        other.buttonIconColor == buttonIconColor;
   }
 
   @override
@@ -55,6 +54,5 @@ class BottomActionBarConfig {
       showBackspaceButton.hashCode ^
       backgroundColor.hashCode ^
       buttonColor.hashCode ^
-      buttonIconColor.hashCode ^
-      customBottomActionBar.hashCode;
+      buttonIconColor.hashCode;
 }

@@ -1,8 +1,10 @@
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 
 /// Callback function for custom search view
 typedef SearchViewBuilder = Widget Function(
-  SearchViewConfig config,
+  Config config,
+  EmojiViewState state,
   VoidCallback showEmojiView,
 );
 
@@ -33,13 +35,12 @@ class SearchViewConfig {
     return (other is SearchViewConfig) &&
         other.backgroundColor == backgroundColor &&
         other.buttonColor == buttonColor &&
-        other.buttonIconColor == buttonIconColor &&
-        other.customSearchView == customSearchView;
+        other.buttonIconColor == buttonIconColor;
   }
 
   @override
   int get hashCode =>
       backgroundColor.hashCode ^
-      buttonIconColor.hashCode ^
-      customSearchView.hashCode;
+      buttonColor.hashCode ^
+      buttonIconColor.hashCode;
 }

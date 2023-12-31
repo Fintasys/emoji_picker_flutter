@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 /// Default Search implementation
 class DefaultSearchView extends SearchView {
   /// Constructor
-  DefaultSearchView(
+  const DefaultSearchView(
     Config config,
     EmojiViewState state,
     VoidCallback showEmojiView,
@@ -100,7 +100,9 @@ class _DefaultSearchViewState extends State<DefaultSearchView>
             Row(
               children: [
                 IconButton(
-                  onPressed: widget.showEmojiView,
+                  onPressed: () {
+                    widget.showEmojiView();
+                  },
                   color: widget.config.searchViewConfig.buttonColor,
                   icon: Icon(
                     Icons.arrow_back,

@@ -41,32 +41,36 @@ mixin SkinToneOverlayStateMixin<T extends StatefulWidget> on State<T> {
       builder: (context) => Positioned(
         left: positionRect.left,
         top: positionRect.top,
-        child: Material(
-          elevation: 4.0,
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 4.0),
-            color: config.skinToneConfig.dialogBackgroundColor,
-            child: Row(
-              children: [
-                _buildSkinToneEmoji(
-                  emoji,
-                  categoryEmoji,
-                  positionRect.width,
-                  emojiSize,
-                  onEmojiSelected,
-                  config,
-                ),
-                ...List.generate(
-                  SkinTone.values.length,
-                  (index) => _buildSkinToneEmoji(
+        child: TapRegion(
+          onTapOutside: (_) => closeSkinToneOverlay(),
+          child: Material(
+            elevation: 4.0,
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 4.0),
+              color: config.skinToneConfig.dialogBackgroundColor,
+              child: Row(
+                children: [
+                  _buildSkinToneEmoji(
+                    emoji,
+                    categoryEmoji,
+                    positionRect.width,
+                    emojiSize,
+                    onEmojiSelected,
+                    config,
+                  ),
+                  ...List.generate(
+                    SkinTone.values.length,
+                    (index) => _buildSkinToneEmoji(
                       skinTonesEmoji[index],
                       categoryEmoji,
                       positionRect.width,
                       emojiSize,
                       onEmojiSelected,
-                      config),
-                ),
-              ],
+                      config,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

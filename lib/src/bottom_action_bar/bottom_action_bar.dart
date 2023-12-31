@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 /// Template class for custom implementation
 abstract class BottomActionBar extends StatefulWidget {
   /// Constructor
-  BottomActionBar(
+  const BottomActionBar(
     this.config,
     this.state,
     this.showSearchView, {

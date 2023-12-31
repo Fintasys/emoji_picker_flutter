@@ -20,12 +20,14 @@ class _DefaultBottomActionBarState extends State<DefaultBottomActionBar> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          IconButton(
-            color: widget.config.bottomActionBarConfig.buttonColor,
-            onPressed: widget.showSearchView,
-            icon: Icon(
-              Icons.search,
-              color: widget.config.bottomActionBarConfig.buttonIconColor,
+          CircleAvatar(
+            backgroundColor: widget.config.bottomActionBarConfig.buttonColor,
+            child: IconButton(
+              onPressed: widget.showSearchView,
+              icon: Icon(
+                Icons.search,
+                color: widget.config.bottomActionBarConfig.buttonIconColor,
+              ),
             ),
           ),
           _buildBackspaceButton(),

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 /// Inhert this class to create your own search view
 abstract class SearchView extends StatefulWidget {
   /// Constructor
-  SearchView(
+  const SearchView(
     this.config,
     this.state,
     this.showEmojiView, {

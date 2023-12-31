@@ -209,10 +209,13 @@ class EmojiPickerState extends State<EmojiPicker> {
         final selection = controller.value.selection;
         final newTextBeforeCursor =
             selection.textBefore(text).characters.skipLast(1).toString();
-        controller
-          ..text = newTextBeforeCursor + selection.textAfter(text)
-          ..selection = TextSelection.fromPosition(
-              TextPosition(offset: newTextBeforeCursor.length));
+
+        controller.value = controller.value.copyWith(
+          text: newTextBeforeCursor + selection.textAfter(text),
+          selection: TextSelection.fromPosition(
+            TextPosition(offset: newTextBeforeCursor.length),
+          ),
+        );
       }
     }
 
@@ -245,11 +248,12 @@ class EmojiPickerState extends State<EmojiPicker> {
           final newTextBeforeCursor = _deleteWordByWord(
             selection.textBefore(text).toString(),
           );
-          controller
-            ..text = newTextBeforeCursor + selection.textAfter(text)
-            ..selection = TextSelection.fromPosition(
+          controller.value = controller.value.copyWith(
+            text: newTextBeforeCursor + selection.textAfter(text),
+            selection: TextSelection.fromPosition(
               TextPosition(offset: newTextBeforeCursor.length),
-            );
+            ),
+          );
         }
       }
     };
@@ -368,7 +372,8 @@ class EmojiPickerState extends State<EmojiPicker> {
             _hideSearchView,
           )
         : widget.config.searchViewConfig.customSearchView!(
-            widget.config.searchViewConfig,
+            widget.config,
+            _state,
             _hideSearchView,
           );
   }

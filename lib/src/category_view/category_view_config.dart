@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 /// Callback function for custom category view
 typedef CategoryViewBuilder = Widget Function(
   Config config,
+  EmojiViewState state,
+  TabController tabController,
+  PageController pageController,
 );
 
 /// Category view Config
@@ -78,7 +81,8 @@ class CategoryViewConfig {
         other.iconColor == iconColor &&
         other.iconColorSelected == iconColorSelected &&
         other.backspaceColor == backspaceColor &&
-        other.dividerColor == dividerColor;
+        other.dividerColor == dividerColor &&
+        other.categoryIcons == categoryIcons;
   }
 
   @override
@@ -93,5 +97,6 @@ class CategoryViewConfig {
       iconColor.hashCode ^
       iconColorSelected.hashCode ^
       backspaceColor.hashCode ^
-      dividerColor.hashCode;
+      dividerColor.hashCode ^
+      categoryIcons.hashCode;
 }

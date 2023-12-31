@@ -81,6 +81,9 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     return widget.config.categoryViewConfig.customCategoryView != null
         ? widget.config.categoryViewConfig.customCategoryView!(
             widget.config,
+            widget.state,
+            _tabController,
+            _pageController,
           )
         : DefaultCategoryView(
             widget.config,
