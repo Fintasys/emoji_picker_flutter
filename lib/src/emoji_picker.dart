@@ -175,6 +175,7 @@ class EmojiPickerState extends State<EmojiPicker> {
       _loaded = false;
       _updateEmojis();
     }
+    _resetStateWhenOffstage();
     super.didUpdateWidget(oldWidget);
   }
 
@@ -187,6 +188,17 @@ class EmojiPickerState extends State<EmojiPicker> {
       return _buildSearchBar();
     }
     return _buildEmojiView();
+  }
+
+  void _resetStateWhenOffstage() {
+    final offstageParent = context.findAncestorWidgetOfExactType<Offstage>();
+    if (offstageParent != null &&
+        offstageParent.offstage == true &&
+        _isSearchBarVisible) {
+      setState(() {
+        _isSearchBarVisible = false;
+      });
+    }
   }
 
   void _onBackspacePressed() {

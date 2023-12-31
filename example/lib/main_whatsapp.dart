@@ -25,6 +25,7 @@ class MyApp extends StatefulWidget {
 class MyAppState extends State<MyApp> {
   late EmojiTextEditingController _controller;
   late ScrollController _scrollController;
+  late FocusNode _focusNode;
   late TextStyle _textStyle;
   bool _emojiShowing = false;
   final _fontSize = 24.0;
@@ -39,6 +40,7 @@ class MyAppState extends State<MyApp> {
 
     _controller = EmojiTextEditingController(emojiStyle: _textStyle);
     _scrollController = ScrollController();
+    _focusNode = FocusNode();
 
     super.initState();
   }
@@ -115,6 +117,14 @@ class MyAppState extends State<MyApp> {
                                   onPressed: () {
                                     setState(() {
                                       _emojiShowing = !_emojiShowing;
+                                      if (!_emojiShowing) {
+                                        WidgetsBinding.instance
+                                            .addPostFrameCallback((_) {
+                                          _focusNode.requestFocus();
+                                        });
+                                      } else {
+                                        _focusNode.unfocus();
+                                      }
                                     });
                                   },
                                   icon: Icon(
@@ -128,6 +138,7 @@ class MyAppState extends State<MyApp> {
                                   child: TextField(
                                     controller: _controller,
                                     scrollController: _scrollController,
+                                    focusNode: _focusNode,
                                     style: const TextStyle(
                                       fontSize: 20.0,
                                       color: Colors.black87,
