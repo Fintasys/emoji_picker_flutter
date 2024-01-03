@@ -30,6 +30,7 @@ class EmojiPickerUtils {
     if (_allAvailableEmojiEntities.isEmpty) {
       final emojiPickerInternalUtils = EmojiPickerInternalUtils();
 
+      data.removeWhere((e) => e.category == Category.RECENT);
       final availableCategoryEmoji = checkPlatformCompatibility
           ? await emojiPickerInternalUtils.filterUnsupported(data)
           : data;
@@ -41,9 +42,10 @@ class EmojiPickerUtils {
     }
 
     return _allAvailableEmojiEntities
+        .toSet()
         .where(
-          (emoji) => emoji.name.toLowerCase().contains(keyword.toLowerCase()),
-        )
+            (emoji) => emoji.name.toLowerCase().contains(keyword.toLowerCase()))
+        .toSet()
         .toList();
   }
 

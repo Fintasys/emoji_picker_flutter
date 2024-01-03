@@ -1,5 +1,6 @@
-import 'package:emoji_picker_flutter/src/config.dart';
-import 'package:emoji_picker_flutter/src/emoji_view_state.dart';
+import 'dart:collection';
+
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 
 /// Template class for custom implementation
@@ -21,4 +22,99 @@ abstract class SearchView extends StatefulWidget {
 
   /// Return to emoji view
   final VoidCallback showEmojiView;
+}
+
+/// Template class for custom implementation
+/// Inhert this class to create your own search view state
+class SearchViewState<T extends SearchView> extends State<T>
+    with SkinToneOverlayStateMixin {
+  /// Emoji picker utils
+  final utils = EmojiPickerUtils();
+
+  /// Layer links for skin tone overlay
+  final links = HashMap<String, LayerLink>();
+
+  /// Focus node for textfield
+  final focusNode = FocusNode();
+
+  /// Search results
+  final results = List<Emoji>.empty(growable: true);
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Auto focus textfield
+      FocusScope.of(context).requestFocus(focusNode);
+      // Load recent emojis initially
+      utils.getRecentEmojis().then(
+            (value) => setState(
+              () => _updateResults(value.map((e) => e.emoji).toList()),
+            ),
+          );
+    });
+    super.initState();
+  }
+
+  /// On text input changed callback
+  void onTextInputChanged(String text) {
+    links.clear();
+    results.clear();
+    utils.searchEmoji(text, widget.state.categoryEmoji).then(
+          (value) => setState(
+            () => _updateResults(value),
+          ),
+        );
+  }
+
+  void _updateResults(List<Emoji> emojis) {
+    results
+      ..clear()
+      ..addAll(emojis);
+    results.asMap().entries.forEach((e) {
+      links[e.value.emoji] = LayerLink();
+    });
+  }
+
+  /// Build emoji cell
+  Widget buildEmoji(Emoji emoji, double emojiSize, double emojiBoxSize) {
+    return CompositedTransformTarget(
+      link: links[emoji.emoji]!,
+      child: EmojiCell.fromConfig(
+        emoji: emoji,
+        emojiSize: emojiSize,
+        emojiBoxSize: emojiBoxSize,
+        onEmojiSelected: widget.state.onEmojiSelected,
+        config: widget.config,
+        onSkinToneDialogRequested:
+            (renderBox, emoji, emojiSize, category, index) {
+          closeSkinToneOverlay();
+          if (!emoji.hasSkinTone || !widget.config.skinToneConfig.enabled) {
+            return;
+          }
+          showSkinToneOverlay(
+            renderBox,
+            emoji,
+            emojiSize,
+            null,
+            index,
+            widget.config,
+            0.0,
+            0.0,
+            _onSkinTonedEmojiSelected,
+            links[emoji.emoji]!,
+          );
+        },
+      ),
+    );
+  }
+
+  void _onSkinTonedEmojiSelected(Category? category, Emoji emoji) {
+    widget.state.onEmojiSelected(category, emoji);
+    closeSkinToneOverlay();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    throw UnimplementedError('Search View implementation missing');
+  }
 }

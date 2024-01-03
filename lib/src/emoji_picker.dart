@@ -82,8 +82,8 @@ enum ButtonMode {
 typedef void OnEmojiSelected(Category? category, Emoji emoji);
 
 /// Callback from emoji cell to show a skin tone selection overlay
-typedef void OnSkinToneDialogRequested(
-    Emoji emoji, double emojiSize, CategoryEmoji? categoryEmoji, int index);
+typedef void OnSkinToneDialogRequested(RenderBox renderBox, Emoji emoji,
+    double emojiSize, CategoryEmoji? categoryEmoji, int index);
 
 /// Callback function for backspace button
 typedef void OnBackspacePressed();

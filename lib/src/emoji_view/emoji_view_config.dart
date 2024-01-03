@@ -74,6 +74,11 @@ class EmojiViewConfig {
     return min(maxSize, emojiSizeMax);
   }
 
+  /// Get Emoji hitbox size based on properties and screen width
+  double getEmojiBoxSize(double width) {
+    return width / columns;
+  }
+
   @override
   bool operator ==(other) {
     return (other is EmojiViewConfig) &&

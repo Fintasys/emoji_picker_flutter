@@ -10,6 +10,7 @@ class EmojiCell extends StatelessWidget {
   const EmojiCell({
     required this.emoji,
     required this.emojiSize,
+    required this.emojiBoxSize,
     this.categoryEmoji,
     required this.buttonMode,
     this.index = 0,
@@ -25,6 +26,7 @@ class EmojiCell extends StatelessWidget {
   EmojiCell.fromConfig(
       {required this.emoji,
       required this.emojiSize,
+      required this.emojiBoxSize,
       this.categoryEmoji,
       this.index = 0,
       required this.onEmojiSelected,
@@ -40,6 +42,9 @@ class EmojiCell extends StatelessWidget {
 
   /// Font size for the emoji
   final double emojiSize;
+
+  /// Hitbox of emoji cell
+  final double emojiBoxSize;
 
   /// Optinonal category that will be passed through to callbacks
   final CategoryEmoji? categoryEmoji;
@@ -137,13 +142,21 @@ class EmojiCell extends StatelessWidget {
     };
 
     final onLongPressed = () {
-      onSkinToneDialogRequested?.call(emoji, emojiSize, categoryEmoji, index);
+      final renderBox = context.findRenderObject() as RenderBox;
+      onSkinToneDialogRequested?.call(
+          renderBox, emoji, emojiSize, categoryEmoji, index);
     };
 
-    return _buildButtonWidget(
-      onPressed: onPressed,
-      onLongPressed: onLongPressed,
-      child: _buildEmoji(),
+    return Material(
+      child: _buildButtonWidget(
+        onPressed: onPressed,
+        onLongPressed: onLongPressed,
+        child: SizedBox(
+          width: emojiBoxSize,
+          height: emojiBoxSize,
+          child: _buildEmoji(),
+        ),
+      ),
     );
   }
 }
