@@ -51,3 +51,13 @@ IconData getIconForCategory(CategoryIcons categoryIcons, Category category) {
       throw Exception('Unsupported Category');
   }
 }
+
+/// Template class for custom implementation
+/// Inhert this class to create your own category view state
+class CategoryViewState<T extends CategoryView> extends State<T>
+    with SkinToneOverlayStateMixin {
+  @override
+  Widget build(BuildContext context) {
+    throw UnimplementedError('Category View implementation missing');
+  }
+}

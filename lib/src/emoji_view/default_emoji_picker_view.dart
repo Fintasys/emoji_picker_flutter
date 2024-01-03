@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +21,6 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
   late TabController _tabController;
   late PageController _pageController;
   late final _scrollController = ScrollController();
-  final link = HashMap<String, LayerLink>();
 
   @override
   void initState() {
@@ -140,37 +137,31 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
       return _buildNoRecent();
     }
     // Build page normally
-    return GestureDetector(
-        onTap: closeSkinToneOverlay,
-        child:
-            // Todo: childAspectRatio: check if there is an alternative
-            // works by height
-            // maxWidth / widget.config.columns / emojiSize / 2,
-            GridView.count(
-          scrollDirection: Axis.vertical,
-          controller: _scrollController,
-          primary: false,
-          padding: widget.config.emojiViewConfig.gridPadding,
-          crossAxisCount: widget.config.emojiViewConfig.columns,
-          mainAxisSpacing: widget.config.emojiViewConfig.verticalSpacing,
-          crossAxisSpacing: widget.config.emojiViewConfig.horizontalSpacing,
-          children: categoryEmoji.emoji.asMap().entries.map<Widget>((entry) {
-            link[entry.value.emoji] = LayerLink();
-            return CompositedTransformTarget(
-              link: link[entry.value.emoji]!,
-              child: EmojiCell.fromConfig(
-                emoji: categoryEmoji.emoji[entry.key],
-                emojiSize: emojiSize,
-                emojiBoxSize: emojiBoxSize,
-                categoryEmoji: categoryEmoji,
-                index: entry.key,
-                onEmojiSelected: _onSkinTonedEmojiSelected,
-                onSkinToneDialogRequested: _openSkinToneDialog,
-                config: widget.config,
-              ),
-            );
-          }).toList(),
-        ));
+    return GridView.count(
+      scrollDirection: Axis.vertical,
+      controller: _scrollController,
+      primary: false,
+      padding: widget.config.emojiViewConfig.gridPadding,
+      crossAxisCount: widget.config.emojiViewConfig.columns,
+      mainAxisSpacing: widget.config.emojiViewConfig.verticalSpacing,
+      crossAxisSpacing: widget.config.emojiViewConfig.horizontalSpacing,
+      children: categoryEmoji.emoji.asMap().entries.map<Widget>((entry) {
+        return addSkinToneTargetIfAvailable(
+          hasSkinTone: entry.value.hasSkinTone,
+          linkKey: categoryEmoji.category.name + entry.value.emoji,
+          child: EmojiCell.fromConfig(
+            emoji: categoryEmoji.emoji[entry.key],
+            emojiSize: emojiSize,
+            emojiBoxSize: emojiBoxSize,
+            categoryEmoji: categoryEmoji,
+            index: entry.key,
+            onEmojiSelected: _onSkinTonedEmojiSelected,
+            onSkinToneDialogRequested: _openSkinToneDialog,
+            config: widget.config,
+          ),
+        );
+      }).toList(),
+    );
   }
 
   /// Build Widget for when no recent emoji are available
@@ -201,7 +192,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
       _scrollController.offset,
       _tabBarHeight,
       _onSkinTonedEmojiSelected,
-      link[emoji.emoji]!,
+      links[categoryEmoji!.category.name + emoji.emoji]!,
     );
   }
 

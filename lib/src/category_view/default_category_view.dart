@@ -13,11 +13,11 @@ class DefaultCategoryView extends CategoryView {
   }) : super(config, state, tabController, pageController, key: key);
 
   @override
-  _DefaultCategoryViewState createState() => _DefaultCategoryViewState();
+  DefaultCategoryViewState createState() => DefaultCategoryViewState();
 }
 
-class _DefaultCategoryViewState extends State<DefaultCategoryView>
-    with SkinToneOverlayStateMixin {
+/// Default Category View State
+class DefaultCategoryViewState extends CategoryViewState {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -50,7 +50,7 @@ class _DefaultCategoryViewState extends State<DefaultCategoryView>
               .asMap()
               .entries
               .map<Widget>(
-                  (item) => _buildCategory(item.key, item.value.category))
+                  (item) => _buildCategoryTab(item.key, item.value.category))
               .toList(),
         ),
       );
@@ -67,7 +67,7 @@ class _DefaultCategoryViewState extends State<DefaultCategoryView>
     return const SizedBox.shrink();
   }
 
-  Widget _buildCategory(int index, Category category) {
+  Widget _buildCategoryTab(int index, Category category) {
     return Tab(
       icon: Icon(
         getIconForCategory(

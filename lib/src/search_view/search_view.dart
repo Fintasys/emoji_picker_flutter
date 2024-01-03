@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 
@@ -30,9 +28,6 @@ class SearchViewState<T extends SearchView> extends State<T>
     with SkinToneOverlayStateMixin {
   /// Emoji picker utils
   final utils = EmojiPickerUtils();
-
-  /// Layer links for skin tone overlay
-  final links = HashMap<String, LayerLink>();
 
   /// Focus node for textfield
   final focusNode = FocusNode();
@@ -77,8 +72,9 @@ class SearchViewState<T extends SearchView> extends State<T>
 
   /// Build emoji cell
   Widget buildEmoji(Emoji emoji, double emojiSize, double emojiBoxSize) {
-    return CompositedTransformTarget(
-      link: links[emoji.emoji]!,
+    return addSkinToneTargetIfAvailable(
+      hasSkinTone: emoji.hasSkinTone,
+      linkKey: emoji.emoji,
       child: EmojiCell.fromConfig(
         emoji: emoji,
         emojiSize: emojiSize,
@@ -95,7 +91,7 @@ class SearchViewState<T extends SearchView> extends State<T>
             renderBox,
             emoji,
             emojiSize,
-            null,
+            null, // Todo: check if we can provide the category
             index,
             widget.config,
             0.0,

@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 
@@ -5,6 +7,25 @@ import 'package:flutter/material.dart';
 mixin SkinToneOverlayStateMixin<T extends StatefulWidget> on State<T> {
   final _utils = EmojiPickerUtils();
   OverlayEntry? _overlay;
+
+  /// Layer links for skin tone overlay
+  final links = HashMap<String, LayerLink>();
+
+  /// Add target for skin tone overlay if skin tone is available
+  Widget addSkinToneTargetIfAvailable({
+    required bool hasSkinTone,
+    required String linkKey,
+    required Widget child,
+  }) {
+    if (hasSkinTone) {
+      final link = links.putIfAbsent(linkKey, LayerLink.new);
+      return CompositedTransformTarget(
+        link: link,
+        child: child,
+      );
+    }
+    return child;
+  }
 
   /// Overlay close & resources disposal
   void closeSkinToneOverlay() {
@@ -122,5 +143,11 @@ mixin SkinToneOverlayStateMixin<T extends StatefulWidget> on State<T> {
       left -= 0.5 * emojiBoxSize;
     }
     return left;
+  }
+
+  @override
+  void dispose() {
+    _overlay?.dispose();
+    super.dispose();
   }
 }
