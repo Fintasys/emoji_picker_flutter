@@ -118,7 +118,7 @@ class EmojiCell extends StatelessWidget {
   Widget _buildEmoji() {
     final emojiText = Text(
       emoji.emoji,
-      textScaleFactor: 1.0,
+      textScaler: const TextScaler.linear(1.0),
       style: _getEmojiTextStyle(),
     );
 
