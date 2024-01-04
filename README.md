@@ -80,19 +80,18 @@ All examples can be found [here](https://github.com/Fintasys/emoji_picker_flutte
 
 ## Config
 
-| property                               | description                                                                                                                                     | default                       |
-| -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
-| height                                 | Height of Emoji Picker                                                                                                                          | 256                           |
-| swapCategoryAndBottomBar               | Swap the category view and bottom bar (category bottom and bottom bar top)                                                                      | false                         |
-| checkPlatformCompatibility             | Whether to filter out glyphs that platform cannot render with the default font (Android).                                                       | true                          |
-| emojiSet                               | Custom emoji set, can be built based on `defaultEmojiSet` provided by the library.                                                              | null                          |
-| emojiTextStyle                         | Text style to apply to individual emoji icons. Can be used to define custom emoji font either with GoogleFonts library or bundled with the app. | null                          |
-| customSkinColorOverlayHorizontalOffset | Custom horizontal offset for SkinColor Overlay. Try to assign `0.0` when overlay is not at the correct position                                 | null                          |
-| emojiViewConfig                        | Emoji view config                                                                                                                               | const EmojiViewConfig()       |
-| skinToneConfig                         | Skin tone config                                                                                                                                | const SkinToneConfig          |
-| categoryViewConfig                     | Category view config                                                                                                                            | const CategoryViewConfig      |
-| bottomActionBarConfig                  | Bottom action bar config                                                                                                                        | const BottomActionBarConfig() |
-| searchViewConfig                       | Search View config                                                                                                                              | const SearchViewConfig        |
+| property                   | description                                                                                                                                     | default                       |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| height                     | Height of Emoji Picker                                                                                                                          | 256                           |
+| swapCategoryAndBottomBar   | Swap the category view and bottom bar (category bottom and bottom bar top)                                                                      | false                         |
+| checkPlatformCompatibility | Whether to filter out glyphs that platform cannot render with the default font (Android).                                                       | true                          |
+| emojiSet                   | Custom emoji set, can be built based on `defaultEmojiSet` provided by the library.                                                              | null                          |
+| emojiTextStyle             | Text style to apply to individual emoji icons. Can be used to define custom emoji font either with GoogleFonts library or bundled with the app. | null                          |
+| emojiViewConfig            | Emoji view config                                                                                                                               | const EmojiViewConfig()       |
+| skinToneConfig             | Skin tone config                                                                                                                                | const SkinToneConfig          |
+| categoryViewConfig         | Category view config                                                                                                                            | const CategoryViewConfig      |
+| bottomActionBarConfig      | Bottom action bar config                                                                                                                        | const BottomActionBarConfig() |
+| searchViewConfig           | Search View config                                                                                                                              | const SearchViewConfig        |
 
 ## Emoji View Config
 

@@ -13,7 +13,6 @@ class Config {
     this.checkPlatformCompatibility = true,
     this.emojiSet,
     this.emojiTextStyle,
-    this.customSkinColorOverlayHorizontalOffset,
     this.emojiViewConfig = const EmojiViewConfig(),
     this.skinToneConfig = const SkinToneConfig(),
     this.categoryViewConfig = const CategoryViewConfig(),
@@ -41,12 +40,6 @@ class Config {
   /// being filtered out.
   final TextStyle? emojiTextStyle;
 
-  /// Customize skin color overlay horizontal offset in case of ShellRoute or
-  /// other cases, when EmojiPicker is not aligned to the left border of the
-  /// screen.
-  /// Reference: https://github.com/Fintasys/emoji_picker_flutter/issues/148
-  final double? customSkinColorOverlayHorizontalOffset;
-
   /// Emoji view config
   final EmojiViewConfig emojiViewConfig;
 
@@ -69,8 +62,6 @@ class Config {
         other.checkPlatformCompatibility == checkPlatformCompatibility &&
         other.emojiSet == emojiSet &&
         other.emojiTextStyle == emojiTextStyle &&
-        other.customSkinColorOverlayHorizontalOffset ==
-            customSkinColorOverlayHorizontalOffset &&
         other.emojiViewConfig == emojiViewConfig &&
         other.skinToneConfig == skinToneConfig &&
         other.bottomActionBarConfig == bottomActionBarConfig &&
@@ -83,7 +74,6 @@ class Config {
       checkPlatformCompatibility.hashCode ^
       (emojiSet?.hashCode ?? 0) ^
       (emojiTextStyle?.hashCode ?? 0) ^
-      (customSkinColorOverlayHorizontalOffset?.hashCode ?? 0) ^
       categoryViewConfig.hashCode ^
       emojiViewConfig.hashCode ^
       skinToneConfig.hashCode ^
