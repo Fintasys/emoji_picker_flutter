@@ -105,7 +105,10 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
           );
         },
         itemBuilder: (context, index) => _buildPage(
-            emojiSize, emojiBoxSize, widget.state.categoryEmoji[index]),
+          emojiSize,
+          emojiBoxSize,
+          widget.state.categoryEmoji[index],
+        ),
       ),
     );
   }
@@ -135,30 +138,35 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
       return _buildNoRecent();
     }
     // Build page normally
-    return GridView.count(
+    return GridView.builder(
       scrollDirection: Axis.vertical,
       controller: _scrollController,
       primary: false,
       padding: widget.config.emojiViewConfig.gridPadding,
-      crossAxisCount: widget.config.emojiViewConfig.columns,
-      mainAxisSpacing: widget.config.emojiViewConfig.verticalSpacing,
-      crossAxisSpacing: widget.config.emojiViewConfig.horizontalSpacing,
-      children: categoryEmoji.emoji.asMap().entries.map<Widget>((entry) {
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        childAspectRatio: 1,
+        crossAxisCount: widget.config.emojiViewConfig.columns,
+        mainAxisSpacing: widget.config.emojiViewConfig.verticalSpacing,
+        crossAxisSpacing: widget.config.emojiViewConfig.horizontalSpacing,
+      ),
+      itemCount: categoryEmoji.emoji.length,
+      itemBuilder: (context, index) {
         return addSkinToneTargetIfAvailable(
-          hasSkinTone: entry.value.hasSkinTone,
-          linkKey: categoryEmoji.category.name + entry.value.emoji,
+          hasSkinTone: categoryEmoji.emoji[index].hasSkinTone,
+          linkKey:
+              categoryEmoji.category.name + categoryEmoji.emoji[index].emoji,
           child: EmojiCell.fromConfig(
-            emoji: categoryEmoji.emoji[entry.key],
+            emoji: categoryEmoji.emoji[index],
             emojiSize: emojiSize,
             emojiBoxSize: emojiBoxSize,
             categoryEmoji: categoryEmoji,
-            index: entry.key,
+            index: index,
             onEmojiSelected: _onSkinTonedEmojiSelected,
             onSkinToneDialogRequested: _openSkinToneDialog,
             config: widget.config,
           ),
         );
-      }).toList(),
+      },
     );
   }
 

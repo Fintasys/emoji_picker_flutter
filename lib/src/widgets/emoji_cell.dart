@@ -106,7 +106,6 @@ class EmojiCell extends StatelessWidget {
       return MaterialButton(
         onPressed: onPressed,
         onLongPress: onLongPressed,
-        color: Colors.transparent,
         child: child,
         elevation: 0,
         highlightElevation: 0,

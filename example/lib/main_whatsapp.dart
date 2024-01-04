@@ -286,40 +286,19 @@ class WhatsAppCategoryViewState extends State<WhatsAppCategoryView>
       child: Row(
         children: [
           Expanded(
-            child: _buildTabBar(context),
+            child: WhatsAppTabBar(
+              widget.config,
+              widget.tabController,
+              widget.pageController,
+              widget.state.categoryEmoji,
+              closeSkinToneOverlay,
+            ),
           ),
           _buildBackspaceButton(),
         ],
       ),
     );
   }
-
-  Widget _buildTabBar(BuildContext context) => SizedBox(
-        height: widget.config.categoryViewConfig.tabBarHeight,
-        child: TabBar(
-          labelColor: widget.config.categoryViewConfig.iconColorSelected,
-          indicatorColor: widget.config.categoryViewConfig.indicatorColor,
-          unselectedLabelColor: widget.config.categoryViewConfig.iconColor,
-          dividerColor: widget.config.categoryViewConfig.dividerColor,
-          controller: widget.tabController,
-          labelPadding: const EdgeInsets.only(top: 1.0),
-          indicatorSize: TabBarIndicatorSize.label,
-          indicator: const BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.black12,
-          ),
-          onTap: (index) {
-            closeSkinToneOverlay();
-            widget.pageController.jumpToPage(index);
-          },
-          tabs: widget.state.categoryEmoji
-              .asMap()
-              .entries
-              .map<Widget>(
-                  (item) => _buildCategory(item.key, item.value.category))
-              .toList(),
-        ),
-      );
 
   Widget _buildBackspaceButton() {
     if (widget.config.categoryViewConfig.showBackspaceButton) {
@@ -332,6 +311,57 @@ class WhatsAppCategoryViewState extends State<WhatsAppCategoryView>
     }
     return const SizedBox.shrink();
   }
+}
+
+class WhatsAppTabBar extends StatelessWidget {
+  const WhatsAppTabBar(
+    this.config,
+    this.tabController,
+    this.pageController,
+    this.categoryEmojis,
+    this.closeSkinToneOverlay, {
+    Key? key,
+  }) : super(key: key);
+
+  final Config config;
+
+  final TabController tabController;
+
+  final PageController pageController;
+
+  final List<CategoryEmoji> categoryEmojis;
+
+  final VoidCallback closeSkinToneOverlay;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: config.categoryViewConfig.tabBarHeight,
+      child: TabBar(
+        labelColor: config.categoryViewConfig.iconColorSelected,
+        indicatorColor: config.categoryViewConfig.indicatorColor,
+        unselectedLabelColor: config.categoryViewConfig.iconColor,
+        dividerColor: config.categoryViewConfig.dividerColor,
+        controller: tabController,
+        labelPadding: const EdgeInsets.only(top: 1.0),
+        indicatorSize: TabBarIndicatorSize.label,
+        indicator: const BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.black12,
+        ),
+        onTap: (index) {
+          closeSkinToneOverlay();
+          pageController.jumpToPage(index);
+        },
+        tabs: categoryEmojis
+            .asMap()
+            .entries
+            .map<Widget>(
+                (item) => _buildCategory(item.key, item.value.category))
+            .toList(),
+      ),
+    );
+  }
 
   Widget _buildCategory(int index, Category category) {
     return Tab(
@@ -339,7 +369,7 @@ class WhatsAppCategoryViewState extends State<WhatsAppCategoryView>
         padding: const EdgeInsets.all(6.0),
         child: Icon(
           getIconForCategory(
-            widget.config.categoryViewConfig.categoryIcons,
+            config.categoryViewConfig.categoryIcons,
             category,
           ),
           size: 20,
