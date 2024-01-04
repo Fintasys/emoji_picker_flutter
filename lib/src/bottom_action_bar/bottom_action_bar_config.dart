@@ -36,6 +36,7 @@ class BottomActionBarConfig {
   final Color buttonIconColor;
 
   /// Custom search bar
+  /// Hot reload is not supported
   final BottomActionBarBuilder? customBottomActionBar;
 
   @override

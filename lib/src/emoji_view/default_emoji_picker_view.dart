@@ -16,11 +16,9 @@ class DefaultEmojiPickerView extends EmojiPickerView {
 
 class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     with SingleTickerProviderStateMixin, SkinToneOverlayStateMixin {
-  final double _tabBarHeight = 46;
-
   late TabController _tabController;
   late PageController _pageController;
-  late final _scrollController = ScrollController();
+  final _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -187,10 +185,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
       emoji,
       emojiSize,
       categoryEmoji,
-      index,
       widget.config,
-      _scrollController.offset,
-      _tabBarHeight,
       _onSkinTonedEmojiSelected,
       links[categoryEmoji!.category.name + emoji.emoji]!,
     );

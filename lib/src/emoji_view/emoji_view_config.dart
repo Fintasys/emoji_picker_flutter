@@ -54,9 +54,11 @@ class EmojiViewConfig {
   final int recentsLimit;
 
   /// A widget (usually [Text]) to be displayed if no recent emojis to display
+  /// Hot reload is not supported
   final Widget noRecents;
 
   /// A widget to display while emoji picker is initializing
+  /// Hot reload is not supported
   final Widget loadingIndicator;
 
   /// Choose visual response for tapping on an emoji cell
@@ -88,8 +90,6 @@ class EmojiViewConfig {
         other.verticalSpacing == verticalSpacing &&
         other.horizontalSpacing == horizontalSpacing &&
         other.recentsLimit == recentsLimit &&
-        other.noRecents == noRecents &&
-        other.loadingIndicator == loadingIndicator &&
         other.buttonMode == buttonMode &&
         other.gridPadding == gridPadding &&
         other.replaceEmojiOnLimitExceed == replaceEmojiOnLimitExceed;
@@ -103,8 +103,6 @@ class EmojiViewConfig {
       verticalSpacing.hashCode ^
       horizontalSpacing.hashCode ^
       recentsLimit.hashCode ^
-      noRecents.hashCode ^
-      loadingIndicator.hashCode ^
       buttonMode.hashCode ^
       gridPadding.hashCode ^
       replaceEmojiOnLimitExceed.hashCode;

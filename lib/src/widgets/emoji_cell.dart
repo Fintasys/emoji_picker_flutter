@@ -103,18 +103,16 @@ class EmojiCell extends StatelessWidget {
     required Widget child,
   }) {
     if (buttonMode == ButtonMode.MATERIAL) {
-      return GestureDetector(
+      return MaterialButton(
+        onPressed: onPressed,
         onLongPress: onLongPressed,
-        child: MaterialButton(
-          onPressed: onPressed,
-          color: Colors.transparent,
-          child: child,
-          elevation: 0,
-          highlightElevation: 0,
-          padding: EdgeInsets.zero,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.zero,
-          ),
+        color: Colors.transparent,
+        child: child,
+        elevation: 0,
+        highlightElevation: 0,
+        padding: EdgeInsets.zero,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.zero,
         ),
       );
     }
@@ -122,8 +120,8 @@ class EmojiCell extends StatelessWidget {
       return GestureDetector(
         onLongPress: onLongPressed,
         child: CupertinoButton(
-          padding: EdgeInsets.zero,
           onPressed: onPressed,
+          padding: EdgeInsets.zero,
           child: child,
           alignment: Alignment.center,
         ),

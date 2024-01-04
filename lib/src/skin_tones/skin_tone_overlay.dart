@@ -39,10 +39,7 @@ mixin SkinToneOverlayStateMixin<T extends StatefulWidget> on State<T> {
     Emoji emoji,
     double emojiSize,
     CategoryEmoji? categoryEmoji,
-    int index,
     Config config,
-    double scrollControllerOffset,
-    double tabBarHeight,
     OnEmojiSelected onEmojiSelected,
     LayerLink link,
   ) {

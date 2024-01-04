@@ -28,6 +28,7 @@ class SearchViewConfig {
   final Color buttonIconColor;
 
   /// Custom search bar
+  /// Hot reload is not supported
   final SearchViewBuilder? customSearchView;
 
   @override

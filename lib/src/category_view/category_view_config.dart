@@ -66,6 +66,7 @@ class CategoryViewConfig {
   final CategoryIcons categoryIcons;
 
   /// Custom search bar
+  /// Hot reload is not supported
   final CategoryViewBuilder? customCategoryView;
 
   @override

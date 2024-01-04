@@ -92,10 +92,7 @@ class SearchViewState<T extends SearchView> extends State<T>
             emoji,
             emojiSize,
             null, // Todo: check if we can provide the category
-            index,
             widget.config,
-            0.0,
-            0.0,
             _onSkinTonedEmojiSelected,
             links[emoji.emoji]!,
           );
