@@ -72,6 +72,9 @@ All examples can be found [here](https://github.com/Fintasys/emoji_picker_flutte
 
    <img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/version-2.0/screenshot/example_custom_font_android.png" width="300"> <img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/version-2.0/screenshot/example_custom_font_android_2.png" width="300">
 
+3. WhatsApp like customization
+   <img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/version-2.0/screenshot/example_whatsapp_emoji_view.png" width="300"> <img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/version-2.0/screenshot/example_whatsapp_search_view.png" width="300">
+
 \*All screenshots from Android. iOS displays by default most emoji correctly.
 
 ## Config
