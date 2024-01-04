@@ -160,7 +160,6 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
             emojiSize: emojiSize,
             emojiBoxSize: emojiBoxSize,
             categoryEmoji: categoryEmoji,
-            index: index,
             onEmojiSelected: _onSkinTonedEmojiSelected,
             onSkinToneDialogRequested: _openSkinToneDialog,
             config: widget.config,
@@ -182,7 +181,6 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     Emoji emoji,
     double emojiSize,
     CategoryEmoji? categoryEmoji,
-    int index,
   ) {
     closeSkinToneOverlay();
     if (!emoji.hasSkinTone || !widget.config.skinToneConfig.enabled) {

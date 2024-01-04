@@ -13,7 +13,6 @@ class EmojiCell extends StatelessWidget {
     required this.emojiBoxSize,
     this.categoryEmoji,
     required this.buttonMode,
-    this.index = 0,
     required this.enableSkinTones,
     required this.textStyle,
     required this.skinToneIndicatorColor,
@@ -28,7 +27,6 @@ class EmojiCell extends StatelessWidget {
       required this.emojiSize,
       required this.emojiBoxSize,
       this.categoryEmoji,
-      this.index = 0,
       required this.onEmojiSelected,
       this.onSkinToneDialogRequested,
       required Config config})
@@ -51,10 +49,6 @@ class EmojiCell extends StatelessWidget {
 
   /// Visual tap feedback, see [ButtonMode] for options
   final ButtonMode buttonMode;
-
-  /// Optional index that can be used for precise skin dialog position.
-  /// Will be passed through to [onSkinToneDialogRequested] callback.
-  final int index;
 
   /// Whether to show skin popup indicator if emoji supports skin colors
   final bool enableSkinTones;
@@ -82,7 +76,11 @@ class EmojiCell extends StatelessWidget {
     final onLongPressed = () {
       final renderBox = context.findRenderObject() as RenderBox;
       onSkinToneDialogRequested?.call(
-          renderBox, emoji, emojiSize, categoryEmoji, index);
+        renderBox,
+        emoji,
+        emojiSize,
+        categoryEmoji,
+      );
     };
 
     return SizedBox(

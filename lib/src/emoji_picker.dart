@@ -83,7 +83,7 @@ typedef void OnEmojiSelected(Category? category, Emoji emoji);
 
 /// Callback from emoji cell to show a skin tone selection overlay
 typedef void OnSkinToneDialogRequested(RenderBox renderBox, Emoji emoji,
-    double emojiSize, CategoryEmoji? categoryEmoji, int index);
+    double emojiSize, CategoryEmoji? categoryEmoji);
 
 /// Callback function for backspace button
 typedef void OnBackspacePressed();
