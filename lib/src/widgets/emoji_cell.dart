@@ -73,68 +73,6 @@ class EmojiCell extends StatelessWidget {
   /// Callback for a single tap on the cell.
   final OnEmojiSelected onEmojiSelected;
 
-  /// Build different Button based on ButtonMode
-  Widget _buildButtonWidget({
-    required VoidCallback onPressed,
-    VoidCallback? onLongPressed,
-    required Widget child,
-  }) {
-    if (buttonMode == ButtonMode.MATERIAL) {
-      return InkWell(
-        onTap: onPressed,
-        onLongPress: onLongPressed,
-        child: child,
-      );
-    }
-    if (buttonMode == ButtonMode.CUPERTINO) {
-      return GestureDetector(
-        onLongPress: onLongPressed,
-        child: CupertinoButton(
-          padding: EdgeInsets.zero,
-          onPressed: onPressed,
-          child: child,
-        ),
-      );
-    }
-    return GestureDetector(
-      onLongPress: onLongPressed,
-      onTap: onPressed,
-      child: child,
-    );
-  }
-
-  TextStyle _getEmojiTextStyle() {
-    final defaultStyle = emojiTextStyle.merge(
-      TextStyle(
-        fontSize: emojiSize,
-        backgroundColor: Colors.transparent,
-        inherit: true,
-      ),
-    );
-    return textStyle == null ? defaultStyle : textStyle!.merge(defaultStyle);
-  }
-
-  /// Build and display Emoji centered of its parent
-  Widget _buildEmoji() {
-    final emojiText = Text(
-      emoji.emoji,
-      textScaler: const TextScaler.linear(1.0),
-      style: _getEmojiTextStyle(),
-    );
-
-    return Center(
-      child: emoji.hasSkinTone &&
-              enableSkinTones &&
-              onSkinToneDialogRequested != null
-          ? Container(
-              decoration:
-                  TriangleDecoration(color: skinToneIndicatorColor, size: 8.0),
-              child: emojiText,
-            )
-          : emojiText,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final onPressed = () {
@@ -147,16 +85,86 @@ class EmojiCell extends StatelessWidget {
           renderBox, emoji, emojiSize, categoryEmoji, index);
     };
 
-    return Material(
+    return SizedBox(
+      width: emojiBoxSize,
+      height: emojiBoxSize,
       child: _buildButtonWidget(
         onPressed: onPressed,
         onLongPressed: onLongPressed,
-        child: SizedBox(
-          width: emojiBoxSize,
-          height: emojiBoxSize,
-          child: _buildEmoji(),
-        ),
+        child: _buildEmoji(),
       ),
     );
+  }
+
+  /// Build different Button based on ButtonMode
+  Widget _buildButtonWidget({
+    required VoidCallback onPressed,
+    VoidCallback? onLongPressed,
+    required Widget child,
+  }) {
+    if (buttonMode == ButtonMode.MATERIAL) {
+      return GestureDetector(
+        onLongPress: onLongPressed,
+        child: MaterialButton(
+          onPressed: onPressed,
+          color: Colors.transparent,
+          child: child,
+          elevation: 0,
+          highlightElevation: 0,
+          padding: EdgeInsets.zero,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.zero,
+          ),
+        ),
+      );
+    }
+    if (buttonMode == ButtonMode.CUPERTINO) {
+      return GestureDetector(
+        onLongPress: onLongPressed,
+        child: CupertinoButton(
+          padding: EdgeInsets.zero,
+          onPressed: onPressed,
+          child: child,
+          alignment: Alignment.center,
+        ),
+      );
+    }
+    return GestureDetector(
+      onLongPress: onLongPressed,
+      onTap: onPressed,
+      child: Center(child: child),
+    );
+  }
+
+  /// Build and display Emoji centered of its parent
+  Widget _buildEmoji() {
+    final emojiText = Text(
+      emoji.emoji,
+      textScaler: const TextScaler.linear(1.0),
+      style: _getEmojiTextStyle(),
+    );
+
+    return emoji.hasSkinTone &&
+            enableSkinTones &&
+            onSkinToneDialogRequested != null
+        ? Container(
+            decoration: TriangleDecoration(
+              color: skinToneIndicatorColor,
+              size: 8.0,
+            ),
+            child: emojiText,
+          )
+        : emojiText;
+  }
+
+  TextStyle _getEmojiTextStyle() {
+    final defaultStyle = emojiTextStyle.merge(
+      TextStyle(
+        fontSize: emojiSize,
+        backgroundColor: Colors.transparent,
+        inherit: true,
+      ),
+    );
+    return textStyle == null ? defaultStyle : textStyle!.merge(defaultStyle);
   }
 }
