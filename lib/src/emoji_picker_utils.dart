@@ -15,7 +15,7 @@ class EmojiPickerUtils {
 
   static final EmojiPickerUtils _singleton = EmojiPickerUtils._internal();
   final List<Emoji> _allAvailableEmojiEntities = [];
-  final _emojiRegExp = RegExp(r'(\p{So})', unicode: true);
+  RegExp? _emojiRegExp;
 
   /// Returns list of recently used emoji from cache
   Future<List<RecentEmoji>> getRecentEmojis() async {
@@ -69,7 +69,7 @@ class EmojiPickerUtils {
       {required TextStyle emojiStyle, TextStyle? parentStyle}) {
     final finalEmojiStyle =
         parentStyle == null ? emojiStyle : parentStyle.merge(emojiStyle);
-    final matches = _emojiRegExp.allMatches(text).toList();
+    final matches = getEmojiRegex().allMatches(text).toList();
     final spans = <InlineSpan>[];
     var cursor = 0;
     for (final match in matches) {
@@ -105,5 +105,30 @@ class EmojiPickerUtils {
     return await EmojiPickerInternalUtils()
         .clearRecentEmojisInLocalStorage()
         .then((_) => key.currentState?.updateRecentEmoji([], refresh: true));
+  }
+
+  /// Returns the emoji regex
+  RegExp getEmojiRegex() {
+    return _emojiRegExp ??= _generateEmojiRegExp();
+  }
+
+  RegExp _generateEmojiRegExp() {
+    final regExBuffer = StringBuffer();
+    for (final list in defaultEmojiSet) {
+      for (final emoji in list.emoji) {
+        // Put emoji inclusive skin tone before actualy emoji
+        // to avoid color and emoji being seperated
+        if (emoji.hasSkinTone) {
+          for (final skinTone in SkinTone.values) {
+            regExBuffer.write(
+              '${applySkinTone(emoji, skinTone).emoji}$delimiter',
+            );
+          }
+        }
+        regExBuffer.write('${emoji.emoji}$delimiter');
+      }
+    }
+    final regExString = regExBuffer.toString();
+    return RegExp(regExString.substring(0, regExString.length - 1));
   }
 }

@@ -11,30 +11,14 @@ class EmojiTextEditingController extends TextEditingController {
   /// Constructor, requres emojiStyle, since otherwise this class has no effect
   EmojiTextEditingController({String? text, required this.emojiStyle})
       : super(text: text) {
-    // Combine all emojis as regex string
     final utils = EmojiPickerUtils();
-    final regExBuffer = StringBuffer();
-    for (final list in defaultEmojiSet) {
-      for (final emoji in list.emoji) {
-        // Put emoji inclusive skin tone before actualy emoji
-        // to avoid color and emoji being seperated
-        if (emoji.hasSkinTone) {
-          for (final skinTone in SkinTone.values) {
-            regExBuffer.write(
-              '${utils.applySkinTone(emoji, skinTone).emoji}$delimiter',
-            );
-          }
-        }
-        regExBuffer.write('${emoji.emoji}$delimiter');
-      }
-    }
-    final regExString = regExBuffer.toString();
-    _regex = RegExp(regExString.substring(0, regExString.length - 1));
+    _regex = utils.getEmojiRegex();
   }
 
   /// The style used for the emoji characters
   final TextStyle emojiStyle;
-  // final _utils = EmojiPickerUtils();
+
+  /// Cached Regex for emoji
   late final RegExp _regex;
 
   @override
