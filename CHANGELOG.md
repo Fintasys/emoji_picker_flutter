@@ -1,3 +1,10 @@
+## 2.0.0-dev.4
+
+- Improve SkinTone Overlay logic
+- Add WhatsApp example
+- Update min Flutter version to 3.16.0
+- Update deprecated API's
+
 ## 2.0.0-dev.3
 
 - Add auto-scroll support by using `ScrollController`
