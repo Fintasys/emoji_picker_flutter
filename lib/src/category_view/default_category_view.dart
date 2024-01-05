@@ -1,4 +1,5 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import 'package:emoji_picker_flutter/src/category_view/default_category_tab_bar.dart';
 import 'package:flutter/material.dart';
 
 /// Default category view
@@ -25,35 +26,19 @@ class DefaultCategoryViewState extends CategoryViewState {
       child: Row(
         children: [
           Expanded(
-            child: _buildTabBar(context),
+            child: DefaultCategoryTabBar(
+              widget.config,
+              widget.tabController,
+              widget.pageController,
+              widget.state.categoryEmoji,
+              closeSkinToneOverlay,
+            ),
           ),
           _buildBackspaceButton(),
         ],
       ),
     );
   }
-
-  Widget _buildTabBar(BuildContext context) => SizedBox(
-        height: widget.config.categoryViewConfig.tabBarHeight,
-        child: TabBar(
-          labelColor: widget.config.categoryViewConfig.iconColorSelected,
-          indicatorColor: widget.config.categoryViewConfig.indicatorColor,
-          unselectedLabelColor: widget.config.categoryViewConfig.iconColor,
-          dividerColor: widget.config.categoryViewConfig.dividerColor,
-          controller: widget.tabController,
-          labelPadding: EdgeInsets.zero,
-          onTap: (index) {
-            closeSkinToneOverlay();
-            widget.pageController.jumpToPage(index);
-          },
-          tabs: widget.state.categoryEmoji
-              .asMap()
-              .entries
-              .map<Widget>(
-                  (item) => _buildCategoryTab(item.key, item.value.category))
-              .toList(),
-        ),
-      );
 
   Widget _buildBackspaceButton() {
     if (widget.config.categoryViewConfig.showBackspaceButton) {
@@ -65,14 +50,5 @@ class DefaultCategoryViewState extends CategoryViewState {
       );
     }
     return const SizedBox.shrink();
-  }
-
-  Widget _buildCategoryTab(int index, Category category) {
-    return Tab(
-      icon: Icon(
-        getIconForCategory(
-            widget.config.categoryViewConfig.categoryIcons, category),
-      ),
-    );
   }
 }
