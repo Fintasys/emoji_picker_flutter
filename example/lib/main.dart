@@ -19,13 +19,6 @@ class MyAppState extends State<MyApp> {
   final _scrollController = ScrollController();
   bool _emojiShowing = false;
 
-  _onBackspacePressed() {
-    _controller
-      ..text = _controller.text.characters.toString()
-      ..selection = TextSelection.fromPosition(
-          TextPosition(offset: _controller.text.length));
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -113,7 +106,6 @@ class MyAppState extends State<MyApp> {
                 child: EmojiPicker(
                   textEditingController: _controller,
                   scrollController: _scrollController,
-                  onBackspacePressed: _onBackspacePressed,
                   config: Config(
                     height: 256,
                     checkPlatformCompatibility: true,
