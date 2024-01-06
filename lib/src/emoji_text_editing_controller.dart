@@ -5,8 +5,7 @@ import 'package:flutter/widgets.dart';
 const delimiter = '|';
 
 /// Text editing controller that produces text spans on the fly for setting
-/// a particular style to emoji characters. Offloads the main magic to
-/// [EmojiPickerUtils.setEmojiTextStyle] method.
+/// a particular style to emoji characters.
 class EmojiTextEditingController extends TextEditingController {
   /// Constructor, requres emojiStyle, since otherwise this class has no effect
   EmojiTextEditingController({String? text, required this.emojiStyle})
