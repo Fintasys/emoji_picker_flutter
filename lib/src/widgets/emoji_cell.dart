@@ -153,12 +153,9 @@ class EmojiCell extends StatelessWidget {
   }
 
   TextStyle _getEmojiTextStyle() {
-    final defaultStyle = emojiTextStyle.merge(
-      TextStyle(
-        fontSize: emojiSize,
-        backgroundColor: Colors.transparent,
-        inherit: true,
-      ),
+    final defaultStyle = TextStyle(
+      fontSize: emojiSize,
+      inherit: true,
     );
     return textStyle == null ? defaultStyle : textStyle!.merge(defaultStyle);
   }
