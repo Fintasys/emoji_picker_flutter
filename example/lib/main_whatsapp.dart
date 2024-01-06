@@ -22,10 +22,10 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-  late EmojiTextEditingController _controller;
-  late ScrollController _scrollController;
-  late FocusNode _focusNode;
-  late TextStyle _textStyle;
+  late final EmojiTextEditingController _controller;
+  late final ScrollController _scrollController;
+  late final FocusNode _focusNode;
+  late final TextStyle _textStyle;
   bool _emojiShowing = false;
   final _fontSize = 24.0;
 
