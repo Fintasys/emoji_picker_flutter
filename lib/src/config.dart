@@ -38,7 +38,7 @@ class Config {
   /// you can consider to set [checkPlatformCompatibility] to false. It will
   /// improve initalization performance and prevent technically supported glyphs
   /// from being filtered out, but some emojis may still not be rendered
-  /// correctly e.g. 👨‍👨‍👧‍👦 on GoogleFonts is still not supported.
+  /// correctly e.g. 👨‍👨‍👧‍👦 on NotoColorEmoji is still not supported.
   ///
   /// This has priority over [EmojiViewConfig.emojiSizeMax] if font size is set.
   final TextStyle? emojiTextStyle;
