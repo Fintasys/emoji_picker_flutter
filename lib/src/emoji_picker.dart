@@ -238,37 +238,35 @@ class EmojiPickerState extends State<EmojiPicker> {
     }
   }
 
-  OnBackspaceLongPressed _onBackspaceLongPressed() {
-    return () {
-      if (widget.textEditingController != null) {
-        final controller = widget.textEditingController!;
+  void _onBackspaceLongPressed() {
+    if (widget.textEditingController != null) {
+      final controller = widget.textEditingController!;
 
-        final text = controller.value.text;
-        var cursorPosition = controller.selection.base.offset;
+      final text = controller.value.text;
+      var cursorPosition = controller.selection.base.offset;
 
-        // If cursor is not set, then place it at the end of the textfield
-        if (cursorPosition < 0) {
-          controller.selection = TextSelection(
-            baseOffset: controller.text.length,
-            extentOffset: controller.text.length,
-          );
-          cursorPosition = controller.selection.base.offset;
-        }
-
-        if (cursorPosition >= 0) {
-          final selection = controller.value.selection;
-          final newTextBeforeCursor = _deleteWordByWord(
-            selection.textBefore(text).toString(),
-          );
-          controller.value = controller.value.copyWith(
-            text: newTextBeforeCursor + selection.textAfter(text),
-            selection: TextSelection.fromPosition(
-              TextPosition(offset: newTextBeforeCursor.length),
-            ),
-          );
-        }
+      // If cursor is not set, then place it at the end of the textfield
+      if (cursorPosition < 0) {
+        controller.selection = TextSelection(
+          baseOffset: controller.text.length,
+          extentOffset: controller.text.length,
+        );
+        cursorPosition = controller.selection.base.offset;
       }
-    };
+
+      if (cursorPosition >= 0) {
+        final selection = controller.value.selection;
+        final newTextBeforeCursor = _deleteWordByWord(
+          selection.textBefore(text).toString(),
+        );
+        controller.value = controller.value.copyWith(
+          text: newTextBeforeCursor + selection.textAfter(text),
+          selection: TextSelection.fromPosition(
+            TextPosition(offset: newTextBeforeCursor.length),
+          ),
+        );
+      }
+    }
   }
 
   String _deleteWordByWord(String text) {
@@ -288,66 +286,64 @@ class EmojiPickerState extends State<EmojiPicker> {
   }
 
   // Add recent emoji handling to tap listener
-  OnEmojiSelected _getOnEmojiListener() {
-    return (category, emoji) {
-      if (widget.config.categoryViewConfig.recentTabBehavior ==
-          RecentTabBehavior.POPULAR) {
-        _emojiPickerInternalUtils
-            .addEmojiToPopularUsed(emoji: emoji, config: widget.config)
-            .then((newRecentEmoji) => {
-                  // we don't want to rebuild the widget if user is currently on
-                  // the RECENT tab, it will make emojis jump since sorting
-                  // is based on the use frequency
-                  updateRecentEmoji(newRecentEmoji,
-                      refresh: category != Category.RECENT),
-                });
-      } else if (widget.config.categoryViewConfig.recentTabBehavior ==
-          RecentTabBehavior.RECENT) {
-        _emojiPickerInternalUtils
-            .addEmojiToRecentlyUsed(emoji: emoji, config: widget.config)
-            .then((newRecentEmoji) => {
-                  // we don't want to rebuild the widget if user is currently on
-                  // the RECENT tab, it will make emojis jump since sorting
-                  // is based on the use frequency
-                  updateRecentEmoji(newRecentEmoji,
-                      refresh: category != Category.RECENT),
-                });
+  void _getOnEmojiListener(Category? category, Emoji emoji) {
+    if (widget.config.categoryViewConfig.recentTabBehavior ==
+        RecentTabBehavior.POPULAR) {
+      _emojiPickerInternalUtils
+          .addEmojiToPopularUsed(emoji: emoji, config: widget.config)
+          .then((newRecentEmoji) => {
+                // we don't want to rebuild the widget if user is currently on
+                // the RECENT tab, it will make emojis jump since sorting
+                // is based on the use frequency
+                updateRecentEmoji(newRecentEmoji,
+                    refresh: category != Category.RECENT),
+              });
+    } else if (widget.config.categoryViewConfig.recentTabBehavior ==
+        RecentTabBehavior.RECENT) {
+      _emojiPickerInternalUtils
+          .addEmojiToRecentlyUsed(emoji: emoji, config: widget.config)
+          .then((newRecentEmoji) => {
+                // we don't want to rebuild the widget if user is currently on
+                // the RECENT tab, it will make emojis jump since sorting
+                // is based on the use frequency
+                updateRecentEmoji(newRecentEmoji,
+                    refresh: category != Category.RECENT),
+              });
+    }
+
+    if (widget.textEditingController != null) {
+      // based on https://stackoverflow.com/a/60058972/10975692
+      final controller = widget.textEditingController!;
+      final text = controller.text;
+      final selection = controller.selection;
+      final cursorPosition = controller.selection.base.offset;
+
+      if (cursorPosition < 0) {
+        controller.text += emoji.emoji;
+        widget.onEmojiSelected?.call(category, emoji);
+        return;
       }
 
-      if (widget.textEditingController != null) {
-        // based on https://stackoverflow.com/a/60058972/10975692
-        final controller = widget.textEditingController!;
-        final text = controller.text;
-        final selection = controller.selection;
-        final cursorPosition = controller.selection.base.offset;
+      final newText = text.replaceRange(
+        selection.start,
+        selection.end,
+        emoji.emoji,
+      );
+      final emojiLength = emoji.emoji.length;
+      controller.value = controller.value.copyWith(
+        text: newText,
+        selection: selection.copyWith(
+          baseOffset: selection.start + emojiLength,
+          extentOffset: selection.start + emojiLength,
+        ),
+      );
+    }
 
-        if (cursorPosition < 0) {
-          controller.text += emoji.emoji;
-          widget.onEmojiSelected?.call(category, emoji);
-          return;
-        }
+    widget.onEmojiSelected?.call(category, emoji);
 
-        final newText = text.replaceRange(
-          selection.start,
-          selection.end,
-          emoji.emoji,
-        );
-        final emojiLength = emoji.emoji.length;
-        controller.value = controller.value.copyWith(
-          text: newText,
-          selection: selection.copyWith(
-            baseOffset: selection.start + emojiLength,
-            extentOffset: selection.start + emojiLength,
-          ),
-        );
-      }
-
-      widget.onEmojiSelected?.call(category, emoji);
-
-      if (widget.textEditingController == null) {
-        _scrollToCursorAfterTextChange();
-      }
-    };
+    if (widget.textEditingController == null) {
+      _scrollToCursorAfterTextChange();
+    }
   }
 
   // Initialize emoji data
@@ -365,9 +361,9 @@ class EmojiPickerState extends State<EmojiPicker> {
         : data);
     _state = EmojiViewState(
       _categoryEmoji,
-      _getOnEmojiListener(),
-      widget.onBackspacePressed == null ? null : _onBackspacePressed,
-      _onBackspaceLongPressed(),
+      _getOnEmojiListener,
+      _onBackspacePressed,
+      _onBackspaceLongPressed,
     );
     if (mounted) {
       setState(() {

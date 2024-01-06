@@ -34,13 +34,6 @@ class MyAppState extends State<MyApp> {
     super.initState();
   }
 
-  _onBackspacePressed() {
-    _controller
-      ..text = _controller.text.characters.toString()
-      ..selection = TextSelection.fromPosition(
-          TextPosition(offset: _controller.text.length));
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -127,7 +120,6 @@ class MyAppState extends State<MyApp> {
                 offstage: !_emojiShowing,
                 child: EmojiPicker(
                   textEditingController: _controller,
-                  onBackspacePressed: _onBackspacePressed,
                   config: Config(
                     height: 256,
                     checkPlatformCompatibility: true,
