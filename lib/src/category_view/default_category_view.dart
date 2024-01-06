@@ -1,5 +1,4 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:emoji_picker_flutter/src/category_view/default_category_tab_bar.dart';
 import 'package:flutter/material.dart';
 
 /// Default category view
