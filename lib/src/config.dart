@@ -35,9 +35,11 @@ class Config {
   /// Custom emoji text style to apply to emoji characters in the grid
   ///
   /// If you define a custom fontFamily or use GoogleFonts to set this property
-  /// be sure to set [checkPlatformCompatibility] to false. It will improve
-  /// initalization performance and prevent technically supported glyphs from
-  /// being filtered out.
+  /// you can consider to set [checkPlatformCompatibility] to false. It will
+  /// improve initalization performance and prevent technically supported glyphs
+  /// from being filtered out, but some emojis may still not be rendered
+  /// correctly e.g. 👨‍👨‍👧‍👦 on GoogleFonts is still not supported.
+  ///
   /// This has priority over [EmojiViewConfig.emojiSizeMax] if font size is set.
   final TextStyle? emojiTextStyle;
 
