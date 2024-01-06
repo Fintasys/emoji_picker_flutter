@@ -8,6 +8,7 @@ export 'package:emoji_picker_flutter/src/category_view/category_icon.dart';
 export 'package:emoji_picker_flutter/src/category_view/category_icons.dart';
 export 'package:emoji_picker_flutter/src/category_view/category_view.dart';
 export 'package:emoji_picker_flutter/src/category_view/category_view_config.dart';
+export 'package:emoji_picker_flutter/src/category_view/default_category_tab_bar.dart';
 export 'package:emoji_picker_flutter/src/category_view/default_category_view.dart';
 export 'package:emoji_picker_flutter/src/category_view/recent_tab_behavior.dart';
 export 'package:emoji_picker_flutter/src/config.dart';
