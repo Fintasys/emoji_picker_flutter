@@ -38,6 +38,7 @@ class Config {
   /// be sure to set [checkPlatformCompatibility] to false. It will improve
   /// initalization performance and prevent technically supported glyphs from
   /// being filtered out.
+  /// This has priority over [EmojiViewConfig.emojiSizeMax] if font size is set.
   final TextStyle? emojiTextStyle;
 
   /// Emoji view config

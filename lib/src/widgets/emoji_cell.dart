@@ -157,6 +157,7 @@ class EmojiCell extends StatelessWidget {
       fontSize: emojiSize,
       inherit: true,
     );
-    return textStyle == null ? defaultStyle : textStyle!.merge(defaultStyle);
+    // textStyle properties have priority over defaultStyle
+    return textStyle == null ? defaultStyle : defaultStyle.merge(textStyle);
   }
 }
