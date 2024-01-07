@@ -1,3 +1,10 @@
+## 2.0.0-dev.5
+
+- Improve documentation
+- Improve examples
+- prioritize emojiTextStyle over emojiSizeMax
+- improve onBackspacePressed logic (trigger controller and callback method)
+
 ## 2.0.0-dev.4
 
 - Improve SkinTone Overlay logic
