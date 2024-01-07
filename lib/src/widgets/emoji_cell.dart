@@ -153,7 +153,7 @@ class EmojiCell extends StatelessWidget {
   }
 
   TextStyle _getEmojiTextStyle() {
-    final defaultStyle = TextStyle(
+    final defaultStyle = emojiTextStyle.copyWith(
       fontSize: emojiSize,
       inherit: true,
     );
