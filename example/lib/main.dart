@@ -114,7 +114,7 @@ class MyAppState extends State<MyApp> {
                       emojiSizeMax: 28 *
                           (foundation.defaultTargetPlatform ==
                                   TargetPlatform.iOS
-                              ? 1.30
+                              ? 1.2
                               : 1.0),
                     ),
                     swapCategoryAndBottomBar: false,

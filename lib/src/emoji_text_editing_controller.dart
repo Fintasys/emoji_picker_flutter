@@ -8,14 +8,14 @@ const delimiter = '|';
 /// a particular style to emoji characters.
 class EmojiTextEditingController extends TextEditingController {
   /// Constructor, requres emojiStyle, since otherwise this class has no effect
-  EmojiTextEditingController({String? text, required this.emojiStyle})
+  EmojiTextEditingController({String? text, required this.emojiTextStyle})
       : super(text: text) {
     final utils = EmojiPickerUtils();
     _regex = utils.getEmojiRegex();
   }
 
   /// The style used for the emoji characters
-  final TextStyle emojiStyle;
+  final TextStyle emojiTextStyle;
 
   /// Cached Regex for emoji
   late final RegExp _regex;
@@ -46,7 +46,7 @@ class EmojiTextEditingController extends TextEditingController {
         _addTextSpan(
           textSpanChildren,
           textPart,
-          style?.merge(emojiStyle),
+          style?.merge(emojiTextStyle),
         );
 
         return '';

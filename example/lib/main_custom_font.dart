@@ -30,7 +30,7 @@ class MyAppState extends State<MyApp> {
     );
 
     // 2. Use EmojiTextEditingController
-    _controller = EmojiTextEditingController(emojiStyle: _textStyle);
+    _controller = EmojiTextEditingController(emojiTextStyle: _textStyle);
     super.initState();
   }
 
@@ -129,7 +129,7 @@ class MyAppState extends State<MyApp> {
                       emojiSizeMax: _fontSize *
                           (foundation.defaultTargetPlatform ==
                                   TargetPlatform.iOS
-                              ? 1.30
+                              ? 1.2
                               : 1.0),
                     ),
                     swapCategoryAndBottomBar: false,

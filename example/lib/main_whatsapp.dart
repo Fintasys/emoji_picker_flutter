@@ -2,6 +2,7 @@ import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/foundation.dart' as foundation;
 
 const accentColor = Color(0xFF4BA586);
 const accentColorDark = Color(0xFF377E6A);
@@ -26,18 +27,20 @@ class MyAppState extends State<MyApp> {
   late final ScrollController _scrollController;
   late final FocusNode _focusNode;
   late final TextStyle _textStyle;
+  final bool isApple = [TargetPlatform.iOS, TargetPlatform.macOS]
+      .contains(foundation.defaultTargetPlatform);
   bool _emojiShowing = false;
-  final _fontSize = 24.0;
 
   @override
   void initState() {
+    final fontSize = 24 * (isApple ? 1.2 : 1.0);
     // Define Custom Emoji Font & Text Style
     _textStyle = emojiTextStyle.copyWith(
-      fontFamily: GoogleFonts.notoColorEmoji().fontFamily,
-      fontSize: _fontSize,
+      fontFamily: isApple ? null : GoogleFonts.notoColorEmoji().fontFamily,
+      fontSize: fontSize,
     );
 
-    _controller = EmojiTextEditingController(emojiStyle: _textStyle);
+    _controller = EmojiTextEditingController(emojiTextStyle: _textStyle);
     _scrollController = ScrollController();
     _focusNode = FocusNode();
 
@@ -179,8 +182,7 @@ class MyAppState extends State<MyApp> {
                           height: 256,
                           checkPlatformCompatibility: true,
                           emojiTextStyle: _textStyle,
-                          emojiViewConfig: EmojiViewConfig(
-                            emojiSizeMax: _fontSize,
+                          emojiViewConfig: const EmojiViewConfig(
                             backgroundColor: Colors.white,
                           ),
                           swapCategoryAndBottomBar: true,
