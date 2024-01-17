@@ -9,16 +9,13 @@ const delimiter = '|';
 class EmojiTextEditingController extends TextEditingController {
   /// Constructor, requres emojiStyle, since otherwise this class has no effect
   EmojiTextEditingController({String? text, required this.emojiTextStyle})
-      : super(text: text) {
-    final utils = EmojiPickerUtils();
-    _regex = utils.getEmojiRegex();
-  }
+      : super(text: text);
 
   /// The style used for the emoji characters
   final TextStyle emojiTextStyle;
 
-  /// Cached Regex for emoji
-  late final RegExp _regex;
+  /// Emoji Picker Utils
+  final EmojiPickerUtils utils = EmojiPickerUtils();
 
   @override
   TextSpan buildTextSpan({
@@ -77,7 +74,7 @@ class EmojiTextEditingController extends TextEditingController {
 
   List<InlineSpan> _getEmojiTextSpanChildren(String text, TextStyle? style) {
     final textSpanChildren = <InlineSpan>[];
-    text.splitMapJoin(_regex, onMatch: (Match match) {
+    text.splitMapJoin(utils.getEmojiRegex(), onMatch: (Match match) {
       final textPart = match.group(0);
 
       if (textPart == null) return '';
