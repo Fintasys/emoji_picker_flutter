@@ -269,12 +269,12 @@ class MyAppState extends State<MyApp> {
 /// Customized Whatsapp category view
 class WhatsAppCategoryView extends CategoryView {
   const WhatsAppCategoryView(
-    Config config,
-    EmojiViewState state,
-    TabController tabController,
-    PageController pageController, {
-    Key? key,
-  }) : super(config, state, tabController, pageController, key: key);
+    super.config,
+    super.state,
+    super.tabController,
+    super.pageController, {
+    super.key,
+  });
 
   @override
   WhatsAppCategoryViewState createState() => WhatsAppCategoryViewState();
@@ -323,8 +323,8 @@ class WhatsAppTabBar extends StatelessWidget {
     this.pageController,
     this.categoryEmojis,
     this.closeSkinToneOverlay, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final Config config;
 
@@ -384,10 +384,8 @@ class WhatsAppTabBar extends StatelessWidget {
 
 /// Custom Whatsapp Search view implementation
 class WhatsAppSearchView extends SearchView {
-  const WhatsAppSearchView(
-      Config config, EmojiViewState state, VoidCallback showEmojiView,
-      {super.key})
-      : super(config, state, showEmojiView);
+  const WhatsAppSearchView(super.config, super.state, super.showEmojiView,
+      {super.key});
 
   @override
   WhatsAppSearchViewState createState() => WhatsAppSearchViewState();
