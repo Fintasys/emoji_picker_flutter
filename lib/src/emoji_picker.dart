@@ -227,6 +227,7 @@ class EmojiPickerState extends State<EmojiPicker> {
           selection: TextSelection.fromPosition(
             TextPosition(offset: newTextBeforeCursor.length),
           ),
+          composing: TextRange.collapsed(newTextBeforeCursor.length),
         );
       }
     }
@@ -264,6 +265,7 @@ class EmojiPickerState extends State<EmojiPicker> {
           selection: TextSelection.fromPosition(
             TextPosition(offset: newTextBeforeCursor.length),
           ),
+          composing: TextRange.collapsed(newTextBeforeCursor.length),
         );
       }
     }
@@ -336,6 +338,7 @@ class EmojiPickerState extends State<EmojiPicker> {
           baseOffset: selection.start + emojiLength,
           extentOffset: selection.start + emojiLength,
         ),
+        composing: TextRange.collapsed(newText.length),
       );
     }
 
