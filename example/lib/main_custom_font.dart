@@ -16,17 +16,20 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-  late EmojiTextEditingController _controller;
-  late TextStyle _textStyle;
+  final _utils = EmojiPickerUtils();
+  late final EmojiTextEditingController _controller;
+  late final TextStyle _textStyle;
+  final bool isApple = [TargetPlatform.iOS, TargetPlatform.macOS]
+      .contains(foundation.defaultTargetPlatform);
   bool _emojiShowing = false;
-  final _fontSize = 28.0;
 
   @override
   void initState() {
+    final fontSize = 24 * (isApple ? 1.2 : 1.0);
     // 1. Define Custom Font & Text Style
     _textStyle = emojiTextStyle.copyWith(
-      fontFamily: GoogleFonts.notoColorEmoji().fontFamily,
-      fontSize: _fontSize,
+      fontFamily: GoogleFonts.notoEmoji().fontFamily,
+      fontSize: fontSize,
     );
 
     // 2. Use EmojiTextEditingController
@@ -50,9 +53,17 @@ class MyAppState extends State<MyApp> {
                   child: ValueListenableBuilder(
                     valueListenable: _controller,
                     builder: (context, text, child) {
-                      return Text(
-                        _controller.text,
-                        style: _textStyle,
+                      return RichText(
+                        text: TextSpan(
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 18.0,
+                          ),
+                          children: _utils.setEmojiTextStyle(
+                            _controller.text,
+                            emojiStyle: _textStyle,
+                          ),
+                        ),
                       );
                     },
                   ),
@@ -124,14 +135,7 @@ class MyAppState extends State<MyApp> {
                     height: 256,
                     checkPlatformCompatibility: true,
                     emojiTextStyle: _textStyle,
-                    emojiViewConfig: EmojiViewConfig(
-                      // Issue: https://github.com/flutter/flutter/issues/28894
-                      emojiSizeMax: _fontSize *
-                          (foundation.defaultTargetPlatform ==
-                                  TargetPlatform.iOS
-                              ? 1.2
-                              : 1.0),
-                    ),
+                    emojiViewConfig: const EmojiViewConfig(),
                     swapCategoryAndBottomBar: false,
                     skinToneConfig: const SkinToneConfig(),
                     categoryViewConfig: const CategoryViewConfig(),

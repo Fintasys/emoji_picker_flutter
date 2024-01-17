@@ -23,6 +23,7 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
+  final _utils = EmojiPickerUtils();
   late final EmojiTextEditingController _controller;
   late final ScrollController _scrollController;
   late final FocusNode _focusNode;
@@ -36,7 +37,7 @@ class MyAppState extends State<MyApp> {
     final fontSize = 24 * (isApple ? 1.2 : 1.0);
     // Define Custom Emoji Font & Text Style
     _textStyle = emojiTextStyle.copyWith(
-      fontFamily: isApple ? null : GoogleFonts.notoColorEmoji().fontFamily,
+      fontFamily: GoogleFonts.notoEmoji().fontFamily,
       fontSize: fontSize,
     );
 
@@ -81,9 +82,17 @@ class MyAppState extends State<MyApp> {
                         child: ValueListenableBuilder(
                           valueListenable: _controller,
                           builder: (context, text, child) {
-                            return Text(
-                              _controller.text,
-                              style: _textStyle,
+                            return RichText(
+                              text: TextSpan(
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 18.0,
+                                ),
+                                children: _utils.setEmojiTextStyle(
+                                  _controller.text,
+                                  emojiStyle: _textStyle,
+                                ),
+                              ),
                             );
                           },
                         ),
