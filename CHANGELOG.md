@@ -1,3 +1,9 @@
+## 2.0.0-dev.6
+
+- Fix issue with `EmojiTextEditingController` during selection
+- Fix issue with onBackspacePressed logic
+- Fix example for custom font
+
 ## 2.0.0-dev.5
 
 - Improve documentation
