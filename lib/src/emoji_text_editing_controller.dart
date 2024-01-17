@@ -35,41 +35,29 @@ class EmojiTextEditingController extends TextEditingController {
     final composingRegionOutOfRange =
         !value.isComposingRangeValid || !withComposing;
 
+    // Style when no cursor or selection is set
     if (composingRegionOutOfRange) {
-      final textSpanChildren = <InlineSpan>[];
-
-      text.splitMapJoin(_regex, onMatch: (Match match) {
-        final textPart = match.group(0);
-
-        if (textPart == null) return '';
-
-        _addTextSpan(
-          textSpanChildren,
-          textPart,
-          style?.merge(emojiTextStyle),
-        );
-
-        return '';
-      }, onNonMatch: (String text) {
-        _addTextSpan(textSpanChildren, text, style);
-        return '';
-      });
-
+      final textSpanChildren = _getEmojiTextSpanChildren(text, style);
       return TextSpan(style: style, children: textSpanChildren);
     }
 
+    // Cursor will automatically highlight current word underlined
     final composingStyle =
         style?.merge(const TextStyle(decoration: TextDecoration.underline)) ??
             const TextStyle(decoration: TextDecoration.underline);
+
     return TextSpan(
       style: style,
       children: <TextSpan>[
-        TextSpan(text: value.composing.textBefore(value.text)),
         TextSpan(
-          style: composingStyle,
-          text: value.composing.textInside(value.text),
-        ),
-        TextSpan(text: value.composing.textAfter(value.text)),
+            children: _getEmojiTextSpanChildren(
+                value.composing.textBefore(value.text), style)),
+        TextSpan(
+            children: _getEmojiTextSpanChildren(
+                value.composing.textInside(value.text), composingStyle)),
+        TextSpan(
+            children: _getEmojiTextSpanChildren(
+                value.composing.textAfter(value.text), style)),
       ],
     );
   }
@@ -85,5 +73,26 @@ class EmojiTextEditingController extends TextEditingController {
         style: style,
       ),
     );
+  }
+
+  List<InlineSpan> _getEmojiTextSpanChildren(String text, TextStyle? style) {
+    final textSpanChildren = <InlineSpan>[];
+    text.splitMapJoin(_regex, onMatch: (Match match) {
+      final textPart = match.group(0);
+
+      if (textPart == null) return '';
+
+      _addTextSpan(
+        textSpanChildren,
+        textPart,
+        style?.merge(emojiTextStyle),
+      );
+
+      return '';
+    }, onNonMatch: (String text) {
+      _addTextSpan(textSpanChildren, text, style);
+      return '';
+    });
+    return textSpanChildren;
   }
 }
