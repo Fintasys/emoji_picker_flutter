@@ -45,9 +45,9 @@ EmojiPicker(
         checkPlatformCompatibility: true,
         emojiViewConfig: EmojiViewConfig(
         // Issue: https://github.com/flutter/flutter/issues/28894
-        emojiSizeMax: 32 *
+        emojiSizeMax: 28 *
         (foundation.defaultTargetPlatform == TargetPlatform.iOS
-            ?  1.30
+            ?  1.20
             :  1.0),
         ),
         swapCategoryAndBottomBar:  false,
@@ -64,7 +64,7 @@ EmojiPicker(
 
 All examples can be found [here](https://github.com/Fintasys/emoji_picker_flutter/tree/master/example/lib)
 
-1. Default (Some Emoji might not be displayed correctly e.g. Frowning Face)
+1. Default (Some Emoji might not be displayed correctly e.g. Frowning Face 🚨 Will be fixed with 3.17)
 
    <img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/41c3e6d2cfe69375e263f42cfe06dbad7936bde1/screenshot/example_default_android.png" width="300">
 
