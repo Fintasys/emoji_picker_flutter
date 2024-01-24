@@ -11,7 +11,7 @@ class Config {
     this.height = 256,
     this.swapCategoryAndBottomBar = false,
     this.checkPlatformCompatibility = true,
-    this.emojiSet,
+    this.emojiSet = defaultEmojiSet,
     this.emojiTextStyle,
     this.emojiViewConfig = const EmojiViewConfig(),
     this.skinToneConfig = const SkinToneConfig(),
@@ -30,7 +30,7 @@ class Config {
   final bool checkPlatformCompatibility;
 
   /// Custom emojis; if set, overrides default emojis provided by the library
-  final List<CategoryEmoji>? emojiSet;
+  final List<CategoryEmoji> emojiSet;
 
   /// Custom emoji text style to apply to emoji characters in the grid
   ///
@@ -75,7 +75,7 @@ class Config {
   int get hashCode =>
       swapCategoryAndBottomBar.hashCode ^
       checkPlatformCompatibility.hashCode ^
-      (emojiSet?.hashCode ?? 0) ^
+      emojiSet.hashCode ^
       (emojiTextStyle?.hashCode ?? 0) ^
       categoryViewConfig.hashCode ^
       emojiViewConfig.hashCode ^
