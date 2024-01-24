@@ -154,10 +154,14 @@ class EmojiPickerState extends State<EmojiPicker> {
   void updateRecentEmoji(List<RecentEmoji> recentEmoji,
       {bool refresh = false}) {
     _recentEmoji = recentEmoji;
-    _categoryEmoji[0] = _categoryEmoji[0]
-        .copyWith(emoji: _recentEmoji.map((e) => e.emoji).toList());
-    if (mounted && refresh) {
-      setState(() {});
+    final recentTabIndex = _categoryEmoji
+        .indexWhere((element) => element.category == Category.RECENT);
+    if (recentTabIndex != -1) {
+      _categoryEmoji[recentTabIndex] = _categoryEmoji[recentTabIndex]
+          .copyWith(emoji: _recentEmoji.map((e) => e.emoji).toList());
+      if (mounted && refresh) {
+        setState(() {});
+      }
     }
   }
 
@@ -288,7 +292,7 @@ class EmojiPickerState extends State<EmojiPicker> {
   }
 
   // Add recent emoji handling to tap listener
-  void _getOnEmojiListener(Category? category, Emoji emoji) {
+  void _onEmojiSelected(Category? category, Emoji emoji) {
     if (widget.config.categoryViewConfig.recentTabBehavior ==
         RecentTabBehavior.POPULAR) {
       _emojiPickerInternalUtils
@@ -358,13 +362,13 @@ class EmojiPickerState extends State<EmojiPicker> {
       final recentEmojiMap = _recentEmoji.map((e) => e.emoji).toList();
       _categoryEmoji.add(CategoryEmoji(Category.RECENT, recentEmojiMap));
     }
-    final data = widget.config.emojiSet ?? defaultEmojiSet;
+    final data = widget.config.emojiSet;
     _categoryEmoji.addAll(widget.config.checkPlatformCompatibility
         ? await _emojiPickerInternalUtils.filterUnsupported(data)
         : data);
     _state = EmojiViewState(
       _categoryEmoji,
-      _getOnEmojiListener,
+      _onEmojiSelected,
       _onBackspacePressed,
       _onBackspaceLongPressed,
     );

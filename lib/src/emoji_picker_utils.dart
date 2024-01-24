@@ -23,14 +23,15 @@ class EmojiPickerUtils {
   }
 
   /// Search for related emoticons based on keywords
-  Future<List<Emoji>> searchEmoji(String keyword, List<CategoryEmoji> data,
+  Future<List<Emoji>> searchEmoji(String keyword, List<CategoryEmoji> emojiSet,
       {bool checkPlatformCompatibility = true}) async {
     if (keyword.isEmpty) return [];
 
     if (_allAvailableEmojiEntities.isEmpty) {
       final emojiPickerInternalUtils = EmojiPickerInternalUtils();
 
-      data.removeWhere((e) => e.category == Category.RECENT);
+      final data = [...emojiSet]
+        ..removeWhere((e) => e.category == Category.RECENT);
       final availableCategoryEmoji = checkPlatformCompatibility
           ? await emojiPickerInternalUtils.filterUnsupported(data)
           : data;
@@ -91,8 +92,11 @@ class EmojiPickerUtils {
   Emoji applySkinTone(Emoji emoji, String color) {
     final codeUnits = emoji.emoji.codeUnits;
     var result = List<int>.empty(growable: true)
+      // Basic emoji without gender (until char 2)
       ..addAll(codeUnits.sublist(0, min(codeUnits.length, 2)))
+      // Skin tone
       ..addAll(color.codeUnits);
+    // add the rest of the emoji (gender, etc.) again
     if (codeUnits.length >= 2) {
       result.addAll(codeUnits.sublist(2));
     }
