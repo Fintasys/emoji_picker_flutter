@@ -66,30 +66,36 @@ class EmojiPickerUtils {
   /// Spans enclosing emojis will have [parentStyle] combined with [emojiStyle].
   /// Other spans will not have an explicit style (this method does not set
   /// [parentStyle] to the whole text.
-  List<InlineSpan> setEmojiTextStyle(String text,
-      {required TextStyle emojiStyle, TextStyle? parentStyle}) {
-    final finalEmojiStyle =
-        parentStyle == null ? emojiStyle : parentStyle.merge(emojiStyle);
-    return getEmojiTextSpanChildren(text, finalEmojiStyle);
+  List<InlineSpan> setEmojiTextStyle(
+    String text, {
+    required TextStyle emojiStyle,
+    TextStyle? parentStyle,
+  }) {
+    final composedEmojiStyle = (parentStyle ?? const TextStyle())
+        .merge(DefaultEmojiTextStyle)
+        .merge(emojiStyle);
+    return getEmojiTextSpanChildren(text, composedEmojiStyle, parentStyle);
   }
 
-  /// Applies the given [style] to all emoji characters in the given [text].
-  List<InlineSpan> getEmojiTextSpanChildren(String text, TextStyle? style) {
+  /// Applies the given [emojiStyle] to all emoji characters in the given [text]
+  /// and [parentStyle] to all other characters.
+  /// Returns a list of spans that can be used to display the text.
+  List<InlineSpan> getEmojiTextSpanChildren(
+    String text,
+    TextStyle? emojiStyle,
+    TextStyle? parentStyle,
+  ) {
     final textSpanChildren = <InlineSpan>[];
     text.splitMapJoin(getEmojiRegex(), onMatch: (Match match) {
-      final textPart = match.group(0);
+      final emojiText = match.group(0);
 
-      if (textPart == null) return '';
+      if (emojiText == null) return '';
 
-      _addTextSpan(
-        textSpanChildren,
-        textPart,
-        style?.merge(emojiTextStyle),
-      );
+      _addTextSpan(textSpanChildren, emojiText, emojiStyle);
 
       return '';
     }, onNonMatch: (String text) {
-      _addTextSpan(textSpanChildren, text, style);
+      _addTextSpan(textSpanChildren, text, parentStyle);
       return '';
     });
     return textSpanChildren;
@@ -97,12 +103,12 @@ class EmojiPickerUtils {
 
   void _addTextSpan(
     List<InlineSpan> textSpanChildren,
-    String? textToBeStyled,
+    String? text,
     TextStyle? style,
   ) {
     textSpanChildren.add(
       TextSpan(
-        text: textToBeStyled,
+        text: text,
         style: style,
       ),
     );

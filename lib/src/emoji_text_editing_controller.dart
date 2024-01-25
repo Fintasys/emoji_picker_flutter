@@ -32,14 +32,23 @@ class EmojiTextEditingController extends TextEditingController {
     final composingRegionOutOfRange =
         !value.isComposingRangeValid || !withComposing;
 
+    // combine existing style, with given emojiStyle and EmojiTextStyle
+    final composedEmojiTextStyle = (style ?? const TextStyle())
+        .merge(DefaultEmojiTextStyle)
+        .merge(emojiTextStyle);
+
     // Style when no cursor or selection is set
     if (composingRegionOutOfRange) {
-      final textSpanChildren = utils.getEmojiTextSpanChildren(text, style);
+      final textSpanChildren = utils.getEmojiTextSpanChildren(
+        text,
+        composedEmojiTextStyle,
+        style,
+      );
       return TextSpan(style: style, children: textSpanChildren);
     }
 
     // Cursor will automatically highlight current word underlined
-    final composingStyle =
+    final underlineStyle =
         style?.merge(const TextStyle(decoration: TextDecoration.underline)) ??
             const TextStyle(decoration: TextDecoration.underline);
 
@@ -47,14 +56,26 @@ class EmojiTextEditingController extends TextEditingController {
       style: style,
       children: <TextSpan>[
         TextSpan(
-            children: utils.getEmojiTextSpanChildren(
-                value.composing.textBefore(value.text), style)),
+          children: utils.getEmojiTextSpanChildren(
+            value.composing.textBefore(value.text),
+            composedEmojiTextStyle,
+            style,
+          ),
+        ),
         TextSpan(
-            children: utils.getEmojiTextSpanChildren(
-                value.composing.textInside(value.text), composingStyle)),
+          children: utils.getEmojiTextSpanChildren(
+            value.composing.textInside(value.text),
+            underlineStyle,
+            style,
+          ),
+        ),
         TextSpan(
-            children: utils.getEmojiTextSpanChildren(
-                value.composing.textAfter(value.text), style)),
+          children: utils.getEmojiTextSpanChildren(
+            value.composing.textAfter(value.text),
+            composedEmojiTextStyle,
+            style,
+          ),
+        ),
       ],
     );
   }

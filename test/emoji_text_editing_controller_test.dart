@@ -22,8 +22,13 @@ void main() {
             );
 
             expect(span.children?.length, 3);
+            // Hello
             expect(span.children?[0].style?.color, Colors.black);
+            // Emoji
             expect(span.children?[1].style?.color, Colors.red);
+            expect(span.children?[1].style?.fontFamilyFallback,
+                DefaultEmojiTextStyle.fontFamilyFallback);
+            // World
             expect(span.children?[2].style?.color, Colors.black);
 
             return const Placeholder();
