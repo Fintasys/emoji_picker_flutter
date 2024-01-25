@@ -70,22 +70,42 @@ class EmojiPickerUtils {
       {required TextStyle emojiStyle, TextStyle? parentStyle}) {
     final finalEmojiStyle =
         parentStyle == null ? emojiStyle : parentStyle.merge(emojiStyle);
-    final matches = getEmojiRegex().allMatches(text).toList();
-    final spans = <InlineSpan>[];
-    var cursor = 0;
-    for (final match in matches) {
-      spans
-        ..add(TextSpan(text: text.substring(cursor, match.start)))
-        ..add(
-          TextSpan(
-            text: text.substring(match.start, match.end),
-            style: finalEmojiStyle,
-          ),
-        );
-      cursor = match.end;
-    }
-    spans.add(TextSpan(text: text.substring(cursor, text.length)));
-    return spans;
+    return getEmojiTextSpanChildren(text, finalEmojiStyle);
+  }
+
+  /// Applies the given [style] to all emoji characters in the given [text].
+  List<InlineSpan> getEmojiTextSpanChildren(String text, TextStyle? style) {
+    final textSpanChildren = <InlineSpan>[];
+    text.splitMapJoin(getEmojiRegex(), onMatch: (Match match) {
+      final textPart = match.group(0);
+
+      if (textPart == null) return '';
+
+      _addTextSpan(
+        textSpanChildren,
+        textPart,
+        style?.merge(emojiTextStyle),
+      );
+
+      return '';
+    }, onNonMatch: (String text) {
+      _addTextSpan(textSpanChildren, text, style);
+      return '';
+    });
+    return textSpanChildren;
+  }
+
+  void _addTextSpan(
+    List<InlineSpan> textSpanChildren,
+    String? textToBeStyled,
+    TextStyle? style,
+  ) {
+    textSpanChildren.add(
+      TextSpan(
+        text: textToBeStyled,
+        style: style,
+      ),
+    );
   }
 
   /// Applies skin tone to given emoji
@@ -112,27 +132,17 @@ class EmojiPickerUtils {
   }
 
   /// Returns the emoji regex
+  /// Based on https://unicode.org/reports/tr51/
   RegExp getEmojiRegex() {
-    return _emojiRegExp ??= _generateEmojiRegExp();
-  }
-
-  RegExp _generateEmojiRegExp() {
-    final regExBuffer = StringBuffer();
-    for (final list in defaultEmojiSet) {
-      for (final emoji in list.emoji) {
-        // Put emoji inclusive skin tone before actualy emoji
-        // to avoid color and emoji being seperated
-        if (emoji.hasSkinTone) {
-          for (final skinTone in SkinTone.values) {
-            regExBuffer.write(
-              '${applySkinTone(emoji, skinTone).emoji}$delimiter',
-            );
-          }
-        }
-        regExBuffer.write('${emoji.emoji}$delimiter');
-      }
-    }
-    final regExString = regExBuffer.toString();
-    return RegExp(regExString.substring(0, regExString.length - 1));
+    return _emojiRegExp ??
+        // Improved version including gender and skin tones
+        RegExp(
+            r'\p{Emoji}\u200D\p{Emoji}\uFE0F|\p{Emoji_Presentation}|\p{Emoji}\uFE0F|\p{Emoji_Modifier_Base}\p{Emoji_Modifier}?',
+            unicode: true);
+    // original version
+    // RegExp(
+    //   r'(\p{Emoji_Presentation}|\p{Emoji}\uFE0F|\p{Emoji_Modifier_Base}\p{Emoji_Modifier}?|\p{Emoji}\u200D\p{Emoji}*)',
+    //   unicode: true,
+    // );
   }
 }

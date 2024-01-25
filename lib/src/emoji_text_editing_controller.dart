@@ -34,7 +34,7 @@ class EmojiTextEditingController extends TextEditingController {
 
     // Style when no cursor or selection is set
     if (composingRegionOutOfRange) {
-      final textSpanChildren = _getEmojiTextSpanChildren(text, style);
+      final textSpanChildren = utils.getEmojiTextSpanChildren(text, style);
       return TextSpan(style: style, children: textSpanChildren);
     }
 
@@ -47,49 +47,15 @@ class EmojiTextEditingController extends TextEditingController {
       style: style,
       children: <TextSpan>[
         TextSpan(
-            children: _getEmojiTextSpanChildren(
+            children: utils.getEmojiTextSpanChildren(
                 value.composing.textBefore(value.text), style)),
         TextSpan(
-            children: _getEmojiTextSpanChildren(
+            children: utils.getEmojiTextSpanChildren(
                 value.composing.textInside(value.text), composingStyle)),
         TextSpan(
-            children: _getEmojiTextSpanChildren(
+            children: utils.getEmojiTextSpanChildren(
                 value.composing.textAfter(value.text), style)),
       ],
     );
-  }
-
-  void _addTextSpan(
-    List<InlineSpan> textSpanChildren,
-    String? textToBeStyled,
-    TextStyle? style,
-  ) {
-    textSpanChildren.add(
-      TextSpan(
-        text: textToBeStyled,
-        style: style,
-      ),
-    );
-  }
-
-  List<InlineSpan> _getEmojiTextSpanChildren(String text, TextStyle? style) {
-    final textSpanChildren = <InlineSpan>[];
-    text.splitMapJoin(utils.getEmojiRegex(), onMatch: (Match match) {
-      final textPart = match.group(0);
-
-      if (textPart == null) return '';
-
-      _addTextSpan(
-        textSpanChildren,
-        textPart,
-        style?.merge(emojiTextStyle),
-      );
-
-      return '';
-    }, onNonMatch: (String text) {
-      _addTextSpan(textSpanChildren, text, style);
-      return '';
-    });
-    return textSpanChildren;
   }
 }
