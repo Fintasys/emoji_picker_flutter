@@ -1,3 +1,8 @@
+## 1.6.4
+
+- Add long-press backspace support (thx @vedasjad)
+- Fix Auto-Scroll issue in TextField (thx @starfreck)
+
 ## 1.6.3
 
 - Added new Config parameter `customSkinColorOverlayHorizontalOffset` to fix issue with SkinColorOverlay in ShellRoute or other horizontal adjustments
