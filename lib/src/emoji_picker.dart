@@ -98,6 +98,9 @@ typedef void OnSkinToneDialogRequested(
 /// Callback function for backspace button
 typedef void OnBackspacePressed();
 
+/// Callback function for backspace button when long pressed
+typedef void OnBackspaceLongPressed();
+
 /// Callback function for custom view
 typedef EmojiViewBuilder = Widget Function(Config config, EmojiViewState state);
 
@@ -230,6 +233,54 @@ class EmojiPickerState extends State<EmojiPicker> {
     }
   }
 
+  OnBackspaceLongPressed _onBackspaceLongPressed() {
+    return () {
+      if (widget.textEditingController != null) {
+        final controller = widget.textEditingController!;
+
+        final text = controller.value.text;
+        var cursorPosition = controller.selection.base.offset;
+
+        // If cursor is not set, then place it at the end of the textfield
+        if (cursorPosition < 0) {
+          controller.selection = TextSelection(
+            baseOffset: controller.text.length,
+            extentOffset: controller.text.length,
+          );
+          cursorPosition = controller.selection.base.offset;
+        }
+
+        if (cursorPosition >= 0) {
+          final selection = controller.value.selection;
+          final newTextBeforeCursor = _deleteWordByWord(
+            selection.textBefore(text).toString(),
+          );
+          controller
+            ..text = newTextBeforeCursor + selection.textAfter(text)
+            ..selection = TextSelection.fromPosition(
+              TextPosition(offset: newTextBeforeCursor.length),
+            );
+        }
+      }
+    };
+  }
+
+  String _deleteWordByWord(String text) {
+    // Trim trailing spaces
+    text = text.trimRight();
+
+    // Find the last space to determine the start of the last word
+    final lastSpaceIndex = text.lastIndexOf(' ');
+
+    // If there is a space, remove the last word and spaces before it
+    if (lastSpaceIndex != -1) {
+      return text.substring(0, lastSpaceIndex).trimRight();
+    }
+
+    // If there is no space, remove the entire text
+    return '';
+  }
+
   // Add recent emoji handling to tap listener
   OnEmojiSelected _getOnEmojiListener() {
     return (category, emoji) {
@@ -305,6 +356,7 @@ class EmojiPickerState extends State<EmojiPicker> {
       _categoryEmoji,
       _getOnEmojiListener(),
       widget.onBackspacePressed == null ? null : _onBackspacePressed,
+      _onBackspaceLongPressed(),
     );
     if (mounted) {
       setState(() {
