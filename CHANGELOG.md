@@ -1,3 +1,9 @@
+## 2.0.0-dev.7
+
+- Improve emoji regex and its performance
+- Fix rendering issue with some emoji due to TextStyle handling
+- Add tests
+
 ## 2.0.0-dev.6
 
 - Fix issue with `EmojiTextEditingController` during selection
