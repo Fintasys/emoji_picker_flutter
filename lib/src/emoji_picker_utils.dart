@@ -4,6 +4,14 @@ import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:emoji_picker_flutter/src/emoji_picker_internal_utils.dart';
 import 'package:flutter/material.dart';
 
+// ignore: lines_longer_than_80_chars
+/// Emoji Regex
+/// Improved version including gender, skin tones and keycap sequences
+/// Keycap Sequence '((\u0023|\u002a|[\u0030-\u0039])\ufe0f\u20e3){1}'
+/// Issue: https://github.com/flutter/flutter/issues/36062
+const EmojiRegex =
+    r'\p{Emoji}\u200D\p{Emoji}\uFE0F|((\u0023|\u002a|[\u0030-\u0039])\ufe0f\u20e3){1}|\p{Emoji_Presentation}|\p{Emoji}\uFE0F|\p{Emoji_Modifier_Base}\p{Emoji_Modifier}?';
+
 /// Helper class that provides extended usage
 class EmojiPickerUtils {
   /// Singleton Constructor
@@ -140,15 +148,7 @@ class EmojiPickerUtils {
   /// Returns the emoji regex
   /// Based on https://unicode.org/reports/tr51/
   RegExp getEmojiRegex() {
-    return _emojiRegExp ??
-        // Improved version including gender and skin tones
-        RegExp(
-            r'\p{Emoji}\u200D\p{Emoji}\uFE0F|\p{Emoji_Presentation}|\p{Emoji}\uFE0F|\p{Emoji_Modifier_Base}\p{Emoji_Modifier}?',
-            unicode: true);
-    // original version
-    // RegExp(
-    //   r'(\p{Emoji_Presentation}|\p{Emoji}\uFE0F|\p{Emoji_Modifier_Base}\p{Emoji_Modifier}?|\p{Emoji}\u200D\p{Emoji}*)',
-    //   unicode: true,
-    // );
+    print(EmojiRegex);
+    return _emojiRegExp ?? RegExp(EmojiRegex, unicode: true);
   }
 }
