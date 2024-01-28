@@ -5,6 +5,8 @@
 <a  href="https://opensource.org/licenses/BSD-2-Clause"><img  src="https://img.shields.io/badge/License-BSD%202--Clause-orange.svg"  alt="License: BSD-2-Clause"></a>
 </p>
 
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/fintasys)
+
 # emoji_picker_flutter
 
 Yet another Emoji Picker for Flutter 🤩
@@ -247,10 +249,6 @@ Always happy if anyone wants to help to improve this package!
 ## If you need any features
 
 Please open an issue so that we can discuss your feature request 🙏
-
-## Support me 🙏
-
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/fintasys)
 
 ---
 
