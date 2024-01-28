@@ -32,17 +32,12 @@ class EmojiTextEditingController extends TextEditingController {
     final composingRegionOutOfRange =
         !value.isComposingRangeValid || !withComposing;
 
-    // combine existing style, with given emojiStyle and EmojiTextStyle
-    final composedEmojiTextStyle = (style ?? const TextStyle())
-        .merge(DefaultEmojiTextStyle)
-        .merge(emojiTextStyle);
-
     // Style when no cursor or selection is set
     if (composingRegionOutOfRange) {
-      final textSpanChildren = utils.getEmojiTextSpanChildren(
+      final textSpanChildren = utils.setEmojiTextStyle(
         text,
-        composedEmojiTextStyle,
-        style,
+        emojiStyle: emojiTextStyle,
+        parentStyle: style,
       );
       return TextSpan(style: style, children: textSpanChildren);
     }
@@ -56,24 +51,24 @@ class EmojiTextEditingController extends TextEditingController {
       style: style,
       children: <TextSpan>[
         TextSpan(
-          children: utils.getEmojiTextSpanChildren(
+          children: utils.setEmojiTextStyle(
             value.composing.textBefore(value.text),
-            composedEmojiTextStyle,
-            style,
+            emojiStyle: emojiTextStyle,
+            parentStyle: style,
           ),
         ),
         TextSpan(
-          children: utils.getEmojiTextSpanChildren(
+          children: utils.setEmojiTextStyle(
             value.composing.textInside(value.text),
-            underlineStyle,
-            style,
+            emojiStyle: emojiTextStyle,
+            parentStyle: underlineStyle,
           ),
         ),
         TextSpan(
-          children: utils.getEmojiTextSpanChildren(
+          children: utils.setEmojiTextStyle(
             value.composing.textAfter(value.text),
-            composedEmojiTextStyle,
-            style,
+            emojiStyle: emojiTextStyle,
+            parentStyle: style,
           ),
         ),
       ],

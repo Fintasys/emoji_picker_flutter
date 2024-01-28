@@ -4,13 +4,11 @@ import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:emoji_picker_flutter/src/emoji_picker_internal_utils.dart';
 import 'package:flutter/material.dart';
 
-// ignore: lines_longer_than_80_chars
 /// Emoji Regex
-/// Improved version including gender, skin tones and keycap sequences
 /// Keycap Sequence '((\u0023|\u002a|[\u0030-\u0039])\ufe0f\u20e3){1}'
 /// Issue: https://github.com/flutter/flutter/issues/36062
 const EmojiRegex =
-    r'\p{Emoji}\u200D\p{Emoji}\uFE0F|((\u0023|\u002a|[\u0030-\u0039])\ufe0f\u20e3){1}|\p{Emoji_Presentation}|\p{Emoji}\uFE0F|\p{Emoji_Modifier_Base}\p{Emoji_Modifier}?';
+    r'((\u0023|\u002a|[\u0030-\u0039])\ufe0f\u20e3){1}|\p{Emoji}|\u200D|\uFE0F';
 
 /// Helper class that provides extended usage
 class EmojiPickerUtils {
@@ -82,44 +80,46 @@ class EmojiPickerUtils {
     final composedEmojiStyle = (parentStyle ?? const TextStyle())
         .merge(DefaultEmojiTextStyle)
         .merge(emojiStyle);
-    return getEmojiTextSpanChildren(text, composedEmojiStyle, parentStyle);
-  }
 
-  /// Applies the given [emojiStyle] to all emoji characters in the given [text]
-  /// and [parentStyle] to all other characters.
-  /// Returns a list of spans that can be used to display the text.
-  List<InlineSpan> getEmojiTextSpanChildren(
-    String text,
-    TextStyle? emojiStyle,
-    TextStyle? parentStyle,
-  ) {
-    final textSpanChildren = <InlineSpan>[];
-    text.splitMapJoin(getEmojiRegex(), onMatch: (Match match) {
-      final emojiText = match.group(0);
-
-      if (emojiText == null) return '';
-
-      _addTextSpan(textSpanChildren, emojiText, emojiStyle);
-
-      return '';
-    }, onNonMatch: (String text) {
-      _addTextSpan(textSpanChildren, text, parentStyle);
-      return '';
-    });
-    return textSpanChildren;
-  }
-
-  void _addTextSpan(
-    List<InlineSpan> textSpanChildren,
-    String? text,
-    TextStyle? style,
-  ) {
-    textSpanChildren.add(
-      TextSpan(
-        text: text,
-        style: style,
-      ),
-    );
+    final spans = <TextSpan>[];
+    final matches = getEmojiRegex().allMatches(text).toList();
+    var cursor = 0;
+    for (final match in matches) {
+      if (cursor != match.start) {
+        spans
+          ..add(TextSpan(
+              text: text.substring(cursor, match.start), style: parentStyle))
+          ..add(TextSpan(
+            text: text.substring(match.start, match.end),
+            style: composedEmojiStyle,
+          ));
+      } else {
+        if (spans.isEmpty) {
+          // Create new span if previous text was not emoji
+          spans.add(TextSpan(
+            text: text.substring(match.start, match.end),
+            style: composedEmojiStyle,
+          ));
+        } else {
+          // Update last span if current text is still emoji
+          final lastIndex = spans.length - 1;
+          final lastText = spans[lastIndex].text ?? '';
+          final currentText = text.substring(match.start, match.end);
+          spans[lastIndex] = TextSpan(
+            text: '$lastText$currentText',
+            style: composedEmojiStyle,
+          );
+        }
+      }
+      // Update cursor
+      cursor = match.end;
+    }
+    // Add remaining text
+    if (cursor != text.length) {
+      spans.add(TextSpan(
+          text: text.substring(cursor, text.length), style: parentStyle));
+    }
+    return spans;
   }
 
   /// Applies skin tone to given emoji
