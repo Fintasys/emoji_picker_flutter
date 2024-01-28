@@ -24,7 +24,9 @@ Yet another Emoji Picker for Flutter 🤩
 - Custom-Font Support
 - Search Option
 
+<p>
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/fintasys)
+</p>
 
 ## Getting Started
 
