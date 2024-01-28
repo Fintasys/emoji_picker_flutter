@@ -83,6 +83,7 @@ class MyAppState extends State<MyApp> {
                           valueListenable: _controller,
                           builder: (context, text, child) {
                             return RichText(
+                              textAlign: TextAlign.center,
                               text: TextSpan(
                                 style: const TextStyle(
                                   color: Colors.black,
