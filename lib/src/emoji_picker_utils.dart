@@ -148,7 +148,6 @@ class EmojiPickerUtils {
   /// Returns the emoji regex
   /// Based on https://unicode.org/reports/tr51/
   RegExp getEmojiRegex() {
-    print(EmojiRegex);
     return _emojiRegExp ?? RegExp(EmojiRegex, unicode: true);
   }
 }

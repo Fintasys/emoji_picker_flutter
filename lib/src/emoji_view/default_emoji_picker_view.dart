@@ -139,6 +139,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     }
     // Build page normally
     return GridView.builder(
+      key: const Key('emojiScrollView'),
       scrollDirection: Axis.vertical,
       controller: _scrollController,
       primary: false,
