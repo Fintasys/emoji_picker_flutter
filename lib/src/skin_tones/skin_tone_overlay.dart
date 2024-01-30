@@ -35,7 +35,7 @@ mixin SkinToneOverlayStateMixin<T extends StatefulWidget> on State<T> {
 
   /// Overlay for SkinTone
   void showSkinToneOverlay(
-    RenderBox renderBox,
+    Offset emojiBoxPosition,
     Emoji emoji,
     double emojiSize,
     CategoryEmoji? categoryEmoji,
@@ -49,7 +49,6 @@ mixin SkinToneOverlayStateMixin<T extends StatefulWidget> on State<T> {
         .toList();
 
     final screenWidth = MediaQuery.of(context).size.width;
-    final emojiBoxPosition = renderBox.localToGlobal(Offset.zero);
     final emojiPickerRenderbox = context.findRenderObject() as RenderBox;
     final emojiBoxSize = config.emojiViewConfig.getEmojiBoxSize(
       emojiPickerRenderbox.size.width,

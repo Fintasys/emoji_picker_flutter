@@ -75,8 +75,9 @@ class EmojiCell extends StatelessWidget {
 
     final onLongPressed = () {
       final renderBox = context.findRenderObject() as RenderBox;
+      final emojiBoxPosition = renderBox.localToGlobal(Offset.zero);
       onSkinToneDialogRequested?.call(
-        renderBox,
+        emojiBoxPosition,
         emoji,
         emojiSize,
         categoryEmoji,

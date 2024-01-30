@@ -81,13 +81,14 @@ class SearchViewState<T extends SearchView> extends State<T>
         emojiBoxSize: emojiBoxSize,
         onEmojiSelected: widget.state.onEmojiSelected,
         config: widget.config,
-        onSkinToneDialogRequested: (renderBox, emoji, emojiSize, category) {
+        onSkinToneDialogRequested:
+            (emojiBoxPosition, emoji, emojiSize, category) {
           closeSkinToneOverlay();
           if (!emoji.hasSkinTone || !widget.config.skinToneConfig.enabled) {
             return;
           }
           showSkinToneOverlay(
-            renderBox,
+            emojiBoxPosition,
             emoji,
             emojiSize,
             null, // Todo: check if we can provide the category

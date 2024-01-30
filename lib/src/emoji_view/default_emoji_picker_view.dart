@@ -178,7 +178,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
   }
 
   void _openSkinToneDialog(
-    RenderBox renderBox,
+    Offset emojiBoxPosition,
     Emoji emoji,
     double emojiSize,
     CategoryEmoji? categoryEmoji,
@@ -188,7 +188,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
       return;
     }
     showSkinToneOverlay(
-      renderBox,
+      emojiBoxPosition,
       emoji,
       emojiSize,
       categoryEmoji,
