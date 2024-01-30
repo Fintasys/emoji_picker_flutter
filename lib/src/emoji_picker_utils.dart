@@ -86,6 +86,7 @@ class EmojiPickerUtils {
     var cursor = 0;
     for (final match in matches) {
       if (cursor != match.start) {
+        // Non emoji text + following emoji
         spans
           ..add(TextSpan(
               text: text.substring(cursor, match.start), style: parentStyle))
@@ -95,7 +96,7 @@ class EmojiPickerUtils {
           ));
       } else {
         if (spans.isEmpty) {
-          // Create new span if previous text was not emoji
+          // Create new span if no previous emoji TextSpan exists
           spans.add(TextSpan(
             text: text.substring(match.start, match.end),
             style: composedEmojiStyle,
