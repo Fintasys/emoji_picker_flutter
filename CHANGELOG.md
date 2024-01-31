@@ -1,3 +1,17 @@
+## 2.0.0 🚀
+
+- Better customization
+- Better support for emoji and custom font
+- Restructure of configurations
+- Added Search View feature
+- Update examples (Also added WhatsApp example)
+- Add auto-scroll support
+- Add long-press backspace support
+- Improve SkinTone Overlay
+- Updated Readme
+- Update License to MIT
+- Add tests
+
 ## 2.0.0-dev.7
 
 - Improve emoji regex and its performance
