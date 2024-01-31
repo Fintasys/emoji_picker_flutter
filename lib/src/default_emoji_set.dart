@@ -1,5 +1,3 @@
-// Copyright information
-// File originally from https://github.com/JeffG05/emoji_picker
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 
 /// List of categories of emojis

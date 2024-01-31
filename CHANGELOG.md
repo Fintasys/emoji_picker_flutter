@@ -1,3 +1,60 @@
+## 2.0.0 🚀
+
+- Better customization
+- Better support for emoji and custom font
+- Restructure of configurations
+- Added Search View feature
+- Update examples (Also added WhatsApp example)
+- Add auto-scroll support
+- Add long-press backspace support
+- Improve SkinTone Overlay
+- Updated Readme
+- Update License to MIT
+- Add tests
+
+## 2.0.0-dev.7
+
+- Improve emoji regex and its performance
+- Fix rendering issue with some emoji due to TextStyle handling
+- Add tests
+
+## 2.0.0-dev.6
+
+- Fix issue with `EmojiTextEditingController` during selection
+- Fix issue with onBackspacePressed logic
+- Fix example for custom font
+
+## 2.0.0-dev.5
+
+- Improve documentation
+- Improve examples
+- prioritize emojiTextStyle over emojiSizeMax
+- improve onBackspacePressed logic (trigger controller and callback method)
+
+## 2.0.0-dev.4
+
+- Improve SkinTone Overlay logic
+- Add WhatsApp example
+- Update min Flutter version to 3.16.0
+- Update deprecated API's
+
+## 2.0.0-dev.3
+
+- Add auto-scroll support by using `ScrollController`
+- Add long-press backspace support
+
+## 2.0.0-dev.2
+
+- Improve `EmojiTextEditingController` to ensure consistent appearance in Text and TextInput
+- Update examples code
+- Todo: Update ReadMe, Improve Search UI
+
+## 2.0.0-dev.1
+
+- Added search feature 🔎
+- Add more customization possibilities
+- Restructure & rename files
+
 ## 1.6.4
 
 - Add long-press backspace support (thx @vedasjad)

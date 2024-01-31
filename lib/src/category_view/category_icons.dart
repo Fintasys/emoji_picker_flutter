@@ -1,4 +1,3 @@
-import 'package:emoji_picker_flutter/src/category_icon.dart';
 import 'package:flutter/material.dart';
 
 /// Class used to define all the [CategoryIcon] shown for each [Category]

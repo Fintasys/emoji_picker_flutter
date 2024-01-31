@@ -10,14 +10,16 @@ dependencies:
   flutter:
     sdk: flutter
 
-  google_fonts: ^4.0.4
+  google_fonts: ^6.1.0
   emoji_picker_flutter:
     path: ../
 
 dev_dependencies:
-  flutter_lints: ^2.0.3
+  flutter_lints: ^3.0.1
   integration_test:
     sdk: flutter
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/

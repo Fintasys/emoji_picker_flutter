@@ -1,5 +1,4 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:emoji_picker_flutter/src/triangle_decoration.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -11,9 +10,9 @@ class EmojiCell extends StatelessWidget {
   const EmojiCell({
     required this.emoji,
     required this.emojiSize,
+    required this.emojiBoxSize,
     this.categoryEmoji,
     required this.buttonMode,
-    this.index = 0,
     required this.enableSkinTones,
     required this.textStyle,
     required this.skinToneIndicatorColor,
@@ -26,15 +25,15 @@ class EmojiCell extends StatelessWidget {
   EmojiCell.fromConfig(
       {required this.emoji,
       required this.emojiSize,
+      required this.emojiBoxSize,
       this.categoryEmoji,
-      this.index = 0,
       required this.onEmojiSelected,
       this.onSkinToneDialogRequested,
       required Config config})
-      : buttonMode = config.buttonMode,
-        enableSkinTones = config.enableSkinTones,
+      : buttonMode = config.emojiViewConfig.buttonMode,
+        enableSkinTones = config.skinToneConfig.enabled,
         textStyle = config.emojiTextStyle,
-        skinToneIndicatorColor = config.skinToneIndicatorColor;
+        skinToneIndicatorColor = config.skinToneConfig.indicatorColor;
 
   /// Emoji to display as the cell content
   final Emoji emoji;
@@ -42,15 +41,14 @@ class EmojiCell extends StatelessWidget {
   /// Font size for the emoji
   final double emojiSize;
 
+  /// Hitbox of emoji cell
+  final double emojiBoxSize;
+
   /// Optinonal category that will be passed through to callbacks
   final CategoryEmoji? categoryEmoji;
 
   /// Visual tap feedback, see [ButtonMode] for options
   final ButtonMode buttonMode;
-
-  /// Optional index that can be used for precise skin dialog position.
-  /// Will be passed through to [onSkinToneDialogRequested] callback.
-  final int index;
 
   /// Whether to show skin popup indicator if emoji supports skin colors
   final bool enableSkinTones;
@@ -69,61 +67,6 @@ class EmojiCell extends StatelessWidget {
   /// Callback for a single tap on the cell.
   final OnEmojiSelected onEmojiSelected;
 
-  /// Build different Button based on ButtonMode
-  Widget _buildButtonWidget({
-    required VoidCallback onPressed,
-    VoidCallback? onLongPressed,
-    required Widget child,
-  }) {
-    if (buttonMode == ButtonMode.MATERIAL) {
-      return InkWell(
-        onTap: onPressed,
-        onLongPress: onLongPressed,
-        child: child,
-      );
-    }
-    if (buttonMode == ButtonMode.CUPERTINO) {
-      return GestureDetector(
-        onLongPress: onLongPressed,
-        child: CupertinoButton(
-          padding: EdgeInsets.zero,
-          onPressed: onPressed,
-          child: child,
-        ),
-      );
-    }
-    return GestureDetector(
-      onLongPress: onLongPressed,
-      onTap: onPressed,
-      child: child,
-    );
-  }
-
-  /// Build and display Emoji centered of its parent
-  Widget _buildEmoji() {
-    final style = TextStyle(
-      fontSize: emojiSize,
-      backgroundColor: Colors.transparent,
-    );
-    final emojiText = Text(
-      emoji.emoji,
-      textScaleFactor: 1.0,
-      style: textStyle == null ? style : textStyle!.merge(style),
-    );
-
-    return Center(
-      child: emoji.hasSkinTone &&
-              enableSkinTones &&
-              onSkinToneDialogRequested != null
-          ? Container(
-              decoration:
-                  TriangleDecoration(color: skinToneIndicatorColor, size: 8.0),
-              child: emojiText,
-            )
-          : emojiText,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final onPressed = () {
@@ -131,13 +74,91 @@ class EmojiCell extends StatelessWidget {
     };
 
     final onLongPressed = () {
-      onSkinToneDialogRequested?.call(emoji, emojiSize, categoryEmoji, index);
+      final renderBox = context.findRenderObject() as RenderBox;
+      final emojiBoxPosition = renderBox.localToGlobal(Offset.zero);
+      onSkinToneDialogRequested?.call(
+        emojiBoxPosition,
+        emoji,
+        emojiSize,
+        categoryEmoji,
+      );
     };
 
-    return _buildButtonWidget(
-      onPressed: onPressed,
-      onLongPressed: onLongPressed,
-      child: _buildEmoji(),
+    return SizedBox(
+      width: emojiBoxSize,
+      height: emojiBoxSize,
+      child: _buildButtonWidget(
+        onPressed: onPressed,
+        onLongPressed: onLongPressed,
+        child: _buildEmoji(),
+      ),
     );
+  }
+
+  /// Build different Button based on ButtonMode
+  Widget _buildButtonWidget({
+    required VoidCallback onPressed,
+    VoidCallback? onLongPressed,
+    required Widget child,
+  }) {
+    if (buttonMode == ButtonMode.MATERIAL) {
+      return MaterialButton(
+        onPressed: onPressed,
+        onLongPress: onLongPressed,
+        child: child,
+        elevation: 0,
+        highlightElevation: 0,
+        padding: EdgeInsets.zero,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.zero,
+        ),
+      );
+    }
+    if (buttonMode == ButtonMode.CUPERTINO) {
+      return GestureDetector(
+        onLongPress: onLongPressed,
+        child: CupertinoButton(
+          onPressed: onPressed,
+          padding: EdgeInsets.zero,
+          child: child,
+          alignment: Alignment.center,
+        ),
+      );
+    }
+    return GestureDetector(
+      onLongPress: onLongPressed,
+      onTap: onPressed,
+      child: Center(child: child),
+    );
+  }
+
+  /// Build and display Emoji centered of its parent
+  Widget _buildEmoji() {
+    final emojiText = Text(
+      emoji.emoji,
+      textScaler: const TextScaler.linear(1.0),
+      style: _getEmojiTextStyle(),
+    );
+
+    return emoji.hasSkinTone &&
+            enableSkinTones &&
+            onSkinToneDialogRequested != null
+        ? Container(
+            decoration: TriangleDecoration(
+              color: skinToneIndicatorColor,
+              size: 8.0,
+            ),
+            child: emojiText,
+          )
+        : emojiText;
+  }
+
+  TextStyle _getEmojiTextStyle() {
+    final defaultStyle = DefaultEmojiTextStyle.copyWith(
+      fontSize: emojiSize,
+      inherit: true,
+    );
+    // textStyle properties have priority over defaultStyle
+    return textStyle == null ? defaultStyle : defaultStyle.merge(textStyle);
   }
 }

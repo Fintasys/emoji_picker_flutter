@@ -16,20 +16,14 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   final TextEditingController _controller = TextEditingController();
-  bool emojiShowing = false;
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+  bool _emojiShowing = false;
 
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     const emojiPadding =
         9 * 2; // 9 pixels on both left and right sides of each emoji.
-    final emojiSize = 32 *
+    final emojiSize = 28 *
         (foundation.defaultTargetPlatform ==
                 TargetPlatform
                     .iOS // Issue: https://github.com/flutter/flutter/issues/28894
@@ -56,7 +50,7 @@ class MyAppState extends State<MyApp> {
                       child: IconButton(
                         onPressed: () {
                           setState(() {
-                            emojiShowing = !emojiShowing;
+                            _emojiShowing = !_emojiShowing;
                           });
                         },
                         icon: const Icon(
@@ -101,39 +95,16 @@ class MyAppState extends State<MyApp> {
                   ],
                 )),
             Offstage(
-              offstage: !emojiShowing,
+              offstage: !_emojiShowing,
               child: SizedBox(
                   height: 250,
                   child: EmojiPicker(
                     textEditingController: _controller,
                     config: Config(
-                      columns: numEmojiColumns,
-                      emojiSizeMax: emojiSize,
-                      verticalSpacing: 0,
-                      horizontalSpacing: 0,
-                      gridPadding: EdgeInsets.zero,
-                      initCategory: Category.RECENT,
-                      bgColor: const Color(0xFFF2F2F2),
-                      indicatorColor: Colors.blue,
-                      iconColor: Colors.grey,
-                      iconColorSelected: Colors.blue,
-                      backspaceColor: Colors.blue,
-                      skinToneDialogBgColor: Colors.white,
-                      skinToneIndicatorColor: Colors.grey,
-                      enableSkinTones: true,
-                      recentTabBehavior: RecentTabBehavior.RECENT,
-                      recentsLimit: 28,
-                      replaceEmojiOnLimitExceed: false,
-                      noRecents: const Text(
-                        'No Recents',
-                        style: TextStyle(fontSize: 20, color: Colors.black26),
-                        textAlign: TextAlign.center,
+                      emojiViewConfig: EmojiViewConfig(
+                        emojiSizeMax: emojiSize,
+                        columns: numEmojiColumns,
                       ),
-                      loadingIndicator: const SizedBox.shrink(),
-                      tabIndicatorAnimDuration: kTabScrollDuration,
-                      categoryIcons: const CategoryIcons(),
-                      buttonMode: ButtonMode.MATERIAL,
-                      checkPlatformCompatibility: true,
                     ),
                   )),
             ),
@@ -141,5 +112,11 @@ class MyAppState extends State<MyApp> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }
