@@ -15,6 +15,7 @@ class SearchViewConfig {
     this.backgroundColor = const Color(0xFFEBEFF2),
     this.buttonColor = Colors.transparent,
     this.buttonIconColor = Colors.black26,
+    this.hintText = 'Search',
     this.customSearchView,
   });
 
@@ -31,17 +32,22 @@ class SearchViewConfig {
   /// Hot reload is not supported
   final SearchViewBuilder? customSearchView;
 
+  /// Custom hint text
+  final String? hintText;
+
   @override
   bool operator ==(other) {
     return (other is SearchViewConfig) &&
         other.backgroundColor == backgroundColor &&
         other.buttonColor == buttonColor &&
-        other.buttonIconColor == buttonIconColor;
+        other.buttonIconColor == buttonIconColor &&
+        other.hintText == hintText;
   }
 
   @override
   int get hashCode =>
       backgroundColor.hashCode ^
       buttonColor.hashCode ^
-      buttonIconColor.hashCode;
+      buttonIconColor.hashCode ^
+      hintText.hashCode;
 }

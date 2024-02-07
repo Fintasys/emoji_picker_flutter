@@ -437,7 +437,7 @@ class WhatsAppSearchViewState extends SearchViewState {
                     focusNode: focusNode,
                     decoration: const InputDecoration(
                       border: InputBorder.none,
-                      hintText: 'Search',
+                      hintText: widget.config.searchViewConfig.hintText,
                       hintStyle: TextStyle(
                         color: secondaryColor,
                         fontWeight: FontWeight.normal,

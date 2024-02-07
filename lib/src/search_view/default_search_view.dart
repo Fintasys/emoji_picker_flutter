@@ -62,10 +62,10 @@ class DefaultSearchViewState extends SearchViewState {
                   child: TextField(
                     onChanged: onTextInputChanged,
                     focusNode: focusNode,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: 'Search',
-                      contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                      hintText: widget.config.searchViewConfig.hintText,
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16),
                     ),
                   ),
                 ),
