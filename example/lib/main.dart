@@ -121,7 +121,7 @@ class MyAppState extends State<MyApp> {
                     skinToneConfig: const SkinToneConfig(),
                     categoryViewConfig: const CategoryViewConfig(),
                     bottomActionBarConfig: const BottomActionBarConfig(),
-                    searchViewConfig: const SearchViewConfig(hintText: 'Suche'),
+                    searchViewConfig: const SearchViewConfig(),
                   ),
                 ),
               ),
