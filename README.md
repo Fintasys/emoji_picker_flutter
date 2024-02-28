@@ -138,13 +138,14 @@ All examples can be found [here](https://github.com/Fintasys/emoji_picker_flutte
 
 ## Bottom Action Bar Config
 
-| property              | description                                | default      |
-| --------------------- | ------------------------------------------ | ------------ |
-| showBackspaceButton   | Show backspace button in bottom action bar | true         |
-| backgroundColor       | Background color of bottom action bar      | Colors.blue  |
-| buttonColor           | Fill color of buttons in bottom action bar | Colors.blue  |
-| buttonIconColor       | Icon color of buttons                      | Colors.white |
-| customBottomActionBar | Customize the bottom action bar widget     | null         |
+| property              | description                                  | default      |
+| --------------------- | -------------------------------------------- | ------------ |
+| showBackspaceButton   | Show backspace button in bottom action bar   | true         |
+| showSearchViewButton  | Show search-view button in bottom action bar | true         |
+| backgroundColor       | Background color of bottom action bar        | Colors.blue  |
+| buttonColor           | Fill color of buttons in bottom action bar   | Colors.blue  |
+| buttonIconColor       | Icon color of buttons                        | Colors.white |
+| customBottomActionBar | Customize the bottom action bar widget       | null         |
 
 ## Search View Config
 
