@@ -20,20 +20,27 @@ class _DefaultBottomActionBarState extends State<DefaultBottomActionBar> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          CircleAvatar(
-            backgroundColor: widget.config.bottomActionBarConfig.buttonColor,
-            child: IconButton(
-              onPressed: widget.showSearchView,
-              icon: Icon(
-                Icons.search,
-                color: widget.config.bottomActionBarConfig.buttonIconColor,
-              ),
-            ),
-          ),
+          _buildSearchViewButton(),
           _buildBackspaceButton(),
         ],
       ),
     );
+  }
+
+  Widget _buildSearchViewButton() {
+    if (widget.config.bottomActionBarConfig.showSearchViewButton) {
+      return CircleAvatar(
+        backgroundColor: widget.config.bottomActionBarConfig.buttonColor,
+        child: IconButton(
+          onPressed: widget.showSearchView,
+          icon: Icon(
+            Icons.search,
+            color: widget.config.bottomActionBarConfig.buttonIconColor,
+          ),
+        ),
+      );
+    }
+    return const SizedBox.shrink();
   }
 
   Widget _buildBackspaceButton() {

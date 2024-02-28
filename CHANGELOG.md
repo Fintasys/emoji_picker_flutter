@@ -1,3 +1,7 @@
+## 2.1.0
+
+- Add option to hide searchView-Button in bottom navigation
+
 ## 2.0.0 🚀
 
 - Better customization
