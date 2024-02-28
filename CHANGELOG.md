@@ -1,6 +1,7 @@
 ## 2.1.0
 
-- Add option to hide searchView-Button in bottom navigation
+- Add option to hide SearchView-Button in bottom navigation
+- Be able to change HintText in SearchView (thx @akvus)
 
 ## 2.0.0 🚀
 
