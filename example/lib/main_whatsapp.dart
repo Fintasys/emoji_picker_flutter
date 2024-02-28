@@ -435,10 +435,10 @@ class WhatsAppSearchViewState extends SearchViewState {
                   child: TextField(
                     onChanged: onTextInputChanged,
                     focusNode: focusNode,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: 'Search',
-                      hintStyle: TextStyle(
+                      hintText: widget.config.searchViewConfig.hintText,
+                      hintStyle: const TextStyle(
                         color: secondaryColor,
                         fontWeight: FontWeight.normal,
                       ),
