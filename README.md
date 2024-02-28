@@ -154,6 +154,7 @@ All examples can be found [here](https://github.com/Fintasys/emoji_picker_flutte
 | backgroundColor  | Background color of search view       | const Color(0xFFEBEFF2) |
 | buttonColor      | Fill color of hide search view button | Colors.transparent      |
 | buttonIconColor  | Icon color of hide search view button | Colors.black26          |
+| hintText         | Custom hint text                      | 'Search'                |
 | customSearchView | Customize search view widget          | null                    |
 
 ## Backspace-Button

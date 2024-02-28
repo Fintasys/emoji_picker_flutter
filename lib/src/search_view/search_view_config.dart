@@ -28,12 +28,12 @@ class SearchViewConfig {
   /// Icon color of hide search view button
   final Color buttonIconColor;
 
+  /// Custom hint text
+  final String? hintText;
+
   /// Custom search bar
   /// Hot reload is not supported
   final SearchViewBuilder? customSearchView;
-
-  /// Custom hint text
-  final String? hintText;
 
   @override
   bool operator ==(other) {
