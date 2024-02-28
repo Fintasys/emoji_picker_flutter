@@ -14,6 +14,7 @@ class BottomActionBarConfig {
   const BottomActionBarConfig({
     this.enabled = true,
     this.showBackspaceButton = true,
+    this.showSearchViewButton = true,
     this.backgroundColor = Colors.blue,
     this.buttonColor = Colors.blue,
     this.buttonIconColor = Colors.white,
@@ -25,6 +26,9 @@ class BottomActionBarConfig {
 
   /// Show Backspace button
   final bool showBackspaceButton;
+
+  /// Show Search View button
+  final bool showSearchViewButton;
 
   /// Background color of search bar
   final Color? backgroundColor;
@@ -44,6 +48,7 @@ class BottomActionBarConfig {
     return (other is BottomActionBarConfig) &&
         other.enabled == enabled &&
         other.showBackspaceButton == showBackspaceButton &&
+        other.showSearchViewButton == showSearchViewButton &&
         other.backgroundColor == backgroundColor &&
         other.buttonColor == buttonColor &&
         other.buttonIconColor == buttonIconColor;
@@ -53,6 +58,7 @@ class BottomActionBarConfig {
   int get hashCode =>
       enabled.hashCode ^
       showBackspaceButton.hashCode ^
+      showSearchViewButton.hashCode ^
       backgroundColor.hashCode ^
       buttonColor.hashCode ^
       buttonIconColor.hashCode;
