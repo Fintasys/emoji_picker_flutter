@@ -1,3 +1,7 @@
+## 2.1.1
+
+- Downgrade Kotlin version to 1.7.10 due to compatibility issues
+
 ## 2.1.0
 
 - Add option to hide SearchView-Button in bottom navigation
