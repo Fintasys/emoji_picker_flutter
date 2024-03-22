@@ -25,7 +25,9 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    namespace 'com.fintasys.emoji_picker_flutter'
+    if (project.android.hasProperty("namespace")) {
+        namespace 'com.fintasys.emoji_picker_flutter'
+    }
 
     compileSdkVersion 34
 
@@ -44,8 +46,6 @@ android {
     defaultConfig {
         minSdkVersion 21   
     }
-
-    if (project.android.hasProperty("namespace")) { namespace 'com.fintasys.emoji_picker_flutter' }
 }
 
 dependencies {
