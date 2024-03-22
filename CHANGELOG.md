@@ -1,3 +1,7 @@
+## 2.1.1
+
+- Address issue with inconsistent JVM-target compatibility (thx @GleammerRay)
+
 ## 2.1.0
 
 - Add option to hide SearchView-Button in bottom navigation
