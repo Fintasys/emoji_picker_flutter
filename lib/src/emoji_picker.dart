@@ -426,11 +426,13 @@ class EmojiPickerState extends State<EmojiPicker> {
     if (widget.scrollController != null) {
       final scrollController = widget.scrollController!;
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        scrollController.animateTo(
-          scrollController.position.maxScrollExtent,
-          duration: const Duration(milliseconds: 200),
-          curve: Curves.ease,
-        );
+        if (scrollController.hasClients) {
+          scrollController.animateTo(
+            scrollController.position.maxScrollExtent,
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.ease,
+          );
+        }
       });
     }
   }
