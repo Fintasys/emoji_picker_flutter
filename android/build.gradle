@@ -2,7 +2,6 @@ group 'com.fintasys.emoji_picker_flutter'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.9.22'
     repositories {
         google()
         mavenCentral()
@@ -10,7 +9,6 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:4.1.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
