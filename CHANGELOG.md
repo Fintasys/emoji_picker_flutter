@@ -1,3 +1,10 @@
+## 2.2.0
+
+- Downgrade Kotlin to 1.7.10
+- Migrate to DSL syntax for gradle setup
+- Migrate from from `dart:html` to `package:web` (thx @GleammerRay)
+- Minimum Flutter version `3.19.3`
+
 ## 2.1.1
 
 - Address issue with inconsistent JVM-target compatibility (thx @GleammerRay)
