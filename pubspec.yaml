@@ -5,7 +5,7 @@ homepage: https://github.com/Fintasys/emoji_picker_flutter
 
 environment:
   sdk: ">=2.17.0 <4.0.0"
-  flutter: ">=3.16.0"
+  flutter: ">=3.19.3"
 
 dependencies:
   flutter:
@@ -14,6 +14,7 @@ dependencies:
     sdk: flutter
   plugin_platform_interface: ^2.0.2
   shared_preferences: ^2.0.15
+  web: ^0.5.1
 
 dev_dependencies:
   flutter_test:
