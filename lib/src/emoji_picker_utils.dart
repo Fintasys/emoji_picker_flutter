@@ -50,8 +50,9 @@ class EmojiPickerUtils {
 
     return _allAvailableEmojiEntities
         .toSet()
-        .where(
-            (emoji) => emoji.name.toLowerCase().contains(keyword.toLowerCase()))
+        .where((emoji) =>
+            (emoji.name.toLowerCase().contains(keyword.toLowerCase()) ||
+                emoji.emoji == keyword.trim()))
         .toSet()
         .toList();
   }
