@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 env:
-  flutter_version: "3.19.3"
+  flutter_version: "3.24.0"
 
 jobs:
   build:
@@ -20,8 +20,8 @@ jobs:
         uses: styfle/cancel-workflow-action@0.9.1
         with:
           access_token: ${{ github.token }}
-      - uses: actions/checkout@v2
-      - uses: actions/setup-java@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
         with:
           java-version: "12.x"
       - name: Init Flutter
