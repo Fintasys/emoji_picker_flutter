@@ -12,15 +12,15 @@ dependencies:
     sdk: flutter
   flutter_web_plugins:
     sdk: flutter
-  plugin_platform_interface: ^2.0.2
-  shared_preferences: ^2.0.15
-  web: ^0.5.1
+  plugin_platform_interface: ^2.1.8
+  shared_preferences: ^2.3.1
+  web: ^1.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.1
-  test: ^1.24.9
+  flutter_lints: ^4.0.0
+  test: ^1.25.7
 
 flutter:
   plugin:
