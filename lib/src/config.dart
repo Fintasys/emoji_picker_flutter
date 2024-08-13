@@ -13,6 +13,8 @@ class Config {
     this.checkPlatformCompatibility = true,
     this.emojiSet = defaultEmojiSet,
     this.emojiTextStyle,
+    this.customBackspaceIcon,
+    this.customSearchIcon,
     this.emojiViewConfig = const EmojiViewConfig(),
     this.skinToneConfig = const SkinToneConfig(),
     this.categoryViewConfig = const CategoryViewConfig(),
@@ -42,6 +44,12 @@ class Config {
   /// This has priority over [EmojiViewConfig.emojiSizeMax] if font size is set.
   final TextStyle? emojiTextStyle;
 
+  ///  Custom backspace icon
+  final Icon? customBackspaceIcon;
+
+  /// Custom search icon
+  final Icon? customSearchIcon;
+
   /// Emoji view config
   final EmojiViewConfig emojiViewConfig;
 
@@ -64,6 +72,8 @@ class Config {
         other.checkPlatformCompatibility == checkPlatformCompatibility &&
         other.emojiSet == emojiSet &&
         other.emojiTextStyle == emojiTextStyle &&
+        other.customBackspaceIcon == customBackspaceIcon &&
+        other.customSearchIcon == customSearchIcon &&
         other.emojiViewConfig == emojiViewConfig &&
         other.skinToneConfig == skinToneConfig &&
         other.bottomActionBarConfig == bottomActionBarConfig &&
@@ -76,6 +86,8 @@ class Config {
       checkPlatformCompatibility.hashCode ^
       emojiSet.hashCode ^
       (emojiTextStyle?.hashCode ?? 0) ^
+      customBackspaceIcon.hashCode ^
+      customSearchIcon.hashCode ^
       categoryViewConfig.hashCode ^
       emojiViewConfig.hashCode ^
       skinToneConfig.hashCode ^

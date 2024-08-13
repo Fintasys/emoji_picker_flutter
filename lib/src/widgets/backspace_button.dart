@@ -38,10 +38,11 @@ class _BackspaceButtonState extends State<BackspaceButton> {
         onLongPressEnd: (_) => _stopOnBackspacePressedCallback(),
         child: IconButton(
           padding: const EdgeInsets.only(bottom: 2),
-          icon: Icon(
-            Icons.backspace,
-            color: widget.iconColor,
-          ),
+          icon: widget.config.customBackspaceIcon ??
+              Icon(
+                Icons.backspace,
+                color: widget.iconColor,
+              ),
           onPressed: () {
             widget.onBackspacePressed?.call();
           },

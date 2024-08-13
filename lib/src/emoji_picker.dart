@@ -371,6 +371,7 @@ class EmojiPickerState extends State<EmojiPicker> {
       _onEmojiSelected,
       _onBackspacePressed,
       _onBackspaceLongPressed,
+      _showSearchView,
     );
     if (mounted) {
       setState(() {
