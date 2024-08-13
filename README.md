@@ -129,7 +129,7 @@ All examples can be found [here](https://github.com/Fintasys/emoji_picker_flutte
 | tabIndicatorAnimDuration | Duration of tab indicator to animate to next category                                                      | Duration(milliseconds: 300) |
 | initCategory             | The initial Category that will be selected                                                                 | Category.RECENT             |
 | recentTabBehavior        | Show extra tab with recently / popular used emoji                                                          | RecentTabBehavior.RECENT    |
-| extraTab      | Add extra tab to category tab bar with for backspace or search functionality                                                                     | CategoryExtraTab.NONE                       |
+| extraTab      | Add extra tab to category tab bar for backspace or search button                                                                    | CategoryExtraTab.NONE                       |
 | backgroundColor          | Background color of category tab bar                                                                       | const Color(0xFFEBEFF2)     |
 | indicatorColor           | The color of the category indicator                                                                        | Colors.blue                 |
 | iconColor                | The color of the category icons                                                                            | Colors.grey                 |
@@ -161,7 +161,7 @@ All examples can be found [here](https://github.com/Fintasys/emoji_picker_flutte
 
 ## Backspace-Button
 
-Backspace button is enabled by default on the bottom action bar. If you prefer to have the backspace button inside the category, you can enable it inside the `CategoryViewConfig`.
+Backspace button is enabled by default on the bottom action bar. If you prefer to have the backspace button inside the category tab bar, you can enable it inside the `CategoryViewConfig` and then `extraTab` to `CategoryExtraTab.BACKSPACE`.
 You can listen to the Backspace tap event by registering a callback inside `onBackspacePressed: () { }`. This will make it easier for your user to remove an added Emoji without showing the keyboard. Check out the example for more details about usage.
 
 Bottom Backspace Button
