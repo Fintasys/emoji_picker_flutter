@@ -17,7 +17,7 @@ class CategoryViewConfig {
     this.tabIndicatorAnimDuration = kTabScrollDuration,
     this.initCategory = Category.RECENT,
     this.recentTabBehavior = RecentTabBehavior.RECENT,
-    this.showBackspaceButton = false,
+    this.extraTab = CategoryExtraTab.NONE,
     this.backgroundColor = const Color(0xFFEBEFF2),
     this.indicatorColor = Colors.blue,
     this.iconColor = Colors.grey,
@@ -41,8 +41,8 @@ class CategoryViewConfig {
   /// Behavior of Recent Tab (Recent, Popular)
   final RecentTabBehavior recentTabBehavior;
 
-  /// Show Backspace button
-  final bool showBackspaceButton;
+  /// Extra tab button in category tab bar
+  final CategoryExtraTab? extraTab;
 
   /// Background color of TabBar
   final Color backgroundColor;
@@ -59,7 +59,7 @@ class CategoryViewConfig {
   /// The color of the backspace icon button
   final Color backspaceColor;
 
-  /// Divider color between TabBar and emoji's
+  /// Divider color between TabBar and emoji's, use Colors.transparent to remove
   final Color? dividerColor;
 
   /// Determines the icon to display for each [Category]
@@ -76,7 +76,7 @@ class CategoryViewConfig {
         other.tabIndicatorAnimDuration == tabIndicatorAnimDuration &&
         other.initCategory == initCategory &&
         other.recentTabBehavior == recentTabBehavior &&
-        other.showBackspaceButton == showBackspaceButton &&
+        other.extraTab == extraTab &&
         other.backgroundColor == backgroundColor &&
         other.indicatorColor == indicatorColor &&
         other.iconColor == iconColor &&
@@ -92,7 +92,7 @@ class CategoryViewConfig {
       tabIndicatorAnimDuration.hashCode ^
       initCategory.hashCode ^
       recentTabBehavior.hashCode ^
-      showBackspaceButton.hashCode ^
+      extraTab.hashCode ^
       backgroundColor.hashCode ^
       indicatorColor.hashCode ^
       iconColor.hashCode ^

@@ -33,21 +33,28 @@ class DefaultCategoryViewState extends CategoryViewState {
               closeSkinToneOverlay,
             ),
           ),
-          _buildBackspaceButton(),
+          _buildExtraTab(widget.config.categoryViewConfig.extraTab),
         ],
       ),
     );
   }
 
-  Widget _buildBackspaceButton() {
-    if (widget.config.categoryViewConfig.showBackspaceButton) {
+  Widget _buildExtraTab(extraTab) {
+    if (extraTab == CategoryExtraTab.BACKSPACE) {
       return BackspaceButton(
         widget.config,
         widget.state.onBackspacePressed,
         widget.state.onBackspaceLongPressed,
         widget.config.categoryViewConfig.backspaceColor,
       );
+    } else if (extraTab == CategoryExtraTab.SEARCH) {
+      return SearchButton(
+        widget.config,
+        widget.state.onShowSearchView,
+        widget.config.categoryViewConfig.iconColor,
+      );
+    } else {
+      return const SizedBox.shrink();
     }
-    return const SizedBox.shrink();
   }
 }
