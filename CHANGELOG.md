@@ -1,3 +1,8 @@
+## 3.0.0
+- Upgrade to Flutter `3.24.0`, Dart `3.4.0` and dependencies e.g. `web: 1.0.0` (thx to @diegotori)
+- Allow custom icon for Backspace and Search button
+- Replace `showBackspaceButton` in `CategoryViewConfig` with `extraTab` to allow choosing between Backspace, Search or no extra button in category tab bar
+
 ## 2.2.0
 
 - Downgrade Kotlin to 1.7.10

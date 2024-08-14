@@ -70,7 +70,7 @@ All examples can be found [here](https://github.com/Fintasys/emoji_picker_flutte
 
    <img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/41c3e6d2cfe69375e263f42cfe06dbad7936bde1/screenshot/example_default_android.png" width="300">
 
-2. Custom Font (Display all emoji correctly in the style of the font, additional ~15mb e.g. with Google Fonts)
+2. Custom Font (Display all emoji correctly in the style of the font, additional ~15mb e.g. with Google Fonts) - Might causes performance issues on iOS (see [issue 205](https://github.com/Fintasys/emoji_picker_flutter/issues/205))
 
    <img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/version-2.0/screenshot/example_custom_font_android.png" width="300"> <img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/version-2.0/screenshot/example_custom_font_android_2.png" width="300">
 
@@ -89,6 +89,8 @@ All examples can be found [here](https://github.com/Fintasys/emoji_picker_flutte
 | checkPlatformCompatibility | Whether to filter out glyphs that platform cannot render with the default font (Android).                                                       | true                          |
 | emojiSet                   | Custom emoji set, can be built based on `defaultEmojiSet` provided by the library.                                                              | null                          |
 | emojiTextStyle             | Text style to apply to individual emoji icons. Can be used to define custom emoji font either with GoogleFonts library or bundled with the app. | null                          |
+| customBackspaceIcon             | Custom Icon for Backspace button | null                          |
+| customSearchIcon             | Custom Icon for Search button | null                          |
 | emojiViewConfig            | Emoji view config                                                                                                                               | const EmojiViewConfig()       |
 | skinToneConfig             | Skin tone config                                                                                                                                | const SkinToneConfig          |
 | categoryViewConfig         | Category view config                                                                                                                            | const CategoryViewConfig      |
@@ -127,7 +129,7 @@ All examples can be found [here](https://github.com/Fintasys/emoji_picker_flutte
 | tabIndicatorAnimDuration | Duration of tab indicator to animate to next category                                                      | Duration(milliseconds: 300) |
 | initCategory             | The initial Category that will be selected                                                                 | Category.RECENT             |
 | recentTabBehavior        | Show extra tab with recently / popular used emoji                                                          | RecentTabBehavior.RECENT    |
-| showBackspaceButton      | Show backspace button in category view                                                                     | false                       |
+| extraTab      | Add extra tab to category tab bar for backspace or search button                                                                    | CategoryExtraTab.NONE                       |
 | backgroundColor          | Background color of category tab bar                                                                       | const Color(0xFFEBEFF2)     |
 | indicatorColor           | The color of the category indicator                                                                        | Colors.blue                 |
 | iconColor                | The color of the category icons                                                                            | Colors.grey                 |
@@ -159,7 +161,7 @@ All examples can be found [here](https://github.com/Fintasys/emoji_picker_flutte
 
 ## Backspace-Button
 
-Backspace button is enabled by default on the bottom action bar. If you prefer to have the backspace button inside the category, you can enable it inside the `CategoryViewConfig`.
+Backspace button is enabled by default on the bottom action bar. If you prefer to have the backspace button inside the category tab bar, you can enable it inside the `CategoryViewConfig` and then `extraTab` to `CategoryExtraTab.BACKSPACE`.
 You can listen to the Backspace tap event by registering a callback inside `onBackspacePressed: () { }`. This will make it easier for your user to remove an added Emoji without showing the keyboard. Check out the example for more details about usage.
 
 Bottom Backspace Button
