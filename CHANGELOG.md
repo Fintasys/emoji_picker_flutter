@@ -3,6 +3,9 @@
 - Allow custom icon for Backspace and Search button
 - Replace `showBackspaceButton` in `CategoryViewConfig` with `extraTab` to allow choosing between Backspace, Search or no extra button in category tab bar
 - Fix scroll issue on Linux
+- Remove `buttonColor` property in `SearchViewConfig` because it had no effect
+- Add `inputTextStyle` and `hintTextStyle` in `SearchViewConfig` for better customization
+- Fix issue with dark mode support in search view
 
 ## 2.2.0
 
