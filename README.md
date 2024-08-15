@@ -146,8 +146,8 @@ All examples can be found [here](https://github.com/Fintasys/emoji_picker_flutte
 | showSearchViewButton  | Show search-view button in bottom action bar | true         |
 | backgroundColor       | Background color of bottom action bar        | Colors.blue  |
 | buttonIconColor       | Icon color of buttons                        | Colors.white |
-| inputTextStyle        | TextStyle of TextField for input text        | null         |
-| hintTextStyle         | TextStyle of TextField for hint              | null         |
+| inputTextStyle        | Custom TextStyle of TextField for input text | null         |
+| hintTextStyle         | Custom TextStyle of TextField for hint       | null         |
 | customBottomActionBar | Customize the bottom action bar widget       | null         |
 
 ## Search View Config
