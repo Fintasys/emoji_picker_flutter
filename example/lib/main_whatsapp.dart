@@ -431,10 +431,9 @@ class WhatsAppSearchViewState extends SearchViewState {
               children: [
                 IconButton(
                   onPressed: widget.showEmojiView,
-                  color: widget.config.searchViewConfig.buttonColor,
-                  icon: Icon(
+                  color: widget.config.searchViewConfig.buttonIconColor,
+                  icon: const Icon(
                     Icons.arrow_back,
-                    color: widget.config.searchViewConfig.buttonIconColor,
                     size: 20.0,
                   ),
                 ),
