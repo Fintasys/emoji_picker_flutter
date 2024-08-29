@@ -191,11 +191,15 @@ class MyAppState extends State<MyApp> {
                         config: Config(
                           height: 256,
                           checkPlatformCompatibility: true,
+                          viewOrderConfig: const ViewOrderConfig(
+                            top: EmojiPickerItem.categoryBar,
+                            middle: EmojiPickerItem.emojiView,
+                            bottom: EmojiPickerItem.searchBar,
+                          ),
                           emojiTextStyle: _textStyle,
                           emojiViewConfig: const EmojiViewConfig(
                             backgroundColor: Colors.white,
                           ),
-                          swapCategoryAndBottomBar: true,
                           skinToneConfig: const SkinToneConfig(),
                           categoryViewConfig: CategoryViewConfig(
                             backgroundColor: Colors.white,

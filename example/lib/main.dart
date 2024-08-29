@@ -109,6 +109,11 @@ class MyAppState extends State<MyApp> {
                   config: Config(
                     height: 256,
                     checkPlatformCompatibility: true,
+                    viewOrderConfig: const ViewOrderConfig(
+                      top: EmojiPickerItem.categoryBar,
+                      middle: EmojiPickerItem.emojiView,
+                      bottom: EmojiPickerItem.searchBar,
+                    ),
                     emojiViewConfig: EmojiViewConfig(
                       // Issue: https://github.com/flutter/flutter/issues/28894
                       emojiSizeMax: 28 *
@@ -117,7 +122,6 @@ class MyAppState extends State<MyApp> {
                               ? 1.2
                               : 1.0),
                     ),
-                    swapCategoryAndBottomBar: false,
                     skinToneConfig: const SkinToneConfig(),
                     categoryViewConfig: const CategoryViewConfig(),
                     bottomActionBarConfig: const BottomActionBarConfig(),

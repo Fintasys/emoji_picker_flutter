@@ -32,6 +32,7 @@ export 'package:emoji_picker_flutter/src/skin_tones/emoji_skin_tones.dart';
 export 'package:emoji_picker_flutter/src/skin_tones/skin_tone_config.dart';
 export 'package:emoji_picker_flutter/src/skin_tones/skin_tone_overlay.dart';
 export 'package:emoji_picker_flutter/src/skin_tones/triangle_decoration.dart';
+export 'package:emoji_picker_flutter/src/view_order_config.dart';
 export 'package:emoji_picker_flutter/src/widgets/backspace_button.dart';
 export 'package:emoji_picker_flutter/src/widgets/emoji_cell.dart';
 export 'package:emoji_picker_flutter/src/widgets/search_button.dart';

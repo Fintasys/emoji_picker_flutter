@@ -52,7 +52,11 @@ EmojiPicker(
             ?  1.20
             :  1.0),
         ),
-        swapCategoryAndBottomBar:  false,
+        viewOrderConfig: const ViewOrderConfig(
+            top: EmojiPickerItem.categoryBar,
+            middle: EmojiPickerItem.emojiView,
+            bottom: EmojiPickerItem.searchBar,
+        ),
         skinToneConfig: const SkinToneConfig(),
         categoryViewConfig: const CategoryViewConfig(),
         bottomActionBarConfig: const BottomActionBarConfig(),
@@ -85,7 +89,7 @@ All examples can be found [here](https://github.com/Fintasys/emoji_picker_flutte
 | property                   | description                                                                                                                                     | default                       |
 | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
 | height                     | Height of Emoji Picker                                                                                                                          | 256                           |
-| swapCategoryAndBottomBar   | Swap the category view and bottom bar (category bottom and bottom bar top)                                                                      | false                         |
+| viewOrderConfig   | The exact order in which category view, emoji view and bottom bar appear                                                                      | false                         |
 | checkPlatformCompatibility | Whether to filter out glyphs that platform cannot render with the default font (Android).                                                       | true                          |
 | emojiSet                   | Custom emoji set, can be built based on `defaultEmojiSet` provided by the library.                                                              | null                          |
 | emojiTextStyle             | Text style to apply to individual emoji icons. Can be used to define custom emoji font either with GoogleFonts library or bundled with the app. | null                          |
