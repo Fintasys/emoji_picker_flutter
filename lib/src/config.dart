@@ -51,7 +51,8 @@ class Config {
   /// Custom search icon
   final Icon? customSearchIcon;
 
-  /// Config for items in order to show in UI
+  /// Config the order of the views displayed in the UI
+  /// (category bar, emoji view, search bar)
   final ViewOrderConfig viewOrderConfig;
 
   /// Emoji view config

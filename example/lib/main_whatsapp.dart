@@ -192,9 +192,9 @@ class MyAppState extends State<MyApp> {
                           height: 256,
                           checkPlatformCompatibility: true,
                           viewOrderConfig: const ViewOrderConfig(
-                            top: EmojiPickerItem.categoryBar,
+                            top: EmojiPickerItem.searchBar,
                             middle: EmojiPickerItem.emojiView,
-                            bottom: EmojiPickerItem.searchBar,
+                            bottom: EmojiPickerItem.categoryBar,
                           ),
                           emojiTextStyle: _textStyle,
                           emojiViewConfig: const EmojiViewConfig(

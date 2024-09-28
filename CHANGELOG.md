@@ -1,3 +1,7 @@
+## 3.1.0
+- Added Emoji for Transgender Flag and Hugging People (thx to everypizza1)
+- Replace `swapCategoryAndBottomBar` with `viewOrderConfig` to give more control over the order of each view (thx to coder-with-a-bushido)
+
 ## 3.0.0
 - Upgrade to Flutter `3.24.0`, Dart `3.4.0` and dependencies e.g. `web: 1.0.0` (thx to @diegotori)
 - Allow custom icon for Backspace and Search button
