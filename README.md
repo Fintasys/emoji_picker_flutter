@@ -89,7 +89,7 @@ All examples can be found [here](https://github.com/Fintasys/emoji_picker_flutte
 | property                   | description                                                                                                                                     | default                       |
 | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
 | height                     | Height of Emoji Picker                                                                                                                          | 256                           |
-| viewOrderConfig   | The exact order in which category view, emoji view and bottom bar appear                                                                      | false                         |
+| viewOrderConfig   | The exact order in which category view, emoji view and bottom bar appear                                                                      | const ViewOrderConfig(),                         |
 | checkPlatformCompatibility | Whether to filter out glyphs that platform cannot render with the default font (Android).                                                       | true                          |
 | emojiSet                   | Custom emoji set, can be built based on `defaultEmojiSet` provided by the library.                                                              | null                          |
 | emojiTextStyle             | Text style to apply to individual emoji icons. Can be used to define custom emoji font either with GoogleFonts library or bundled with the app. | null                          |

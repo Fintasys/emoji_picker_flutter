@@ -2,9 +2,9 @@
 class ViewOrderConfig {
   /// Constructor
   const ViewOrderConfig({
-    required this.top,
-    required this.middle,
-    required this.bottom,
+    this.top = EmojiPickerItem.categoryBar,
+    this.middle = EmojiPickerItem.emojiView,
+    this.bottom = EmojiPickerItem.searchBar,
   }) : assert(!identical(top, middle) &&
             !identical(top, bottom) &&
             !identical(middle, bottom));

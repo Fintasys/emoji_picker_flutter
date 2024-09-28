@@ -14,11 +14,7 @@ class Config {
     this.emojiTextStyle,
     this.customBackspaceIcon,
     this.customSearchIcon,
-    this.viewOrderConfig = const ViewOrderConfig(
-      top: EmojiPickerItem.categoryBar,
-      middle: EmojiPickerItem.emojiView,
-      bottom: EmojiPickerItem.searchBar,
-    ),
+    this.viewOrderConfig = const ViewOrderConfig(),
     this.emojiViewConfig = const EmojiViewConfig(),
     this.skinToneConfig = const SkinToneConfig(),
     this.categoryViewConfig = const CategoryViewConfig(),
