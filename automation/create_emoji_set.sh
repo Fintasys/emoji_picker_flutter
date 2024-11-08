@@ -11,7 +11,7 @@ const_name="$2"  # New variable to store the const name
 url="https://raw.githubusercontent.com/unicode-org/cldr/main/common/annotations/${locale}.xml"
 template_file="emoji_set_template.dart"
 
-output_dir="../locales"
+output_dir="../lib/locales"
 output_file="$output_dir/emoji_set_${locale}.dart"
 
 # Create the output directory if it doesn't exist
