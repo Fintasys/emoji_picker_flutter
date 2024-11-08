@@ -1,7 +1,7 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 
 /// List of categories of emojis
-const List<CategoryEmoji> defaultEmojiSet = [
+const List<CategoryEmoji> emojiSetJapanese = [
 // ======================================================= Category.SMILEYS
   CategoryEmoji(Category.SMILEYS, [
     Emoji('😀', 'にこにこ'),

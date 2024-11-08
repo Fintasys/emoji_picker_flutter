@@ -1,7 +1,7 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 
 /// List of categories of emojis
-const List<CategoryEmoji> defaultEmojiSet = [
+const List<CategoryEmoji> emojiSetEnglish = [
 // ======================================================= Category.SMILEYS
   CategoryEmoji(Category.SMILEYS, [
     Emoji('😀', 'Grinning Face'),

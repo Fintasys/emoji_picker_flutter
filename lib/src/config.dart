@@ -10,7 +10,7 @@ class Config {
   const Config({
     this.height = 256,
     this.checkPlatformCompatibility = true,
-    this.emojiSet = defaultEmojiSet,
+    this.emojiSet = emojiSetEnglish,
     this.emojiTextStyle,
     this.customBackspaceIcon,
     this.customSearchIcon,
