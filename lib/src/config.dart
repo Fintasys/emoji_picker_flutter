@@ -29,10 +29,12 @@ class Config {
   /// Verify that emoji glyph is supported by the platform (Android only)
   final bool checkPlatformCompatibility;
 
-  /// Provide a customized list of Emoji or add/remove the support for specific
-  /// locales. If not provided, the default emoji set will be used based on the
+  /// Useful to provide a customized list of Emoji or add/remove the support
+  /// for specific locales (create similar method as in
+  /// default_emoji_set_locale.dart).
+  /// If not provided, the default emoji set will be used based on the
   /// locales that are available in the package. If you want to use a single set
-  /// of emojis for all locales, just return the single emoji set in the
+  /// of emojis for all locales, simple return only the single emoji set in the
   /// function.
   final List<CategoryEmoji> Function(Locale)? emojiSet;
 
