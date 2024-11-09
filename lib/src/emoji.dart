@@ -17,6 +17,9 @@ class Emoji {
   /// Flag if emoji supports multiple skin tones
   final bool hasSkinTone;
 
+  /// List of keywords that describe the emoji
+  List<String> get keywords => name.split(' | ');
+
   @override
   String toString() {
     return 'Emoji: $emoji, Name: $name, HasSkinTone: $hasSkinTone';
