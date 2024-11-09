@@ -10,7 +10,8 @@ class Config {
   const Config({
     this.height = 256,
     this.checkPlatformCompatibility = true,
-    this.emojiSet = defaultEmojiSet,
+    this.emojiSet,
+    this.locale = const Locale('en'),
     this.emojiTextStyle,
     this.customBackspaceIcon,
     this.customSearchIcon,
@@ -28,8 +29,15 @@ class Config {
   /// Verify that emoji glyph is supported by the platform (Android only)
   final bool checkPlatformCompatibility;
 
-  /// Custom emojis; if set, overrides default emojis provided by the library
-  final List<CategoryEmoji> emojiSet;
+  /// Provide a customized list of Emoji or add/remove the support for specific
+  /// locales. If not provided, the default emoji set will be used based on the
+  /// locales that are available in the package. If you want to use a single set
+  /// of emojis for all locales, just return the single emoji set in the
+  /// function.
+  final List<CategoryEmoji> Function(Locale)? emojiSet;
+
+  /// Locale for the emoji set
+  final Locale locale;
 
   /// Custom emoji text style to apply to emoji characters in the grid
   ///
@@ -72,6 +80,7 @@ class Config {
         other.viewOrderConfig == viewOrderConfig &&
         other.checkPlatformCompatibility == checkPlatformCompatibility &&
         other.emojiSet == emojiSet &&
+        other.locale == locale &&
         other.emojiTextStyle == emojiTextStyle &&
         other.customBackspaceIcon == customBackspaceIcon &&
         other.customSearchIcon == customSearchIcon &&
@@ -86,6 +95,7 @@ class Config {
       viewOrderConfig.hashCode ^
       checkPlatformCompatibility.hashCode ^
       emojiSet.hashCode ^
+      locale.hashCode ^
       (emojiTextStyle?.hashCode ?? 0) ^
       customBackspaceIcon.hashCode ^
       customSearchIcon.hashCode ^
