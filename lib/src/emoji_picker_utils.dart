@@ -29,9 +29,9 @@ class EmojiPickerUtils {
   }
 
   /// Search for related emoticons based on keywords
-  Future<List<Emoji>> searchEmoji(String keyword, List<CategoryEmoji> emojiSet,
+  Future<List<Emoji>> searchEmoji(String search, List<CategoryEmoji> emojiSet,
       {bool checkPlatformCompatibility = true}) async {
-    if (keyword.isEmpty) return [];
+    if (search.isEmpty) return [];
 
     if (_allAvailableEmojiEntities.isEmpty) {
       final emojiPickerInternalUtils = EmojiPickerInternalUtils();
@@ -48,13 +48,29 @@ class EmojiPickerUtils {
       }
     }
 
-    return _allAvailableEmojiEntities
-        .toSet()
-        .where((emoji) =>
-            (emoji.name.toLowerCase().contains(keyword.toLowerCase()) ||
-                emoji.emoji == keyword.trim()))
-        .toSet()
-        .toList();
+    // Split the input string into a list of lowercase keywords
+    final keywordSet = search
+        .split(RegExp(r'\s+'))
+        .where((e) => e.isNotEmpty)
+        .map((e) => e.toLowerCase())
+        .toSet();
+
+    return _allAvailableEmojiEntities.where((emoji) {
+      // Perform lowercasing of emoji keywords once
+      final emojiKeywordSet =
+          emoji.keywords.map((e) => e.toLowerCase()).toSet();
+
+      // Check if each search keyword is a prefix of any emoji keyword
+      final matchKeywords = keywordSet.every((keyword) {
+        return emojiKeywordSet
+            .any((emojiKeyword) => emojiKeyword.startsWith(keyword));
+      });
+
+      // Check for an exact match with emoji character
+      final matchEmoji = emoji.emoji == search.trim();
+
+      return matchKeywords || matchEmoji;
+    }).toList();
   }
 
   /// Add an emoji to recently used list or increase its counter
