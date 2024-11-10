@@ -33,12 +33,11 @@ class Config {
   /// for specific locales (create similar method as in
   /// default_emoji_set_locale.dart).
   /// If not provided, the default emoji set will be used based on the
-  /// locales that are available in the package. If you want to use a single set
-  /// of emojis for all locales, simple return only the single emoji set in the
-  /// function.
-  final List<CategoryEmoji> Function(Locale)? emojiSet;
+  /// locales that are available in the package.
+  final List<CategoryEmoji>? emojiSet;
 
-  /// Locale for the emoji set
+  /// Locale to choose the fitting language for the emoji set
+  /// This will affect the emoji search results
   final Locale locale;
 
   /// Custom emoji text style to apply to emoji characters in the grid

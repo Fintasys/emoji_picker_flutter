@@ -1,3 +1,8 @@
+## 4.0.0
+- Add localization support for following languages: en, de, es, fr, it, ja, zh
+- Add script to generate language files for any language based on the official unucode organization translations
+- Improve search feature to match new emoji name pattern based on keywords
+
 ## 3.1.0
 - Added Emoji for Transgender Flag and Hugging People (thx to everypizza1)
 - Replace `swapCategoryAndBottomBar` with `viewOrderConfig` to give more control over the order of each view (thx to coder-with-a-bushido)

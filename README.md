@@ -227,6 +227,35 @@ Each component can also be completely customized individually:
 
 - `BottomActionBarConfig` -> `customBottomActionBar`
 
+## Localization
+The package currently supports following languages: en, de, es, fr, it, ja, zh.
+In order to let the EmojiPicker choose the right language you need to pass the locale to the config:
+``` dart
+Config(
+    locale: const Locale("ja"),
+)    
+```
+In case you want to support additional languages, you need to create a copy of a emoji set file (see /lib/locales) and adjust the config for `emojiSet`:
+```dart
+EmojiPicker(
+    config: Config(
+         emojiSet: _getEmojiLocale(locale),
+    ),
+)
+
+List<CategoryEmoji> _getEmojiLocale(String locale) {
+    switch (locale) {
+      case "ja":
+        return emojiSetJapanese;
+      case "de":
+        return emojiSetGerman;
+      default:
+        return emojiSetEnglish;
+    }
+}
+```
+Feel free to create an issue if you think a specific language should be supported by default. We keep the languages limited for now to avoid the package size growing unnecesserily large.
+
 ## Extended usage with EmojiPickerUtils
 
 Find usage example [here](https://github.com/Fintasys/emoji_picker_flutter/blob/master/example/lib/main_key.dart)
