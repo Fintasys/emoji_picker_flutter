@@ -69,7 +69,7 @@ class EmojiPickerUtils {
       var matchKeywords = false;
       if (matchFirstKeyword) {
         // Check if each search keyword is a prefix of any emoji keyword
-        // start from second keyword
+        // start from second keyword, returns true if empty (only 1 keyword)
         matchKeywords = keywordSet.skip(1).every((keyword) {
           return emojiKeywordSet
               .any((emojiKeyword) => emojiKeyword.startsWith(keyword));
