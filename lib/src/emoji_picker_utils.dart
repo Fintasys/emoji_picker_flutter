@@ -55,16 +55,28 @@ class EmojiPickerUtils {
         .map((e) => e.toLowerCase())
         .toSet();
 
+    if (keywordSet.isEmpty) return [];
+
     return _allAvailableEmojiEntities.where((emoji) {
       // Perform lowercasing of emoji keywords once
       final emojiKeywordSet =
           emoji.keywords.map((e) => e.toLowerCase()).toSet();
 
-      // Check if each search keyword is a prefix of any emoji keyword
-      final matchKeywords = keywordSet.every((keyword) {
-        return emojiKeywordSet
-            .any((emojiKeyword) => emojiKeyword.startsWith(keyword));
-      });
+      // Check if first keyword is a prefix of any emoji keyword
+      final matchFirstKeyword = emojiKeywordSet
+          .any((emojiKeyword) => emojiKeyword.startsWith(keywordSet.first));
+
+      var matchKeywords = false;
+      if (matchFirstKeyword) {
+        // Check if each search keyword is a prefix of any emoji keyword
+        // start from second keyword
+        matchKeywords = keywordSet.skip(1).every((keyword) {
+          return emojiKeywordSet
+              .any((emojiKeyword) => emojiKeyword.startsWith(keyword));
+        });
+      } else {
+        matchKeywords = false;
+      }
 
       // Check for an exact match with emoji character
       final matchEmoji = emoji.emoji == search.trim();
