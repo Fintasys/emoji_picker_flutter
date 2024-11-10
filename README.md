@@ -235,7 +235,7 @@ Config(
     locale: const Locale("ja"),
 )    
 ```
-In case you want to support additional languages, you need to create a copy of a emoji set file (see /lib/locales) and adjust the config for `emojiSet`:
+In case you want to support additional languages, you need to create a copy of a emoji set file (see /lib/locales), transalte it and adjust the config for `emojiSet`:
 ```dart
 EmojiPicker(
     config: Config(
