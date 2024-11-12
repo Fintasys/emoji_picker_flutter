@@ -256,6 +256,8 @@ List<CategoryEmoji> _getEmojiLocale(String locale) {
 }
 ```
 Example for using `/automation/create_emoji_set.sh` for generating translation in terminal:
+1. Fork the repository and open the directory from your terminal
+2. Run command below 
 ```
 cd automation && ./create_emoji_set.sh pt Portuguese
 ```
