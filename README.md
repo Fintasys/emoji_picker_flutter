@@ -23,7 +23,7 @@ Yet another Emoji Picker for Flutter 🤩
 - Skin Tone Support
 - Custom-Font Support
 - Search Option
-- Localization (supports 8 Languages)
+- Localization (supporting 8 Languages)
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/fintasys)
 
