@@ -658,16 +658,16 @@ const List<CategoryEmoji> emojiSetSpanish = [
         'gesto | persona | persona haciendo pucheros | pucheros mujer | signo | signo femenino | símbolo ',
         hasSkinTone: true),
     Emoji('🙅‍♂️',
-        'gesto | mano | no | persona haciendo el gesto de &quot;no&quot; | prohibido hombre | signo | signo masculino | símbolo ',
+        'gesto | mano | no | persona haciendo el gesto de "no" | prohibido hombre | signo | signo masculino | símbolo ',
         hasSkinTone: true),
     Emoji('🙅‍♀️',
-        'gesto | mano | no | persona haciendo el gesto de &quot;no&quot; | prohibido mujer | signo | signo femenino | símbolo ',
+        'gesto | mano | no | persona haciendo el gesto de "no" | prohibido mujer | signo | signo femenino | símbolo ',
         hasSkinTone: true),
     Emoji('🙆‍♂️',
-        'gesto | mano | OK | persona haciendo el gesto de &quot;de acuerdo&quot; | vale hombre | signo | signo masculino | símbolo ',
+        'gesto | mano | OK | persona haciendo el gesto de "de acuerdo" | vale hombre | signo | signo masculino | símbolo ',
         hasSkinTone: true),
     Emoji('🙆‍♀️',
-        'gesto | mano | OK | persona haciendo el gesto de &quot;de acuerdo&quot; | vale mujer | signo | signo femenino | símbolo ',
+        'gesto | mano | OK | persona haciendo el gesto de "de acuerdo" | vale mujer | signo | signo femenino | símbolo ',
         hasSkinTone: true),
     Emoji('💁‍♂️',
         'información | mano | mostrador | persona | persona de mostrador de información hombre | signo | signo masculino | símbolo ',
@@ -4549,7 +4549,7 @@ const List<CategoryEmoji> emojiSetSpanish = [
     ),
     Emoji(
       '🔛',
-      'flecha | flecha de doble punta con la palabra &quot;on&quot; encima | flecha ON! | on | señal',
+      'flecha | flecha de doble punta con la palabra "on" encima | flecha ON! | on | señal',
     ),
     Emoji(
       '🔜',
@@ -4921,7 +4921,7 @@ const List<CategoryEmoji> emojiSetSpanish = [
     ),
     Emoji(
       '🔣',
-      '〒♪&amp;% | símbolos',
+      '〒♪&% | símbolos',
     ),
     Emoji(
       '🔤',
@@ -4997,71 +4997,71 @@ const List<CategoryEmoji> emojiSetSpanish = [
     ),
     Emoji(
       '🈁',
-      '“aquí” | ideograma japonés para &quot;aquí&quot; | japonés | katakana',
+      '“aquí” | ideograma japonés para "aquí" | japonés | katakana',
     ),
     Emoji(
       '🈂️',
-      'cortesía | ideograma japonés para &quot;de cortesía&quot; | japonés | katakana ',
+      'cortesía | ideograma japonés para "de cortesía" | japonés | katakana ',
     ),
     Emoji(
       '🈷️',
-      '“cantidad mensual” | ideograma | ideograma japonés para &quot;cantidad mensual&quot; | japonés | kanji ',
+      '“cantidad mensual” | ideograma | ideograma japonés para "cantidad mensual" | japonés | kanji ',
     ),
     Emoji(
       '🈶',
-      '“de pago” | ideograma | ideograma japonés para &quot;de pago&quot; | japonés | kanji',
+      '“de pago” | ideograma | ideograma japonés para "de pago" | japonés | kanji',
     ),
     Emoji(
       '🈯',
-      'ideograma | ideograma japonés para &quot;reservado&quot; | japonés | kanji | reservado',
+      'ideograma | ideograma japonés para "reservado" | japonés | kanji | reservado',
     ),
     Emoji(
       '🉐',
-      'ganga | ideograma | ideograma japonés para &quot;ganga&quot; | japonés | kanji',
+      'ganga | ideograma | ideograma japonés para "ganga" | japonés | kanji',
     ),
     Emoji(
       '🈹',
-      'descuento | ideograma | ideograma japonés para &quot;descuento&quot; | japonés | kanji',
+      'descuento | ideograma | ideograma japonés para "descuento" | japonés | kanji',
     ),
     Emoji(
       '🈚',
-      'gratis | ideograma | ideograma japonés para &quot;gratis&quot; | japonés | kanji',
+      'gratis | ideograma | ideograma japonés para "gratis" | japonés | kanji',
     ),
     Emoji(
       '🈲',
-      'ideograma | ideograma japonés para &quot;prohibido&quot; | japonés | kanji | prohibido',
+      'ideograma | ideograma japonés para "prohibido" | japonés | kanji | prohibido',
     ),
     Emoji(
       '🉑',
-      'aceptable | ideograma | ideograma japonés para &quot;aceptable&quot; | japonés | kanji',
+      'aceptable | ideograma | ideograma japonés para "aceptable" | japonés | kanji',
     ),
     Emoji(
       '🈸',
-      'aplicación | ideograma | ideograma japonés para &quot;aplicación&quot; | japonés | kanji',
+      'aplicación | ideograma | ideograma japonés para "aplicación" | japonés | kanji',
     ),
     Emoji(
       '🈴',
-      'aprobado | ideograma | ideograma japonés para &quot;aprobado&quot; | japonés | kanji',
+      'aprobado | ideograma | ideograma japonés para "aprobado" | japonés | kanji',
     ),
     Emoji(
       '🈳',
-      'ideograma | ideograma japonés para &quot;vacante&quot; | japonés | kanji | vacante',
+      'ideograma | ideograma japonés para "vacante" | japonés | kanji | vacante',
     ),
     Emoji(
       '㊗️',
-      'enhorabuena | ideograma | ideograma japonés para &quot;enhorabuena&quot; | japonés | kanji ',
+      'enhorabuena | ideograma | ideograma japonés para "enhorabuena" | japonés | kanji ',
     ),
     Emoji(
       '㊙️',
-      'ideograma | ideograma japonés para &quot;secreto&quot; | japonés | kanji | secreto ',
+      'ideograma | ideograma japonés para "secreto" | japonés | kanji | secreto ',
     ),
     Emoji(
       '🈺',
-      'abierto | ideograma | ideograma japonés para &quot;abierto&quot; | japonés | kanji',
+      'abierto | ideograma | ideograma japonés para "abierto" | japonés | kanji',
     ),
     Emoji(
       '🈵',
-      'completo | ideograma | ideograma japonés para &quot;completo&quot; | japonés | kanji | lleno',
+      'completo | ideograma | ideograma japonés para "completo" | japonés | kanji | lleno',
     ),
     Emoji(
       '🔴',

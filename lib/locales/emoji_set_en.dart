@@ -478,7 +478,7 @@ const List<CategoryEmoji> emojiSetEnglish = [
       '😾',
       'animal | cat | face | pouting',
     ),
-    Emoji('🫶', '&lt;3 | hands | heart | love | you', hasSkinTone: true),
+    Emoji('🫶', '<3 | hands | heart | love | you', hasSkinTone: true),
     Emoji('👋',
         'bye | cya | g2g | greetings | gtg | hand | hello | hey | hi | later | outtie | ttfn | ttyl | wave | yo | you',
         hasSkinTone: true),
@@ -504,7 +504,7 @@ const List<CategoryEmoji> emojiSetEnglish = [
         hasSkinTone: true),
     Emoji('✌️', 'hand | peace | v | victory ', hasSkinTone: true),
     Emoji('🫰',
-        '&lt;3 | crossed | expensive | finger | hand | heart | index | love | money | snap | thumb',
+        '<3 | crossed | expensive | finger | hand | heart | index | love | money | snap | thumb',
         hasSkinTone: true),
     Emoji('🤞', 'cross | crossed | finger | fingers | hand | luck',
         hasSkinTone: true),
@@ -4928,7 +4928,7 @@ const List<CategoryEmoji> emojiSetEnglish = [
     ),
     Emoji(
       '🔣',
-      '&amp; | % | ♪ | 〒 | input | symbols',
+      '& | % | ♪ | 〒 | input | symbols',
     ),
     Emoji(
       '🔤',

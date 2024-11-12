@@ -479,7 +479,7 @@ const List<CategoryEmoji> emojiSetGerman = [
       'Gesicht | Katze | Katzengesicht | schmollen | Schmollmund | Smiley | Tier | verärgert',
     ),
     Emoji('🫶',
-        '&lt;3 | Finger | Geste | Hände | Händeherz | Handgeste | Handherz | hdl | Herz | Liebe',
+        '<3 | Finger | Geste | Hände | Händeherz | Handgeste | Handherz | hdl | Herz | Liebe',
         hasSkinTone: true),
     Emoji('👋',
         'auf Wiedersehen | bis später | ciao | guten Tag | hallo | Hand | hey | hi | tschüs | tschüss | winken',
@@ -4950,7 +4950,7 @@ const List<CategoryEmoji> emojiSetGerman = [
     ),
     Emoji(
       '🔣',
-      '&amp; | % | ♪ | 〒 | Eingabe | Eingabesymbol | keycap | Sonderzeichen | Symbol | Tastenkappe',
+      '& | % | ♪ | 〒 | Eingabe | Eingabesymbol | keycap | Sonderzeichen | Symbol | Tastenkappe',
     ),
     Emoji(
       '🔤',
