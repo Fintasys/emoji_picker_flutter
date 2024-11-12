@@ -255,6 +255,10 @@ List<CategoryEmoji> _getEmojiLocale(String locale) {
     }
 }
 ```
+Example for using `/automation/create_emoji_set.sh` for generating translation in terminal:
+```
+cd automation && ./create_emoji_set.sh pt Portuguese
+```
 Feel free to create an issue if you think a specific language should be supported by default. We keep the languages limited for now to avoid the package size growing unnecesserily large.
 
 In case you want to support only a single language you can just return the same EmojiSet for all locales.
