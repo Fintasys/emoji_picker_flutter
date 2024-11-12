@@ -14,12 +14,12 @@ List<CategoryEmoji> getDefaultEmojiLocale(Locale locale) {
       return emojiSetFrance;
     case 'hi':
       return emojiSetHindi;
-    case 'pt':
-      return emojiSetPortuguese;
     case 'it':
       return emojiSetItalian;
     case 'ja':
       return emojiSetJapanese;
+    case 'pt':
+      return emojiSetPortuguese;
     case 'ru':
       return emojiSetRussian;
     case 'zh':
