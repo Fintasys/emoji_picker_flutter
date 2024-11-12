@@ -9,7 +9,7 @@ fi
 locale="$1"
 const_name="$2" # New variable to store the const name
 url="https://raw.githubusercontent.com/unicode-org/cldr/main/common/annotations/${locale}.xml"
-template_file="emoji_set_template.dart"
+template_file="../lib/src/default_emoji_set.dart"
 
 output_dir="../lib/locales"
 output_file="$output_dir/emoji_set_${locale}.dart"
@@ -46,7 +46,7 @@ fi
 grep '<annotation cp="' temp.xml | perl -CSD -ne 'print "$1:$2\n" if /<annotation cp="([^"]+)"[^>]*>([^<]+)<\/annotation>/;' >descriptions.txt
 
 # Create the output file based on the template
-cat "$template_file" | sed "s/emojiSetTemplate/emojiSet$const_name/" | while read line; do
+cat "$template_file" | sed "s/defaultEmojiSet/emojiSet$const_name/" | while read line; do
 
   if [[ "$line" == *"Emoji("* ]] && [[ "$line" != *"CategoryEmoji("* ]]; then
     #emoji=$(echo "$line" | cut -d "'" -f 2)
