@@ -244,15 +244,15 @@ EmojiPicker(
     ),
 )
 
-List<CategoryEmoji> _getEmojiLocale(String locale) {
-    switch (locale) {
-      case "ja":
-        return emojiSetJapanese;
-      case "de":
-        return emojiSetGerman;
-      default:
-        return emojiSetEnglish;
-    }
+List<CategoryEmoji> _getEmojiLocale(Locale locale) {
+  switch (locale.languageCode) {
+    case "ja":
+      return emojiSetJapanese;
+    case "de":
+      return emojiSetGerman;
+    default:
+      return emojiSetEnglish;
+  }
 }
 ```
 Example for using `/automation/create_emoji_set.sh` for generating translation in terminal:
