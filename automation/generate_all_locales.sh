@@ -11,9 +11,9 @@ locales=(
     "es Spanish"
     "fr France"
     "hi Hindi"
-    "pt Portuguese"
     "it Italian"
     "ja Japanese"
+    "pt Portuguese"
     "ru Russian"
     "zh Chinese"
 )

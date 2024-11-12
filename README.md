@@ -23,6 +23,7 @@ Yet another Emoji Picker for Flutter 🤩
 - Skin Tone Support
 - Custom-Font Support
 - Search Option
+- Localization (supports 8 Languages)
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/fintasys)
 
@@ -228,7 +229,7 @@ Each component can also be completely customized individually:
 - `BottomActionBarConfig` -> `customBottomActionBar`
 
 ## Localization
-The package currently supports following languages: en, de, es, fr, it, ja, zh.
+The package currently supports following languages: en, de, es, fr, hi, it, ja, pt, ru, zh.
 In order to let the EmojiPicker choose the right language you need to pass the locale to the config:
 ``` dart
 Config(
