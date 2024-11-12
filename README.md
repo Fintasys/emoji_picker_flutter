@@ -236,11 +236,11 @@ Config(
     locale: const Locale("ja"),
 )    
 ```
-In case you want to support additional languages, you need to create a copy of a emoji set file (see /lib/locales), transalte it and adjust the config for `emojiSet`:
+In case you want to support additional languages, you need to create a copy of a emoji set file (see /lib/locales), translate it (optional use `/automation/create_emoji_set.sh` to help you) and adjust the config for `emojiSet`:
 ```dart
 EmojiPicker(
     config: Config(
-         emojiSet: _getEmojiLocale(locale),
+         emojiSet: _getEmojiLocale,
     ),
 )
 
@@ -256,6 +256,15 @@ List<CategoryEmoji> _getEmojiLocale(String locale) {
 }
 ```
 Feel free to create an issue if you think a specific language should be supported by default. We keep the languages limited for now to avoid the package size growing unnecesserily large.
+
+In case you want to support only a single language you can just return the same EmojiSet for all locales.
+```
+List<CategoryEmoji> _getEmojiLocale(String locale) {
+    return emojiSetEnglish;
+}
+```
+Using a single EmojiSet will reduce the package size by about 2 MB.
+If you prefer to use the old EmojiSet (version 3 and below), you can return `defaultEmojiSet`. 
 
 ## Extended usage with EmojiPickerUtils
 

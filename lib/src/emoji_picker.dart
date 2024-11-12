@@ -366,8 +366,8 @@ class EmojiPickerState extends State<EmojiPicker> {
       final recentEmojiMap = _recentEmoji.map((e) => e.emoji).toList();
       _categoryEmoji.add(CategoryEmoji(Category.RECENT, recentEmojiMap));
     }
-    final data =
-        widget.config.emojiSet ?? getDefaultEmojiLocale(widget.config.locale);
+    final data = widget.config.emojiSet?.call(widget.config.locale) ??
+        getDefaultEmojiLocale(widget.config.locale);
     _categoryEmoji.addAll(widget.config.checkPlatformCompatibility
         ? await _emojiPickerInternalUtils.filterUnsupported(data)
         : data);

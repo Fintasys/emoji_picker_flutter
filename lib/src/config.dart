@@ -1,4 +1,5 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import 'package:emoji_picker_flutter/locales/default_emoji_set_locale.dart';
 import 'package:flutter/material.dart';
 
 /// Number of skin tone icons
@@ -10,7 +11,7 @@ class Config {
   const Config({
     this.height = 256,
     this.checkPlatformCompatibility = true,
-    this.emojiSet,
+    this.emojiSet = getDefaultEmojiLocale,
     this.locale = const Locale('en'),
     this.emojiTextStyle,
     this.customBackspaceIcon,
@@ -34,7 +35,7 @@ class Config {
   /// default_emoji_set_locale.dart).
   /// If not provided, the default emoji set will be used based on the
   /// locales that are available in the package.
-  final List<CategoryEmoji>? emojiSet;
+  final List<CategoryEmoji> Function(Locale locale)? emojiSet;
 
   /// Locale to choose the fitting language for the emoji set
   /// This will affect the emoji search results
