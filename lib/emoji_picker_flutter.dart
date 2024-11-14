@@ -1,5 +1,6 @@
 library emoji_picker_flutter;
 
+export 'package:emoji_picker_flutter/locales/emoji_set.dart';
 export 'package:emoji_picker_flutter/src/bottom_action_bar/bottom_action_bar.dart';
 export 'package:emoji_picker_flutter/src/bottom_action_bar/bottom_action_bar_config.dart';
 export 'package:emoji_picker_flutter/src/bottom_action_bar/default_bottom_action_bar.dart';

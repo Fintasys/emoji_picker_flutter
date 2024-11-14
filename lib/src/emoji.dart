@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// Delimiter for keywords
+const _keywordDelimiter = ' | ';
+
 /// A class to store data for each individual emoji
 @immutable
 class Emoji {
@@ -16,6 +19,9 @@ class Emoji {
 
   /// Flag if emoji supports multiple skin tones
   final bool hasSkinTone;
+
+  /// List of keywords that describe the emoji
+  List<String> get keywords => name.split(_keywordDelimiter);
 
   @override
   String toString() {

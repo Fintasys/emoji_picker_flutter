@@ -56,7 +56,11 @@ void main() {
 
       // Check if the emoji been passed to the 'onEmojiSelected' callback
       expect(
-          _emojiSelected, equals(const Emoji('🙂', 'Slightly Smiling Face')));
+        _emojiSelected,
+        equals(
+          const Emoji('🙂', 'face | happy | slightly | smile | smiling'),
+        ),
+      );
 
       // Check if the category been passed to the 'onEmojiSelected' callback
       expect(_categorySelected, equals(Category.SMILEYS));
@@ -133,7 +137,10 @@ void main() {
 
       // Check if the emoji been passed to the 'onEmojiSelected' callback
       expect(_emojiSelected?.emoji, equals('👍🏿'));
-      expect(_emojiSelected?.name, equals('Thumbs Up'));
+      expect(
+        _emojiSelected?.name,
+        equals('+1 | good | hand | like | thumb | up | yes'),
+      );
       expect(_emojiSelected?.hasSkinTone, equals(true));
 
       // Check if the category been passed to the 'onEmojiSelected' callback

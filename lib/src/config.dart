@@ -1,4 +1,5 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import 'package:emoji_picker_flutter/locales/default_emoji_set_locale.dart';
 import 'package:flutter/material.dart';
 
 /// Number of skin tone icons
@@ -10,7 +11,8 @@ class Config {
   const Config({
     this.height = 256,
     this.checkPlatformCompatibility = true,
-    this.emojiSet = defaultEmojiSet,
+    this.emojiSet = getDefaultEmojiLocale,
+    this.locale = const Locale('en'),
     this.emojiTextStyle,
     this.customBackspaceIcon,
     this.customSearchIcon,
@@ -28,8 +30,16 @@ class Config {
   /// Verify that emoji glyph is supported by the platform (Android only)
   final bool checkPlatformCompatibility;
 
-  /// Custom emojis; if set, overrides default emojis provided by the library
-  final List<CategoryEmoji> emojiSet;
+  /// Useful to provide a customized list of Emoji or add/remove the support
+  /// for specific locales (create similar method as in
+  /// default_emoji_set_locale.dart).
+  /// If not provided, the default emoji set will be used based on the
+  /// locales that are available in the package.
+  final List<CategoryEmoji> Function(Locale locale)? emojiSet;
+
+  /// Locale to choose the fitting language for the emoji set
+  /// This will affect the emoji search results
+  final Locale locale;
 
   /// Custom emoji text style to apply to emoji characters in the grid
   ///
@@ -72,6 +82,7 @@ class Config {
         other.viewOrderConfig == viewOrderConfig &&
         other.checkPlatformCompatibility == checkPlatformCompatibility &&
         other.emojiSet == emojiSet &&
+        other.locale == locale &&
         other.emojiTextStyle == emojiTextStyle &&
         other.customBackspaceIcon == customBackspaceIcon &&
         other.customSearchIcon == customSearchIcon &&
@@ -86,6 +97,7 @@ class Config {
       viewOrderConfig.hashCode ^
       checkPlatformCompatibility.hashCode ^
       emojiSet.hashCode ^
+      locale.hashCode ^
       (emojiTextStyle?.hashCode ?? 0) ^
       customBackspaceIcon.hashCode ^
       customSearchIcon.hashCode ^
