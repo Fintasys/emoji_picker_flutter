@@ -1,10 +1,9 @@
-import 'dart:io';
-
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:emoji_picker_flutter/locales/default_emoji_set_locale.dart';
 import 'package:emoji_picker_flutter/src/emoji_picker_internal_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:universal_io/io.dart';
 
 /// All the possible categories that [Emoji] can be put into
 ///
