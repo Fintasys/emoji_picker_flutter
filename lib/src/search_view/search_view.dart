@@ -9,8 +9,8 @@ abstract class SearchView extends StatefulWidget {
     this.config,
     this.state,
     this.showEmojiView, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Config for customizations
   final Config config;

@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 class EmojiContainer extends StatelessWidget {
   /// Constructor
   const EmojiContainer({
+    super.key,
     required this.color,
     required this.buttonMode,
     this.padding,

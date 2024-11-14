@@ -8,8 +8,8 @@ abstract class BottomActionBar extends StatefulWidget {
     this.config,
     this.state,
     this.showSearchView, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Config for customizations
   final Config config;

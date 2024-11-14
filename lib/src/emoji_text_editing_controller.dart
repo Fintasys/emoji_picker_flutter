@@ -8,8 +8,7 @@ const delimiter = '|';
 /// a particular style to emoji characters.
 class EmojiTextEditingController extends TextEditingController {
   /// Constructor, requres emojiStyle, since otherwise this class has no effect
-  EmojiTextEditingController({String? text, required this.emojiTextStyle})
-      : super(text: text);
+  EmojiTextEditingController({super.text, required this.emojiTextStyle});
 
   /// The style used for the emoji characters
   final TextStyle emojiTextStyle;

@@ -1,4 +1,4 @@
-library emoji_picker_flutter;
+library;
 
 export 'package:emoji_picker_flutter/locales/emoji_set.dart';
 export 'package:emoji_picker_flutter/src/bottom_action_bar/bottom_action_bar.dart';

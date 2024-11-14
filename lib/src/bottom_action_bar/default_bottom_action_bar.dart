@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 /// Default Bottom Action Bar implementation
 class DefaultBottomActionBar extends BottomActionBar {
   /// Constructor
-  DefaultBottomActionBar(
-      Config config, EmojiViewState state, VoidCallback showSearchView)
-      : super(config, state, showSearchView);
+  const DefaultBottomActionBar(super.config, super.state, super.showSearchView,
+      {super.key});
 
   @override
   State<StatefulWidget> createState() => _DefaultBottomActionBarState();

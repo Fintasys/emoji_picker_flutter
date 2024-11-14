@@ -4,11 +4,8 @@ import 'package:flutter/material.dart';
 /// Default Search implementation
 class DefaultSearchView extends SearchView {
   /// Constructor
-  const DefaultSearchView(
-    Config config,
-    EmojiViewState state,
-    VoidCallback showEmojiView,
-  ) : super(config, state, showEmojiView);
+  const DefaultSearchView(super.config, super.state, super.showEmojiView,
+      {super.key});
 
   @override
   DefaultSearchViewState createState() => DefaultSearchViewState();

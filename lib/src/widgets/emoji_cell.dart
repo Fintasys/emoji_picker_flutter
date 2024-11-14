@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 class EmojiCell extends StatelessWidget {
   /// Constructor for manually setting all properties
   const EmojiCell({
+    super.key,
     required this.emoji,
     required this.emojiSize,
     required this.emojiBoxSize,
@@ -23,7 +24,8 @@ class EmojiCell extends StatelessWidget {
   /// Constructor that can retrieve as much information as possible from
   /// [Config]
   EmojiCell.fromConfig(
-      {required this.emoji,
+      {super.key,
+      required this.emoji,
       required this.emojiSize,
       required this.emojiBoxSize,
       this.categoryEmoji,
@@ -69,11 +71,11 @@ class EmojiCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final onPressed = () {
+    onPressed() {
       onEmojiSelected(categoryEmoji?.category, emoji);
-    };
+    }
 
-    final onLongPressed = () {
+    onLongPressed() {
       final renderBox = context.findRenderObject() as RenderBox;
       final emojiBoxPosition = renderBox.localToGlobal(Offset.zero);
       onSkinToneDialogRequested?.call(
@@ -82,7 +84,7 @@ class EmojiCell extends StatelessWidget {
         emojiSize,
         categoryEmoji,
       );
-    };
+    }
 
     return SizedBox(
       width: emojiBoxSize,
@@ -105,13 +107,13 @@ class EmojiCell extends StatelessWidget {
       return MaterialButton(
         onPressed: onPressed,
         onLongPress: onLongPressed,
-        child: child,
         elevation: 0,
         highlightElevation: 0,
         padding: EdgeInsets.zero,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.zero,
         ),
+        child: child,
       );
     }
     if (buttonMode == ButtonMode.CUPERTINO) {
@@ -120,8 +122,8 @@ class EmojiCell extends StatelessWidget {
         child: CupertinoButton(
           onPressed: onPressed,
           padding: EdgeInsets.zero,
-          child: child,
           alignment: Alignment.center,
+          child: child,
         ),
       );
     }

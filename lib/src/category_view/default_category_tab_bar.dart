@@ -10,8 +10,8 @@ class DefaultCategoryTabBar extends StatelessWidget {
     this.pageController,
     this.categoryEmojis,
     this.closeSkinToneOverlay, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Config
   final Config config;

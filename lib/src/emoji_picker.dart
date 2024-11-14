@@ -83,17 +83,17 @@ enum ButtonMode {
 /// The function returns the selected [Emoji] as well
 /// as the [Category] from which it originated
 /// Category can be null in some cases, for example in search results
-typedef void OnEmojiSelected(Category? category, Emoji emoji);
+typedef OnEmojiSelected = void Function(Category? category, Emoji emoji);
 
 /// Callback from emoji cell to show a skin tone selection overlay
-typedef void OnSkinToneDialogRequested(Offset emojiBoxPosition, Emoji emoji,
-    double emojiSize, CategoryEmoji? categoryEmoji);
+typedef OnSkinToneDialogRequested = void Function(Offset emojiBoxPosition,
+    Emoji emoji, double emojiSize, CategoryEmoji? categoryEmoji);
 
 /// Callback function for backspace button
-typedef void OnBackspacePressed();
+typedef OnBackspacePressed = void Function();
 
 /// Callback function for backspace button when long pressed
-typedef void OnBackspaceLongPressed();
+typedef OnBackspaceLongPressed = void Function();
 
 /// The Emoji Keyboard widget
 ///
@@ -105,14 +105,14 @@ typedef void OnBackspaceLongPressed();
 class EmojiPicker extends StatefulWidget {
   /// EmojiPicker for flutter
   const EmojiPicker({
-    Key? key,
+    super.key,
     this.textEditingController,
     this.scrollController,
     this.onEmojiSelected,
     this.onBackspacePressed,
     this.config = const Config(),
     this.customWidget,
-  }) : super(key: key);
+  });
 
   /// Custom widget
   final EmojiViewBuilder? customWidget;

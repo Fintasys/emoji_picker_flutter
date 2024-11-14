@@ -10,8 +10,8 @@ abstract class CategoryView extends StatefulWidget {
     this.state,
     this.tabController,
     this.pageController, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Config for customizations
   final Config config;

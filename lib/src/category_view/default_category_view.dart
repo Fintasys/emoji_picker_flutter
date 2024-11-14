@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 /// Default category view
 class DefaultCategoryView extends CategoryView {
   /// Constructor
-  DefaultCategoryView(
-    Config config,
-    EmojiViewState state,
-    TabController tabController,
-    PageController pageController, {
-    Key? key,
-  }) : super(config, state, tabController, pageController, key: key);
+  const DefaultCategoryView(
+    super.config,
+    super.state,
+    super.tabController,
+    super.pageController, {
+    super.key,
+  });
 
   @override
   DefaultCategoryViewState createState() => DefaultCategoryViewState();

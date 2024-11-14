@@ -10,8 +10,8 @@ abstract class EmojiPickerView extends StatefulWidget {
     this.config,
     this.state,
     this.showSearchBar, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Config for customizations
   final Config config;

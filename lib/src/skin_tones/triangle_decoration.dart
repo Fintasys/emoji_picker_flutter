@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 /// corner of a container
 class TriangleDecoration extends Decoration {
   /// Constructor
-  TriangleDecoration({required this.color, required this.size}) : super();
+  const TriangleDecoration({required this.color, required this.size}) : super();
 
   /// Color of the triangle
   final Color color;
