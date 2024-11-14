@@ -1,4 +1,4 @@
-## 4.0.0
+## 4.0.0-dev.1
 - Add localization support for following languages: en, de, es, fr, hi it, ja, pt, ru, zh
 - Add script to generate language files for any language based on the official unucode organization translations
 - Improve search feature to match new emoji name pattern based on keywords
