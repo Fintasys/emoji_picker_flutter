@@ -28,6 +28,10 @@ class EmojiPickerUtils {
     return EmojiPickerInternalUtils().getRecentEmojis();
   }
 
+  /// Filters out emojis not supported on the platform
+  Future<List<CategoryEmoji>> filterUnsupported(List<CategoryEmoji> data) =>
+      EmojiPickerInternalUtils().filterUnsupported(data);
+
   /// Search for related emoticons based on keywords
   Future<List<Emoji>> searchEmoji(String search, List<CategoryEmoji> emojiSet,
       {bool checkPlatformCompatibility = true}) async {
