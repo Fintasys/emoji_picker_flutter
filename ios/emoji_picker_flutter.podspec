@@ -5,15 +5,13 @@
 Pod::Spec.new do |s|
   s.name             = 'emoji_picker_flutter'
   s.version          = '0.0.1'
-  s.summary          = 'A new Flutter plugin project.'
-  s.description      = <<-DESC
-A new Flutter plugin project.
-                       DESC
-  s.homepage         = 'http://example.com'
-  s.license          = { :file => '../LICENSE' }
+  s.summary          = 'Flutter Emoji Picker'
+  s.description      = 'Flutter Emoji Picker Plugin'
+  s.homepage         = 'https://fintasys.com'
+  s.license          = { :file => '../LICENSE', :type => 'MIT' }
   s.author           = { 'Your Company' => 'email@example.com' }
   s.source           = { :path => '.' }
-  s.source_files = 'Classes/**/*'
+  s.source_files = 'emoji_picker_flutter/Sources/emoji_picker_flutter/**/*.swift'
   s.dependency 'Flutter'
   s.platform = :ios, '11.0'
 
