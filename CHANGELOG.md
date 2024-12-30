@@ -1,14 +1,13 @@
-## 4.0.0-dev.2
-- Update dependencies
-- Replace dart:io with universal_io to support wasm
-
-## 4.0.0-dev.1
+## 4.0.0
 - Add localization support for following languages: en, de, es, fr, hi it, ja, pt, ru, zh
 - Add script to generate language files for any language based on the official unucode organization translations
 - Improve search feature to match new emoji name pattern based on keywords
+- Update dependencies
+- Replace dart:io with universal_io to support wasm
+- Added filterUnsupported method to EmojiPickerUtils (thx to @maeddin)
 
 ## 3.1.0
-- Added Emoji for Transgender Flag and Hugging People (thx to everypizza1)
+- Added Emoji for Transgender Flag and Hugging People (thx to @everypizza1)
 - Replace `swapCategoryAndBottomBar` with `viewOrderConfig` to give more control over the order of each view (thx to coder-with-a-bushido)
 
 ## 3.0.0
