@@ -23,6 +23,8 @@ if (flutterVersionName == null) {
 }
 
 android {
+    namespace 'com.fintasys.emoji_picker_flutter_example'
+
     compileSdkVersion 34
 
     compileOptions {

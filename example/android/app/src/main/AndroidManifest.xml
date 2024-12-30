@@ -1,4 +1,5 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.fintasys.emoji_picker_flutter_example">
    <application
         android:label="emoji_picker_flutter_example"
         android:icon="@mipmap/ic_launcher">
