@@ -1,5 +1,8 @@
+## 4.2.0
+- Migrate to Swift Package Manager for MacOS
+
 ## 4.1.0
-- Migrate to Swift Package Manager
+- Migrate to Swift Package Manager for iOS
 
 ## 4.0.0
 - Add localization support for following languages: en, de, es, fr, hi it, ja, pt, ru, zh
