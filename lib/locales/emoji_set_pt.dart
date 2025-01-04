@@ -259,6 +259,10 @@ const List<CategoryEmoji> emojiSetPortuguese = [
       'rosto | rosto atordoado | tontura',
     ),
     Emoji(
+      '😵‍💫',
+      'caramba | confusa | confuso | desnorteada | desnorteado | eita | espirais | hipnotizado | problema | putz | rosto com olhos em espiral | tonta | tonto | tontura | uau',
+    ),
+    Emoji(
       '🤯',
       'cabeça explodindo | cabeça explodindo, em choque, perplexo | chocado',
     ),

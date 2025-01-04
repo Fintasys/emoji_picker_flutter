@@ -259,6 +259,10 @@ const List<CategoryEmoji> emojiSetItalian = [
       'crocetta | crocette | emozione | faccina | frastornato | malato | occhi | occhi a croce | stanco | testa che gira',
     ),
     Emoji(
+      '😵‍💫',
+      'capogiro | confuso | faccina | faccina con occhi a spirale | giramento di testa | ipnotizzato | nausea | problema | stordito | vertigini',
+    ),
+    Emoji(
       '🤯',
       'cervello | faccina | faccina con testa che esplode | faccina sorpresa | mindblown | non ci credo | sbalordito | scioccato | sconcertato | sorpesa | sorpreso | stupore | testa che esplode',
     ),

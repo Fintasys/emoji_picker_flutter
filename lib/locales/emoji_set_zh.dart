@@ -259,6 +259,10 @@ const List<CategoryEmoji> emojiSetChinese = [
       '头晕 | 头晕眼花 | 晕头 | 晕头的脸 | 晕头转向 | 脸',
     ),
     Emoji(
+      '😵‍💫',
+      '哇 | 哎呀 | 头晕 | 晕 | 笑脸 | 迷糊',
+    ),
+    Emoji(
       '🤯',
       '不可能 | 印象深刻 | 吓到了 | 惊吓 | 爆炸头 | 震惊',
     ),
@@ -3999,7 +4003,7 @@ const List<CategoryEmoji> emojiSetChinese = [
     ),
     Emoji(
       '💗',
-      '亲亲 | 吻 | 我爱你 | 搏动 | 搏动的心 | 激动 | 紧张 | 红心',
+      '亲亲 | 吻 | 我爱你 | 搏动 | 搏动的心 | 激动 | 红心 | 紧张',
     ),
     Emoji(
       '💓',

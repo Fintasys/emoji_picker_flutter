@@ -259,6 +259,10 @@ const List<CategoryEmoji> emojiSetSpanish = [
       'cara | cara mareada | mareo',
     ),
     Emoji(
+      '😵‍💫',
+      'cara con ojos en espiral | espiral | hipnotizado | indispuesto | mareado | mareo | problema',
+    ),
+    Emoji(
       '🤯',
       'cabeza | cabeza explotando | explosión',
     ),
