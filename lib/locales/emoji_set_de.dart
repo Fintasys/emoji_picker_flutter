@@ -259,6 +259,10 @@ const List<CategoryEmoji> emojiSetGerman = [
       'Augen | benommen | Gesicht | ko | krank | Kreuze | schwindelig | schwindlig | Smiley',
     ),
     Emoji(
+      '😵‍💫',
+      'Augen | Gesicht | Höhenangst | Hypnose | hypnotisiert | omg | schwindelig | schwindlig | Smiley | Spiralen | verwirrt | wirr',
+    ),
+    Emoji(
       '🤯',
       'entsetzt | explodieren | geschockt | Gesicht | Kopf | Schock | schockiert | Smiley | überwältigt | unglaublich',
     ),

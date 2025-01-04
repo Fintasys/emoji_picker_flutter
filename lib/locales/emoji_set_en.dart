@@ -259,6 +259,10 @@ const List<CategoryEmoji> emojiSetEnglish = [
       'crossed-out | dead | dizzy | eyes | face | feels | knocked | out | sick | tired',
     ),
     Emoji(
+      '😵‍💫',
+      'confused | dizzy | eyes | face | hypnotized | omg | smiley | spiral | trouble | whoa | woah | woozy',
+    ),
+    Emoji(
       '🤯',
       'blown | explode | exploding | head | mind | mindblown | no | shocked | way',
     ),

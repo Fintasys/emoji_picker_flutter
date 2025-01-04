@@ -259,6 +259,10 @@ const List<CategoryEmoji> emojiSetFrance = [
       'émoticône | fatigué | malade | mort | tournis | visage | visage avec le tournis | visage étourdi',
     ),
     Emoji(
+      '😵‍💫',
+      'confusion | étourdi | hagard | malade | nausée | ouh la la | tête qui tourne | visage aux yeux en spirales',
+    ),
+    Emoji(
       '🤯',
       'choc | choqué | surpris | surprise | tête choquée | tête qui explose',
     ),
