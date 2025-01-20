@@ -1137,6 +1137,7 @@ const List<CategoryEmoji> defaultEmojiSet = [
     Emoji('💟', 'Heart Decoration'),
     Emoji('❣️', 'Heavy Heart Exclamation'),
     Emoji('💔', 'Broken Heart'),
+    Emoji('❤️‍🔥', 'Heart on Fire'),
     Emoji('❤️', 'Red Heart'),
     Emoji('🧡', 'Orange Heart'),
     Emoji('💛', 'Yellow Heart'),

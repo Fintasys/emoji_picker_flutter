@@ -4206,6 +4206,10 @@ const List<CategoryEmoji> emojiSetFrance = [
       'amour | cœur | cœur brisé | malheureux | sentiment | séparé | triste',
     ),
     Emoji(
+      '❤️‍🔥',
+      'amour | cœur | rouge | sentiment | feu | enflammé',
+    ),
+    Emoji(
       '❤️',
       'amour | cœur | cœur rouge | sentiment ',
     ),

@@ -4201,6 +4201,10 @@ const List<CategoryEmoji> emojiSetPortuguese = [
       'coração | coração partido | coração quebrado | decepção amorosa | desilusão amorosa | emoção | rompimento | s2 | sofrendo | sofrimento | triste',
     ),
     Emoji(
+      '❤️‍🔥',
+      'amor | coração | coração vermelho | s2 | fogo | ardente',
+    ),
+    Emoji(
       '❤️',
       'amor | coração | coração vermelho | s2 ',
     ),
