@@ -4177,6 +4177,10 @@ const List<CategoryEmoji> emojiSetGerman = [
       'allein | gebrochen | Gefühl | Herz | Herzschmerz | Liebeskummer | Schmerz | traurig | Trennung | zerbrochen',
     ),
     Emoji(
+      '❤️‍🔥',
+      'emotion | Herz | Feuer | feurig | Liebe | rot',
+    ),
+    Emoji(
       '❤️',
       'Herz | rotes Herz ',
     ),

@@ -4246,6 +4246,10 @@ const List<CategoryEmoji> emojiSetItalian = [
       'amore | amore finito | cuore | emozione | infranto | spezzato | triste',
     ),
     Emoji(
+      '❤️‍🔥',
+      'amore | cuore | cuoricino | emozione | rosso | fuoco | infuocato',
+    ),
+    Emoji(
       '❤️',
       'amore | cuore | cuoricino | emozione | rosso ',
     ),

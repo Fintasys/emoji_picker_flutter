@@ -4155,6 +4155,10 @@ const List<CategoryEmoji> emojiSetEnglish = [
       'break | broken | crushed | emotion | heart | heartbroken | lonely | sad',
     ),
     Emoji(
+      '❤️‍🔥',
+      'emotion | heart | fire | fiery | love | red',
+    ),
+    Emoji(
       '❤️',
       'emotion | heart | love | red ',
     ),

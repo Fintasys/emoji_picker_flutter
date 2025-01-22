@@ -4148,6 +4148,10 @@ const List<CategoryEmoji> emojiSetSpanish = [
       'corazón | emoción | partido | roto',
     ),
     Emoji(
+      '❤️‍🔥',
+      'corazón | emoción | rojo | fuego | ardiente',
+    ),
+    Emoji(
       '❤️',
       'corazón | emoción | rojo ',
     ),
