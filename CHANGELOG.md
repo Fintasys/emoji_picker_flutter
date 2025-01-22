@@ -1,3 +1,7 @@
+## 4.3.0
+- Separate 'Cross-eye' and 'Spiral-eye' emojis (Thx to @echogit)
+- Add 'Heart on Fire' emoji (Thx to @Yotamho)
+
 ## 4.2.0
 - Migrate to Swift Package Manager for MacOS
 
