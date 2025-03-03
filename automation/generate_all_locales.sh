@@ -13,6 +13,7 @@ locales=(
     "hi Hindi"
     "it Italian"
     "ja Japanese"
+    "nl Dutch"
     "pt Portuguese"
     "ru Russian"
     "zh Chinese"

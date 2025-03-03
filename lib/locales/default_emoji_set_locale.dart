@@ -18,6 +18,8 @@ List<CategoryEmoji> getDefaultEmojiLocale(Locale locale) {
       return emojiSetItalian;
     case 'ja':
       return emojiSetJapanese;
+    case 'nl':
+      return emojiSetDutch;
     case 'pt':
       return emojiSetPortuguese;
     case 'ru':
