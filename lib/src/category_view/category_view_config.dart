@@ -26,7 +26,7 @@ class CategoryViewConfig {
     this.dividerColor,
     this.categoryIcons = const CategoryIcons(),
     this.customCategoryView,
-    this.recentEmojisUpdatePolicy = RecentEmojisStateUpdatePolicy.always,
+    this.recentEmojisUpdatePolicy = RecentEmojisStateUpdatePolicy.notFromRecent,
   });
 
   /// Tab bar height
@@ -73,7 +73,7 @@ class CategoryViewConfig {
   /// Determines the behavior of recent emojis list update in the state.
   /// It can be configured to prevent recent emojis list from jumping when
   /// user selects and emoji.
-  /// Defaults to always update recent emojis list.
+  /// Defaults [RecentEmojisStateUpdatePolicy.notFromRecent].
   /// NOTE: This affects only the widget state changes. Locally stored recent
   /// emojis list is getting updated regardless of this setting.
   final RecentEmojisStateUpdatePolicy recentEmojisUpdatePolicy;
