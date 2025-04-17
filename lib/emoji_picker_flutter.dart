@@ -12,6 +12,7 @@ export 'package:emoji_picker_flutter/src/category_view/category_view.dart';
 export 'package:emoji_picker_flutter/src/category_view/category_view_config.dart';
 export 'package:emoji_picker_flutter/src/category_view/default_category_tab_bar.dart';
 export 'package:emoji_picker_flutter/src/category_view/default_category_view.dart';
+export 'package:emoji_picker_flutter/src/category_view/recent_emojis_state_update_policy.dart';
 export 'package:emoji_picker_flutter/src/category_view/recent_tab_behavior.dart';
 export 'package:emoji_picker_flutter/src/config.dart';
 export 'package:emoji_picker_flutter/src/default_emoji_set.dart';

@@ -26,6 +26,7 @@ class CategoryViewConfig {
     this.dividerColor,
     this.categoryIcons = const CategoryIcons(),
     this.customCategoryView,
+    this.recentEmojisUpdatePolicy = RecentEmojisStateUpdatePolicy.always,
   });
 
   /// Tab bar height
@@ -69,6 +70,14 @@ class CategoryViewConfig {
   /// Hot reload is not supported
   final CategoryViewBuilder? customCategoryView;
 
+  /// Determines the behavior of recent emojis list update in the state.
+  /// It can be configured to prevent recent emojis list from jumping when
+  /// user selects and emoji.
+  /// Defaults to always update recent emojis list.
+  /// NOTE: This affects only the widget state changes. Locally stored recent
+  /// emojis list is getting updated regardless of this setting.
+  final RecentEmojisStateUpdatePolicy recentEmojisUpdatePolicy;
+
   @override
   bool operator ==(other) {
     return (other is CategoryViewConfig) &&
@@ -83,7 +92,8 @@ class CategoryViewConfig {
         other.iconColorSelected == iconColorSelected &&
         other.backspaceColor == backspaceColor &&
         other.dividerColor == dividerColor &&
-        other.categoryIcons == categoryIcons;
+        other.categoryIcons == categoryIcons &&
+        other.recentEmojisUpdatePolicy == recentEmojisUpdatePolicy;
   }
 
   @override
@@ -99,5 +109,6 @@ class CategoryViewConfig {
       iconColorSelected.hashCode ^
       backspaceColor.hashCode ^
       dividerColor.hashCode ^
-      categoryIcons.hashCode;
+      categoryIcons.hashCode ^
+      recentEmojisUpdatePolicy.hashCode;
 }

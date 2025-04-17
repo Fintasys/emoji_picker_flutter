@@ -154,17 +154,14 @@ class EmojiPickerState extends State<EmojiPicker> {
   final _emojiPickerInternalUtils = EmojiPickerInternalUtils();
 
   /// Update recentEmoji list from outside using EmojiPickerUtils
-  void updateRecentEmoji(List<RecentEmoji> recentEmoji,
-      {bool refresh = false}) {
+  void updateRecentEmoji(List<RecentEmoji> recentEmoji) {
     _recentEmoji = recentEmoji;
     final recentTabIndex = _categoryEmoji
         .indexWhere((element) => element.category == Category.RECENT);
     if (recentTabIndex != -1) {
       _categoryEmoji[recentTabIndex] = _categoryEmoji[recentTabIndex]
           .copyWith(emoji: _recentEmoji.map((e) => e.emoji).toList());
-      if (mounted && refresh) {
-        setState(() {});
-      }
+      setState(() {});
     }
   }
 
@@ -300,24 +297,20 @@ class EmojiPickerState extends State<EmojiPicker> {
         RecentTabBehavior.POPULAR) {
       _emojiPickerInternalUtils
           .addEmojiToPopularUsed(emoji: emoji, config: widget.config)
-          .then((newRecentEmoji) => {
-                // we don't want to rebuild the widget if user is currently on
-                // the RECENT tab, it will make emojis jump since sorting
-                // is based on the use frequency
-                updateRecentEmoji(newRecentEmoji,
-                    refresh: category != Category.RECENT),
-              });
+          .then((newRecentEmoji) {
+        if (_considerRecentEmojisStateUpdate(category)) {
+          updateRecentEmoji(newRecentEmoji);
+        }
+      });
     } else if (widget.config.categoryViewConfig.recentTabBehavior ==
         RecentTabBehavior.RECENT) {
       _emojiPickerInternalUtils
           .addEmojiToRecentlyUsed(emoji: emoji, config: widget.config)
-          .then((newRecentEmoji) => {
-                // we don't want to rebuild the widget if user is currently on
-                // the RECENT tab, it will make emojis jump since sorting
-                // is based on the use frequency
-                updateRecentEmoji(newRecentEmoji,
-                    refresh: category != Category.RECENT),
-              });
+          .then((newRecentEmoji) {
+        if (_considerRecentEmojisStateUpdate(category)) {
+          updateRecentEmoji(newRecentEmoji);
+        }
+      });
     }
 
     if (widget.textEditingController != null) {
@@ -353,6 +346,17 @@ class EmojiPickerState extends State<EmojiPicker> {
 
     if (widget.textEditingController == null) {
       _scrollToCursorAfterTextChange();
+    }
+  }
+
+  bool _considerRecentEmojisStateUpdate(Category? category) {
+    switch (widget.config.categoryViewConfig.recentEmojisUpdatePolicy) {
+      case RecentEmojisStateUpdatePolicy.never:
+        return false;
+      case RecentEmojisStateUpdatePolicy.notFromRecent:
+        return category != Category.RECENT;
+      case RecentEmojisStateUpdatePolicy.always:
+        return true;
     }
   }
 
