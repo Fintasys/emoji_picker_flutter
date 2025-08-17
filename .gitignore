@@ -29,3 +29,7 @@ build/
 automation/descriptions.txt
 automation/temp.xml
 automation/temp
+
+# Example
+/example/android/app/.cxx
+/example/macos/DerivedData

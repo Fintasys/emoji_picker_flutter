@@ -25,7 +25,8 @@ if (flutterVersionName == null) {
 android {
     namespace 'com.fintasys.emoji_picker_flutter_example'
 
-    compileSdkVersion 34
+    compileSdk = 35
+    ndkVersion = "26.3.11579264"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
