@@ -5,6 +5,7 @@ export 'package:emoji_picker_flutter/locales/emoji_set_fr.dart';
 export 'package:emoji_picker_flutter/locales/emoji_set_hi.dart';
 export 'package:emoji_picker_flutter/locales/emoji_set_it.dart';
 export 'package:emoji_picker_flutter/locales/emoji_set_ja.dart';
+export 'package:emoji_picker_flutter/locales/emoji_set_nl.dart';
 export 'package:emoji_picker_flutter/locales/emoji_set_pt.dart';
 export 'package:emoji_picker_flutter/locales/emoji_set_ru.dart';
 export 'package:emoji_picker_flutter/locales/emoji_set_zh.dart';
