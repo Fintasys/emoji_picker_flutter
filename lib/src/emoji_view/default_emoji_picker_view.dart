@@ -46,8 +46,7 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final emojiSize =
-            widget.config.emojiViewConfig.getEmojiSize(constraints.maxWidth);
+        final emojiSize = widget.config.emojiViewConfig.emojiSizeMax;
         final emojiBoxSize =
             widget.config.emojiViewConfig.getEmojiBoxSize(constraints.maxWidth);
         return EmojiContainer(

@@ -136,10 +136,12 @@ class EmojiCell extends StatelessWidget {
 
   /// Build and display Emoji centered of its parent
   Widget _buildEmoji() {
-    final emojiText = Text(
-      emoji.emoji,
-      textScaler: const TextScaler.linear(1.0),
-      style: _getEmojiTextStyle(),
+    final emojiText = FittedBox(
+      child: Text(
+        emoji.emoji,
+        textScaler: const TextScaler.linear(1.0),
+        style: _getEmojiTextStyle(),
+      ),
     );
 
     return emoji.hasSkinTone &&

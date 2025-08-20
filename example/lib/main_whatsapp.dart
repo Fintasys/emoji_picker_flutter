@@ -407,8 +407,7 @@ class WhatsAppSearchViewState extends SearchViewState {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      final emojiSize =
-          widget.config.emojiViewConfig.getEmojiSize(constraints.maxWidth);
+      final emojiSize = widget.config.emojiViewConfig.emojiSizeMax;
       final emojiBoxSize =
           widget.config.emojiViewConfig.getEmojiBoxSize(constraints.maxWidth);
       return Container(

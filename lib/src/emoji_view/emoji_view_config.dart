@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 
@@ -69,12 +67,6 @@ class EmojiViewConfig {
 
   /// Replace latest emoji on recents list on limit exceed
   final bool replaceEmojiOnLimitExceed;
-
-  /// Get Emoji size based on properties and screen width
-  double getEmojiSize(double width) {
-    final maxSize = width / columns;
-    return min(maxSize, emojiSizeMax);
-  }
 
   /// Get Emoji hitbox size based on properties and screen width
   double getEmojiBoxSize(double width) {
