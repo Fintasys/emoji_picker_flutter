@@ -1,14 +1,32 @@
+## 4.4.0
+
+- Add Dutch language support
+- Add `EmojiPickerController` to get control over the category tabs
+- Remove universal_io dependency (Thx to @hm21)
+- Allow to set height to null to allow unconstrained height for the emoji picker (e.g. Expanded)
+- Fix issue with padding, spacing and emoji size calculations
+- Update dependencies
+
 ## 4.3.0
+
+- Separate 'Cross-eye' and 'Spiral-eye' emojis (Thx to @echogit)
+- Add 'Heart on Fire' emoji (Thx to @Yotamho)
+
+## 4.3.0
+
 - Separate 'Cross-eye' and 'Spiral-eye' emojis (Thx to @echogit)
 - Add 'Heart on Fire' emoji (Thx to @Yotamho)
 
 ## 4.2.0
+
 - Migrate to Swift Package Manager for MacOS
 
 ## 4.1.0
+
 - Migrate to Swift Package Manager for iOS
 
 ## 4.0.0
+
 - Add localization support for following languages: en, de, es, fr, hi it, ja, pt, ru, zh
 - Add script to generate language files for any language based on the official unucode organization translations
 - Improve search feature to match new emoji name pattern based on keywords
@@ -17,10 +35,12 @@
 - Added filterUnsupported method to EmojiPickerUtils (thx to @maeddin)
 
 ## 3.1.0
+
 - Added Emoji for Transgender Flag and Hugging People (thx to @everypizza1)
 - Replace `swapCategoryAndBottomBar` with `viewOrderConfig` to give more control over the order of each view (thx to coder-with-a-bushido)
 
 ## 3.0.0
+
 - Upgrade to Flutter `3.24.0`, Dart `3.4.0` and dependencies e.g. `web: 1.0.0` (thx to @diegotori)
 - Allow custom icon for Backspace and Search button
 - Replace `showBackspaceButton` in `CategoryViewConfig` with `extraTab` to allow choosing between Backspace, Search or no extra button in category tab bar
