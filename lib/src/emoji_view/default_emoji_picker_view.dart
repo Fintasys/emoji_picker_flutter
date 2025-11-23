@@ -52,9 +52,10 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
       if (index != -1) {
         final currentPage = _pageController.page?.round();
         if (index != currentPage) {
-          // Use jumpToPage for instant navigation without building intermediate pages
-          // This prevents performance issues when jumping to tabs far away
-          // The onPageChanged callback will handle animating the tab indicator
+          // Use jumpToPage for instant navigation without building
+          // intermediate pages. This prevents performance issues when
+          // jumping to tabs far away. The onPageChanged callback will
+          // handle animating the tab indicator
           _pageController.jumpToPage(index);
         }
       }
