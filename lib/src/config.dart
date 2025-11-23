@@ -25,7 +25,8 @@ class Config {
   });
 
   /// Max Height of the Emoji's view
-  final double height;
+  /// If explicitly set to null, the emoji view will not be constrained by height
+  final double? height;
 
   /// Verify that emoji glyph is supported by the platform (Android only)
   final bool checkPlatformCompatibility;
@@ -79,6 +80,7 @@ class Config {
   @override
   bool operator ==(other) {
     return (other is Config) &&
+        other.height == height &&
         other.viewOrderConfig == viewOrderConfig &&
         other.checkPlatformCompatibility == checkPlatformCompatibility &&
         other.emojiSet == emojiSet &&
@@ -94,6 +96,7 @@ class Config {
 
   @override
   int get hashCode =>
+      (height?.hashCode ?? 0) ^
       viewOrderConfig.hashCode ^
       checkPlatformCompatibility.hashCode ^
       emojiSet.hashCode ^
