@@ -72,13 +72,15 @@ class EmojiViewConfig {
 
   /// Get Emoji size based on properties and screen width
   double getEmojiSize(double width) {
-    final maxSize = width / columns;
+    final maxSize = getEmojiBoxSize(width);
     return min(maxSize, emojiSizeMax);
   }
 
   /// Get Emoji hitbox size based on properties and screen width
   double getEmojiBoxSize(double width) {
-    return width / columns;
+    final totalHorizontalSpacing = (columns - 1) * horizontalSpacing;
+    final availableWidth = width - totalHorizontalSpacing;
+    return availableWidth / columns;
   }
 
   @override
