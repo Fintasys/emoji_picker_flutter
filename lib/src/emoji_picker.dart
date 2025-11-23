@@ -411,21 +411,25 @@ class EmojiPickerState extends State<EmojiPicker> {
   }
 
   Widget _buildEmojiView() {
+    final content = widget.customWidget == null
+        ? DefaultEmojiPickerView(
+            widget.config,
+            _state,
+            _showSearchView,
+          )
+        : widget.customWidget!(
+            widget.config,
+            _state,
+            _showSearchView,
+          );
+
     return _wrapScrollBehaviorForPlatforms(
-      SizedBox(
-        height: widget.config.height,
-        child: widget.customWidget == null
-            ? DefaultEmojiPickerView(
-                widget.config,
-                _state,
-                _showSearchView,
-              )
-            : widget.customWidget!(
-                widget.config,
-                _state,
-                _showSearchView,
-              ),
-      ),
+      widget.config.height != null
+          ? SizedBox(
+              height: widget.config.height,
+              child: content,
+            )
+          : content,
     );
   }
 
