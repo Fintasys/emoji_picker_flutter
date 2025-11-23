@@ -15,7 +15,6 @@ dependencies:
   plugin_platform_interface: ^2.1.8
   shared_preferences: ^2.3.3
   web: ^1.1.0
-  universal_io: ^2.2.2
 
 dev_dependencies:
   flutter_test:
