@@ -12,7 +12,8 @@ import 'package:emoji_picker_flutter/src/recent_emoji.dart';
 import 'package:emoji_picker_flutter/src/search_view/default_search_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:universal_io/io.dart';
+
+import 'core/io/io_helper.dart';
 
 /// All the possible categories that [Emoji] can be put into
 ///
@@ -447,21 +448,25 @@ class EmojiPickerState extends State<EmojiPicker> {
   }
 
   Widget _buildEmojiView() {
+    final content = widget.customWidget == null
+        ? DefaultEmojiPickerView(
+            widget.config,
+            _state,
+            _showSearchView,
+          )
+        : widget.customWidget!(
+            widget.config,
+            _state,
+            _showSearchView,
+          );
+
     return _wrapScrollBehaviorForPlatforms(
-      SizedBox(
-        height: widget.config.height,
-        child: widget.customWidget == null
-            ? DefaultEmojiPickerView(
-                widget.config,
-                _state,
-                _showSearchView,
-              )
-            : widget.customWidget!(
-                widget.config,
-                _state,
-                _showSearchView,
-              ),
-      ),
+      widget.config.height != null
+          ? SizedBox(
+              height: widget.config.height,
+              child: content,
+            )
+          : content,
     );
   }
 

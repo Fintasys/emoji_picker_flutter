@@ -92,7 +92,10 @@ class EmojiCell extends StatelessWidget {
       child: _buildButtonWidget(
         onPressed: onPressed,
         onLongPressed: onLongPressed,
-        child: _buildEmoji(),
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: _buildEmoji(),
+        ),
       ),
     );
   }
