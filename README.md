@@ -229,14 +229,18 @@ Each component can also be completely customized individually:
 - `BottomActionBarConfig` -> `customBottomActionBar`
 
 ## Localization
+
 The package currently supports following languages: en, de, es, fr, hi, it, ja, pt, ru, zh.
 In order to let the EmojiPicker choose the right language you need to pass the locale to the config:
-``` dart
+
+```dart
 Config(
     locale: const Locale("ja"),
-)    
+)
 ```
+
 In case you want to support additional languages, you need to create a copy of a emoji set file (see /lib/locales), translate it (optional use `/automation/create_emoji_set.sh` to help you) and adjust the config for `emojiSet`:
+
 ```dart
 EmojiPicker(
     config: Config(
@@ -255,22 +259,69 @@ List<CategoryEmoji> _getEmojiLocale(Locale locale) {
   }
 }
 ```
+
 Example for using `/automation/create_emoji_set.sh` for generating translation in terminal:
+
 1. Fork the repository and open the directory from your terminal
-2. Run command below 
+2. Run command below
+
 ```
 cd automation && ./create_emoji_set.sh pt Portuguese
 ```
+
 Feel free to create an issue if you think a specific language should be supported by default. We keep the languages limited for now to avoid the package size growing unnecesserily large.
 
 In case you want to support only a single language you can just return the same EmojiSet for all locales.
+
 ```
 List<CategoryEmoji> _getEmojiLocale(String locale) {
     return emojiSetEnglish;
 }
 ```
+
 Using a single EmojiSet will reduce the package size by about 2 MB.
-If you prefer to use the old EmojiSet (version 3 and below), you can return `defaultEmojiSet`. 
+If you prefer to use the old EmojiSet (version 3 and below), you can return `defaultEmojiSet`.
+
+## EmojiPickerController
+
+The `EmojiPickerController` provides programmatic control over the emoji picker's category selection. This is particularly useful when you need to:
+
+- Persist the selected category across widget rebuilds (e.g., theme changes)
+- Change the category programmatically
+- Listen to category changes
+- Synchronize category state with other parts of your app
+
+### Basic Usage
+
+```dart
+// Create a controller
+final controller = EmojiPickerController();
+
+// Or with an initial category
+final controller = EmojiPickerController(initialCategory: Category.SMILEYS);
+
+// Use with EmojiPicker
+EmojiPicker(
+  controller: controller,
+  textEditingController: textController,
+  config: Config(
+    // ... your config
+  ),
+)
+
+// Change category programmatically
+controller.setCategory(Category.ANIMALS);
+
+// Listen to category changes
+controller.addListener(() {
+  print('Category changed to: ${controller.currentCategory.name}');
+});
+
+// Don't forget to dispose
+controller.dispose();
+```
+
+See a full controller usage example in [here](https://github.com/Fintasys/emoji_picker_flutter/blob/master/example/lib/main_controller_example.dart).
 
 ## Extended usage with EmojiPickerUtils
 
