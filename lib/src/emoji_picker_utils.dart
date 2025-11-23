@@ -176,7 +176,7 @@ class EmojiPickerUtils {
       {required GlobalKey<EmojiPickerState> key}) async {
     return await EmojiPickerInternalUtils()
         .clearRecentEmojisInLocalStorage()
-        .then((_) => key.currentState?.updateRecentEmoji([], refresh: true));
+        .then((_) => key.currentState?.updateRecentEmoji([]));
   }
 
   /// Returns the emoji regex
