@@ -42,7 +42,7 @@ EmojiPicker(
         // Set it to null to hide the Backspace-Button
     },
     textEditingController: textEditingController, // pass here the same [TextEditingController] that is connected to your input field, usually a [TextFormField]
-    controller: emojiPickerController, // Allows you to control and maintain state of category tabs
+    controller: emojiPickerController, // (Optional) Allows you to control and maintain state of category tabs
     config: Config(
         height: 256, // Set `null` to unconstrain emoji picker
         bgColor: const Color(0xFFF2F2F2),
