@@ -25,7 +25,8 @@ class Config {
   });
 
   /// Max Height of the Emoji's view
-  /// If explicitly set to null, the emoji view will not be constrained by height
+  /// If explicitly set to null, the emoji view will not be constrained by
+  /// height
   final double? height;
 
   /// Verify that emoji glyph is supported by the platform (Android only)
