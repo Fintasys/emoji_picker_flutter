@@ -17,6 +17,7 @@ export 'package:emoji_picker_flutter/src/config.dart';
 export 'package:emoji_picker_flutter/src/default_emoji_set.dart';
 export 'package:emoji_picker_flutter/src/emoji.dart';
 export 'package:emoji_picker_flutter/src/emoji_picker.dart';
+export 'package:emoji_picker_flutter/src/emoji_picker_controller.dart';
 export 'package:emoji_picker_flutter/src/emoji_picker_utils.dart';
 export 'package:emoji_picker_flutter/src/emoji_text_editing_controller.dart';
 export 'package:emoji_picker_flutter/src/emoji_text_style.dart';

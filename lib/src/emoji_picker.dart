@@ -1,6 +1,15 @@
-import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:emoji_picker_flutter/locales/default_emoji_set_locale.dart';
+import 'package:emoji_picker_flutter/src/category_view/category_emoji.dart';
+import 'package:emoji_picker_flutter/src/category_view/recent_tab_behavior.dart';
+import 'package:emoji_picker_flutter/src/config.dart';
+import 'package:emoji_picker_flutter/src/emoji.dart';
+import 'package:emoji_picker_flutter/src/emoji_picker_controller.dart';
 import 'package:emoji_picker_flutter/src/emoji_picker_internal_utils.dart';
+import 'package:emoji_picker_flutter/src/emoji_view/default_emoji_picker_view.dart';
+import 'package:emoji_picker_flutter/src/emoji_view/emoji_view_config.dart';
+import 'package:emoji_picker_flutter/src/emoji_view_state.dart';
+import 'package:emoji_picker_flutter/src/recent_emoji.dart';
+import 'package:emoji_picker_flutter/src/search_view/default_search_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:universal_io/io.dart';
@@ -94,6 +103,9 @@ typedef OnBackspacePressed = void Function();
 /// Callback function for backspace button when long pressed
 typedef OnBackspaceLongPressed = void Function();
 
+/// Callback function for category tab changed
+typedef OnCategoryChanged = void Function(Category category);
+
 /// The Emoji Keyboard widget
 ///
 /// This widget displays a grid of [Emoji] sorted by [Category]
@@ -107,8 +119,10 @@ class EmojiPicker extends StatefulWidget {
     super.key,
     this.textEditingController,
     this.scrollController,
+    this.controller,
     this.onEmojiSelected,
     this.onBackspacePressed,
+    this.onCategoryChanged,
     this.config = const Config(),
     this.customWidget,
   });
@@ -125,11 +139,26 @@ class EmojiPicker extends StatefulWidget {
   /// [TextField] this widget handles auto scrolling for you.
   final ScrollController? scrollController;
 
+  /// Controller for managing the emoji picker state, including
+  /// the currently selected category tab.
+  ///
+  /// If provided, this controller allows you to:
+  /// - Read the current selected category programmatically
+  /// - Change the selected category programmatically
+  /// - Listen to category changes
+  ///
+  /// If both [controller] and [onCategoryChanged] are provided,
+  /// the controller takes precedence.
+  final EmojiPickerController? controller;
+
   /// The function called when the emoji is selected
   final OnEmojiSelected? onEmojiSelected;
 
   /// The function called when backspace button is pressed
   final OnBackspacePressed? onBackspacePressed;
+
+  /// The function called when category tab changes
+  final OnCategoryChanged? onCategoryChanged;
 
   /// Config for customizations
   final Config config;
@@ -173,6 +202,7 @@ class EmojiPickerState extends State<EmojiPicker> {
     super.initState();
     _updateEmojis();
     widget.textEditingController?.addListener(_scrollToCursorAfterTextChange);
+    widget.controller?.addListener(_onControllerChanged);
   }
 
   @override
@@ -181,6 +211,11 @@ class EmojiPickerState extends State<EmojiPicker> {
       // Config changed - rebuild EmojiPickerView completely
       _loaded = false;
       _updateEmojis();
+    }
+    // Handle controller changes
+    if (oldWidget.controller != widget.controller) {
+      oldWidget.controller?.removeListener(_onControllerChanged);
+      widget.controller?.addListener(_onControllerChanged);
     }
     _resetStateWhenOffstage();
     super.didUpdateWidget(oldWidget);
@@ -376,6 +411,8 @@ class EmojiPickerState extends State<EmojiPicker> {
       _onBackspacePressed,
       _onBackspaceLongPressed,
       _showSearchView,
+      _handleCategoryChanged,
+      currentCategory: widget.controller?.currentCategory,
     );
     if (mounted) {
       setState(() {
@@ -453,5 +490,32 @@ class EmojiPickerState extends State<EmojiPicker> {
         }
       });
     }
+  }
+
+  /// Handler for controller category changes
+  void _onControllerChanged() {
+    // When the controller's category changes programmatically,
+    // navigate the tabbar to the new category without rebuilding
+    if (mounted && _loaded && widget.controller != null) {
+      _state.categoryNavigationNotifier.value =
+          widget.controller!.currentCategory;
+    }
+  }
+
+  /// Handle category changes (both from user interaction and programmatic)
+  void _handleCategoryChanged(Category category) {
+    // Update controller if present
+    widget.controller?.updateCategory(category);
+
+    // Call callback if present and no controller (for backward compatibility)
+    if (widget.controller == null) {
+      widget.onCategoryChanged?.call(category);
+    }
+  }
+
+  @override
+  void dispose() {
+    widget.controller?.removeListener(_onControllerChanged);
+    super.dispose();
   }
 }

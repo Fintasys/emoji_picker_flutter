@@ -19,8 +19,13 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
 
   @override
   void initState() {
-    var initCategory = widget.state.categoryEmoji.indexWhere((element) =>
-        element.category == widget.config.categoryViewConfig.initCategory);
+    // Use controller's current category if available,
+    // otherwise use config's initCategory
+    final targetCategory = widget.state.currentCategory ??
+        widget.config.categoryViewConfig.initCategory;
+
+    var initCategory = widget.state.categoryEmoji
+        .indexWhere((element) => element.category == targetCategory);
     if (initCategory == -1) {
       initCategory = 0;
     }
@@ -31,11 +36,35 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     _pageController = PageController(initialPage: initCategory)
       ..addListener(closeSkinToneOverlay);
     _scrollController.addListener(closeSkinToneOverlay);
+
+    // Listen to programmatic category changes from controller
+    widget.state.categoryNavigationNotifier
+        .addListener(_onCategoryNavigationChanged);
+
     super.initState();
+  }
+
+  void _onCategoryNavigationChanged() {
+    final targetCategory = widget.state.categoryNavigationNotifier.value;
+    if (targetCategory != null) {
+      final index = widget.state.categoryEmoji
+          .indexWhere((element) => element.category == targetCategory);
+      if (index != -1) {
+        final currentPage = _pageController.page?.round();
+        if (index != currentPage) {
+          // Use jumpToPage for instant navigation without building intermediate pages
+          // This prevents performance issues when jumping to tabs far away
+          // The onPageChanged callback will handle animating the tab indicator
+          _pageController.jumpToPage(index);
+        }
+      }
+    }
   }
 
   @override
   void dispose() {
+    widget.state.categoryNavigationNotifier
+        .removeListener(_onCategoryNavigationChanged);
     closeSkinToneOverlay();
     _pageController.dispose();
     _scrollController.dispose();
@@ -105,6 +134,12 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
             index,
             duration: widget.config.categoryViewConfig.tabIndicatorAnimDuration,
           );
+          // Notify about category change
+          if (index < widget.state.categoryEmoji.length) {
+            widget.state.onCategoryChanged?.call(
+              widget.state.categoryEmoji[index].category,
+            );
+          }
         },
         itemBuilder: (context, index) => _buildPage(
           emojiSize,
