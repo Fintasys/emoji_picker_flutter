@@ -42,8 +42,9 @@ EmojiPicker(
         // Set it to null to hide the Backspace-Button
     },
     textEditingController: textEditingController, // pass here the same [TextEditingController] that is connected to your input field, usually a [TextFormField]
+    controller: emojiPickerController, // Allows you to control and maintain state of category tabs
     config: Config(
-        height: 256,
+        height: 256, // Set `null` to unconstrain emoji picker
         bgColor: const Color(0xFFF2F2F2),
         checkPlatformCompatibility: true,
         emojiViewConfig: EmojiViewConfig(
@@ -89,13 +90,13 @@ All examples can be found [here](https://github.com/Fintasys/emoji_picker_flutte
 
 | property                   | description                                                                                                                                     | default                       |
 | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
-| height                     | Height of Emoji Picker                                                                                                                          | 256                           |
-| viewOrderConfig   | The exact order in which category view, emoji view and bottom bar appear                                                                      | const ViewOrderConfig()                         |
+| height                     | Height of Emoji Picker (set to `null` to make widget unconstrained)                                                                             | 256                           |
+| viewOrderConfig            | The exact order in which category view, emoji view and bottom bar appear                                                                        | const ViewOrderConfig()       |
 | checkPlatformCompatibility | Whether to filter out glyphs that platform cannot render with the default font (Android).                                                       | true                          |
 | emojiSet                   | Custom emoji set, can be built based on `defaultEmojiSet` provided by the library.                                                              | null                          |
 | emojiTextStyle             | Text style to apply to individual emoji icons. Can be used to define custom emoji font either with GoogleFonts library or bundled with the app. | null                          |
-| customBackspaceIcon             | Custom Icon for Backspace button | null                          |
-| customSearchIcon             | Custom Icon for Search button | null                          |
+| customBackspaceIcon        | Custom Icon for Backspace button                                                                                                                | null                          |
+| customSearchIcon           | Custom Icon for Search button                                                                                                                   | null                          |
 | emojiViewConfig            | Emoji view config                                                                                                                               | const EmojiViewConfig()       |
 | skinToneConfig             | Skin tone config                                                                                                                                | const SkinToneConfig          |
 | categoryViewConfig         | Category view config                                                                                                                            | const CategoryViewConfig      |
@@ -134,7 +135,7 @@ All examples can be found [here](https://github.com/Fintasys/emoji_picker_flutte
 | tabIndicatorAnimDuration | Duration of tab indicator to animate to next category                                                      | Duration(milliseconds: 300) |
 | initCategory             | The initial Category that will be selected                                                                 | Category.RECENT             |
 | recentTabBehavior        | Show extra tab with recently / popular used emoji                                                          | RecentTabBehavior.RECENT    |
-| extraTab      | Add extra tab to category tab bar for backspace or search button                                                                    | CategoryExtraTab.NONE                       |
+| extraTab                 | Add extra tab to category tab bar for backspace or search button                                           | CategoryExtraTab.NONE       |
 | backgroundColor          | Background color of category tab bar                                                                       | const Color(0xFFEBEFF2)     |
 | indicatorColor           | The color of the category indicator                                                                        | Colors.blue                 |
 | iconColor                | The color of the category icons                                                                            | Colors.grey                 |
