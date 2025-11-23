@@ -1,6 +1,6 @@
 ## 4.4.0
 
-- Add Dutch language support
+- Add Dutch language support (Thx to @mark-sdb)
 - Add `EmojiPickerController` to get control over the category tabs
 - Remove universal_io dependency (Thx to @hm21)
 - Allow to set height to null to allow unconstrained height for the emoji picker (e.g. Expanded)
