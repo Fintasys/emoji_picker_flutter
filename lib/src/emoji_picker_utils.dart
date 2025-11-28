@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
@@ -23,13 +24,13 @@ class EmojiPickerUtils {
   final List<Emoji> _allAvailableEmojiEntities = [];
   RegExp? _emojiRegExp;
 
-  /// Returns list of recently used emoji from cache
-  Future<List<RecentEmoji>> getRecentEmojis() async {
+  /// Returns list of recently used emoji
+  FutureOr<List<RecentEmoji>> getRecentEmojis() {
     return EmojiPickerInternalUtils().getRecentEmojis();
   }
 
   /// Filters out emojis not supported on the platform
-  Future<List<CategoryEmoji>> filterUnsupported(List<CategoryEmoji> data) =>
+  FutureOr<List<CategoryEmoji>> filterUnsupported(List<CategoryEmoji> data) =>
       EmojiPickerInternalUtils().filterUnsupported(data);
 
   /// Search for related emoticons based on keywords
@@ -42,9 +43,21 @@ class EmojiPickerUtils {
 
       final data = [...emojiSet]
         ..removeWhere((e) => e.category == Category.RECENT);
-      final availableCategoryEmoji = checkPlatformCompatibility
-          ? await emojiPickerInternalUtils.filterUnsupported(data)
-          : data;
+
+      final List<CategoryEmoji> availableCategoryEmoji;
+
+      if (checkPlatformCompatibility) {
+        final futureOrCategories =
+            emojiPickerInternalUtils.filterUnsupported(data);
+
+        if (futureOrCategories is List<CategoryEmoji>) {
+          availableCategoryEmoji = futureOrCategories;
+        } else {
+          availableCategoryEmoji = await futureOrCategories;
+        }
+      } else {
+        availableCategoryEmoji = data;
+      }
 
       // Set all the emoji entities
       for (var emojis in availableCategoryEmoji) {
