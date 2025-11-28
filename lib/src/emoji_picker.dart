@@ -397,15 +397,33 @@ class EmojiPickerState extends State<EmojiPicker> {
     _categoryEmoji.clear();
     if ([RecentTabBehavior.RECENT, RecentTabBehavior.POPULAR]
         .contains(widget.config.categoryViewConfig.recentTabBehavior)) {
-      _recentEmoji = await _emojiPickerInternalUtils.getRecentEmojis();
+      final futureOrRecent = _emojiPickerInternalUtils.getRecentEmojis();
+
+      if (futureOrRecent is List<RecentEmoji>) {
+        _recentEmoji = futureOrRecent;
+      } else {
+        _recentEmoji = await futureOrRecent;
+      }
+
       final recentEmojiMap = _recentEmoji.map((e) => e.emoji).toList();
       _categoryEmoji.add(CategoryEmoji(Category.RECENT, recentEmojiMap));
     }
     final data = widget.config.emojiSet?.call(widget.config.locale) ??
         getDefaultEmojiLocale(widget.config.locale);
-    _categoryEmoji.addAll(widget.config.checkPlatformCompatibility
-        ? await _emojiPickerInternalUtils.filterUnsupported(data)
-        : data);
+
+    if (widget.config.checkPlatformCompatibility) {
+      final futureOrCategories =
+          _emojiPickerInternalUtils.filterUnsupported(data);
+
+      if (futureOrCategories is List<CategoryEmoji>) {
+        _categoryEmoji.addAll(futureOrCategories);
+      } else {
+        _categoryEmoji.addAll(await futureOrCategories);
+      }
+    } else {
+      _categoryEmoji.addAll(data);
+    }
+
     _state = EmojiViewState(
       _categoryEmoji,
       _onEmojiSelected,

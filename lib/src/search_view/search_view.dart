@@ -41,11 +41,17 @@ class SearchViewState<T extends SearchView> extends State<T>
       // Auto focus textfield
       FocusScope.of(context).requestFocus(focusNode);
       // Load recent emojis initially
-      utils.getRecentEmojis().then(
-            (value) => setState(
-              () => _updateResults(value.map((e) => e.emoji).toList()),
-            ),
-          );
+      final futureOrRecent = utils.getRecentEmojis();
+
+      if (futureOrRecent is List<RecentEmoji>) {
+        _updateResults(futureOrRecent.map((e) => e.emoji).toList());
+      } else {
+        futureOrRecent.then(
+          (value) => setState(
+            () => _updateResults(value.map((e) => e.emoji).toList()),
+          ),
+        );
+      }
     });
     super.initState();
   }
