@@ -59,7 +59,7 @@ class EmojiPickerInternalUtils {
     });
   }
 
-  /// Returns list of recently used emoji from cache
+  /// Returns list of recently used emoji
   FutureOr<List<RecentEmoji>> getRecentEmojis() {
     if (_recentEmojis != null) {
       return _recentEmojis!.toList();

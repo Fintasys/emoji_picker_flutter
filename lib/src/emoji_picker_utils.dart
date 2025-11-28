@@ -24,7 +24,7 @@ class EmojiPickerUtils {
   final List<Emoji> _allAvailableEmojiEntities = [];
   RegExp? _emojiRegExp;
 
-  /// Returns list of recently used emoji from cache
+  /// Returns list of recently used emoji
   FutureOr<List<RecentEmoji>> getRecentEmojis() {
     return EmojiPickerInternalUtils().getRecentEmojis();
   }
@@ -48,9 +48,9 @@ class EmojiPickerUtils {
 
       if (checkPlatformCompatibility) {
         final futureOrCategories =
-        emojiPickerInternalUtils.filterUnsupported(data);
+            emojiPickerInternalUtils.filterUnsupported(data);
 
-        if(futureOrCategories is List<CategoryEmoji>) {
+        if (futureOrCategories is List<CategoryEmoji>) {
           availableCategoryEmoji = futureOrCategories;
         } else {
           availableCategoryEmoji = await futureOrCategories;
