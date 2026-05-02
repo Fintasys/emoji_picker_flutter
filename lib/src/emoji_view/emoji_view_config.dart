@@ -101,6 +101,10 @@ class EmojiViewConfig {
 
   @override
   bool operator ==(other) {
+    // NOTE: highlightedEmoji / highlightColor / highlightBorderRadius are
+    // intentionally excluded. They are presentation-only and changing them
+    // should not trigger a full emoji reload in EmojiPicker.didUpdateWidget;
+    // the new values still flow into EmojiCell on the next rebuild.
     return (other is EmojiViewConfig) &&
         other.columns == columns &&
         other.emojiSizeMax == emojiSizeMax &&
@@ -110,10 +114,7 @@ class EmojiViewConfig {
         other.recentsLimit == recentsLimit &&
         other.buttonMode == buttonMode &&
         other.gridPadding == gridPadding &&
-        other.replaceEmojiOnLimitExceed == replaceEmojiOnLimitExceed &&
-        other.highlightedEmoji?.emoji == highlightedEmoji?.emoji &&
-        other.highlightColor == highlightColor &&
-        other.highlightBorderRadius == highlightBorderRadius;
+        other.replaceEmojiOnLimitExceed == replaceEmojiOnLimitExceed;
   }
 
   @override
@@ -126,8 +127,5 @@ class EmojiViewConfig {
       recentsLimit.hashCode ^
       buttonMode.hashCode ^
       gridPadding.hashCode ^
-      replaceEmojiOnLimitExceed.hashCode ^
-      (highlightedEmoji?.emoji.hashCode ?? 0) ^
-      highlightColor.hashCode ^
-      highlightBorderRadius.hashCode;
+      replaceEmojiOnLimitExceed.hashCode;
 }

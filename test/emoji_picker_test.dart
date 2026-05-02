@@ -149,27 +149,30 @@ void main() {
 
     testWidgets('Should highlight the configured highlightedEmoji',
         (WidgetTester tester) async {
-      const highlighted = Emoji('🙂', 'face | happy | slightly | smile | smiling');
+      const highlighted =
+          Emoji('🙂', 'face | happy | slightly | smile | smiling');
       const highlightColor = Color(0xFFFF00FF);
 
-      await tester.pumpWidget(
-        const MaterialApp(
+      Widget buildApp(Emoji? highlight) {
+        return MaterialApp(
           home: Scaffold(
             body: EmojiPicker(
               config: Config(
                 height: 256,
-                categoryViewConfig: CategoryViewConfig(
+                categoryViewConfig: const CategoryViewConfig(
                   recentTabBehavior: RecentTabBehavior.NONE,
                 ),
                 emojiViewConfig: EmojiViewConfig(
-                  highlightedEmoji: highlighted,
+                  highlightedEmoji: highlight,
                   highlightColor: highlightColor,
                 ),
               ),
             ),
           ),
-        ),
-      );
+        );
+      }
+
+      await tester.pumpWidget(buildApp(highlighted));
       await tester.pumpAndSettle();
 
       final cellFinder = find.ancestor(
@@ -188,6 +191,36 @@ void main() {
             .first,
       );
       expect(otherCell.isHighlighted, isFalse);
+
+      // Regression: changing highlightedEmoji must not trigger a full reload
+      // (which would briefly show the loading indicator) and the new highlight
+      // should propagate to the cells on the next frame.
+      const newHighlighted = Emoji('😀', 'face | grinning | smile');
+      await tester.pumpWidget(buildApp(newHighlighted));
+      await tester.pump();
+
+      // Grid should still be present (not replaced by the loading indicator).
+      expect(find.byKey(const Key('emojiScrollView')), findsOneWidget);
+
+      final newCellFinder = find.ancestor(
+        of: find.text(newHighlighted.emoji).hitTestable(),
+        matching: find.byType(EmojiCell),
+      );
+      expect(newCellFinder, findsOneWidget);
+      expect(
+        tester.widget<EmojiCell>(newCellFinder).isHighlighted,
+        isTrue,
+      );
+
+      // Previously highlighted emoji should no longer be highlighted.
+      final oldCellFinder = find.ancestor(
+        of: find.text(highlighted.emoji).hitTestable(),
+        matching: find.byType(EmojiCell),
+      );
+      expect(
+        tester.widget<EmojiCell>(oldCellFinder).isHighlighted,
+        isFalse,
+      );
     });
   });
 }
