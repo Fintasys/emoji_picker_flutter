@@ -16,6 +16,8 @@ class EmojiPickerInternalUtils {
   // Establish communication with native
   static const _platform = MethodChannel('emoji_picker_flutter');
 
+  static final RegExp _skinToneRegExp = RegExp(SkinTone.values.join('|'));
+
   // Get available emoji for given category title
   Future<CategoryEmoji> _getAvailableEmojis(CategoryEmoji category) async {
     var available = (await _platform.invokeListMethod<bool>(
@@ -124,10 +126,7 @@ class EmojiPickerInternalUtils {
   /// Remove skin tone from given emoji
   Emoji removeSkinTone(Emoji emoji) {
     return emoji.copyWith(
-      emoji: emoji.emoji.replaceFirst(
-        RegExp(SkinTone.values.join('|')),
-        '',
-      ),
+      emoji: emoji.emoji.replaceFirst(_skinToneRegExp, ''),
     );
   }
 }
