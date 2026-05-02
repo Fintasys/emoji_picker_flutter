@@ -83,7 +83,11 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
         return EmojiContainer(
           color: widget.config.emojiViewConfig.backgroundColor,
           buttonMode: widget.config.emojiViewConfig.buttonMode,
+          // Clip overflowing children so the picker still renders cleanly when
+          // a parent constrains it to a smaller height than the natural sum of
+          // the category bar, emoji view, and bottom action bar (see #256).
           child: Column(
+            clipBehavior: Clip.hardEdge,
             children: [
               widget.config.viewOrderConfig.top,
               widget.config.viewOrderConfig.middle,
