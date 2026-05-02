@@ -118,6 +118,9 @@ All examples can be found [here](https://github.com/Fintasys/emoji_picker_flutte
 | noRecents                 | A widget (usually [Text]) to be displayed if no recent emojis to display. Needs to be `const` Widget! | Text('No Recents', style: TextStyle(fontSize: 20, color: Colors.black26), textAlign: TextAlign.center) |
 | loadingIndicator          | A widget to display while emoji picker is initializing. Needs to be `const` Widget!                   | SizedBox.shrink()                                                                                      |
 | buttonMode                | Choose between Material and Cupertino button style                                                    | ButtonMode.MATERIAL                                                                                    |
+| highlightedEmoji          | Emoji that should be visually highlighted in the picker (e.g. user's selected reaction)               | null                                                                                                   |
+| highlightColor            | Background color used to highlight `highlightedEmoji`                                                 | const Color(0xFFE0E0E0)                                                                                |
+| highlightBorderRadius     | Border radius applied to the highlight background                                                     | 4.0                                                                                                    |
 
 ## SkinTone Config
 

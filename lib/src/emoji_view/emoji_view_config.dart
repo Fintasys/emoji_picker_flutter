@@ -32,6 +32,9 @@ class EmojiViewConfig {
     this.noRecents = DefaultNoRecentsWidget,
     this.loadingIndicator = const SizedBox.shrink(),
     this.buttonMode = ButtonMode.MATERIAL,
+    this.highlightedEmoji,
+    this.highlightColor = const Color(0xFFE0E0E0),
+    this.highlightBorderRadius = 4.0,
   });
 
   /// Number of emojis per row
@@ -70,6 +73,19 @@ class EmojiViewConfig {
   /// Replace latest emoji on recents list on limit exceed
   final bool replaceEmojiOnLimitExceed;
 
+  /// Emoji that should be visually highlighted in the picker. Useful to
+  /// indicate the user's previously selected reaction so they can easily
+  /// identify and toggle it. Matching is performed by emoji unicode string.
+  ///
+  /// When `null`, no emoji is highlighted.
+  final Emoji? highlightedEmoji;
+
+  /// Background color used to highlight [highlightedEmoji]
+  final Color highlightColor;
+
+  /// Border radius applied to the highlight background
+  final double highlightBorderRadius;
+
   /// Get Emoji size based on properties and screen width
   double getEmojiSize(double width) {
     final maxSize = getEmojiBoxSize(width);
@@ -94,7 +110,10 @@ class EmojiViewConfig {
         other.recentsLimit == recentsLimit &&
         other.buttonMode == buttonMode &&
         other.gridPadding == gridPadding &&
-        other.replaceEmojiOnLimitExceed == replaceEmojiOnLimitExceed;
+        other.replaceEmojiOnLimitExceed == replaceEmojiOnLimitExceed &&
+        other.highlightedEmoji?.emoji == highlightedEmoji?.emoji &&
+        other.highlightColor == highlightColor &&
+        other.highlightBorderRadius == highlightBorderRadius;
   }
 
   @override
@@ -107,5 +126,8 @@ class EmojiViewConfig {
       recentsLimit.hashCode ^
       buttonMode.hashCode ^
       gridPadding.hashCode ^
-      replaceEmojiOnLimitExceed.hashCode;
+      replaceEmojiOnLimitExceed.hashCode ^
+      (highlightedEmoji?.emoji.hashCode ?? 0) ^
+      highlightColor.hashCode ^
+      highlightBorderRadius.hashCode;
 }

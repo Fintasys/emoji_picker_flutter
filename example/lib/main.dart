@@ -18,6 +18,7 @@ class MyAppState extends State<MyApp> {
   final _controller = TextEditingController();
   final _scrollController = ScrollController();
   bool _emojiShowing = false;
+  Emoji? _selectedReaction;
 
   @override
   Widget build(BuildContext context) {
@@ -106,6 +107,14 @@ class MyAppState extends State<MyApp> {
                 child: EmojiPicker(
                   textEditingController: _controller,
                   scrollController: _scrollController,
+                  onEmojiSelected: (category, emoji) {
+                    setState(() {
+                      // Toggle reaction: tapping the same emoji removes it,
+                      // tapping a different one replaces it.
+                      _selectedReaction =
+                          _selectedReaction?.emoji == emoji.emoji ? null : emoji;
+                    });
+                  },
                   config: Config(
                     height: 256,
                     checkPlatformCompatibility: true,
@@ -117,6 +126,7 @@ class MyAppState extends State<MyApp> {
                                   TargetPlatform.iOS
                               ? 1.2
                               : 1.0),
+                      highlightedEmoji: _selectedReaction,
                     ),
                     skinToneConfig: const SkinToneConfig(),
                     categoryViewConfig: const CategoryViewConfig(),

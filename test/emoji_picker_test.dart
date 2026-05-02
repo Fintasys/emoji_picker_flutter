@@ -146,5 +146,48 @@ void main() {
       // Check if the category been passed to the 'onEmojiSelected' callback
       expect(_categorySelected, equals(Category.SMILEYS));
     });
+
+    testWidgets('Should highlight the configured highlightedEmoji',
+        (WidgetTester tester) async {
+      const highlighted = Emoji('🙂', 'face | happy | slightly | smile | smiling');
+      const highlightColor = Color(0xFFFF00FF);
+
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: EmojiPicker(
+              config: Config(
+                height: 256,
+                categoryViewConfig: CategoryViewConfig(
+                  recentTabBehavior: RecentTabBehavior.NONE,
+                ),
+                emojiViewConfig: EmojiViewConfig(
+                  highlightedEmoji: highlighted,
+                  highlightColor: highlightColor,
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final cellFinder = find.ancestor(
+        of: find.text(highlighted.emoji).hitTestable(),
+        matching: find.byType(EmojiCell),
+      );
+      expect(cellFinder, findsOneWidget);
+      final cell = tester.widget<EmojiCell>(cellFinder);
+      expect(cell.isHighlighted, isTrue);
+      expect(cell.highlightColor, equals(highlightColor));
+
+      final otherCell = tester.widget<EmojiCell>(
+        find
+            .byWidgetPredicate(
+                (w) => w is EmojiCell && w.emoji.emoji != highlighted.emoji)
+            .first,
+      );
+      expect(otherCell.isHighlighted, isFalse);
+    });
   });
 }

@@ -19,6 +19,9 @@ class EmojiCell extends StatelessWidget {
     required this.skinToneIndicatorColor,
     this.onSkinToneDialogRequested,
     required this.onEmojiSelected,
+    this.isHighlighted = false,
+    this.highlightColor = const Color(0xFFE0E0E0),
+    this.highlightBorderRadius = 4.0,
   });
 
   /// Constructor that can retrieve as much information as possible from
@@ -35,7 +38,11 @@ class EmojiCell extends StatelessWidget {
       : buttonMode = config.emojiViewConfig.buttonMode,
         enableSkinTones = config.skinToneConfig.enabled,
         textStyle = config.emojiTextStyle,
-        skinToneIndicatorColor = config.skinToneConfig.indicatorColor;
+        skinToneIndicatorColor = config.skinToneConfig.indicatorColor,
+        isHighlighted =
+            config.emojiViewConfig.highlightedEmoji?.emoji == emoji.emoji,
+        highlightColor = config.emojiViewConfig.highlightColor,
+        highlightBorderRadius = config.emojiViewConfig.highlightBorderRadius;
 
   /// Emoji to display as the cell content
   final Emoji emoji;
@@ -69,6 +76,16 @@ class EmojiCell extends StatelessWidget {
   /// Callback for a single tap on the cell.
   final OnEmojiSelected onEmojiSelected;
 
+  /// Whether this cell should be visually highlighted (e.g. to indicate the
+  /// user's previously selected reaction).
+  final bool isHighlighted;
+
+  /// Background color used when [isHighlighted] is `true`.
+  final Color highlightColor;
+
+  /// Border radius applied to the highlight background.
+  final double highlightBorderRadius;
+
   @override
   Widget build(BuildContext context) {
     onPressed() {
@@ -86,7 +103,7 @@ class EmojiCell extends StatelessWidget {
       );
     }
 
-    return SizedBox(
+    final cell = SizedBox(
       width: emojiBoxSize,
       height: emojiBoxSize,
       child: _buildButtonWidget(
@@ -97,6 +114,17 @@ class EmojiCell extends StatelessWidget {
           child: _buildEmoji(),
         ),
       ),
+    );
+
+    if (!isHighlighted) {
+      return cell;
+    }
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: highlightColor,
+        borderRadius: BorderRadius.circular(highlightBorderRadius),
+      ),
+      child: cell,
     );
   }
 

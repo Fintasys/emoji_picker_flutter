@@ -1,3 +1,9 @@
+## Unreleased
+
+- Add `highlightedEmoji` to `EmojiViewConfig` to visually highlight a selected
+  emoji in the picker (e.g. to indicate the user's current reaction).
+  Customizable via `highlightColor` and `highlightBorderRadius`.
+
 ## 4.4.0
 
 - Add Dutch language support (Thx to @mark-sdb)
