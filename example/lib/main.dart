@@ -111,8 +111,11 @@ class MyAppState extends State<MyApp> {
                     setState(() {
                       // Toggle reaction: tapping the same emoji removes it,
                       // tapping a different one replaces it.
-                      _selectedReaction =
-                          _selectedReaction?.emoji == emoji.emoji ? null : emoji;
+                      if (_selectedReaction?.emoji == emoji.emoji) {
+                        _selectedReaction = null;
+                      } else {
+                        _selectedReaction = emoji;
+                      }
                     });
                   },
                   config: Config(
