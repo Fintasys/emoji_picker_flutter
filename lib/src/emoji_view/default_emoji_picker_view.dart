@@ -83,26 +83,29 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
         return EmojiContainer(
           color: widget.config.emojiViewConfig.backgroundColor,
           buttonMode: widget.config.emojiViewConfig.buttonMode,
-          child: Column(
-            children: [
-              widget.config.viewOrderConfig.top,
-              widget.config.viewOrderConfig.middle,
-              widget.config.viewOrderConfig.bottom,
-            ].map(
-              (item) {
-                switch (item) {
-                  case EmojiPickerItem.categoryBar:
-                    // Category view
-                    return _buildCategoryView();
-                  case EmojiPickerItem.emojiView:
-                    // Emoji view
-                    return _buildEmojiView(emojiSize, emojiBoxSize);
-                  case EmojiPickerItem.searchBar:
-                    // Search Bar
-                    return _buildBottomSearchBar();
-                }
-              },
-            ).toList(),
+          // Clip overflow when constrained tighter than natural height (#256).
+          child: ClipRect(
+            child: Column(
+              children: [
+                widget.config.viewOrderConfig.top,
+                widget.config.viewOrderConfig.middle,
+                widget.config.viewOrderConfig.bottom,
+              ].map(
+                (item) {
+                  switch (item) {
+                    case EmojiPickerItem.categoryBar:
+                      // Category view
+                      return _buildCategoryView();
+                    case EmojiPickerItem.emojiView:
+                      // Emoji view
+                      return _buildEmojiView(emojiSize, emojiBoxSize);
+                    case EmojiPickerItem.searchBar:
+                      // Search Bar
+                      return _buildBottomSearchBar();
+                  }
+                },
+              ).toList(),
+            ),
           ),
         );
       },
