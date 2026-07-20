@@ -143,7 +143,7 @@ mixin SkinToneOverlayStateMixin<T extends StatefulWidget> on State<T> {
 
   @override
   void dispose() {
-    _overlay?.dispose();
+    closeSkinToneOverlay();
     super.dispose();
   }
 }

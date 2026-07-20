@@ -37,28 +37,33 @@ class SearchViewState<T extends SearchView> extends State<T>
 
   @override
   void initState() {
+    super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
       // Auto focus textfield
       FocusScope.of(context).requestFocus(focusNode);
       // Load recent emojis initially
-      utils.getRecentEmojis().then(
-            (value) => setState(
-              () => _updateResults(value.map((e) => e.emoji).toList()),
-            ),
-          );
+      utils.getRecentEmojis().then((value) {
+        if (!mounted) return;
+        setState(() => _updateResults(value.map((e) => e.emoji).toList()));
+      });
     });
-    super.initState();
+  }
+
+  @override
+  void dispose() {
+    focusNode.dispose();
+    super.dispose();
   }
 
   /// On text input changed callback
   void onTextInputChanged(String text) {
     links.clear();
     results.clear();
-    utils.searchEmoji(text, widget.state.categoryEmoji).then(
-          (value) => setState(
-            () => _updateResults(value),
-          ),
-        );
+    utils.searchEmoji(text, widget.state.categoryEmoji).then((value) {
+      if (!mounted) return;
+      setState(() => _updateResults(value));
+    });
   }
 
   void _updateResults(List<Emoji> emojis) {

@@ -218,6 +218,12 @@ class EmojiPickerState extends State<EmojiPicker> {
       oldWidget.controller?.removeListener(_onControllerChanged);
       widget.controller?.addListener(_onControllerChanged);
     }
+    // Handle text editing controller changes
+    if (oldWidget.textEditingController != widget.textEditingController) {
+      oldWidget.textEditingController
+          ?.removeListener(_scrollToCursorAfterTextChange);
+      widget.textEditingController?.addListener(_scrollToCursorAfterTextChange);
+    }
     _resetStateWhenOffstage();
     super.didUpdateWidget(oldWidget);
   }
@@ -521,6 +527,8 @@ class EmojiPickerState extends State<EmojiPicker> {
   @override
   void dispose() {
     widget.controller?.removeListener(_onControllerChanged);
+    widget.textEditingController
+        ?.removeListener(_scrollToCursorAfterTextChange);
     super.dispose();
   }
 }
