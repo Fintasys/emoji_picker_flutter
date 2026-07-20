@@ -40,7 +40,8 @@ class MyAppState extends State<MyApp> {
     // (either from user interaction or programmatic changes)
     if (foundation.kDebugMode) {
       debugPrint(
-          'Category changed to: ${_emojiController.currentCategory.name}');
+        'Category changed to: ${_emojiController.currentCategory.name}',
+      );
     }
 
     // You can perform any additional logic here
@@ -174,10 +175,7 @@ class MyAppState extends State<MyApp> {
                         onPressed: () {
                           _textController.clear();
                         },
-                        icon: const Icon(
-                          Icons.clear,
-                          color: Colors.white,
-                        ),
+                        icon: const Icon(Icons.clear, color: Colors.white),
                         tooltip: 'Clear',
                       ),
                     ),
@@ -199,13 +197,15 @@ class MyAppState extends State<MyApp> {
                     viewOrderConfig: const ViewOrderConfig(),
                     emojiViewConfig: EmojiViewConfig(
                       // Issue: https://github.com/flutter/flutter/issues/28894
-                      emojiSizeMax: 28 *
+                      emojiSizeMax:
+                          28 *
                           (foundation.defaultTargetPlatform ==
                                   TargetPlatform.iOS
                               ? 1.2
                               : 1.0),
-                      backgroundColor:
-                          _isDarkTheme ? Colors.grey[900]! : Colors.white,
+                      backgroundColor: _isDarkTheme
+                          ? Colors.grey[900]!
+                          : Colors.white,
                     ),
                     skinToneConfig: const SkinToneConfig(),
                     categoryViewConfig: CategoryViewConfig(
@@ -213,8 +213,9 @@ class MyAppState extends State<MyApp> {
                           ? Colors.grey[800]!
                           : const Color(0xFFEBEFF2),
                       iconColor: _isDarkTheme ? Colors.white70 : Colors.grey,
-                      iconColorSelected:
-                          _isDarkTheme ? Colors.white : Colors.blue,
+                      iconColorSelected: _isDarkTheme
+                          ? Colors.white
+                          : Colors.blue,
                       indicatorColor: _isDarkTheme ? Colors.white : Colors.blue,
                     ),
                     bottomActionBarConfig: const BottomActionBarConfig(),

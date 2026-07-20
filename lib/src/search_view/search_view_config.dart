@@ -2,11 +2,12 @@ import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 
 /// Callback function for custom search view
-typedef SearchViewBuilder = Widget Function(
-  Config config,
-  EmojiViewState state,
-  VoidCallback showEmojiView,
-);
+typedef SearchViewBuilder =
+    Widget Function(
+      Config config,
+      EmojiViewState state,
+      VoidCallback showEmojiView,
+    );
 
 /// Search view Config
 class SearchViewConfig {

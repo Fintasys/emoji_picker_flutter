@@ -33,18 +33,15 @@ class Emoji {
     return Emoji(
       json['emoji'] as String,
       json['name'] as String,
-      hasSkinTone:
-          json['hasSkinTone'] != null ? json['hasSkinTone'] as bool : false,
+      hasSkinTone: json['hasSkinTone'] != null
+          ? json['hasSkinTone'] as bool
+          : false,
     );
   }
 
   ///  Encode Emoji to json
   Map<String, dynamic> toJson() {
-    return {
-      'emoji': emoji,
-      'name': name,
-      'hasSkinTone': hasSkinTone,
-    };
+    return {'emoji': emoji, 'name': name, 'hasSkinTone': hasSkinTone};
   }
 
   /// Copy method

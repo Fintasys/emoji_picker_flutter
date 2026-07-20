@@ -2,12 +2,13 @@ import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 
 /// Callback function for custom category view
-typedef CategoryViewBuilder = Widget Function(
-  Config config,
-  EmojiViewState state,
-  TabController tabController,
-  PageController pageController,
-);
+typedef CategoryViewBuilder =
+    Widget Function(
+      Config config,
+      EmojiViewState state,
+      TabController tabController,
+      PageController pageController,
+    );
 
 /// Category view Config
 class CategoryViewConfig {

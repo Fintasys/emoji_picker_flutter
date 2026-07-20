@@ -4,7 +4,7 @@ import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 
 /// List of categories of emojis
 const List<CategoryEmoji> defaultEmojiSet = [
-// ======================================================= Category.SMILEYS
+  // ======================================================= Category.SMILEYS
   CategoryEmoji(Category.SMILEYS, [
     Emoji('😀', 'Grinning Face'),
     Emoji('😃', 'Grinning Face With Big Eyes'),
@@ -385,10 +385,10 @@ const List<CategoryEmoji> defaultEmojiSet = [
     Emoji('⛑️', 'Rescue Worker’s Helmet'),
     Emoji('💄', 'Lipstick'),
     Emoji('💍', 'Ring'),
-    Emoji('💼', 'Briefcase')
+    Emoji('💼', 'Briefcase'),
   ]),
 
-// ======================================================= Category.ANIMALS
+  // ======================================================= Category.ANIMALS
   CategoryEmoji(Category.ANIMALS, [
     Emoji('🐶', 'Dog Face'),
     Emoji('🐱', 'Cat Face'),
@@ -576,10 +576,10 @@ const List<CategoryEmoji> defaultEmojiSet = [
     Emoji('🎄', 'Christmas Tree'),
     Emoji('✨', 'Sparkles'),
     Emoji('🎋', 'Tanabata Tree'),
-    Emoji('🎍', 'Pine Decoration')
+    Emoji('🎍', 'Pine Decoration'),
   ]),
 
-// ======================================================= Category.FOODS
+  // ======================================================= Category.FOODS
   CategoryEmoji(Category.FOODS, [
     Emoji('🍇', 'Grapes'),
     Emoji('🍈', 'Melon'),
@@ -689,10 +689,10 @@ const List<CategoryEmoji> defaultEmojiSet = [
     Emoji('🥢', 'Chopsticks'),
     Emoji('🍽️', 'Fork and Knife With Plate'),
     Emoji('🍴', 'Fork and Knife'),
-    Emoji('🥄', 'Spoon')
+    Emoji('🥄', 'Spoon'),
   ]),
 
-// ======================================================= Category.TRAVEL
+  // ======================================================= Category.TRAVEL
   CategoryEmoji(Category.TRAVEL, [
     Emoji('🗾', 'Map of Japan'),
     Emoji('🏔️', 'Snow-Capped Mountain'),
@@ -815,10 +815,10 @@ const List<CategoryEmoji> defaultEmojiSet = [
     Emoji('🛂', 'Passport Control'),
     Emoji('🛃', 'Customs'),
     Emoji('🛄', 'Baggage Claim'),
-    Emoji('🛅', 'Left Luggage')
+    Emoji('🛅', 'Left Luggage'),
   ]),
 
-// ======================================================= Category.ACTIVITIES
+  // ======================================================= Category.ACTIVITIES
   CategoryEmoji(Category.ACTIVITIES, [
     Emoji('🧗‍♂️', 'Man Climbing', hasSkinTone: true),
     Emoji('🧗‍♀️', 'Woman Climbing', hasSkinTone: true),
@@ -916,10 +916,10 @@ const List<CategoryEmoji> defaultEmojiSet = [
     Emoji('🎺', 'Trumpet'),
     Emoji('🎻', 'Violin'),
     Emoji('🥁', 'Drum'),
-    Emoji('🎬', 'Clapper Board')
+    Emoji('🎬', 'Clapper Board'),
   ]),
 
-// ======================================================= Category.OBJECTS
+  // ======================================================= Category.OBJECTS
   CategoryEmoji(Category.OBJECTS, [
     Emoji('💌', 'Love Letter'),
     Emoji('🕳️', 'Hole'),
@@ -1122,10 +1122,10 @@ const List<CategoryEmoji> defaultEmojiSet = [
     Emoji('🚬', 'Cigarette'),
     Emoji('⚰️', 'Coffin'),
     Emoji('⚱️', 'Funeral Urn'),
-    Emoji('🚰', 'Potable Water')
+    Emoji('🚰', 'Potable Water'),
   ]),
 
-// ======================================================= Category.SYMBOLS
+  // ======================================================= Category.SYMBOLS
   CategoryEmoji(Category.SYMBOLS, [
     Emoji('💘', 'Heart With Arrow'),
     Emoji('💝', 'Heart With Ribbon'),
@@ -1388,10 +1388,10 @@ const List<CategoryEmoji> defaultEmojiSet = [
     Emoji('🔻', 'Red Triangle Pointed Down'),
     Emoji('💠', 'Diamond With a Dot'),
     Emoji('🔳', 'White Square Button'),
-    Emoji('🔲', 'Black Square Button')
+    Emoji('🔲', 'Black Square Button'),
   ]),
 
-// ======================================================= Category.FLAGS
+  // ======================================================= Category.FLAGS
   CategoryEmoji(Category.FLAGS, [
     Emoji('🏁', 'Chequered Flag'),
     Emoji('🚩', 'Triangular Flag'),
@@ -1658,6 +1658,6 @@ const List<CategoryEmoji> defaultEmojiSet = [
     Emoji('🇾🇹', 'Flag: Mayotte'),
     Emoji('🇿🇦', 'Flag: South Africa'),
     Emoji('🇿🇲', 'Flag: Zambia'),
-    Emoji('🇿🇼', 'Flag: Zimbabwe')
+    Emoji('🇿🇼', 'Flag: Zimbabwe'),
   ]),
 ];

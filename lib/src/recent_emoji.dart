@@ -23,8 +23,5 @@ class RecentEmoji {
   }
 
   /// Encode RecentEmoji to json
-  Map<String, dynamic> toJson() => {
-        'emoji': emoji,
-        'counter': counter,
-      };
+  Map<String, dynamic> toJson() => {'emoji': emoji, 'counter': counter};
 }

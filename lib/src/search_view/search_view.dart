@@ -5,12 +5,7 @@ import 'package:flutter/material.dart';
 /// Inhert this class to create your own search view
 abstract class SearchView extends StatefulWidget {
   /// Constructor
-  const SearchView(
-    this.config,
-    this.state,
-    this.showEmojiView, {
-    super.key,
-  });
+  const SearchView(this.config, this.state, this.showEmojiView, {super.key});
 
   /// Config for customizations
   final Config config;
@@ -88,20 +83,20 @@ class SearchViewState<T extends SearchView> extends State<T>
         config: widget.config,
         onSkinToneDialogRequested:
             (emojiBoxPosition, emoji, emojiSize, category) {
-          closeSkinToneOverlay();
-          if (!emoji.hasSkinTone || !widget.config.skinToneConfig.enabled) {
-            return;
-          }
-          showSkinToneOverlay(
-            emojiBoxPosition,
-            emoji,
-            emojiSize,
-            null, // Todo: check if we can provide the category
-            widget.config,
-            _onSkinTonedEmojiSelected,
-            links[emoji.emoji]!,
-          );
-        },
+              closeSkinToneOverlay();
+              if (!emoji.hasSkinTone || !widget.config.skinToneConfig.enabled) {
+                return;
+              }
+              showSkinToneOverlay(
+                emojiBoxPosition,
+                emoji,
+                emojiSize,
+                null, // Todo: check if we can provide the category
+                widget.config,
+                _onSkinTonedEmojiSelected,
+                links[emoji.emoji]!,
+              );
+            },
       ),
     );
   }

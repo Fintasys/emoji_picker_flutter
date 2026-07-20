@@ -31,7 +31,7 @@ class EmojiPickerController extends ChangeNotifier {
   /// Creates an EmojiPickerController with an optional initial category.
   /// Defaults to [Category.RECENT] if not specified.
   EmojiPickerController({Category initialCategory = Category.RECENT})
-      : _currentCategory = initialCategory;
+    : _currentCategory = initialCategory;
 
   Category _currentCategory;
 
@@ -62,9 +62,7 @@ class EmojiPickerController extends ChangeNotifier {
 
   /// Creates a copy of this controller with the same current category.
   EmojiPickerController copyWith({Category? category}) {
-    return EmojiPickerController(
-      initialCategory: category ?? _currentCategory,
-    );
+    return EmojiPickerController(initialCategory: category ?? _currentCategory);
   }
 
   @override

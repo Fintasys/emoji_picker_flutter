@@ -10,8 +10,9 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('EmojiPicker Tests', () {
-    testWidgets('Should allow user to select an emoji',
-        (WidgetTester tester) async {
+    testWidgets('Should allow user to select an emoji', (
+      WidgetTester tester,
+    ) async {
       final _controller = TextEditingController();
       Emoji? _emojiSelected;
       Category? _categorySelected;
@@ -27,10 +28,11 @@ void main() {
                 _categorySelected = category;
               },
               config: const Config(
-                  height: 256,
-                  categoryViewConfig: CategoryViewConfig(
-                    recentTabBehavior: RecentTabBehavior.NONE,
-                  )),
+                height: 256,
+                categoryViewConfig: CategoryViewConfig(
+                  recentTabBehavior: RecentTabBehavior.NONE,
+                ),
+              ),
             ),
           ),
         ),
@@ -57,17 +59,16 @@ void main() {
       // Check if the emoji been passed to the 'onEmojiSelected' callback
       expect(
         _emojiSelected,
-        equals(
-          const Emoji('🙂', 'face | happy | slightly | smile | smiling'),
-        ),
+        equals(const Emoji('🙂', 'face | happy | slightly | smile | smiling')),
       );
 
       // Check if the category been passed to the 'onEmojiSelected' callback
       expect(_categorySelected, equals(Category.SMILEYS));
     });
 
-    testWidgets('Should allow to select an emoji with skintone on longPress',
-        (WidgetTester tester) async {
+    testWidgets('Should allow to select an emoji with skintone on longPress', (
+      WidgetTester tester,
+    ) async {
       final _controller = TextEditingController();
       final _utils = EmojiPickerUtils();
       final emoji = const Emoji('👍', 'Thumbs Up', hasSkinTone: true);
@@ -123,8 +124,9 @@ void main() {
       /// Check if all skin tones are rendered in overlay
       Finder? skinToneVariantToFind;
       for (var i = 0; i < SkinTone.values.length; i++) {
-        skinToneVariantToFind =
-            find.text(_utils.applySkinTone(emoji, SkinTone.values[i]).emoji);
+        skinToneVariantToFind = find.text(
+          _utils.applySkinTone(emoji, SkinTone.values[i]).emoji,
+        );
         // Verify if we can find the skintone variant
         expect(skinToneVariantToFind, findsOneWidget);
       }

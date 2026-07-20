@@ -25,9 +25,7 @@ class MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: const Text('Emoji Picker Example App'),
-        ),
+        appBar: AppBar(title: const Text('Emoji Picker Example App')),
         body: Column(
           children: [
             Expanded(
@@ -73,28 +71,30 @@ class MyAppState extends State<MyApp> {
                   _emojiShowing = !_emojiShowing;
                 });
               },
-              icon: const Icon(
-                Icons.emoji_emotions,
-                color: Colors.white,
-              ),
+              icon: const Icon(Icons.emoji_emotions, color: Colors.white),
             ),
           ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: TextField(
-                  controller: _controller,
-                  style: const TextStyle(fontSize: 20.0, color: Colors.black87),
-                  decoration: InputDecoration(
-                    hintText: 'Type a message',
-                    filled: true,
-                    fillColor: Colors.white,
-                    contentPadding: const EdgeInsets.only(
-                        left: 16.0, bottom: 8.0, top: 8.0, right: 16.0),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(50.0),
-                    ),
-                  )),
+                controller: _controller,
+                style: const TextStyle(fontSize: 20.0, color: Colors.black87),
+                decoration: InputDecoration(
+                  hintText: 'Type a message',
+                  filled: true,
+                  fillColor: Colors.white,
+                  contentPadding: const EdgeInsets.only(
+                    left: 16.0,
+                    bottom: 8.0,
+                    top: 8.0,
+                    right: 16.0,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50.0),
+                  ),
+                ),
+              ),
             ),
           ),
           Material(
@@ -103,12 +103,9 @@ class MyAppState extends State<MyApp> {
               onPressed: () {
                 // send message
               },
-              icon: const Icon(
-                Icons.send,
-                color: Colors.white,
-              ),
+              icon: const Icon(Icons.send, color: Colors.white),
             ),
-          )
+          ),
         ],
       ),
     );

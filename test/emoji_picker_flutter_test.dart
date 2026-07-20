@@ -28,18 +28,25 @@ void skinToneTests() {
 
   test('removeSkinTone()', () {
     expect(internalUtils.removeSkinTone(const Emoji('👍🏻', '')).emoji, '👍');
-    expect(internalUtils.removeSkinTone(const Emoji('🏊🏾‍♂️', '')).emoji,
-        '🏊‍♂️');
-    expect(internalUtils.removeSkinTone(const Emoji('👱🏿‍♀️', '')).emoji,
-        '👱‍♀️');
+    expect(
+      internalUtils.removeSkinTone(const Emoji('🏊🏾‍♂️', '')).emoji,
+      '🏊‍♂️',
+    );
+    expect(
+      internalUtils.removeSkinTone(const Emoji('👱🏿‍♀️', '')).emoji,
+      '👱‍♀️',
+    );
   });
 }
 
 void emojiModelTests() {
   test('encode Emoji', () {
     final encode = const Emoji('🤣', 'name');
-    expect(encode.toJson(),
-        <String, dynamic>{'emoji': '🤣', 'name': 'name', 'hasSkinTone': false});
+    expect(encode.toJson(), <String, dynamic>{
+      'emoji': '🤣',
+      'name': 'name',
+      'hasSkinTone': false,
+    });
   });
 
   test('decode Emoji without hasSkinTone property', () {
@@ -54,7 +61,7 @@ void emojiModelTests() {
     final decode = <String, dynamic>{
       'name': 'name',
       'emoji': '🤣',
-      'hasSkinTone': true
+      'hasSkinTone': true,
     };
     final result = Emoji.fromJson(decode);
     expect(result.name, 'name');

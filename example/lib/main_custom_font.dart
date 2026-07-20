@@ -19,8 +19,10 @@ class MyAppState extends State<MyApp> {
   final _utils = EmojiPickerUtils();
   late final EmojiTextEditingController _controller;
   late final TextStyle _textStyle;
-  final bool isApple = [TargetPlatform.iOS, TargetPlatform.macOS]
-      .contains(foundation.defaultTargetPlatform);
+  final bool isApple = [
+    TargetPlatform.iOS,
+    TargetPlatform.macOS,
+  ].contains(foundation.defaultTargetPlatform);
   bool _emojiShowing = false;
 
   @override
@@ -42,9 +44,7 @@ class MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: const Text('Emoji Picker Example App'),
-        ),
+        appBar: AppBar(title: const Text('Emoji Picker Example App')),
         body: SafeArea(
           child: Column(
             children: [
@@ -70,63 +70,63 @@ class MyAppState extends State<MyApp> {
                 ),
               ),
               Container(
-                  height: 66.0,
-                  color: Colors.blue,
-                  child: Row(
-                    children: [
-                      Material(
-                        color: Colors.transparent,
-                        child: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _emojiShowing = !_emojiShowing;
-                            });
-                          },
-                          icon: const Icon(
-                            Icons.emoji_emotions,
-                            color: Colors.white,
+                height: 66.0,
+                color: Colors.blue,
+                child: Row(
+                  children: [
+                    Material(
+                      color: Colors.transparent,
+                      child: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _emojiShowing = !_emojiShowing;
+                          });
+                        },
+                        icon: const Icon(
+                          Icons.emoji_emotions,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: TextField(
+                          controller: _controller,
+                          style: const TextStyle(
+                            fontSize: 20.0,
+                            color: Colors.black87,
+                          ),
+                          maxLines: 1,
+                          decoration: InputDecoration(
+                            hintText: 'Type a message',
+                            filled: true,
+                            fillColor: Colors.white,
+                            contentPadding: const EdgeInsets.only(
+                              left: 16.0,
+                              bottom: 8.0,
+                              top: 8.0,
+                              right: 16.0,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(50.0),
+                            ),
                           ),
                         ),
                       ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: TextField(
-                              controller: _controller,
-                              style: const TextStyle(
-                                fontSize: 20.0,
-                                color: Colors.black87,
-                              ),
-                              maxLines: 1,
-                              decoration: InputDecoration(
-                                hintText: 'Type a message',
-                                filled: true,
-                                fillColor: Colors.white,
-                                contentPadding: const EdgeInsets.only(
-                                  left: 16.0,
-                                  bottom: 8.0,
-                                  top: 8.0,
-                                  right: 16.0,
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(50.0),
-                                ),
-                              )),
-                        ),
+                    ),
+                    Material(
+                      color: Colors.transparent,
+                      child: IconButton(
+                        onPressed: () {
+                          // send message
+                        },
+                        icon: const Icon(Icons.send, color: Colors.white),
                       ),
-                      Material(
-                        color: Colors.transparent,
-                        child: IconButton(
-                            onPressed: () {
-                              // send message
-                            },
-                            icon: const Icon(
-                              Icons.send,
-                              color: Colors.white,
-                            )),
-                      )
-                    ],
-                  )),
+                    ),
+                  ],
+                ),
+              ),
               Offstage(
                 offstage: !_emojiShowing,
                 child: EmojiPicker(

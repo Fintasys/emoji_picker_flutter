@@ -2,11 +2,12 @@ import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 
 /// Callback function for custom bottom action bar
-typedef BottomActionBarBuilder = Widget Function(
-  Config config,
-  EmojiViewState state,
-  VoidCallback showSearchView,
-);
+typedef BottomActionBarBuilder =
+    Widget Function(
+      Config config,
+      EmojiViewState state,
+      VoidCallback showSearchView,
+    );
 
 /// Bottom Action Bar Config
 class BottomActionBarConfig {

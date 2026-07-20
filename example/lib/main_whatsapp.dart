@@ -28,8 +28,10 @@ class MyAppState extends State<MyApp> {
   late final ScrollController _scrollController;
   late final FocusNode _focusNode;
   late final TextStyle _textStyle;
-  final bool isApple = [TargetPlatform.iOS, TargetPlatform.macOS]
-      .contains(foundation.defaultTargetPlatform);
+  final bool isApple = [
+    TargetPlatform.iOS,
+    TargetPlatform.macOS,
+  ].contains(foundation.defaultTargetPlatform);
   bool _emojiShowing = false;
 
   @override
@@ -101,9 +103,7 @@ class MyAppState extends State<MyApp> {
                     ),
                     Container(
                       height: 48.0,
-                      margin: const EdgeInsets.symmetric(
-                        vertical: 4.0,
-                      ),
+                      margin: const EdgeInsets.symmetric(vertical: 4.0),
                       child: Row(
                         children: [
                           Expanded(
@@ -126,8 +126,8 @@ class MyAppState extends State<MyApp> {
                                         if (!_emojiShowing) {
                                           WidgetsBinding.instance
                                               .addPostFrameCallback((_) {
-                                            _focusNode.requestFocus();
-                                          });
+                                                _focusNode.requestFocus();
+                                              });
                                         } else {
                                           _focusNode.unfocus();
                                         }
@@ -153,8 +153,9 @@ class MyAppState extends State<MyApp> {
                                       decoration: const InputDecoration(
                                         hintText: 'Type a message',
                                         hintStyle: TextStyle(
-                                            color: secondaryColor,
-                                            fontWeight: FontWeight.normal),
+                                          color: secondaryColor,
+                                          fontWeight: FontWeight.normal,
+                                        ),
                                         border: InputBorder.none,
                                         contentPadding: EdgeInsets.zero,
                                       ),
@@ -207,19 +208,15 @@ class MyAppState extends State<MyApp> {
                             indicatorColor: accentColor,
                             iconColorSelected: Colors.black,
                             iconColor: secondaryColor,
-                            customCategoryView: (
-                              config,
-                              state,
-                              tabController,
-                              pageController,
-                            ) {
-                              return WhatsAppCategoryView(
-                                config,
-                                state,
-                                tabController,
-                                pageController,
-                              );
-                            },
+                            customCategoryView:
+                                (config, state, tabController, pageController) {
+                                  return WhatsAppCategoryView(
+                                    config,
+                                    state,
+                                    tabController,
+                                    pageController,
+                                  );
+                                },
                             categoryIcons: const CategoryIcons(
                               recentIcon: Icons.access_time_outlined,
                               smileyIcon: Icons.emoji_emotions_outlined,
@@ -239,11 +236,7 @@ class MyAppState extends State<MyApp> {
                           ),
                           searchViewConfig: SearchViewConfig(
                             backgroundColor: Colors.white,
-                            customSearchView: (
-                              config,
-                              state,
-                              showEmojiView,
-                            ) {
+                            customSearchView: (config, state, showEmojiView) {
                               return WhatsAppSearchView(
                                 config,
                                 state,
@@ -372,7 +365,8 @@ class WhatsAppTabBar extends StatelessWidget {
             .asMap()
             .entries
             .map<Widget>(
-                (item) => _buildCategory(item.key, item.value.category))
+              (item) => _buildCategory(item.key, item.value.category),
+            )
             .toList(),
       ),
     );
@@ -383,10 +377,7 @@ class WhatsAppTabBar extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(6.0),
         child: Icon(
-          getIconForCategory(
-            config.categoryViewConfig.categoryIcons,
-            category,
-          ),
+          getIconForCategory(config.categoryViewConfig.categoryIcons, category),
           size: 20,
         ),
       ),
@@ -396,8 +387,12 @@ class WhatsAppTabBar extends StatelessWidget {
 
 /// Custom Whatsapp Search view implementation
 class WhatsAppSearchView extends SearchView {
-  const WhatsAppSearchView(super.config, super.state, super.showEmojiView,
-      {super.key});
+  const WhatsAppSearchView(
+    super.config,
+    super.state,
+    super.showEmojiView, {
+    super.key,
+  });
 
   @override
   WhatsAppSearchViewState createState() => WhatsAppSearchViewState();
@@ -406,61 +401,58 @@ class WhatsAppSearchView extends SearchView {
 class WhatsAppSearchViewState extends SearchViewState {
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      final emojiSize =
-          widget.config.emojiViewConfig.getEmojiSize(constraints.maxWidth);
-      final emojiBoxSize =
-          widget.config.emojiViewConfig.getEmojiBoxSize(constraints.maxWidth);
-      return Container(
-        color: widget.config.searchViewConfig.backgroundColor,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SizedBox(
-              height: emojiBoxSize + 8.0,
-              child: ListView.builder(
-                padding: const EdgeInsets.symmetric(vertical: 4.0),
-                scrollDirection: Axis.horizontal,
-                itemCount: results.length,
-                itemBuilder: (context, index) {
-                  return buildEmoji(
-                    results[index],
-                    emojiSize,
-                    emojiBoxSize,
-                  );
-                },
-              ),
-            ),
-            Row(
-              children: [
-                IconButton(
-                  onPressed: widget.showEmojiView,
-                  color: widget.config.searchViewConfig.buttonIconColor,
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    size: 20.0,
-                  ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final emojiSize = widget.config.emojiViewConfig.getEmojiSize(
+          constraints.maxWidth,
+        );
+        final emojiBoxSize = widget.config.emojiViewConfig.getEmojiBoxSize(
+          constraints.maxWidth,
+        );
+        return Container(
+          color: widget.config.searchViewConfig.backgroundColor,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                height: emojiBoxSize + 8.0,
+                child: ListView.builder(
+                  padding: const EdgeInsets.symmetric(vertical: 4.0),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: results.length,
+                  itemBuilder: (context, index) {
+                    return buildEmoji(results[index], emojiSize, emojiBoxSize);
+                  },
                 ),
-                Expanded(
-                  child: TextField(
-                    onChanged: onTextInputChanged,
-                    focusNode: focusNode,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: widget.config.searchViewConfig.hintText,
-                      hintStyle: const TextStyle(
-                        color: secondaryColor,
-                        fontWeight: FontWeight.normal,
+              ),
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: widget.showEmojiView,
+                    color: widget.config.searchViewConfig.buttonIconColor,
+                    icon: const Icon(Icons.arrow_back, size: 20.0),
+                  ),
+                  Expanded(
+                    child: TextField(
+                      onChanged: onTextInputChanged,
+                      focusNode: focusNode,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: widget.config.searchViewConfig.hintText,
+                        hintStyle: const TextStyle(
+                          color: secondaryColor,
+                          fontWeight: FontWeight.normal,
+                        ),
+                        contentPadding: EdgeInsets.zero,
                       ),
-                      contentPadding: EdgeInsets.zero,
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      );
-    });
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }
