@@ -30,9 +30,14 @@ class SearchViewState<T extends SearchView> extends State<T>
   /// Search results
   final results = List<Emoji>.empty(growable: true);
 
+  /// Last remembered skin tone, applied to skin-tone-capable emoji for display
+  /// and selection when [SkinToneConfig.rememberSkinTone] is enabled.
+  String? _rememberedSkinTone;
+
   @override
   void initState() {
     super.initState();
+    _loadRememberedSkinTone();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
       // Auto focus textfield
@@ -51,6 +56,18 @@ class SearchViewState<T extends SearchView> extends State<T>
     super.dispose();
   }
 
+  void _loadRememberedSkinTone() {
+    if (!widget.config.skinToneConfig.rememberSkinTone) {
+      return;
+    }
+    utils.getRememberedSkinTone().then((tone) {
+      if (!mounted || tone == null) {
+        return;
+      }
+      setState(() => _rememberedSkinTone = tone);
+    });
+  }
+
   /// On text input changed callback
   void onTextInputChanged(String text) {
     links.clear();
@@ -66,17 +83,29 @@ class SearchViewState<T extends SearchView> extends State<T>
       ..clear()
       ..addAll(emojis);
     results.asMap().entries.forEach((e) {
-      links[e.value.emoji] = LayerLink();
+      final displayEmoji = utils.applyDisplaySkinTone(
+        e.value,
+        widget.config.skinToneConfig,
+        _rememberedSkinTone,
+      );
+      links[displayEmoji.emoji] = LayerLink();
     });
   }
 
   /// Build emoji cell
   Widget buildEmoji(Emoji emoji, double emojiSize, double emojiBoxSize) {
+    // Apply a remembered skin tone for display and selection.
+    // Falls back to the base glyph when no tone is remembered.
+    final displayEmoji = utils.applyDisplaySkinTone(
+      emoji,
+      widget.config.skinToneConfig,
+      _rememberedSkinTone,
+    );
     return addSkinToneTargetIfAvailable(
-      hasSkinTone: emoji.hasSkinTone,
-      linkKey: emoji.emoji,
+      hasSkinTone: displayEmoji.hasSkinTone,
+      linkKey: displayEmoji.emoji,
       child: EmojiCell.fromConfig(
-        emoji: emoji,
+        emoji: displayEmoji,
         emojiSize: emojiSize,
         emojiBoxSize: emojiBoxSize,
         onEmojiSelected: widget.state.onEmojiSelected,
@@ -102,8 +131,24 @@ class SearchViewState<T extends SearchView> extends State<T>
   }
 
   void _onSkinTonedEmojiSelected(Category? category, Emoji emoji) {
+    _rememberSkinToneIfEnabled(emoji);
     widget.state.onEmojiSelected(category, emoji);
     closeSkinToneOverlay();
+  }
+
+  /// Persists and re-applies the skin tone of the selected [emoji] when
+  /// [SkinToneConfig.rememberSkinTone] is enabled. Selecting a
+  /// skin-tone-capable base glyph (no modifier) clears the remembered tone.
+  void _rememberSkinToneIfEnabled(Emoji emoji) {
+    if (!widget.config.skinToneConfig.rememberSkinTone || !emoji.hasSkinTone) {
+      return;
+    }
+    final tone = utils.extractSkinTone(emoji);
+    if (tone == _rememberedSkinTone) {
+      return;
+    }
+    utils.setRememberedSkinTone(tone);
+    setState(() => _rememberedSkinTone = tone);
   }
 
   @override

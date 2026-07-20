@@ -20,6 +20,11 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
   late TabController _tabController;
   late PageController _pageController;
   final _scrollController = ScrollController();
+  final _utils = EmojiPickerUtils();
+
+  /// Last remembered skin tone, applied to skin-tone-capable emoji for
+  /// display and selection when [SkinToneConfig.rememberSkinTone] is enabled.
+  String? _rememberedSkinTone;
 
   @override
   void initState() {
@@ -49,7 +54,21 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
       _onCategoryNavigationChanged,
     );
 
+    _loadRememberedSkinTone();
+
     super.initState();
+  }
+
+  void _loadRememberedSkinTone() {
+    if (!widget.config.skinToneConfig.rememberSkinTone) {
+      return;
+    }
+    _utils.getRememberedSkinTone().then((tone) {
+      if (!mounted || tone == null) {
+        return;
+      }
+      setState(() => _rememberedSkinTone = tone);
+    });
   }
 
   void _onCategoryNavigationChanged() {
@@ -206,12 +225,18 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
       ),
       itemCount: categoryEmoji.emoji.length,
       itemBuilder: (context, index) {
+        // Apply a remembered/default skin tone for display and selection.
+        // Falls back to the base glyph when no tone is configured.
+        final displayEmoji = _utils.applyDisplaySkinTone(
+          categoryEmoji.emoji[index],
+          widget.config.skinToneConfig,
+          _rememberedSkinTone,
+        );
         return addSkinToneTargetIfAvailable(
-          hasSkinTone: categoryEmoji.emoji[index].hasSkinTone,
-          linkKey:
-              categoryEmoji.category.name + categoryEmoji.emoji[index].emoji,
+          hasSkinTone: displayEmoji.hasSkinTone,
+          linkKey: categoryEmoji.category.name + displayEmoji.emoji,
           child: EmojiCell.fromConfig(
-            emoji: categoryEmoji.emoji[index],
+            emoji: displayEmoji,
             emojiSize: emojiSize,
             emojiBoxSize: emojiBoxSize,
             categoryEmoji: categoryEmoji,
@@ -251,7 +276,23 @@ class _DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
   }
 
   void _onSkinTonedEmojiSelected(Category? category, Emoji emoji) {
+    _rememberSkinToneIfEnabled(emoji);
     widget.state.onEmojiSelected(category, emoji);
     closeSkinToneOverlay();
+  }
+
+  /// Persists and re-applies the skin tone of the selected [emoji] when
+  /// [SkinToneConfig.rememberSkinTone] is enabled. Selecting a
+  /// skin-tone-capable base glyph (no modifier) clears the remembered tone.
+  void _rememberSkinToneIfEnabled(Emoji emoji) {
+    if (!widget.config.skinToneConfig.rememberSkinTone || !emoji.hasSkinTone) {
+      return;
+    }
+    final tone = _utils.extractSkinTone(emoji);
+    if (tone == _rememberedSkinTone) {
+      return;
+    }
+    _utils.setRememberedSkinTone(tone);
+    setState(() => _rememberedSkinTone = tone);
   }
 }

@@ -175,8 +175,12 @@ class EmojiPickerUtils {
   }
 
   /// Applies skin tone to given emoji
+  ///
+  /// Any existing skin tone modifier is stripped first, so re-applying a tone
+  /// to an already toned glyph produces a valid single-modifier sequence
+  /// instead of an invalid double-modifier one (e.g. 👋🏻🏽).
   Emoji applySkinTone(Emoji emoji, String color) {
-    final codeUnits = emoji.emoji.codeUnits;
+    final codeUnits = removeSkinTone(emoji).emoji.codeUnits;
     var result = List<int>.empty(growable: true)
       // Basic emoji without gender (until char 2)
       ..addAll(codeUnits.sublist(0, min(codeUnits.length, 2)))
@@ -188,6 +192,53 @@ class EmojiPickerUtils {
     }
     return emoji.copyWith(emoji: String.fromCharCodes(result));
   }
+
+  /// Removes any skin tone modifier from the given emoji
+  Emoji removeSkinTone(Emoji emoji) {
+    return emoji.copyWith(
+      emoji: emoji.emoji.replaceFirst(RegExp(SkinTone.values.join('|')), ''),
+    );
+  }
+
+  /// Returns the emoji that should be displayed (and selected) in the grid,
+  /// recents and search results.
+  ///
+  /// When [skinToneConfig] remembers a tone and [rememberedSkinTone] is set,
+  /// the toned glyph is returned; otherwise the original emoji is returned
+  /// unchanged. The result keeps [Emoji.hasSkinTone] intact so the indicator
+  /// and long-press picker keep working on the cell.
+  Emoji applyDisplaySkinTone(
+    Emoji emoji,
+    SkinToneConfig skinToneConfig,
+    String? rememberedSkinTone,
+  ) {
+    if (!skinToneConfig.enabled ||
+        !skinToneConfig.rememberSkinTone ||
+        rememberedSkinTone == null ||
+        !emoji.hasSkinTone) {
+      return emoji;
+    }
+    return applySkinTone(emoji, rememberedSkinTone);
+  }
+
+  /// Returns the skin tone modifier contained in [emoji], or `null` when the
+  /// emoji carries no skin tone.
+  String? extractSkinTone(Emoji emoji) {
+    for (final tone in SkinTone.values) {
+      if (emoji.emoji.contains(tone)) {
+        return tone;
+      }
+    }
+    return null;
+  }
+
+  /// Returns the last remembered skin tone modifier, or `null` if none.
+  Future<String?> getRememberedSkinTone() =>
+      EmojiPickerInternalUtils().getRememberedSkinTone();
+
+  /// Persists the remembered skin tone modifier. Passing `null` clears it.
+  Future<void> setRememberedSkinTone(String? skinTone) =>
+      EmojiPickerInternalUtils().setRememberedSkinTone(skinTone);
 
   /// Clears the list of recent emojis
   Future<void> clearRecentEmojis({

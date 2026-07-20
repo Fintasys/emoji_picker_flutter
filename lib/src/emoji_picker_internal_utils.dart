@@ -136,6 +136,22 @@ class EmojiPickerInternalUtils {
     prefs.setString('recent', jsonEncode([]));
   }
 
+  /// Returns the last remembered skin tone modifier, or `null` if none stored
+  Future<String?> getRememberedSkinTone() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('skin_tone');
+  }
+
+  /// Persists the remembered skin tone modifier. Passing `null` clears it.
+  Future<void> setRememberedSkinTone(String? skinTone) async {
+    final prefs = await SharedPreferences.getInstance();
+    if (skinTone == null) {
+      await prefs.remove('skin_tone');
+    } else {
+      await prefs.setString('skin_tone', skinTone);
+    }
+  }
+
   /// Remove skin tone from given emoji
   Emoji removeSkinTone(Emoji emoji) {
     return emoji.copyWith(emoji: emoji.emoji.replaceFirst(_skinToneRegExp, ''));

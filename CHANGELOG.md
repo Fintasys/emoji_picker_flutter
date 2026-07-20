@@ -3,6 +3,9 @@
 - Bump minimum Flutter version to `3.41.8` (Dart `3.11.5`)
 - Fix memory leaks, race conditions, and regex recompilation
 - Clip picker overflow so it renders cleanly when constrained to a smaller height (#256)
+- Add `rememberSkinTone` to `SkinToneConfig` to persist the last selected skin tone and re-apply it as the default in the grid, recents and search
+- Fix `applySkinTone` producing invalid double-modifier sequences when applied to an already toned glyph (existing tone is now stripped first)
+- Skin tone long-press picker now always applies the new tone to the base glyph
 
 ## 4.4.0
 
