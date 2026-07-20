@@ -23,16 +23,7 @@ rootProject.allprojects {
 
 apply plugin: 'com.android.library'
 
-// Built-in Kotlin migration.
-//
-// From Android Gradle Plugin (AGP) 9 onwards, Kotlin support is built in and
-// Flutter manages the Kotlin Gradle Plugin (KGP) centrally. Plugins that apply
-// KGP themselves fail to build against Built-in Kotlin. To remain compatible
-// with both older Flutter/AGP versions (which still require the plugin to apply
-// KGP to compile its Kotlin sources) and newer ones, only apply KGP when the
-// AGP in use predates Built-in Kotlin (AGP < 9).
-//
-// See https://docs.flutter.dev/release/breaking-changes/migrate-to-built-in-kotlin/for-plugin-authors
+// Built-in Kotlin: AGP 9+ provides Kotlin, so only apply KGP on older AGP.
 def agpMajorVersion = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION.tokenize('.')[0].toInteger()
 def appliesLegacyKotlin = agpMajorVersion < 9
 if (appliesLegacyKotlin) {
@@ -59,9 +50,7 @@ android {
     }
 }
 
-// `kotlinOptions` is contributed by KGP, so it is only available when KGP is
-// applied. With Built-in Kotlin (AGP 9+) the Kotlin JVM target follows the Java
-// target configured in `compileOptions` above.
+// kotlinOptions and kotlin-stdlib come from KGP; Built-in Kotlin supplies them.
 if (appliesLegacyKotlin) {
     android.kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
@@ -69,8 +58,6 @@ if (appliesLegacyKotlin) {
 }
 
 dependencies {
-    // With Built-in Kotlin (AGP 9+) the Kotlin standard library is provided
-    // automatically, so only declare it explicitly on the legacy KGP path.
     if (appliesLegacyKotlin) {
         implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     }
