@@ -1,3 +1,8 @@
+## Unreleased
+
+- Bump minimum Flutter version to `3.41.8` (Dart `3.11.5`)
+- Fix memory leaks, race conditions, and regex recompilation
+
 ## 4.4.0
 
 - Add Dutch language support (Thx to @mark-sdb)
