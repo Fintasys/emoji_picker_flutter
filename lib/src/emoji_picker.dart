@@ -222,8 +222,7 @@ class EmojiPickerState extends State<EmojiPicker> {
     if (oldWidget.textEditingController != widget.textEditingController) {
       oldWidget.textEditingController
           ?.removeListener(_scrollToCursorAfterTextChange);
-      widget.textEditingController
-          ?.addListener(_scrollToCursorAfterTextChange);
+      widget.textEditingController?.addListener(_scrollToCursorAfterTextChange);
     }
     _resetStateWhenOffstage();
     super.didUpdateWidget(oldWidget);
