@@ -146,5 +146,52 @@ void main() {
       // Check if the category been passed to the 'onEmojiSelected' callback
       expect(_categorySelected, equals(Category.SMILEYS));
     });
+
+    testWidgets('Clips overflow when constrained tighter than natural height',
+        (WidgetTester tester) async {
+      final _controller = TextEditingController();
+
+      // Constrain the picker far below the natural sum of the category bar
+      // and bottom action bar to force the inner Column to overflow (#256).
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Center(
+              child: SizedBox(
+                width: 300,
+                height: 30,
+                child: EmojiPicker(
+                  textEditingController: _controller,
+                  config: const Config(
+                    height: 30,
+                    categoryViewConfig: CategoryViewConfig(
+                      recentTabBehavior: RecentTabBehavior.NONE,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+
+      // A RenderFlex overflow is reported in debug mode; drain it so the test
+      // can assert the overflow is clipped rather than left painting stripes.
+      final exception = tester.takeException();
+      expect(
+        exception == null || exception.toString().contains('overflowed'),
+        isTrue,
+      );
+
+      // The inner Column is wrapped in a ClipRect that clips the overflow.
+      expect(
+        find.descendant(
+          of: find.byType(EmojiContainer),
+          matching: find.byType(ClipRect),
+        ),
+        findsOneWidget,
+      );
+    });
   });
 }
