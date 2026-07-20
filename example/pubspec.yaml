@@ -3,8 +3,8 @@ description: Demonstrates how to use the emoji_picker_flutter plugin.
 publish_to: "none"
 
 environment:
-  sdk: ">=3.4.0 <4.0.0"
-  flutter: ">=3.24.0"
+  sdk: ">=3.11.5 <4.0.0"
+  flutter: ">=3.41.8"
 
 dependencies:
   flutter:
