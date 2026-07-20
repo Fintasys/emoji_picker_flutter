@@ -2,6 +2,7 @@
 
 - Bump minimum Flutter version to `3.41.8` (Dart `3.11.5`)
 - Fix memory leaks, race conditions, and regex recompilation
+- Clip picker overflow so it renders cleanly when constrained to a smaller height (#256)
 
 ## 4.4.0
 
