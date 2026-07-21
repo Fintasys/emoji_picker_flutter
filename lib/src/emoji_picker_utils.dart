@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
@@ -25,12 +26,11 @@ class EmojiPickerUtils {
   RegExp? _emojiRegExp;
 
   /// Returns list of recently used emoji from cache
-  Future<List<RecentEmoji>> getRecentEmojis() async {
-    return EmojiPickerInternalUtils().getRecentEmojis();
-  }
+  FutureOr<List<RecentEmoji>> getRecentEmojis() =>
+      EmojiPickerInternalUtils().getRecentEmojis();
 
   /// Filters out emojis not supported on the platform
-  Future<List<CategoryEmoji>> filterUnsupported(List<CategoryEmoji> data) =>
+  FutureOr<List<CategoryEmoji>> filterUnsupported(List<CategoryEmoji> data) =>
       EmojiPickerInternalUtils().filterUnsupported(data);
 
   /// Search for related emoticons based on keywords

@@ -1,8 +1,9 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/foundation.dart' hide Category;
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,6 +18,15 @@ class EmojiPickerInternalUtils {
   static const _platform = MethodChannel('emoji_picker_flutter');
 
   static final RegExp _skinToneRegExp = RegExp(SkinTone.values.join('|'));
+
+  /// Caches the platform-supported emojis per [Category] so that
+  /// [filterUnsupported] only queries the native side once per category.
+  static final Map<Category, CategoryEmoji> _availableEmojis = {};
+
+  /// Caches the recently used emojis so that [getRecentEmojis] avoids
+  /// re-reading [SharedPreferences] on subsequent calls. Kept in sync by the
+  /// add/clear methods below.
+  static List<RecentEmoji>? _recentEmojis;
 
   // Get available emoji for given category title
   Future<CategoryEmoji> _getAvailableEmojis(CategoryEmoji category) async {
@@ -34,25 +44,53 @@ class EmojiPickerInternalUtils {
   }
 
   /// Filters out emojis not supported on the platform
-  Future<List<CategoryEmoji>> filterUnsupported(
-    List<CategoryEmoji> data,
-  ) async {
+  ///
+  /// Returns synchronously when every requested category is already cached,
+  /// so a rebuilt [EmojiPicker] does not have to hit the native side again.
+  FutureOr<List<CategoryEmoji>> filterUnsupported(List<CategoryEmoji> data) {
     if (kIsWeb || !Platform.isAndroid) {
       return data;
     }
-    final futures = [for (final cat in data) _getAvailableEmojis(cat)];
-    return await Future.wait(futures);
+
+    if (data.every((e) => _availableEmojis.containsKey(e.category))) {
+      return data.map((e) => _availableEmojis[e.category]!).toList();
+    }
+
+    return Future(() async {
+      final futures = [
+        for (final cat
+            in data.where((e) => !_availableEmojis.containsKey(e.category)))
+          _getAvailableEmojis(cat),
+      ];
+
+      for (final cat in await Future.wait(futures)) {
+        _availableEmojis[cat.category] = cat;
+      }
+
+      return data.map((e) => _availableEmojis[e.category]!).toList();
+    });
   }
 
   /// Returns list of recently used emoji from cache
-  Future<List<RecentEmoji>> getRecentEmojis() async {
-    final prefs = await SharedPreferences.getInstance();
-    var emojiJson = prefs.getString('recent');
-    if (emojiJson == null) {
-      return [];
+  ///
+  /// Reads from [SharedPreferences] on the first call and reuses the cached
+  /// result afterwards. The cache is kept in sync by [addEmojiToRecentlyUsed],
+  /// [addEmojiToPopularUsed] and [clearRecentEmojisInLocalStorage].
+  FutureOr<List<RecentEmoji>> getRecentEmojis() {
+    if (_recentEmojis != null) {
+      return _recentEmojis!.toList();
     }
-    var json = jsonDecode(emojiJson) as List<dynamic>;
-    return json.map<RecentEmoji>(RecentEmoji.fromJson).toList();
+
+    return Future(() async {
+      final prefs = await SharedPreferences.getInstance();
+      var emojiJson = prefs.getString('recent');
+      if (emojiJson == null) {
+        return _recentEmojis = [];
+      }
+      var json = jsonDecode(emojiJson) as List<dynamic>;
+      return _recentEmojis =
+          json.map<RecentEmoji>(RecentEmoji.fromJson).toList();
+    });
   }
 
   /// Add an emoji to recently used list
@@ -86,7 +124,7 @@ class EmojiPickerInternalUtils {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('recent', jsonEncode(recentEmoji));
 
-    return recentEmoji;
+    return _recentEmojis = recentEmoji;
   }
 
   /// Add an emoji to popular used list or increase its counter
@@ -127,13 +165,14 @@ class EmojiPickerInternalUtils {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('recent', jsonEncode(recentEmoji));
 
-    return recentEmoji;
+    return _recentEmojis = recentEmoji;
   }
 
   /// Clears the list of recent emojis in local storage
   Future<void> clearRecentEmojisInLocalStorage() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('recent', jsonEncode([]));
+    _recentEmojis = [];
   }
 
   /// Returns the last remembered skin tone modifier, or `null` if none stored

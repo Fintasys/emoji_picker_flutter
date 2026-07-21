@@ -1,3 +1,7 @@
+## Unreleased
+
+- Cache platform-supported emojis and recently used emojis so a rebuilt `EmojiPicker` skips redundant native `getSupportedEmojis` calls and `SharedPreferences` reads. `EmojiPickerUtils.filterUnsupported` and `getRecentEmojis` now return `FutureOr` and resolve synchronously once cached. The recent-emoji cache is kept in sync when emojis are added or cleared. (based on #252)
+
 ## 4.5.0
 
 - Bump minimum Flutter version to `3.41.8` (Dart `3.11.5`)
