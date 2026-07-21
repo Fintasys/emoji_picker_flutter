@@ -123,7 +123,7 @@ All examples can be found [here](https://github.com/Fintasys/emoji_picker_flutte
 
 | property              | description                                                          | default      |
 | --------------------- | -------------------------------------------------------------------- | ------------ |
-| enableSkinTones       | Enable feature to select a skin tone of certain emoji's              | true         |
+| enabled               | Enable feature to select a skin tone of certain emoji's              | true         |
 | dialogBackgroundColor | The background color of the skin tone dialog                         | Colors.white |
 | indicatorColor        | Color of the small triangle next to multiple skin tone emoji         | Colors.grey  |
 | rememberSkinTone      | Remember the last selected skin tone and re-apply it as the default  | false        |

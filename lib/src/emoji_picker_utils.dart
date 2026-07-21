@@ -194,11 +194,8 @@ class EmojiPickerUtils {
   }
 
   /// Removes any skin tone modifier from the given emoji
-  Emoji removeSkinTone(Emoji emoji) {
-    return emoji.copyWith(
-      emoji: emoji.emoji.replaceFirst(RegExp(SkinTone.values.join('|')), ''),
-    );
-  }
+  Emoji removeSkinTone(Emoji emoji) =>
+      EmojiPickerInternalUtils().removeSkinTone(emoji);
 
   /// Returns the emoji that should be displayed (and selected) in the grid,
   /// recents and search results.
