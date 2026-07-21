@@ -50,10 +50,19 @@ android {
     }
 }
 
-// kotlinOptions and kotlin-stdlib come from KGP; Built-in Kotlin supplies them.
+// Configure the Kotlin JVM target to match compileOptions (Java 17). It is not
+// inherited from compileOptions automatically, so it must be set on both paths.
+// Legacy KGP (<2.0) exposes kotlinOptions; Built-in Kotlin (AGP 9+, KGP 2.0+)
+// exposes the compilerOptions DSL instead.
 if (appliesLegacyKotlin) {
     android.kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
+    }
+} else {
+    kotlin {
+        compilerOptions {
+            jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+        }
     }
 }
 
