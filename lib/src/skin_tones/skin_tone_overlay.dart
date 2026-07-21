@@ -74,8 +74,12 @@ mixin SkinToneOverlayStateMixin<T extends StatefulWidget> on State<T> {
                 color: config.skinToneConfig.dialogBackgroundColor,
                 child: Row(
                   children: [
+                    // The first cell is always the neutral (no-tone) glyph so
+                    // it doubles as the "reset" option: selecting it clears any
+                    // remembered skin tone. When [emoji] carries a remembered
+                    // tone this strips it; otherwise it is already neutral.
                     EmojiCell.fromConfig(
-                      emoji: emoji,
+                      emoji: _utils.removeSkinTone(emoji),
                       emojiSize: emojiSize,
                       emojiBoxSize: emojiBoxSize,
                       categoryEmoji: categoryEmoji,

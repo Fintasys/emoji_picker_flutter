@@ -115,7 +115,9 @@ class MyAppState extends State<MyApp> {
                               ? 1.2
                               : 1.0),
                     ),
-                    skinToneConfig: const SkinToneConfig(),
+                    skinToneConfig: const SkinToneConfig(
+                      rememberSkinTone: true,
+                    ),
                     categoryViewConfig: const CategoryViewConfig(),
                     bottomActionBarConfig: const BottomActionBarConfig(),
                     searchViewConfig: const SearchViewConfig(),
