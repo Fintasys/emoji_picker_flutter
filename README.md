@@ -121,11 +121,26 @@ All examples can be found [here](https://github.com/Fintasys/emoji_picker_flutte
 
 ## SkinTone Config
 
-| property              | description                                                  | default      |
-| --------------------- | ------------------------------------------------------------ | ------------ |
-| enableSkinTones       | Enable feature to select a skin tone of certain emoji's      | true         |
-| dialogBackgroundColor | The background color of the skin tone dialog                 | Colors.white |
-| indicatorColor        | Color of the small triangle next to multiple skin tone emoji | Colors.grey  |
+| property              | description                                                          | default      |
+| --------------------- | -------------------------------------------------------------------- | ------------ |
+| enabled               | Enable feature to select a skin tone of certain emoji's              | true         |
+| dialogBackgroundColor | The background color of the skin tone dialog                         | Colors.white |
+| indicatorColor        | Color of the small triangle next to multiple skin tone emoji         | Colors.grey  |
+| rememberSkinTone      | Remember the last selected skin tone and re-apply it as the default  | false        |
+
+### Remembering a chosen skin tone
+
+By default the grid, recents and search render the base (default) glyph. Set
+`rememberSkinTone: true` to have the picker persist the last tone chosen via the
+long-press picker (stored in `SharedPreferences`) and re-apply it as the default
+for every skin-tone-capable emoji on the next launch. Selecting the base
+(no-tone) glyph clears the remembered tone.
+
+```dart
+SkinToneConfig(
+  rememberSkinTone: true,
+),
+```
 
 ## Category View Config
 
