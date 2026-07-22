@@ -437,8 +437,9 @@ class EmojiPickerState extends State<EmojiPicker> {
         widget.config.emojiSet?.call(widget.config.locale) ??
         getDefaultEmojiLocale(widget.config.locale);
     if (widget.config.checkPlatformCompatibility) {
-      final futureOrCategories =
-          _emojiPickerInternalUtils.filterUnsupported(data);
+      final futureOrCategories = _emojiPickerInternalUtils.filterUnsupported(
+        data,
+      );
       _categoryEmoji.addAll(
         futureOrCategories is List<CategoryEmoji>
             ? futureOrCategories

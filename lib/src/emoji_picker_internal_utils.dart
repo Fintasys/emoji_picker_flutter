@@ -49,9 +49,7 @@ class EmojiPickerInternalUtils {
   CategoryEmoji _applySupport(CategoryEmoji category) {
     final support = _emojiSupport[category.category];
     return category.copyWith(
-      emoji: category.emoji
-          .where((e) => support?[e.emoji] ?? false)
-          .toList(),
+      emoji: category.emoji.where((e) => support?[e.emoji] ?? false).toList(),
     );
   }
 
@@ -109,8 +107,9 @@ class EmojiPickerInternalUtils {
         return _recentEmojis = [];
       }
       var json = jsonDecode(emojiJson) as List<dynamic>;
-      return _recentEmojis =
-          json.map<RecentEmoji>(RecentEmoji.fromJson).toList();
+      return _recentEmojis = json
+          .map<RecentEmoji>(RecentEmoji.fromJson)
+          .toList();
     });
   }
 
