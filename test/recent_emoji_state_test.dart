@@ -1,4 +1,5 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import 'package:emoji_picker_flutter/src/emoji_picker_internal_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -63,6 +64,9 @@ void main() {
   setUp(() {
     // Start every test with an empty recent-emoji store.
     SharedPreferences.setMockInitialValues({});
+    // The internal caches are static and would otherwise leak the recent
+    // emoji added by one test into the next.
+    EmojiPickerInternalUtils.resetCaches();
   });
 
   testWidgets(
