@@ -72,13 +72,11 @@ EmojiPicker(
 
 All examples can be found [here](https://github.com/Fintasys/emoji_picker_flutter/tree/master/example/lib)
 
-1. Default (Some Emoji might not be displayed correctly e.g. Frowning Face 🚨 Will be fixed with 3.17)
-
-   <img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/41c3e6d2cfe69375e263f42cfe06dbad7936bde1/screenshot/example_default_android.png" width="300">
-
-2. Custom Font (Display all emoji correctly in the style of the font, additional ~15mb e.g. with Google Fonts) - Might causes performance issues on iOS (see [issue 205](https://github.com/Fintasys/emoji_picker_flutter/issues/205))
+1. Default
 
    <img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/version-2.0/screenshot/example_custom_font_android.png" width="300"> <img src="https://raw.githubusercontent.com/Fintasys/emoji_picker_flutter/version-2.0/screenshot/example_custom_font_android_2.png" width="300">
+
+2. Custom Font (Display all emoji correctly in the style of the font, additional ~15mb e.g. with Google Fonts) - Might causes performance issues on iOS (see [issue 205](https://github.com/Fintasys/emoji_picker_flutter/issues/205))
 
 3. WhatsApp like customization
 

@@ -3,6 +3,16 @@ description: A Flutter package that provides an Emoji picker widget with 1500+ e
 version: 4.5.0
 homepage: https://github.com/Fintasys/emoji_picker_flutter
 
+screenshots:
+  - description: 'Default emoji picker on Android'
+    path: screenshot/example_custom_font_android.png
+  - description: 'WhatsApp-style emoji view'
+    path: screenshot/example_whatsapp_emoji_view.png
+  - description: 'WhatsApp-style search view'
+    path: screenshot/example_whatsapp_search_view.png
+  - description: 'Custom font rendering'
+    path: screenshot/example_custom_font_android.png
+
 environment:
   sdk: ">=3.11.5 <4.0.0"
   flutter: ">=3.41.8"
