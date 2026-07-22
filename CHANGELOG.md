@@ -1,8 +1,8 @@
 ## 4.5.0
 
 - Bump minimum Flutter version to `3.41.8` (Dart `3.11.5`)
-- Fix recent-emoji list changing on an unrelated parent rebuild. A recent update with `refresh: false` (e.g. selecting an emoji while the `RECENT` tab is visible) no longer mutates the displayed category data, so the list stays stable until the next explicit refresh instead of jumping on a stray rebuild ([#238](https://github.com/Fintasys/emoji_picker_flutter/pull/238))
-- Cache platform-supported emojis and recently used emojis so a rebuilt `EmojiPicker` skips redundant native `getSupportedEmojis` calls and `SharedPreferences` reads, and resolves synchronously once cached. Support is cached per emoji glyph (not per resolved category), so results stay correct across locale switches and custom emoji sets, and the recent-emoji cache is kept in sync when emojis are added or cleared. The public `EmojiPickerUtils` API is unchanged (still returns `Future`). (based on #252)
+- Fix recent-emoji list changing on an unrelated parent rebuild; updates with `refresh: false` no longer mutate the displayed list until the next explicit refresh ([#238](https://github.com/Fintasys/emoji_picker_flutter/pull/238))
+- Cache platform-supported and recent emojis so a rebuilt `EmojiPicker` skips redundant native `getSupportedEmojis` calls and `SharedPreferences` reads. Support is cached per glyph, so results stay correct across locale switches and custom emoji sets; the public `EmojiPickerUtils` API is unchanged. (based on #252)
 - Fix memory leaks, race conditions, and regex recompilation
 - Clip picker overflow so it renders cleanly when constrained to a smaller height (#256)
 - Add `rememberSkinTone` to `SkinToneConfig` to persist the last selected skin tone and re-apply it as the default in the grid, recents and search
