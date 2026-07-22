@@ -19,55 +19,76 @@ class EmojiPickerInternalUtils {
 
   static final RegExp _skinToneRegExp = RegExp(SkinTone.values.join('|'));
 
-  /// Caches the platform-supported emojis per [Category] so that
-  /// [filterUnsupported] only queries the native side once per category.
-  static final Map<Category, CategoryEmoji> _availableEmojis = {};
+  /// Caches, per [Category], whether each emoji glyph is supported on the
+  /// platform. Keyed by the emoji string (not the [CategoryEmoji]) so the
+  /// cache stays correct across locales and custom emoji sets, which change
+  /// an emoji's name/keywords but never the glyph or its platform support.
+  static final Map<Category, Map<String, bool>> _emojiSupport = {};
 
   /// Caches the recently used emojis so that [getRecentEmojis] avoids
   /// re-reading [SharedPreferences] on subsequent calls. Kept in sync by the
   /// add/clear methods below.
   static List<RecentEmoji>? _recentEmojis;
 
-  // Get available emoji for given category title
-  Future<CategoryEmoji> _getAvailableEmojis(CategoryEmoji category) async {
-    var available = (await _platform.invokeListMethod<bool>(
+  // Query the native side for which of the given glyphs are supported and
+  // merge the result into the per-category support cache.
+  Future<void> _cacheSupport(CategoryEmoji category, List<Emoji> query) async {
+    final available = (await _platform.invokeListMethod<bool>(
       'getSupportedEmojis',
-      {'source': category.emoji.map((e) => e.emoji).toList(growable: false)},
+      {'source': query.map((e) => e.emoji).toList(growable: false)},
     ))!;
 
+    final support = _emojiSupport.putIfAbsent(category.category, () => {});
+    for (var i = 0; i < query.length; i++) {
+      support[query[i].emoji] = available[i];
+    }
+  }
+
+  // Filter a category down to the glyphs known to be supported. Every glyph is
+  // expected to be present in the cache by the time this is called.
+  CategoryEmoji _applySupport(CategoryEmoji category) {
+    final support = _emojiSupport[category.category];
     return category.copyWith(
-      emoji: [
-        for (int i = 0; i < available.length; i++)
-          if (available[i]) category.emoji[i],
-      ],
+      emoji: category.emoji
+          .where((e) => support?[e.emoji] ?? false)
+          .toList(),
     );
   }
 
   /// Filters out emojis not supported on the platform
   ///
-  /// Returns synchronously when every requested category is already cached,
-  /// so a rebuilt [EmojiPicker] does not have to hit the native side again.
+  /// Returns synchronously when the support of every requested glyph is
+  /// already cached, so a rebuilt [EmojiPicker] does not have to hit the
+  /// native side again. Glyphs whose support is not yet known (e.g. after a
+  /// locale switch that introduces new glyphs, or a custom emoji set) are
+  /// queried and merged into the cache.
   FutureOr<List<CategoryEmoji>> filterUnsupported(List<CategoryEmoji> data) {
     if (kIsWeb || !Platform.isAndroid) {
       return data;
     }
 
-    if (data.every((e) => _availableEmojis.containsKey(e.category))) {
-      return data.map((e) => _availableEmojis[e.category]!).toList();
+    // Collect, per category, the glyphs whose support is not yet cached.
+    final pending = <CategoryEmoji, List<Emoji>>{};
+    for (final cat in data) {
+      final support = _emojiSupport[cat.category];
+      final unknown = support == null
+          ? cat.emoji
+          : cat.emoji.where((e) => !support.containsKey(e.emoji)).toList();
+      if (unknown.isNotEmpty) {
+        pending[cat] = unknown;
+      }
+    }
+
+    if (pending.isEmpty) {
+      return [for (final cat in data) _applySupport(cat)];
     }
 
     return Future(() async {
-      final futures = [
-        for (final cat
-            in data.where((e) => !_availableEmojis.containsKey(e.category)))
-          _getAvailableEmojis(cat),
-      ];
-
-      for (final cat in await Future.wait(futures)) {
-        _availableEmojis[cat.category] = cat;
-      }
-
-      return data.map((e) => _availableEmojis[e.category]!).toList();
+      await Future.wait([
+        for (final entry in pending.entries)
+          _cacheSupport(entry.key, entry.value),
+      ]);
+      return [for (final cat in data) _applySupport(cat)];
     });
   }
 
@@ -194,5 +215,14 @@ class EmojiPickerInternalUtils {
   /// Remove skin tone from given emoji
   Emoji removeSkinTone(Emoji emoji) {
     return emoji.copyWith(emoji: emoji.emoji.replaceFirst(_skinToneRegExp, ''));
+  }
+
+  /// Clears the in-memory caches. The caches are `static`, so they otherwise
+  /// persist for the lifetime of the isolate and can leak state between test
+  /// cases. Call this in `setUp`/`tearDown` to keep tests isolated.
+  @visibleForTesting
+  static void resetCaches() {
+    _emojiSupport.clear();
+    _recentEmojis = null;
   }
 }

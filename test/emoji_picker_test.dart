@@ -1,4 +1,5 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import 'package:emoji_picker_flutter/src/emoji_picker_internal_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -10,6 +11,9 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('EmojiPicker Tests', () {
+    // Caches are static and would otherwise leak between test cases.
+    setUp(EmojiPickerInternalUtils.resetCaches);
+
     testWidgets('Should allow user to select an emoji', (
       WidgetTester tester,
     ) async {
