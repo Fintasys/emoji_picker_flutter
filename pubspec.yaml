@@ -10,8 +10,6 @@ screenshots:
     path: screenshot/example_whatsapp_emoji_view.png
   - description: 'WhatsApp-style search view'
     path: screenshot/example_whatsapp_search_view.png
-  - description: 'Custom font rendering'
-    path: screenshot/example_custom_font_android.png
 
 environment:
   sdk: ">=3.11.5 <4.0.0"
