@@ -1,4 +1,5 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import 'package:emoji_picker_flutter/src/emoji_picker_internal_utils.dart';
 import 'package:flutter/material.dart';
 
 /// Template class for custom implementation
@@ -24,6 +25,10 @@ class SearchViewState<T extends SearchView> extends State<T>
   /// Emoji picker utils
   final utils = EmojiPickerUtils();
 
+  /// Internal utils, used for the cache-backed synchronous fast-path when
+  /// loading recent emojis (the public [utils] returns a `Future`).
+  final _internalUtils = EmojiPickerInternalUtils();
+
   /// Focus node for textfield
   final focusNode = FocusNode();
 
@@ -43,7 +48,7 @@ class SearchViewState<T extends SearchView> extends State<T>
       // Auto focus textfield
       FocusScope.of(context).requestFocus(focusNode);
       // Load recent emojis initially
-      final futureOrRecent = utils.getRecentEmojis();
+      final futureOrRecent = _internalUtils.getRecentEmojis();
       if (futureOrRecent is List<RecentEmoji>) {
         setState(
           () => _updateResults(futureOrRecent.map((e) => e.emoji).toList()),

@@ -1,6 +1,6 @@
 ## Unreleased
 
-- Cache platform-supported emojis and recently used emojis so a rebuilt `EmojiPicker` skips redundant native `getSupportedEmojis` calls and `SharedPreferences` reads. `EmojiPickerUtils.filterUnsupported` and `getRecentEmojis` now return `FutureOr` and resolve synchronously once cached. Support is cached per emoji glyph (not per resolved category), so results stay correct across locale switches and custom emoji sets, and the recent-emoji cache is kept in sync when emojis are added or cleared. (based on #252)
+- Cache platform-supported emojis and recently used emojis so a rebuilt `EmojiPicker` skips redundant native `getSupportedEmojis` calls and `SharedPreferences` reads, and resolves synchronously once cached. Support is cached per emoji glyph (not per resolved category), so results stay correct across locale switches and custom emoji sets, and the recent-emoji cache is kept in sync when emojis are added or cleared. The public `EmojiPickerUtils` API is unchanged (still returns `Future`). (based on #252)
 
 ## 4.5.0
 
