@@ -194,6 +194,16 @@ class EmojiPickerState extends State<EmojiPicker> {
     bool refresh = false,
   }) {
     _recentEmoji = recentEmoji;
+    // Only mutate the displayed category data when we actually intend to
+    // refresh the UI. `_categoryEmoji` is shared by reference with `_state`,
+    // so mutating it here without a `setState()` would still surface the new
+    // recent list on the next unrelated rebuild triggered by a parent widget
+    // (e.g. the RECENT tab re-ordering under the user). The persisted store is
+    // already updated by the caller, so the change is not lost - it simply
+    // becomes visible on the next explicit refresh instead of leaking early.
+    if (!refresh) {
+      return;
+    }
     final recentTabIndex = _categoryEmoji.indexWhere(
       (element) => element.category == Category.RECENT,
     );
@@ -201,7 +211,7 @@ class EmojiPickerState extends State<EmojiPicker> {
       _categoryEmoji[recentTabIndex] = _categoryEmoji[recentTabIndex].copyWith(
         emoji: _recentEmoji.map((e) => e.emoji).toList(),
       );
-      if (mounted && refresh) {
+      if (mounted) {
         setState(() {});
       }
     }
