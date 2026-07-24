@@ -38,7 +38,7 @@ class _RebuildHarnessState extends State<_RebuildHarness> {
               child: EmojiPicker(
                 key: widget.pickerKey,
                 config: widget.config,
-                onEmojiSelected: (_, __) {},
+                onEmojiSelected: (_, _) {},
               ),
             ),
           ],
@@ -129,7 +129,7 @@ void main() {
           body: EmojiPicker(
             key: pickerKey,
             config: config,
-            onEmojiSelected: (_, __) {},
+            onEmojiSelected: (_, _) {},
           ),
         ),
       ),

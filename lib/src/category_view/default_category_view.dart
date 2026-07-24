@@ -39,7 +39,7 @@ class DefaultCategoryViewState extends CategoryViewState {
     );
   }
 
-  Widget _buildExtraTab(extraTab) {
+  Widget _buildExtraTab(CategoryExtraTab? extraTab) {
     if (extraTab == CategoryExtraTab.BACKSPACE) {
       return BackspaceButton(
         widget.config,

@@ -24,8 +24,13 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 // Built-in Kotlin: AGP 9+ provides Kotlin, so only apply KGP on older AGP.
+// AGP 9 enables Built-in Kotlin by default, but Flutter's AGP 9 migrator writes
+// android.builtInKotlin=false into gradle.properties while apps/plugins transition,
+// which leaves nothing to apply the `kotlin {}` extension unless we fall back to KGP.
 def agpMajorVersion = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION.tokenize('.')[0].toInteger()
-def appliesLegacyKotlin = agpMajorVersion < 9
+def builtInKotlinDisabled = project.hasProperty('android.builtInKotlin') &&
+    project.property('android.builtInKotlin').toString() == 'false'
+def appliesLegacyKotlin = agpMajorVersion < 9 || builtInKotlinDisabled
 if (appliesLegacyKotlin) {
     apply plugin: 'kotlin-android'
 }

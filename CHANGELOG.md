@@ -1,3 +1,16 @@
+## 4.5.3
+
+- Fix Android build failure (`Could not find method kotlin()`) on AGP 9 when `android.builtInKotlin=false`, the default written by Flutter's AGP 9 migrator. The Kotlin Gradle Plugin (KGP) is now applied whenever Built-in Kotlin is disabled, not just on AGP versions prior to 9 ([#270](https://github.com/Fintasys/emoji_picker_flutter/issues/270))
+- Minor lint fixes: add explicit parameter type in `DefaultCategoryView` and use `_` for unused callback parameters in tests
+
+## 4.5.2
+
+- Fix README
+
+## 4.5.1
+
+- Fix README
+
 ## 4.5.0
 
 - Bump minimum Flutter version to `3.41.8` (Dart `3.11.5`)
