@@ -19,6 +19,26 @@ class EmojiPickerInternalUtils {
 
   static final RegExp _skinToneRegExp = RegExp(SkinTone.values.join('|'));
 
+  /// Skin tone capable emoji bases that default to *text* presentation, so
+  /// their untoned form needs U+FE0F to render as an emoji (✌️, not ✌).
+  ///
+  /// A skin tone modifier already implies emoji presentation, which is why
+  /// [EmojiPickerUtils.applySkinTone] drops the selector while building a
+  /// modifier sequence - it has to be restored once the tone is stripped
+  /// again. Every other skin tone base has Emoji_Presentation=Yes and must
+  /// *not* gain a selector (👍, not 👍️).
+  static const _textPresentationBases = <int>{
+    0x261D, // ☝ index pointing up
+    0x26F9, // ⛹ person bouncing ball
+    0x270C, // ✌ victory hand
+    0x270D, // ✍ writing hand
+    0x1F3CB, // 🏋 person lifting weights
+    0x1F3CC, // 🏌 person golfing
+    0x1F574, // 🕴 person in suit levitating
+    0x1F575, // 🕵 detective
+    0x1F590, // 🖐 hand with fingers splayed
+  };
+
   /// Caches, per [Category], whether each emoji glyph is supported on the
   /// platform. Keyed by the emoji string (not the [CategoryEmoji]) so the
   /// cache stays correct across locales and custom emoji sets, which change
@@ -213,7 +233,21 @@ class EmojiPickerInternalUtils {
 
   /// Remove skin tone from given emoji
   Emoji removeSkinTone(Emoji emoji) {
-    return emoji.copyWith(emoji: emoji.emoji.replaceFirst(_skinToneRegExp, ''));
+    final stripped = emoji.emoji.replaceFirst(_skinToneRegExp, '');
+    return emoji.copyWith(emoji: _restorePresentationSelector(stripped));
+  }
+
+  /// Re-inserts U+FE0F after the base code point of [emoji] when the untoned
+  /// form needs it to keep emoji presentation. See [_textPresentationBases].
+  String _restorePresentationSelector(String emoji) {
+    final runes = emoji.runes.toList();
+    if (runes.isEmpty || !_textPresentationBases.contains(runes.first)) {
+      return emoji;
+    }
+    if (runes.length > 1 && runes[1] == 0xFE0F) {
+      return emoji;
+    }
+    return String.fromCharCodes([runes.first, 0xFE0F, ...runes.skip(1)]);
   }
 
   /// Clears the in-memory caches. The caches are `static`, so they otherwise

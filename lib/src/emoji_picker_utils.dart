@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:emoji_picker_flutter/src/emoji_picker_internal_utils.dart';
 import 'package:flutter/material.dart';
@@ -179,16 +177,24 @@ class EmojiPickerUtils {
   /// to an already toned glyph produces a valid single-modifier sequence
   /// instead of an invalid double-modifier one (e.g. 👋🏻🏽).
   Emoji applySkinTone(Emoji emoji, String color) {
-    final codeUnits = removeSkinTone(emoji).emoji.codeUnits;
-    var result = List<int>.empty(growable: true)
-      // Basic emoji without gender (until char 2)
-      ..addAll(codeUnits.sublist(0, min(codeUnits.length, 2)))
-      // Skin tone
-      ..addAll(color.codeUnits);
-    // add the rest of the emoji (gender, etc.) again
-    if (codeUnits.length >= 2) {
-      result.addAll(codeUnits.sublist(2));
+    final runes = removeSkinTone(emoji).emoji.runes.toList();
+    if (runes.isEmpty) {
+      return emoji;
     }
+    // The tone modifier has to immediately follow the base code point, so the
+    // base is one rune - not two UTF-16 code units, which would also swallow a
+    // variation selector for bases outside the BMP. The modifier implies emoji
+    // presentation, so a selector right after the base is dropped rather than
+    // carried along (✌️ + 🏽 is 270C 1F3FD, not 270C FE0F 1F3FD).
+    final restIndex = runes.length > 1 && runes[1] == 0xFE0F ? 2 : 1;
+    final result = <int>[
+      // Base emoji without gender, presentation selector, etc.
+      runes.first,
+      // Skin tone
+      ...color.runes,
+      // The rest of the emoji (gender, etc.) again
+      ...runes.skip(restIndex),
+    ];
     return emoji.copyWith(emoji: String.fromCharCodes(result));
   }
 

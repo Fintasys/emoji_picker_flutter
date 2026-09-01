@@ -1,3 +1,8 @@
+## 4.5.4
+
+- Fix `applySkinTone` inserting the skin tone modifier around the emoji presentation selector (U+FE0F), which produced invalid sequences for 13 of the 200 skin tone capable emoji. Emoji with a BMP base such as ✌️, ☝️, ✍️ and ⛹️ rendered as two glyphs (`270C FE0F 1F3FD` instead of `270C 1F3FD`); emoji such as 🖐️, 🕵️, 🕴️, 🏌️ and 🏋️ kept a stray selector after the modifier ([#272](https://github.com/Fintasys/emoji_picker_flutter/issues/272))
+- `removeSkinTone` now restores U+FE0F for bases that default to text presentation, so recents and the skin tone overlay keep showing ✌️ rather than ✌
+
 ## 4.5.3
 
 - Fix Android build failure (`Could not find method kotlin()`) on AGP 9 when `android.builtInKotlin=false`, the default written by Flutter's AGP 9 migrator. The Kotlin Gradle Plugin (KGP) is now applied whenever Built-in Kotlin is disabled, not just on AGP versions prior to 9 ([#270](https://github.com/Fintasys/emoji_picker_flutter/issues/270))
