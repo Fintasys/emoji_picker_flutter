@@ -16,7 +16,7 @@ const List<CategoryEmoji> emojiSetFrance = [
     ),
     Emoji(
       '😄',
-      'content | émoticône | grand sourire | heureux | joyeux | lol | mdr | rire | sourire | sourire mignon | visage | visage avec la bouche ouverte et les yeux souriants | visage très souriant aux yeux rieurs',
+      'content | émoticône | grand sourire | heureux | joyeux | lol | mdr | rire | sourire | sourire mignon | visage avec la bouche ouverte et les yeux souriants | visage très souriant aux yeux rieurs',
     ),
     Emoji(
       '😁',
@@ -56,11 +56,11 @@ const List<CategoryEmoji> emojiSetFrance = [
     ),
     Emoji(
       '😇',
-      'ange | angélique | auréole | béni | Bible | émoticône | heureux | innocent | paix | sourire | spirituel | visage | visage souriant avec auréole | visage souriant avec une auréole',
+      'ange | angélique | auréole | béni | Bible | émoticône | heureux | innocent | paix | sourire | spirituel | visage souriant avec auréole',
     ),
     Emoji(
       '🥰',
-      'adorer | aimer | amour | amoureuse | amoureux | béguin | coeur | coeurs | cœurs | j’adore | Je t’aime | romance | smiley avec 3 coeurs | sourire | visage souriant avec cœurs',
+      'adorer | aimer | amour | béguin | coeur | cœurs | j’adore | Je t’aime | smiley avec 3 coeurs | sourire | visage souriant avec cœurs',
     ),
     Emoji(
       '😍',
@@ -72,7 +72,7 @@ const List<CategoryEmoji> emojiSetFrance = [
     ),
     Emoji(
       '😘',
-      'amour | baiser | bise | bisou | bisou et cœur | bonjour | bonne nuit | cœur | embrasser | émoticône | je t’aime | visage envoyant un bisou | visage qui fait une bise avec un cœur',
+      'amour | baiser | bise | bisou et cœur | bonjour | bonne nuit | cœur | embrasser | émoticône | je t’aime | visage envoyant un bisou | visage qui fait une bise avec un cœur',
     ),
     Emoji(
       '😗',
@@ -108,7 +108,7 @@ const List<CategoryEmoji> emojiSetFrance = [
     ),
     Emoji(
       '😝',
-      'dégoûtant | émoticône | goût | horrible | langue | œil | omd | on ne vit qu’une fois | peu importe | visage | visage qui tire la langue et ferme les yeux | visage qui tire la langue les yeux plissés | yeux fermés',
+      'dégoûtant | émoticône | goût | horrible | langue | œil | omd | on ne vit qu’une fois | peu importe | visage qui tire la langue et ferme les yeux | visage qui tire la langue les yeux plissés | yeux fermés',
     ),
     Emoji(
       '🤑',
@@ -168,7 +168,7 @@ const List<CategoryEmoji> emojiSetFrance = [
     ),
     Emoji(
       '😶',
-      'émoticône | muet | ne rien dire | neutre | sans commentaires | sans expression | sans voix | se taire | secret | silence | sourdine | visage | visage sans bouche',
+      'émoticône | muet | ne rien dire | neutre | sans commentaires | sans expression | sans voix | se taire | secret | silence | sourdine | visage sans bouche',
     ),
     Emoji(
       '🫥',
@@ -240,11 +240,11 @@ const List<CategoryEmoji> emojiSetFrance = [
     ),
     Emoji(
       '🤧',
-      'à tes souhaits | atchoum | émoticône | éternuement | éternuer | fièvre | grippe | malade | mouchoir | rhume | se moucher | visage | visage qui éternue',
+      'à tes souhaits | atchoum | émoticône | éternuement | éternuer | fièvre | grippe | malade | mouchoir | rhume | se moucher | visage qui éternue',
     ),
     Emoji(
       '🥵',
-      'chaleur | chaud | coup de chaleur | coup de chaud | fièvre | sue | suer | toute rouge | transpiration | trop chaud | visage | visage rouge et chaud | visage tout rouge',
+      'chaleur | chaud | coup de chaleur | coup de chaud | fièvre | sue | suer | toute rouge | transpiration | trop chaud | visage rouge et chaud | visage tout rouge',
     ),
     Emoji(
       '🥶',
@@ -269,7 +269,7 @@ const List<CategoryEmoji> emojiSetFrance = [
     Emoji('🤠', 'chapeau | cowboy | visage | visage avec chapeau de cowboy'),
     Emoji(
       '🥳',
-      'anniversaire | célébration | chapeau | chapeau pointu | émoticône | fête | heureux | hourra | joyeux anniversaire | sifflet | visage de fête | visage festif | youpi',
+      'anniversaire | célébration | chapeau pointu | émoticône | fête | heureux | hourra | joyeux anniversaire | sifflet | visage de fête | visage festif | youpi',
     ),
     Emoji(
       '😎',
@@ -277,7 +277,7 @@ const List<CategoryEmoji> emojiSetFrance = [
     ),
     Emoji(
       '🤓',
-      'doué | futé | geek | idiot | intelligent | lunettes | personne | premier de la classe | ringard | surdoué | tronche | visage | visage de geek',
+      'doué | futé | geek | idiot | intelligent | lunettes | personne | premier de la classe | ringard | surdoué | tronche | visage de geek',
     ),
     Emoji(
       '🧐',
@@ -310,7 +310,7 @@ const List<CategoryEmoji> emojiSetFrance = [
     ),
     Emoji(
       '😳',
-      'chaud | comment | ébahi | émoticône | étonné | gêné | hébété | impressionné | incrédule | incroyable | quoi | rouge | rougissant | stupéfait | visage | visage qui rougit',
+      'chaud | comment | ébahi | émoticône | étonné | gêné | impressionné | incrédule | incroyable | quoi | rouge | visage qui rougit',
     ),
     Emoji(
       '🥺',
@@ -322,7 +322,7 @@ const List<CategoryEmoji> emojiSetFrance = [
     ),
     Emoji(
       '😧',
-      'angoisse | comment | émoticône | hein | mécontent | oubli | peur | quoi | stressé | surpris | terrifié | visage | visage angoissé',
+      'angoisse | comment | émoticône | hein | mécontent | oubli | peur | quoi | stressé | surpris | terrifié | visage angoissé',
     ),
     Emoji(
       '😨',
@@ -330,7 +330,7 @@ const List<CategoryEmoji> emojiSetFrance = [
     ),
     Emoji(
       '😰',
-      'aah | bleu | bouche | bouche bée | effrayé | émoticône | froid | mince | nerveux | peur | peur bleue | sueur | sueurs froides | terrifié | visage | visage anxieux avec goutte de sueur | visage en sueur bouche ouverte',
+      'aah | bleu | bouche bée | effrayé | émoticône | froid | mince | nerveux | peur bleue | sueurs froides | terrifié | visage anxieux avec goutte de sueur | visage en sueur bouche ouverte',
     ),
     Emoji(
       '😥',
@@ -378,7 +378,7 @@ const List<CategoryEmoji> emojiSetFrance = [
     ),
     Emoji(
       '😡',
-      'colère | émoticône | énervé | exaspéré | fâché | furieux | mécontent | rageur | rouge | rouge de colère | sourcils froncés | visage | visage boudeur',
+      'colère | émoticône | énervé | exaspéré | fâché | furieux | mécontent | rageur | rouge | rouge de colère | sourcils froncés | visage boudeur',
     ),
     Emoji(
       '😠',
@@ -572,7 +572,7 @@ const List<CategoryEmoji> emojiSetFrance = [
     ),
     Emoji(
       '👍',
-      'bien | compris | d’accord | génial | haut | main | moi aussi | OK | oui | pouce levé | pouce vers le haut | super | top',
+      '+1 | bien | compris | d’accord | génial | haut | OK | oui | super',
       hasSkinTone: true,
     ),
     Emoji(
@@ -1503,7 +1503,7 @@ const List<CategoryEmoji> emojiSetFrance = [
     ),
     Emoji(
       '🥾',
-      'camping | chaussure | chaussure de marche | chaussure de randonnée | chaussures de chantier | chaussures de montagne | chaussures de sécurité | chaussures marron | marche | rando | randonnée | timberland | vêtements',
+      'camping | chaussure de marche | chaussure de randonnée | chaussures de chantier | chaussures de montagne | chaussures de sécurité | chaussures marron | marche | rando | randonnée | timberland | vêtements',
     ),
     Emoji(
       '🥿',
@@ -1548,6 +1548,285 @@ const List<CategoryEmoji> emojiSetFrance = [
       'alliance | amour | bague | brillant | diamant | étincelant | fiançailles | mariage | solitaire',
     ),
     Emoji('💼', 'accessoire | bureau | cartable | porte-documents'),
+    Emoji(
+      '🥲',
+      'ému | fier | heureux | larme | reconnaissant | smiley | soulagé | souriant | touché | visage souriant avec une larme',
+    ),
+    Emoji(
+      '😶‍🌫️',
+      'émoticône | muet | ne rien dire | neutre | sans commentaires | sans expression | sans voix | se taire | secret | silence | sourdine | visage sans bouche brouillard | brume | fog | météo | nuage ',
+    ),
+    Emoji(
+      '😮‍💨',
+      'chuchoter | découragé | déçu | expiration | exténué | fatigué | siffler | souffler | soulagement | soupir | sursaut | visage expirant',
+    ),
+    Emoji(
+      '🫨',
+      'choc | étourdi | fou | omg | ouah | panique | secoué | surprenant | tremblement | tremblement de terre | vibration | visage secoué',
+    ),
+    Emoji(
+      '🙂‍↔️',
+      'content | émoticône | heureux | léger sourire | sourire | visage avec un léger sourire | visage souriant flèche | flèche gauche droite ',
+    ),
+    Emoji(
+      '🙂‍↕️',
+      'content | émoticône | heureux | léger sourire | sourire | visage avec un léger sourire | visage souriant flèche | flèche dans les deux sens | flèche haut bas ',
+    ),
+    Emoji(
+      '🫩',
+      'ensommeilé | épuisé | fatigué | sommeil | visage avec des valises sous les yeux',
+    ),
+    Emoji(
+      '🥸',
+      'déguisement | espion | faux nez | grimer | incognito | lunettes | moustache | postiche | smiley | sourcils ébouriffés | visage déguisé',
+    ),
+    Emoji(
+      '🫪',
+      'anxiété | bouffi | choc | gonflé | panique | surprise | vulnérabilité',
+    ),
+    Emoji(
+      '🥱',
+      'bâille | bâiller | dormir | émoticône | ennui | fatigant | fatigue | sieste | visage bâillant',
+    ),
+    Emoji(
+      '🫷',
+      'arrêter | attendre | bloquer | gauche | halte | high five | main | main qui pousse vers la gauche | pousser | refuser | stop | tape m’en cinq | top là',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '🫸',
+      'arrêter | attendre | bloquer | droite | halte | high five | main | main qui pousse vers la droite | pousser | refuser | stop | tape m’en cinq | top là',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '🦾',
+      'accessibilité | bras | bras mécanique | bras robot | handicap | prothèse | prothèse de bras',
+    ),
+    Emoji(
+      '🦿',
+      'accessibilité | handicap | jambe artificielle | jambe mécanique | jambe robot | prothèse | prothèse de jambe',
+    ),
+    Emoji(
+      '🦻',
+      'accessibilité | handicap | malentendant | oreille appareillée | prothèse auditive | sonotone | sourd | surdité',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '🫀',
+      'anatomie | battement de coeur | battements | cardiologie | cœur | organe | pouls | pulsation',
+    ),
+    Emoji(
+      '🫁',
+      'anatomie | expiration | inspiration | organe | poumons | respiration | respirer | souffle',
+    ),
+    Emoji(
+      '🧔‍♀️',
+      'barbe | barbu | personne avec une barbe | personne barbue femme | symbole de la femme ',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '🧏‍♂️',
+      'accessibilité | entendre | malentendant | oreille | personne sourde | sourd | surdité homme | symbole de l’homme ',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '🧏‍♀️',
+      'accessibilité | entendre | malentendant | oreille | personne sourde | sourd | surdité femme | symbole de la femme ',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '🥷',
+      'assassin | combat | furtif | guerrier | masqué | ninja | personne | sabre | secret | soldat',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '🫅',
+      'monarque | noble | personne avec une couronne | royal | royauté',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '🤵‍♀️',
+      'élégant | homme | marié | personne en smoking | personne mariée | smoking femme | symbole de la femme ',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '👰‍♂️',
+      'mariage | mariée | mariée avec voile | personne mariée avec voile | voile homme | symbole de l’homme ',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '🫃',
+      'enceinte | grossesse | homme enceint | homme enceinte | personne enceinte | trop mangé | ventre',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '👩‍🍼',
+      'allaitement | bébé | biberon | femme | femme allaitant un bébé | maman | mère | nounou | nouveau-né | personne',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '👨‍🍼',
+      'allaitement | bébé | biberon | homme | homme allaitant un bébé | nouveau-né | papa | père | personne',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '🫈',
+      'bigfoot | cryptide | forêt | géant | homme sauvage | poilu | sasquatch | yéti',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '🚶‍♀️‍➡️',
+      'balade | en route | flâner | homme | marche | marcher | nonchalant | personne | personne qui marche | piéton | promenade | se balader femme | symbole de la femme direction | droite | est | flèche | sens ',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '🚶‍♂️‍➡️',
+      'balade | en route | flâner | homme | marche | marcher | nonchalant | personne | personne qui marche | piéton | promenade | se balader homme | symbole de l’homme direction | droite | est | flèche | sens ',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '🧍‍♂️',
+      'debout | personne debout homme | symbole de l’homme ',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '🧍‍♀️',
+      'debout | personne debout femme | symbole de la femme ',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '🧎‍♂️',
+      'à genoux | personne à genoux | prière | religion homme | symbole de l’homme ',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '🧎‍♀️',
+      'à genoux | personne à genoux | prière | religion femme | symbole de la femme ',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '🧎‍♀️‍➡️',
+      'à genoux | personne à genoux | prière | religion femme | symbole de la femme direction | droite | est | flèche | sens ',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '🧎‍♂️‍➡️',
+      'à genoux | personne à genoux | prière | religion homme | symbole de l’homme direction | droite | est | flèche | sens ',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '👨‍🦯',
+      'accessibilité | aveugle | déficient visuel | handicap | handicap visuel | homme | homme avec canne blanche | malvoyant',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '👨‍🦯‍➡️',
+      'ami | garçon | homme | personne | petit ami | pote accessibilité | aveugle | canne blanche | déficient visuel | malvoyant direction | droite | est | flèche | sens ',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '👩‍🦯',
+      'accessibilité | aveugle | déficiente visuelle | femme | femme avec canne blanche | handicap | malvoyante',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '👩‍🦯‍➡️',
+      'blonde | coupe de cheveux | femme | personne accessibilité | aveugle | canne blanche | déficient visuel | malvoyant direction | droite | est | flèche | sens ',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '👨‍🦼',
+      'accessibilité | fauteuil roulant | handicap | homme | homme en fauteuil motorisé',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '👨‍🦼‍➡️',
+      'ami | garçon | homme | personne | petit ami | pote accessibilité | fauteuil motorisé | fauteuil roulant | fauteuil roulant motorisé | handicap direction | droite | est | flèche | sens ',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '👩‍🦼',
+      'accessibilité | fauteuil roulant | femme | femme en fauteuil motorisé | handicap',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '👩‍🦼‍➡️',
+      'blonde | coupe de cheveux | femme | personne accessibilité | fauteuil motorisé | fauteuil roulant | fauteuil roulant motorisé | handicap direction | droite | est | flèche | sens ',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '👨‍🦽',
+      'accessibilité | fauteuil roulant | handicap | homme | homme en fauteuil roulant manuel',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '👨‍🦽‍➡️',
+      'ami | garçon | homme | personne | petit ami | pote accessibilité | fauteuil roulant | fauteuil roulant manuel | handicap direction | droite | est | flèche | sens ',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '👩‍🦽',
+      'accessibilité | fauteuil roulant | femme | femme en fauteuil roulant manuel | handicap',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '👩‍🦽‍➡️',
+      'blonde | coupe de cheveux | femme | personne accessibilité | fauteuil roulant | fauteuil roulant manuel | handicap direction | droite | est | flèche | sens ',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '🏃‍♀️‍➡️',
+      'arriver | coureur | courir | course à pied | homme qui court | jogging | marathon | marathonien | personne qui court | pressé | rapide | sportif | vite femme | symbole de la femme direction | droite | est | flèche | sens ',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '🏃‍♂️‍➡️',
+      'arriver | coureur | courir | course à pied | homme qui court | jogging | marathon | marathonien | personne qui court | pressé | rapide | sportif | vite homme | symbole de l’homme direction | droite | est | flèche | sens ',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '🧑‍🩰',
+      'ballerine | ballet | danse classique | danseuse',
+      hasSkinTone: true,
+    ),
+    Emoji(
+      '🫆',
+      'dermatoglyphe | données biométriques | empreinte digitale | identité | sécurité',
+    ),
+    Emoji(
+      '🦺',
+      'chantier | fluo | gilet de sécurité | gilet jaune | gilet orange | sécurité | sûreté | visibilité',
+    ),
+    Emoji('🥻', 'inde | mode | robe | sari | traditionnel | vêtement'),
+    Emoji(
+      '🩱',
+      'maillot | maillot de bain | maillot de bain une pièce | maillot une pièce',
+    ),
+    Emoji(
+      '🩲',
+      'maillot de bain | slip | slip de bain | sous-vêtement | une pièce',
+    ),
+    Emoji(
+      '🩳',
+      'baignade | caleçon | maillot de bain | piscine | plage | short | short de bain | sous-vêtement',
+    ),
+    Emoji(
+      '🪭',
+      'agiter | chaleur | charmer | chaud | danse | danser | éventail | éventer | rafraîchir | timide',
+    ),
+    Emoji(
+      '🩴',
+      'claquettes | été | mer | plage | sandales | sandales de plage | tatanes | tong | tongs',
+    ),
+    Emoji(
+      '🩰',
+      'ballerines | ballet | chaussons de danse | chaussures | classique | danse',
+    ),
+    Emoji('🪮', 'afro | cheveux | démêler | démêloir | peigne | peigner'),
+    Emoji(
+      '🪖',
+      'armée | casque | équipement | guerre | guerrier | militaire | protection | soldat',
+    ),
   ]),
 
   // ======================================================= Category.ANIMALS
@@ -1913,7 +2192,7 @@ const List<CategoryEmoji> emojiSetFrance = [
     ),
     Emoji(
       '🌞',
-      'chaleur | chaud | éclat | éclatant | ensoleillé | jour | lumière | météo | plage | rayon de soleil | soleil | soleil à visage | soleil avec visage',
+      'chaleur | chaud | éclatant | ensoleillé | jour | lumière | météo | plage | rayon de soleil | soleil | soleil à visage | soleil avec visage',
     ),
     Emoji('⭐', 'astronomie | étoile | nuit'),
     Emoji(
@@ -1962,7 +2241,7 @@ const List<CategoryEmoji> emojiSetFrance = [
     ),
     Emoji(
       '🌈',
-      'arc-en-ciel | bisexuel | bisexuelle | gay | Gay Pride | homosexuel | homosexuelle | lesbienne | LGBT | LGBTQ | LGBTQIA | météo | nature | orgueil | pluie | trans | transgenre',
+      'arc-en-ciel | bisexuelle | Gay Pride | homosexuelle | lesbienne | LGBTQIA | météo | nature | pluie | transgenre',
     ),
     Emoji('☂️', 'parapluie | parapluie ouvert | pluie '),
     Emoji(
@@ -1989,7 +2268,7 @@ const List<CategoryEmoji> emojiSetFrance = [
     ),
     Emoji(
       '💧',
-      'bande dessinée | BD | eau | froid | goutte | goutte d’eau | larme | météo | nature | pluie | sueur | sueurs froides | tristesse',
+      'BD | eau | froid | goutte | goutte d’eau | larme | météo | nature | pluie | sueurs froides | tristesse',
     ),
     Emoji('🫧', 'bulle | bulles | propre | savon | sous l’eau'),
     Emoji(
@@ -2009,6 +2288,93 @@ const List<CategoryEmoji> emojiSetFrance = [
       'arbre | arbre à vœux | fête | Japon | prières | Tanabata | vœux',
     ),
     Emoji('🎍', 'bambou | bambou décoratif | fête | japonais | plante'),
+    Emoji(
+      '🫯',
+      'bagarre | combat | désaccord | discussion | dispute | grabuge | lutte',
+    ),
+    Emoji('🦧', 'animal | orang-outan | primate | singe'),
+    Emoji(
+      '🦮',
+      'accessibilité | animal | aveugle | chien guide | guide | malvoyant | non-voyant',
+    ),
+    Emoji(
+      '🐕‍🦺',
+      'accessibilité | aide | animal | assistance | chien d’assistance | chien-guide | handicap',
+    ),
+    Emoji(
+      '🐈‍⬛',
+      'animal | chat | chaton | félin | halloween | malchanceux | matou | miaou | noir | superstition',
+    ),
+    Emoji(
+      '🫎',
+      'animal | bois | cervidé | élan | mammifère | orignal | ramure',
+    ),
+    Emoji('🫏', 'âne | animal | bourricot | mammifère | mule | têtu'),
+    Emoji('🦌', 'animal | bois | cerf'),
+    Emoji(
+      '🦬',
+      'animal | bison | buffle | cornes | herbivore | nature | troupeau',
+    ),
+    Emoji(
+      '🦣',
+      'animal | défenses | extinction | géant | grand | laineux | mammouth',
+    ),
+    Emoji('🦫', 'animal | barrage | castor | dents | rongeur'),
+    Emoji(
+      '🐻‍❄️',
+      'animal | miel | nounours | ours | ours brun | teddy | tête | visage flocon | flocon de neige | froid | météo | neige ',
+    ),
+    Emoji('🦥', 'aï | animal | endormi | lent | paresseux'),
+    Emoji('🦦', 'animal | joueur | loutre | mignon | pêcheur'),
+    Emoji('🦨', 'animal | mouffette | odeur | puer | putois'),
+    Emoji(
+      '🦤',
+      'animal | dodo | Dronte | espèce éteinte | extinction | grand | Maurice | oiseau',
+    ),
+    Emoji('🪶', 'écrire | écrivain | léger | oiseau | plumage | plume | voler'),
+    Emoji('🦩', 'animal | flamant | oiseau | rose | tropical'),
+    Emoji(
+      '🪽',
+      'aile | angélique | aviation | céleste | mythologie | oiseau | s’élever | s’envoler | voler',
+    ),
+    Emoji(
+      '🐦‍⬛',
+      'animal | bec | corbeau | corneille | corvidé | croasser | merle | noir | oiseau',
+    ),
+    Emoji(
+      '🪿',
+      'animal | bête | cacarder | canard | jars | oie | oiseau | troupeau | volaille | volée',
+    ),
+    Emoji(
+      '🐦‍🔥',
+      'ailes | cendres | feu | gloire | immortel | mythologie | oiseau | phénix | renaissance | renaître | revivre | transformation',
+    ),
+    Emoji('🫍', 'baleine | marin | océan'),
+    Emoji('🦭', 'animal | lion de mer | océan | otarie | phoque'),
+    Emoji(
+      '🪼',
+      'aïe | animal | aquarium | brûlure | gélatineux | invertébré | marin | méduse | mer | mou | océan | piqûre | plancton | tentacules | vie marine',
+    ),
+    Emoji('🦪', 'coquillage | coquille | huître | mollusque | perle'),
+    Emoji('🪲', 'animal | insecte | scarabée'),
+    Emoji('🪳', 'animal | blatte | cafard | coquerelle | insecte | nuisible'),
+    Emoji(
+      '🪰',
+      'animal | asticot | insecte | maladie | mouche | nuisible | pourrissement | puanteur | putréfaction | tsé-tsé',
+    ),
+    Emoji(
+      '🪱',
+      'animal | annélide | insecte | lombric | parasite | ver | ver de terre',
+    ),
+    Emoji(
+      '🪻',
+      'fleur | fleurir | indigo | jacinthe | lavande | lilas | lupin | mauve | muflier | plante | printemps | violet',
+    ),
+    Emoji(
+      '🪴',
+      'décoration | ennuyeux | faire pousser | intérieur | nature | plante | plante en pot | pousser | prendre soin',
+    ),
+    Emoji('🪾', 'arbre sans feuille | aride | hiver | sécheresse'),
   ]),
 
   // ======================================================= Category.FOODS
@@ -2141,7 +2507,7 @@ const List<CategoryEmoji> emojiSetFrance = [
     ),
     Emoji(
       '🥟',
-      'boulette de pâte | dumpling | empanada | gyoza | gyōza | jiaozi | pierogi | potsticker | ravioli',
+      'boulette de pâte | dumpling | empanada | gyoza | jiaozi | pierogi | potsticker | ravioli',
     ),
     Emoji('🥠', 'biscuit chinois | nourriture | prophétie'),
     Emoji(
@@ -2251,6 +2617,66 @@ const List<CategoryEmoji> emojiSetFrance = [
       'couteau et fourchette | couverts | faim | fourchette et couteau | manger | nourriture | repas | restaurant',
     ),
     Emoji('🥄', 'couvert | cuillère | manger'),
+    Emoji(
+      '🍋‍🟩',
+      'acide | agrume | citron | fruit | lime | mojito | tropical | vert | zeste',
+    ),
+    Emoji(
+      '🫐',
+      'airelles | baies | bleu | bleuets | fruit | myrtilles | nourriture | violet',
+    ),
+    Emoji(
+      '🫒',
+      'aliment | apéritif | apéro | nourriture | olive | olivier | rameau',
+    ),
+    Emoji('🫑', 'légume | piment | poivron | poivron rouge | poivron vert'),
+    Emoji(
+      '🧄',
+      'ail | aromate | assaisonnement | condiment | légume | vampire',
+    ),
+    Emoji('🧅', 'assaisonnement | condiment | légume | ognon | oignon'),
+    Emoji(
+      '🫚',
+      'bière | épice | gingembre | naturel | racine | racine de gingembre | santé',
+    ),
+    Emoji(
+      '🫛',
+      'cosse | cosse de petits pois | edamame | fève | haricot | légume | légumineuse | pois | soja',
+    ),
+    Emoji(
+      '🍄‍🟫',
+      'automne | brun | cèpe | champignon | fongus | marron | nature | nourriture',
+    ),
+    Emoji('🫜', 'betterave | jardin | légume | navet | racine'),
+    Emoji(
+      '🫓',
+      'arepa | galette | gordita | lavash | naan | nourriture | pain plat | pita',
+    ),
+    Emoji(
+      '🧇',
+      'brunch | gaufre | gourmandise | goûter | moule | pâtisserie | petit déjeuner | petit-déjeuner',
+    ),
+    Emoji('🫔', 'mexicain | nourriture | pamonha | papillote | tamal'),
+    Emoji(
+      '🧆',
+      'boulette | boulettes | falafel | falafels | pois chiches | seitan | soja | viande',
+    ),
+    Emoji('🥚', 'nourriture | œuf'),
+    Emoji(
+      '🫕',
+      'bourguignonne | chocolat | fondue | fromage | plat | poêlon | savoyarde | ski | suisse | Suisse',
+    ),
+    Emoji('🧈', 'beurre | gras | produit laitier'),
+    Emoji('🫖', 'boisson | boisson chaude | infusion | thé | théière'),
+    Emoji(
+      '🧋',
+      'boba | boisson | bubble tea | bulle | lait | paille | perle | thé aux bulles | thé aux perles | thé froid | zenzou',
+    ),
+    Emoji(
+      '🧃',
+      'boisson | briquette de jus | carton | jus | jus de fruits | paille',
+    ),
+    Emoji('🧊', 'cube | froid | glace | glaçon | iceberg'),
   ]),
 
   // ======================================================= Category.TRAVEL
@@ -2518,6 +2944,47 @@ const List<CategoryEmoji> emojiSetFrance = [
       'aéroport | arrivée | avion | bagages | retrait des bagages | valise | voyage',
     ),
     Emoji('🛅', 'bagages | casier | clé | consigne | valise'),
+    Emoji(
+      '🛘',
+      'avalanche | catastrophe | coulée de boue | danger | glissement de terrain | montagne | rochers | tremblement de terre',
+    ),
+    Emoji(
+      '🪨',
+      'caillou | dur | lourd | pierre | roc | roche | rocher | solide',
+    ),
+    Emoji('🪵', 'arbre | bois | bûche | bûcheron | rondins | tronc'),
+    Emoji('🛖', 'abri | case | hutte | maison | maisonnette | yourte'),
+    Emoji(
+      '🛕',
+      'bouddhisme | hindou | pagode | religion | stupa | temple | temple bouddhiste',
+    ),
+    Emoji(
+      '🚙',
+      'automobile | conduire | loisirs | moyen de transport | véhicule de loisirs | véhicule utilitaire sport | voiture | voyage',
+    ),
+    Emoji(
+      '🛻',
+      'auto | camion benne | camionnette | pick-up | pickup | plateau | poids lourd | transports | véhicule',
+    ),
+    Emoji(
+      '🦽',
+      'accessibilité | fauteuil roulant | fauteuil roulant manuel | handicap',
+    ),
+    Emoji(
+      '🦼',
+      'accessibilité | fauteuil motorisé | fauteuil roulant | fauteuil roulant motorisé | handicap',
+    ),
+    Emoji('🛺', 'rickshaw | taxi | thaï | tricycle | tuk tuk'),
+    Emoji('🛣️', 'autoroute | route | voyage '),
+    Emoji('🛶', 'bateau | canoë | rame | ramer'),
+    Emoji(
+      '🪂',
+      'chute libre | parachute | parachute ascensionnel | parapente | sensations fortes',
+    ),
+    Emoji(
+      '🪐',
+      'anneaux | planète à anneaux | saturne | saturnien | saturnienne',
+    ),
   ]),
 
   // ======================================================= Category.ACTIVITIES
@@ -2738,7 +3205,7 @@ const List<CategoryEmoji> emojiSetFrance = [
     ),
     Emoji('🎣', 'canne à pêche | pêche | pêche à la ligne | sport'),
     Emoji(
-      '🤿 ',
+      '🤿',
       'apnée | masque | masque de plongée | masque et tuba | plongée | plonger | snorkeling | tuba',
     ),
     Emoji('🥊', 'boxe | gant | gant de boxe | sport'),
@@ -2797,6 +3264,48 @@ const List<CategoryEmoji> emojiSetFrance = [
     Emoji('🎻', 'instrument | musique | violon'),
     Emoji('🥁', 'baguette | baguettes | batterie | musique | tambour'),
     Emoji('🎬', 'action | ça tourne | clap | film'),
+    Emoji(
+      '🤺',
+      'épée | escrime | escrimeur | escrimeuse | personne | sport',
+      hasSkinTone: true,
+    ),
+    Emoji('🪀', 'descendre | jouet | monter | osciller | yoyo'),
+    Emoji(
+      '🪄',
+      'abracadabra | baguette magique | magicien | magie | sorcier | sorcière | sort | tour de magie',
+    ),
+    Emoji(
+      '🪅',
+      '5 mai | bonbons | cinco de mayo | confiseries | fête | mexicain | piñata',
+    ),
+    Emoji(
+      '🪆',
+      'emboîté | empiler | jouet | matriochka | poupée gigogne | poupée russe | poupées russes | russe | russie',
+    ),
+    Emoji(
+      '🪡',
+      'aiguille à coudre | broderie | coudre | couture | fil à coudre | points | suture | tailleur',
+    ),
+    Emoji('🪢', 'attacher | corde | entrelacer | lien | nœud | noué | tordre'),
+    Emoji('🪊', 'cuivre | instrument | jazz | musique'),
+    Emoji(
+      '🪗',
+      'accordéon | bandonéon | concert | concertina | instrument | mélodie | musique | piano à bretelles',
+    ),
+    Emoji('🪕', 'banjo | cordes | instrument | instrument à cordes | musique'),
+    Emoji(
+      '🪘',
+      'battement | conga | djembé | instrument | musique | percussions | rythme | tambour',
+    ),
+    Emoji(
+      '🪇',
+      'cha cha cha | danse | danser | fête | hochet | instrument | maracas | musique | percussion | secouer',
+    ),
+    Emoji(
+      '🪈',
+      'bois | fanfare | fifre | flûte | flûte à bec | flûtiste | instrument | musique | orchestre | piccolo',
+    ),
+    Emoji('🪉', 'amour | cupidon | harpe | instrument | musique | orchestre'),
   ]),
 
   // ======================================================= Category.OBJECTS
@@ -3008,7 +3517,7 @@ const List<CategoryEmoji> emojiSetFrance = [
     ),
     Emoji(
       '📖',
-      'apprendre | bibliothèque | école | enseignement | étudier | lecture | lire | littérature | livre | livre ouvert | manuel scolaire | roman | savoir',
+      'apprendre | bibliothèque | école | enseignement | étudier | lecture | lire | littérature | livre ouvert | manuel scolaire | roman | savoir',
     ),
     Emoji(
       '📗',
@@ -3024,7 +3533,7 @@ const List<CategoryEmoji> emojiSetFrance = [
     ),
     Emoji(
       '📚',
-      'apprendre | bibliothèque | école | enseignement | étudier | lecture | lire | littérature | livre | livres | manuels scolaires | roman | savoir',
+      'apprendre | bibliothèque | école | enseignement | étudier | lecture | lire | littérature | livres | manuels scolaires | roman | savoir',
     ),
     Emoji('📓', 'cahier | carnet | écrire'),
     Emoji('📃', 'document | page | page enroulée'),
@@ -3294,6 +3803,91 @@ const List<CategoryEmoji> emojiSetFrance = [
     Emoji('⚰️', 'cercueil | enterrement | mort | obsèques | vampire '),
     Emoji('⚱️', 'cendres | mort | obsèques | urne | urne funéraire '),
     Emoji('🚰', 'eau | eau du robinet | eau potable | robinet'),
+    Emoji(
+      '🪔',
+      'ārtī | Diwali | diya | fête inde | huile | lampe | lampe à beurre | lampe inde',
+    ),
+    Emoji('📒', 'cahier | carnet de compte | classeur | grand livre'),
+    Emoji(
+      '🪙',
+      'argent | euro | fortune | métal | or | pièce | pièce de monnaie | riche | sou | trésor',
+    ),
+    Emoji(
+      '🪎',
+      'argent | argenterie | bijoux | butin | objets de valeur | or | pierre précieuse | richesse',
+    ),
+    Emoji(
+      '💹',
+      'banque | courbe avec yen en hausse | croissance | devise | graphique | hausse | marché | monnaie | tendance | yen',
+    ),
+    Emoji('🪓', 'bois | bûcheron | fendre | hache | hachette'),
+    Emoji('🪚', 'bois | outil | scie | scie à bois | scie égoïne | scier'),
+    Emoji('🪛', 'outil | outillage | tournevis | vis'),
+    Emoji(
+      '🦯',
+      'accessibilité | aveugle | canne blanche | déficient visuel | malvoyant',
+    ),
+    Emoji(
+      '⛓️‍💥',
+      'chaîne | chaînes bande dessinée | BD | bombe | boum | collision | détonation | étincelles | explosion ',
+    ),
+    Emoji(
+      '🪝',
+      'accrocher | appâter | attraper | capitaine | crochet | ferrer | hameçon | hameçonner',
+    ),
+    Emoji(
+      '🪜',
+      'ascension | barreau | échelle | échelon | escabeau | grimper | monter',
+    ),
+    Emoji('🪏', 'bêche | creuser | pelle | trou'),
+    Emoji(
+      '🩸',
+      'don du sang | goutte de sang | médecine | menstruation | menstruations | règles | sang',
+    ),
+    Emoji(
+      '🩹',
+      'bandage | bobo | médecine | pansement | premiers secours | sparadrap',
+    ),
+    Emoji(
+      '🩺',
+      'cœur | diagnostic | docteur | médecin | médecine | poumons | stéthoscope',
+    ),
+    Emoji(
+      '🛗',
+      'accessibilité | ascenseur | descente | monte-charge | monte-personnes | montée',
+    ),
+    Emoji(
+      '🪞',
+      'beauté | glace | image | maquillage | miroir | psyché | reflet',
+    ),
+    Emoji(
+      '🪟',
+      'air frais | cadre | carreaux | fenêtre | ouverture | transparent | vitre | vue',
+    ),
+    Emoji('🪑', 'assis | chaise | siège'),
+    Emoji(
+      '🪠',
+      'bouché | déboucheur | dégorgement | outil | plombier | succion | toilettes | ventouse',
+    ),
+    Emoji(
+      '🪤',
+      'apât | appât | fromage | leurre | piège | piège à souris | rat | tapette | tapette à souris',
+    ),
+    Emoji('🪒', 'coupant | lame | raser | rasoir | tranchant'),
+    Emoji('🪣', 'conteneur | plage | seau'),
+    Emoji(
+      '🪥',
+      'brosse | brosse à dents | brosser les dents | dentaire | dents | hygiène | laver | laver les dents | salle de bain',
+    ),
+    Emoji('🛒', 'caddie | chariot | courses | panier | shopping | supermarché'),
+    Emoji(
+      '🪦',
+      'cimetière | enterrement | funérailles | mémorial | mort | pierre tombale | RIP | sépulture | stèle | tombe',
+    ),
+    Emoji(
+      '🪧',
+      'affiche | écriteau | grève | manifestation | pancarte | panneau | protestation | signe',
+    ),
   ]),
 
   // ======================================================= Category.SYMBOLS
@@ -3335,7 +3929,10 @@ const List<CategoryEmoji> emojiSetFrance = [
       '💔',
       'amour | cœur | cœur brisé | malheureux | sentiment | séparé | triste',
     ),
-    Emoji('❤️‍🔥', 'amour | cœur | rouge | sentiment | feu | enflammé'),
+    Emoji(
+      '❤️‍🔥',
+      'amour | cœur | cœur rouge | sentiment allumer | brûler | chaud | feu | flamme | fournaise | incendie ',
+    ),
     Emoji('❤️', 'amour | cœur | cœur rouge | sentiment '),
     Emoji('🧡', 'coeur orange | cœur orange | orange'),
     Emoji('💛', 'amour | cœur | cœur jaune | sentiment'),
@@ -3762,16 +4359,16 @@ const List<CategoryEmoji> emojiSetFrance = [
     Emoji('®️', '® | marque commerciale | marque déposée | r '),
     Emoji('™️', 'marque commerciale déposée | marque déposée | TM '),
     Emoji('#️⃣', 'Keycap Number Sign'),
-    Emoji('0️⃣', 'Keycap Digit Zero'),
-    Emoji('1️⃣', 'Keycap Digit One'),
-    Emoji('2️⃣', 'Keycap Digit Two'),
-    Emoji('3️⃣', 'Keycap Digit Three'),
-    Emoji('4️⃣', 'Keycap Digit Four'),
-    Emoji('5️⃣', 'Keycap Digit Five'),
-    Emoji('6️⃣', 'Keycap Digit Six'),
-    Emoji('7️⃣', 'Keycap Digit Seven'),
-    Emoji('8️⃣', 'Keycap Digit Eight'),
-    Emoji('9️⃣', 'Keycap Digit Nine'),
+    Emoji('0️⃣', '0 | touches | zéro '),
+    Emoji('1️⃣', '1 | touches | un '),
+    Emoji('2️⃣', '2 | deux | touches '),
+    Emoji('3️⃣', '3 | touches | trois '),
+    Emoji('4️⃣', '4 | quatre | touches '),
+    Emoji('5️⃣', '5 | cinq | touches '),
+    Emoji('6️⃣', '6 | six | touches '),
+    Emoji('7️⃣', '7 | sept | touches '),
+    Emoji('8️⃣', '8 | huit | touches '),
+    Emoji('9️⃣', '9 | neuf | touches '),
     Emoji('🔟', 'Keycap: 10'),
     Emoji(
       '🔠',
@@ -3935,6 +4532,101 @@ const List<CategoryEmoji> emojiSetFrance = [
     ),
     Emoji('🔳', 'bouton | carré | carré blanc | forme | géométrie'),
     Emoji('🔲', 'bouton | carré | carré noir | forme | géométrie'),
+    Emoji(
+      '❤️‍🩹',
+      'amour | cœur | cœur rouge | sentiment bandage | bobo | médecine | pansement | premiers secours | sparadrap ',
+    ),
+    Emoji(
+      '🩷',
+      '143 | adorable | aimer | amour | cœur | émotion | jtm | mignon | rose',
+    ),
+    Emoji(
+      '🩵',
+      '143 | aimer | amour | bleu ciel | bleu clair | cœur bleu clair | cyan | émotion | jtm | mignon | spécial',
+    ),
+    Emoji('🤎', 'brun | cœur | marron'),
+    Emoji(
+      '🩶',
+      '143 | amour | ardoise | argent | argenté | cœur | émotion | gris | jtm | spécial',
+    ),
+    Emoji('🤍', 'blanc | cœur'),
+    Emoji(
+      '🗨️',
+      'bulle | bulle à gauche | bulle de parole gauche | dialogue | gauche ',
+    ),
+    Emoji(
+      '📵',
+      'interdiction | interdit | portable | téléphone | téléphones portables interdits',
+    ),
+    Emoji(
+      '🪯',
+      'deg tegh fateh | foi | khalsa | khanda | religion | sikh | sikhisme',
+    ),
+    Emoji(
+      '⏭️',
+      'bouton piste suivante | bouton suivant | double flèche | piste suivante | scène suivante | suivant | triangle ',
+    ),
+    Emoji('⏯️', 'bouton lecture/pause | flèche | lecture | pause | triangle '),
+    Emoji(
+      '⏮️',
+      'bouton piste précédente | bouton précédent | flèche | piste précédente | précédent | scène précédente | triangle ',
+    ),
+    Emoji('⏸️', 'bouton pause | pause '),
+    Emoji(
+      '⏺️',
+      'bouton enregistrer | cercle | enregistrement | enregistrer | point blanc ',
+    ),
+    Emoji(
+      '🛜',
+      'connexion | haut débit | hotspot | internet | ordinateur | réseau | routeur | sans fil | smartphone | Wi-Fi | wifi | wlan',
+    ),
+    Emoji('♀️', 'femme | symbole de la femme '),
+    Emoji('♂️', 'homme | symbole de l’homme '),
+    Emoji('⚧️', 'symbole de la communauté transgenre | transgenre '),
+    Emoji(
+      '〰️',
+      'ligne ondulée | ponctuation | tiret | trait d’union ondulé | vague ',
+    ),
+    Emoji(
+      '💱',
+      'argent | banque | change | conversion | conversion de devise | devise',
+    ),
+    Emoji('💲', 'argent | devise | dollar | espèces | payer | symbole dollar'),
+    Emoji('⚕️', 'caducée | docteur | Esculape | médecine | personnel '),
+    Emoji(
+      '⚜️',
+      'blason | fleur de lis | fleur de lys | reine | roi | royauté française ',
+    ),
+    Emoji('🫟', 'éclaboussure | holi | peinture | tache'),
+    Emoji('*️⃣', 'Keycap: *'),
+    Emoji(
+      '🟠',
+      'cercle | disque orange | forme géométrique | géométrie | orange | rond',
+    ),
+    Emoji(
+      '🟡',
+      'cercle | disque jaune | forme géométrique | géométrie | jaune | rond',
+    ),
+    Emoji(
+      '🟢',
+      'cercle | disque vert | forme géométrique | géométrie | rond | vert',
+    ),
+    Emoji(
+      '🟣',
+      'cercle | disque violet | forme géométrique | géométrie | rond | violet',
+    ),
+    Emoji(
+      '🟤',
+      'brun | cercle | disque brun | disque marron | forme géométrique | géométrie | marron | rond',
+    ),
+    Emoji('🟥', 'carré | forme géométrique | géométrie | rouge'),
+    Emoji('🟧', 'carré | forme géométrique | géométrie | orange'),
+    Emoji('🟨', 'carré | forme géométrique | géométrie | jaune'),
+    Emoji('🟩', 'carré | forme géométrique | géométrie | vert'),
+    Emoji('🟦', 'bleu | carré | forme géométrique | géométrie'),
+    Emoji('🟪', 'carré | forme géométrique | géométrie | violet'),
+    Emoji('🟫', 'carré | carré brun | forme géométrique | géométrie | marron'),
+    Emoji('🔘', 'bouton | forme | géométrie | géométrique | radio | rond'),
   ]),
 
   // ======================================================= Category.FLAGS
@@ -3952,7 +4644,7 @@ const List<CategoryEmoji> emojiSetFrance = [
     Emoji('🏳️', 'drapeau | drapeau blanc | drapeau qui flotte au vent '),
     Emoji(
       '🏳️‍🌈',
-      'drapeau | drapeau blanc | drapeau qui flotte au vent arc-en-ciel | bisexuel | bisexuelle | gay | Gay Pride | homosexuel | homosexuelle | lesbienne | LGBT | LGBTQ | LGBTQIA | météo | nature | orgueil | pluie | trans | transgenre ',
+      'drapeau | drapeau blanc | drapeau qui flotte au vent arc-en-ciel | bisexuelle | Gay Pride | homosexuelle | lesbienne | LGBTQIA | météo | nature | pluie | transgenre ',
     ),
     Emoji(
       '🏳️‍⚧️',
@@ -4220,5 +4912,9 @@ const List<CategoryEmoji> emojiSetFrance = [
     Emoji('🇿🇦', 'Flag: South Africa'),
     Emoji('🇿🇲', 'Flag: Zambia'),
     Emoji('🇿🇼', 'Flag: Zimbabwe'),
+    Emoji('🇨🇶', 'Flag: Sark'),
+    Emoji('🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'Flag: England'),
+    Emoji('🏴󠁧󠁢󠁳󠁣󠁴󠁿', 'Flag: Scotland'),
+    Emoji('🏴󠁧󠁢󠁷󠁬󠁳󠁿', 'Flag: Wales'),
   ]),
 ];
