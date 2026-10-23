@@ -23,6 +23,8 @@ dependencies:
   plugin_platform_interface: ^2.1.8
   shared_preferences: ^2.3.3
   web: ^1.1.0
+  material_ui: ^1.8.0
+  cupertino_ui: ^1.1.4
 
 dev_dependencies:
   flutter_test:
