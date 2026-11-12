@@ -1,5 +1,5 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Default EmojiPicker Implementation
 class DefaultEmojiPickerView extends EmojiPickerView {

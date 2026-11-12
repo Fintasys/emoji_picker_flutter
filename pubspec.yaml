@@ -12,8 +12,8 @@ screenshots:
     path: screenshot/example_whatsapp_search_view.png
 
 environment:
-  sdk: ">=3.11.5 <4.0.0"
-  flutter: ">=3.41.8"
+  sdk: ">=3.13.0 <4.0.0"
+  flutter: ">=3.47.0"
 
 dependencies:
   flutter:
@@ -23,6 +23,8 @@ dependencies:
   plugin_platform_interface: ^2.1.8
   shared_preferences: ^2.3.3
   web: ^1.1.0
+  material_ui: ^1.8.0
+  cupertino_ui: ^1.1.4
 
 dev_dependencies:
   flutter_test:
