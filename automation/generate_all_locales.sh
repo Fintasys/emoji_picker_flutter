@@ -1,3 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd -- "$(dirname -- "${BASH_SOURCE[0]}")"
+
 outputDir="../lib/locales"
 outputFile="$outputDir/default_emoji_set_locale.dart"
 
@@ -6,16 +10,23 @@ echo "Generating all locales"
 echo "====================="
 
 locales=(
+    "da Danish"
     "de German"
     "en English"
     "es Spanish"
+    "fi Finnish"
     "fr France"
     "hi Hindi"
+    "is Icelandic"
     "it Italian"
     "ja Japanese"
+    "nb NorwegianBokmal"
     "nl Dutch"
+    "nn NorwegianNynorsk"
+    "pl Polish"
     "pt Portuguese"
     "ru Russian"
+    "sv Swedish"
     "zh Chinese"
 )
 
@@ -44,6 +55,9 @@ for locale in "${locales[@]}"; do
     echo "    case '$code':" >>"$outputFile"
     echo "      return $emojiSetVar;" >>"$outputFile"
 done
+
+echo "    case 'no':" >>"$outputFile"
+echo "      return emojiSetNorwegianBokmal;" >>"$outputFile"
 
 # Default case
 echo "    default:" >>"$outputFile"
