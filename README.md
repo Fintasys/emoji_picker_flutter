@@ -363,6 +363,24 @@ EmojiPickerUtils().clearRecentEmojis(key: key);
 
 ```
 
+### Search in the selected language and English
+
+English keywords can optionally be searched alongside the selected locale:
+
+```dart
+Config(
+  locale: const Locale('de'),
+  searchViewConfig: const SearchViewConfig(includeEnglishKeywords: true),
+)
+```
+
+For example, `Herz` and `heart` both find heart emojis in German. Results keep
+localized metadata and are limited to the active emoji set, including custom
+sets and platform compatibility filtering. The option defaults to `false`.
+Custom search views extending `SearchViewState` use it through
+`onTextInputChanged`. For direct calls, pass `includeEnglishKeywords: true` to
+`EmojiPickerUtils().searchEmoji`.
+
 ## Feel free to contribute to this package!! 🙇‍♂️
 
 Always happy if anyone wants to help to improve this package!

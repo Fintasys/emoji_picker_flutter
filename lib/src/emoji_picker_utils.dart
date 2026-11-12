@@ -19,7 +19,14 @@ class EmojiPickerUtils {
 
   static final EmojiPickerUtils _singleton = EmojiPickerUtils._internal();
   static final RegExp _whitespaceRegExp = RegExp(r'\s+');
-  final List<Emoji> _allAvailableEmojiEntities = [];
+  static final Map<String, List<String>> _englishKeywords = {
+    for (final category in emojiSetEnglish)
+      for (final emoji in category.emoji)
+        _glyphKey(emoji.emoji): emoji.keywords,
+  };
+
+  static String _glyphKey(String glyph) =>
+      glyph.replaceAll('\uFE0F', '').replaceAll('\uFE0E', '');
   RegExp? _emojiRegExp;
 
   /// Returns list of recently used emoji from cache
@@ -30,66 +37,51 @@ class EmojiPickerUtils {
   Future<List<CategoryEmoji>> filterUnsupported(List<CategoryEmoji> data) =>
       Future.value(EmojiPickerInternalUtils().filterUnsupported(data));
 
-  /// Search for related emoticons based on keywords
+  /// Search the supplied emoji set by keyword prefixes or an exact glyph.
+  ///
+  /// When [includeEnglishKeywords] is true, English keywords are searched
+  /// alongside the supplied keywords for the same glyph. Returned emojis keep
+  /// the supplied names and skin-tone metadata. English matching never adds
+  /// glyphs absent from [emojiSet].
   Future<List<Emoji>> searchEmoji(
     String search,
     List<CategoryEmoji> emojiSet, {
     bool checkPlatformCompatibility = true,
+    bool includeEnglishKeywords = false,
   }) async {
-    if (search.isEmpty) return [];
-
-    if (_allAvailableEmojiEntities.isEmpty) {
-      final emojiPickerInternalUtils = EmojiPickerInternalUtils();
-
-      final data = [...emojiSet]
-        ..removeWhere((e) => e.category == Category.RECENT);
-      final availableCategoryEmoji = checkPlatformCompatibility
-          ? await emojiPickerInternalUtils.filterUnsupported(data)
-          : data;
-
-      // Set all the emoji entities
-      for (var emojis in availableCategoryEmoji) {
-        _allAvailableEmojiEntities.addAll(emojis.emoji);
-      }
-    }
-
-    // Split the input string into a list of lowercase keywords
     final keywordSet = search
         .split(_whitespaceRegExp)
         .where((e) => e.isNotEmpty)
         .map((e) => e.toLowerCase())
         .toSet();
-
     if (keywordSet.isEmpty) return [];
 
-    return _allAvailableEmojiEntities.where((emoji) {
-      // Perform lowercasing of emoji keywords once
-      final emojiKeywordSet = emoji.keywords
-          .map((e) => e.toLowerCase())
-          .toSet();
-
-      // Check if first keyword is a prefix of any emoji keyword
-      final matchFirstKeyword = emojiKeywordSet.any(
-        (emojiKeyword) => emojiKeyword.startsWith(keywordSet.first),
-      );
-
-      var matchKeywords = false;
-      if (matchFirstKeyword) {
-        // Check if each search keyword is a prefix of any emoji keyword
-        // start from second keyword, returns true if empty (only 1 keyword)
-        matchKeywords = keywordSet.skip(1).every((keyword) {
-          return emojiKeywordSet.any(
-            (emojiKeyword) => emojiKeyword.startsWith(keyword),
-          );
-        });
-      } else {
-        matchKeywords = false;
+    // Always use the current input. A singleton cache of the first search set
+    // leaks keywords across locale changes and unrelated/custom pickers.
+    // Platform compatibility is already cached per glyph by internal utils.
+    final data = emojiSet.where((e) => e.category != Category.RECENT).toList();
+    final available = checkPlatformCompatibility
+        ? await EmojiPickerInternalUtils().filterUnsupported(data)
+        : data;
+    final candidates = <String, Emoji>{};
+    for (final category in available) {
+      for (final emoji in category.emoji) {
+        candidates.putIfAbsent(emoji.emoji, () => emoji);
       }
+    }
 
-      // Check for an exact match with emoji character
-      final matchEmoji = emoji.emoji == search.trim();
-
-      return matchKeywords || matchEmoji;
+    return candidates.values.where((emoji) {
+      if (emoji.emoji == search.trim()) return true;
+      final keywords = <String>{
+        ...emoji.keywords.map((e) => e.toLowerCase()),
+        if (includeEnglishKeywords)
+          ...?_englishKeywords[_glyphKey(emoji.emoji)]?.map(
+            (e) => e.toLowerCase(),
+          ),
+      };
+      return keywordSet.every(
+        (query) => keywords.any((keyword) => keyword.startsWith(query)),
+      );
     }).toList();
   }
 
