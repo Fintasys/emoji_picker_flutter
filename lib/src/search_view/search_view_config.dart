@@ -19,6 +19,7 @@ class SearchViewConfig {
     this.hintText = 'Search',
     this.hintTextStyle,
     this.customSearchView,
+    this.includeEnglishKeywords = false,
   });
 
   /// Background color of search bar
@@ -36,6 +37,12 @@ class SearchViewConfig {
   /// Custom hint text style
   final TextStyle? hintTextStyle;
 
+  /// Search English keywords alongside the selected locale's keywords.
+  ///
+  /// Disabled by default to preserve locale-only search. This is also used by
+  /// custom views extending [SearchViewState] and its input-change handler.
+  final bool includeEnglishKeywords;
+
   /// Custom search bar
   /// Hot reload is not supported
   final SearchViewBuilder? customSearchView;
@@ -47,7 +54,8 @@ class SearchViewConfig {
         other.buttonIconColor == buttonIconColor &&
         other.hintText == hintText &&
         other.hintTextStyle == hintTextStyle &&
-        other.inputTextStyle == inputTextStyle;
+        other.inputTextStyle == inputTextStyle &&
+        other.includeEnglishKeywords == includeEnglishKeywords;
   }
 
   @override
@@ -56,5 +64,6 @@ class SearchViewConfig {
       buttonIconColor.hashCode ^
       hintText.hashCode ^
       hintTextStyle.hashCode ^
-      inputTextStyle.hashCode;
+      inputTextStyle.hashCode ^
+      includeEnglishKeywords.hashCode;
 }

@@ -84,10 +84,18 @@ class SearchViewState<T extends SearchView> extends State<T>
   void onTextInputChanged(String text) {
     links.clear();
     results.clear();
-    utils.searchEmoji(text, widget.state.categoryEmoji).then((value) {
-      if (!mounted) return;
-      setState(() => _updateResults(value));
-    });
+    utils
+        .searchEmoji(
+          text,
+          widget.state.categoryEmoji,
+          checkPlatformCompatibility: widget.config.checkPlatformCompatibility,
+          includeEnglishKeywords:
+              widget.config.searchViewConfig.includeEnglishKeywords,
+        )
+        .then((value) {
+          if (!mounted) return;
+          setState(() => _updateResults(value));
+        });
   }
 
   void _updateResults(List<Emoji> emojis) {
