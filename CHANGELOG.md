@@ -1,3 +1,7 @@
+## Unreleased
+
+- Add Danish, Finnish, Icelandic, Norwegian Bokmål/Nynorsk, and Swedish/Polish emoji keywords from pinned Unicode CLDR 48.1, including inherited and derived annotations.
+
 ## 4.5.4
 
 - Fix `applySkinTone` inserting the skin tone modifier around the emoji presentation selector (U+FE0F), which produced invalid sequences for 13 of the 200 skin tone capable emoji. Emoji with a BMP base such as ✌️, ☝️, ✍️ and ⛹️ rendered as two glyphs (`270C FE0F 1F3FD` instead of `270C 1F3FD`); emoji such as 🖐️, 🕵️, 🕴️, 🏌️ and 🏋️ kept a stray selector after the modifier ([#272](https://github.com/Fintasys/emoji_picker_flutter/issues/272))

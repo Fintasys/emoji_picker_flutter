@@ -23,7 +23,7 @@ Yet another Emoji Picker for Flutter 🤩
 - Skin Tone Support
 - Custom-Font Support
 - Search Option
-- Localization (supporting 8 Languages)
+- Localization (supporting 18 Languages)
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/fintasys)
 
@@ -275,6 +275,8 @@ List<CategoryEmoji> _getEmojiLocale(Locale locale) {
   }
 }
 ```
+
+The bundled datasets also include Danish, Finnish, Icelandic, Norwegian Bokmål (`nb`, with `no` as an alias), Norwegian Nynorsk, Polish, and Swedish. See `automation/README.md` for reproducible generation from pinned Unicode CLDR data.
 
 Example for using `/automation/create_emoji_set.sh` for generating translation in terminal:
 

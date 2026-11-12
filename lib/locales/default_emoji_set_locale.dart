@@ -26,6 +26,22 @@ List<CategoryEmoji> getDefaultEmojiLocale(Locale locale) {
       return emojiSetRussian;
     case 'zh':
       return emojiSetChinese;
+    case 'da':
+      return emojiSetDanish;
+    case 'fi':
+      return emojiSetFinnish;
+    case 'is':
+      return emojiSetIcelandic;
+    case 'nb':
+      return emojiSetNorwegianBokmal;
+    case 'nn':
+      return emojiSetNorwegianNynorsk;
+    case 'no':
+      return emojiSetNorwegianBokmal;
+    case 'pl':
+      return emojiSetPolish;
+    case 'sv':
+      return emojiSetSwedish;
     default:
       return emojiSetEnglish;
   }
